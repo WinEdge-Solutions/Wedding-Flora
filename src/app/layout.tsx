@@ -22,6 +22,11 @@ export const metadata: Metadata = {
   title: "Wedding Flora | Luxury Indian Wedding Planning & Royal Floral Artistry",
   description:
     "Premier luxury wedding planning, royal palace celebrations, opulent floral mandaps, and bespoke Sangeet productions across Udaipur, Jaipur, Jodhpur, and Goa.",
+  icons: {
+    icon: "/images/logo-emblem.png",
+    shortcut: "/images/logo-emblem.png",
+    apple: "/images/logo-emblem.png",
+  },
 };
 
 export default function RootLayout({

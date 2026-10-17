@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { siteConfig } from "@/lib/site";
 import { Container } from "./Container";
 import { Divider } from "@/components/ui/Divider";
@@ -14,13 +15,23 @@ export const Footer: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10 lg:gap-12 pb-12">
           {/* Brand & Monogram Column */}
           <div className="md:col-span-5 flex flex-col space-y-4">
-            <Link href="/" className="inline-block">
-              <span className="font-serif text-3xl font-semibold tracking-wide text-charcoal block">
-                Wedding Flora
-              </span>
-              <span className="text-[11px] uppercase tracking-[0.25em] text-[#8C6D2D] font-bold">
-                Royal Indian Wedding Planning &amp; Floral Artistry
-              </span>
+            <Link href="/" className="inline-flex items-center gap-3.5 group">
+              <div className="relative w-12 h-12 shrink-0 transition-transform duration-500 group-hover:scale-105">
+                <Image
+                  src="/images/logo-emblem.png"
+                  alt="Wedding Flora Logo"
+                  fill
+                  className="object-contain"
+                />
+              </div>
+              <div className="flex flex-col">
+                <span className="font-serif text-2xl sm:text-3xl font-semibold tracking-wide text-charcoal block group-hover:text-gold-gradient transition-colors">
+                  Wedding Flora
+                </span>
+                <span className="text-[10px] uppercase tracking-[0.25em] text-[#8C6D2D] font-bold">
+                  The Wedding Planner • Royal Celebrations
+                </span>
+              </div>
             </Link>
             <p className="text-charcoal/90 text-sm font-medium max-w-sm leading-relaxed">
               Curating regal palace weddings, bespoke Sangeet productions, and sacred Mandap ceremonies across Udaipur, Jaipur, Jodhpur, and destination sanctuaries in India.

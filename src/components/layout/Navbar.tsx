@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { usePathname } from "next/navigation";
 import { siteConfig } from "@/lib/site";
@@ -55,16 +56,25 @@ export const Navbar: React.FC = () => {
         {/* Logo */}
         <Link
           href="/"
-          className="flex flex-col items-center group text-center focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gold"
+          className="flex items-center gap-2.5 sm:gap-3 group focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gold"
         >
-          <span className="font-serif text-2xl sm:text-3xl font-semibold tracking-wide text-charcoal group-hover:text-gold-gradient transition-colors duration-300">
-            Wedding Flora
-          </span>
-          <span className="text-[10px] uppercase tracking-[0.3em] text-[#8C6D2D] font-bold group-hover:text-gold transition-colors duration-300">
-            Royal Indian Weddings
-          </span>
-          {/* Subtle shimmer under logo on hover */}
-          <span className="h-px w-0 group-hover:w-full bg-gradient-to-r from-transparent via-gold/40 to-transparent transition-all duration-500 mt-0.5" />
+          <div className="relative w-9 h-9 sm:w-11 sm:h-11 shrink-0 transition-transform duration-500 group-hover:scale-105">
+            <Image
+              src="/images/logo-emblem.png"
+              alt="Wedding Flora Crest"
+              fill
+              className="object-contain"
+              priority
+            />
+          </div>
+          <div className="flex flex-col text-left">
+            <span className="font-serif text-xl sm:text-2xl font-semibold tracking-wide text-charcoal group-hover:text-gold-gradient transition-colors duration-300 leading-tight">
+              Wedding Flora
+            </span>
+            <span className="text-[9px] sm:text-[10px] uppercase tracking-[0.25em] text-[#8C6D2D] font-bold group-hover:text-gold transition-colors duration-300">
+              The Wedding Planner
+            </span>
+          </div>
         </Link>
 
         {/* Right nav + CTA */}
@@ -107,7 +117,16 @@ export const Navbar: React.FC = () => {
             className="md:hidden overflow-hidden border-b border-gold/20"
             style={{ background: "rgba(250,247,242,0.97)", backdropFilter: "blur(20px)" }}
           >
-            <nav className="flex flex-col space-y-4 text-center px-6 pt-4 pb-8">
+            <nav className="flex flex-col space-y-4 text-center px-6 pt-5 pb-8">
+              <div className="flex items-center justify-center gap-2.5 pb-3 border-b border-gold/15">
+                <div className="relative w-8 h-8 shrink-0">
+                  <Image src="/images/logo-emblem.png" alt="Wedding Flora Emblem" fill className="object-contain" />
+                </div>
+                <div className="text-left">
+                  <span className="font-serif text-lg font-semibold text-charcoal block leading-none">Wedding Flora</span>
+                  <span className="text-[8px] uppercase tracking-[0.2em] text-[#8C6D2D] font-bold">The Wedding Planner</span>
+                </div>
+              </div>
               {siteConfig.navItems.map((item) => (
                 <NavLink key={item.href} href={item.href} label={item.label} isActive={pathname === item.href} onClick={closeMobileMenu} />
               ))}

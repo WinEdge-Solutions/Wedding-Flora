@@ -79,7 +79,7 @@ export const Hero: React.FC = () => {
   return (
     <section
       ref={sectionRef}
-      className="relative w-full min-h-[95vh] flex items-center justify-center overflow-hidden"
+      className="relative w-full min-h-[calc(100svh-64px)] sm:min-h-[calc(100vh-70px)] flex items-center justify-center overflow-hidden"
     >
       {/* ── Aurora static orbs (always drifting) ─── */}
       <div className="absolute inset-0 z-[1] overflow-hidden">
@@ -121,19 +121,38 @@ export const Hero: React.FC = () => {
         style={{ y: textY }}
         className="relative z-[5] w-full"
       >
-        <Container className="text-center py-28 sm:py-36">
-          <div className="max-w-3xl mx-auto space-y-7">
+        <Container className="text-center py-6 sm:py-8 lg:py-10 my-auto">
+          <div className="max-w-3xl mx-auto space-y-3.5 sm:space-y-4">
+
+            {/* Floral Wreath Crest Monogram */}
+            <motion.div
+              className="flex justify-center -mb-1"
+              variants={fadeUp}
+              initial="hidden"
+              animate="visible"
+              custom={0}
+            >
+              <div className="relative w-12 h-12 sm:w-16 sm:h-16 drop-shadow-sm transition-transform duration-500 hover:scale-105">
+                <Image
+                  src="/images/logo-emblem.png"
+                  alt="Wedding Flora Crest"
+                  fill
+                  className="object-contain"
+                  priority
+                />
+              </div>
+            </motion.div>
 
             <motion.p
-              className="font-sans text-xs sm:text-sm uppercase tracking-[0.35em] text-[#8C6D2D] font-bold"
-              variants={fadeUp} initial="hidden" animate="visible" custom={0}
+              className="font-sans text-[11px] sm:text-xs uppercase tracking-[0.3em] text-[#8C6D2D] font-bold"
+              variants={fadeUp} initial="hidden" animate="visible" custom={1}
             >
               Royal Indian Wedding Planning &amp; Floral Artistry
             </motion.p>
 
             <motion.h1
-              className="font-serif text-4xl sm:text-6xl lg:text-7xl font-semibold sm:font-bold text-charcoal tracking-tight leading-[1.12]"
-              variants={fadeUp} initial="hidden" animate="visible" custom={1}
+              className="font-serif text-3xl sm:text-5xl lg:text-6xl font-semibold sm:font-bold text-charcoal tracking-tight leading-[1.14]"
+              variants={fadeUp} initial="hidden" animate="visible" custom={2}
             >
               Crafting{" "}
               <span className="text-gold-gradient font-bold">Royal</span>{" "}
@@ -142,42 +161,43 @@ export const Hero: React.FC = () => {
               <span className="italic font-medium"> With Grandeur &amp; Soul</span>
             </motion.h1>
 
-            <motion.div variants={fadeUp} initial="hidden" animate="visible" custom={2}>
-              <Divider variant="ornamental" className="my-4" />
+            <motion.div variants={fadeUp} initial="hidden" animate="visible" custom={3}>
+              <Divider variant="ornamental" className="my-1.5 sm:my-2" />
             </motion.div>
 
             <motion.p
-              className="font-sans text-base sm:text-lg lg:text-xl text-charcoal font-medium max-w-2xl mx-auto leading-relaxed drop-shadow-sm"
-              variants={fadeUp} initial="hidden" animate="visible" custom={3}
+              className="font-sans text-xs sm:text-base lg:text-lg text-charcoal font-medium max-w-2xl mx-auto leading-relaxed drop-shadow-sm px-2 sm:px-0"
+              variants={fadeUp} initial="hidden" animate="visible" custom={4}
             >
               From starlit palace Sangeets in Udaipur to ethereal Mandap ceremonies across heritage fortresses,
               we curate unforgettable Indian wedding heirlooms tailored to your family&apos;s heritage.
             </motion.p>
 
+            {/* CTA Buttons - immediately visible above the fold on both phone & desktop */}
             <motion.div
-              className="pt-6 flex flex-col sm:flex-row items-center justify-center gap-4"
-              variants={fadeUp} initial="hidden" animate="visible" custom={4}
+              className="pt-2 sm:pt-4 flex flex-row items-center justify-center gap-3 sm:gap-4 flex-wrap"
+              variants={fadeUp} initial="hidden" animate="visible" custom={5}
             >
-              <Button href="/contact" variant="primary" size="lg">
+              <Button href="/contact" variant="primary" size="md" className="px-5 sm:px-7 py-3 text-xs shadow-md">
                 Plan Your Royal Wedding
               </Button>
-              <Button href="/portfolio" variant="outline" size="lg">
+              <Button href="/portfolio" variant="outline" size="md" className="px-5 sm:px-7 py-3 text-xs">
                 Explore Celebrations
               </Button>
             </motion.div>
 
             {/* Scroll nudge */}
             <motion.div
-              className="pt-8 flex justify-center"
-              variants={fadeUp} initial="hidden" animate="visible" custom={5}
+              className="pt-2 sm:pt-4 flex justify-center"
+              variants={fadeUp} initial="hidden" animate="visible" custom={6}
             >
               <motion.div
-                animate={{ y: [0, 8, 0] }}
+                animate={{ y: [0, 6, 0] }}
                 transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
-                className="flex flex-col items-center gap-2 cursor-pointer opacity-70 hover:opacity-100 transition-opacity"
+                className="flex flex-col items-center gap-1 cursor-pointer opacity-70 hover:opacity-100 transition-opacity"
               >
-                <span className="text-[10px] uppercase tracking-[0.3em] text-charcoal font-bold font-sans">Scroll</span>
-                <div className="w-px h-8 bg-gradient-to-b from-charcoal/80 to-transparent" />
+                <span className="text-[9px] uppercase tracking-[0.25em] text-charcoal font-bold font-sans">Scroll</span>
+                <div className="w-px h-5 sm:h-6 bg-gradient-to-b from-charcoal/80 to-transparent" />
               </motion.div>
             </motion.div>
 
