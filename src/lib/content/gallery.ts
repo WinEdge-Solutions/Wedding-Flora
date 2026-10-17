@@ -5,6 +5,7 @@ export interface GalleryItem {
   location: string;
   year: string;
   imageUrl: string;
+  videoUrl?: string;
   aspect: "portrait" | "landscape" | "square";
   alt: string;
 }
@@ -17,6 +18,7 @@ export const galleryData: GalleryItem[] = [
     location: "Burgundy, France",
     year: "2025",
     imageUrl: "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1200&q=80",
+    videoUrl: "/videos/reel-1.mp4",
     aspect: "portrait",
     alt: "Outdoor wedding ceremony setup with white floral arch and rose petals",
   },
@@ -27,6 +29,7 @@ export const galleryData: GalleryItem[] = [
     location: "Bellagio, Italy",
     year: "2025",
     imageUrl: "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=1200&q=80",
+    videoUrl: "/videos/reel-2.mp4",
     aspect: "landscape",
     alt: "Elegantly set wedding table with crystal glassware, taper candles, and floral centerpieces",
   },
@@ -37,6 +40,7 @@ export const galleryData: GalleryItem[] = [
     location: "Gloucestershire, UK",
     year: "2024",
     imageUrl: "https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?auto=format&fit=crop&w=1200&q=80",
+    videoUrl: "/videos/reel-3.mp4",
     aspect: "portrait",
     alt: "Bride and groom sharing an emotional moment under natural sunlight in a garden setting",
   },
