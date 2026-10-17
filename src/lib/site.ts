@@ -12,15 +12,17 @@ export const siteConfig = {
   contact: {
     email: "enquiries@weddingflora.com", // TODO: replace with real client email
     phone: "+91 98101 23456", // TODO: replace with real client phone
-    address: "DLF Phase 5, Golf Course Road, Gurugram, Delhi NCR • Studio in Civil Lines, Jaipur", // TODO: replace with real client address
-    instagram: "https://instagram.com/weddingflora",
+    address: "DLF Phase 5, Golf Course Road, Gurugram, Delhi NCR • Studio in Civil Lines, Jaipur",
+    instagram: "https://www.instagram.com/weddingflora_theweddingplanner/",
+    instagramHandle: "weddingflora_theweddingplanner",
     pinterest: "https://pinterest.com/weddingflora",
+    whatsapp: "https://wa.me/919810123456",
   },
   navItems: [
     { label: "Home", href: "/" },
     { label: "About", href: "/about" },
     { label: "Services", href: "/services" },
-    { label: "Celebrations", href: "/portfolio" },
+    { label: "Celebrations", href: "/celebrations" },
     { label: "Packages", href: "/packages" },
     { label: "Contact", href: "/contact" },
   ] as NavItem[],

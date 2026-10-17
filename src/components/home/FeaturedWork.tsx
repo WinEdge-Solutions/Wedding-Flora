@@ -306,7 +306,7 @@ export const FeaturedWork: React.FC = () => {
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ delay: 0.55, duration: 0.6 }}
         >
-          <Button href="/portfolio" variant="primary" size="md">
+          <Button href="/celebrations" variant="primary" size="md">
             View All Royal Celebrations
           </Button>
         </motion.div>

@@ -181,7 +181,7 @@ export const Hero: React.FC = () => {
               <Button href="/contact" variant="primary" size="md" className="px-5 sm:px-7 py-3 text-xs shadow-md">
                 Plan Your Royal Wedding
               </Button>
-              <Button href="/portfolio" variant="outline" size="md" className="px-5 sm:px-7 py-3 text-xs">
+              <Button href="/celebrations" variant="outline" size="md" className="px-5 sm:px-7 py-3 text-xs">
                 Explore Celebrations
               </Button>
             </motion.div>
