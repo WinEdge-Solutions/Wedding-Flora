@@ -2,7 +2,7 @@ import React from "react";
 
 interface DividerProps {
   className?: string;
-  variant?: "gold" | "warmgrey" | "ornamental";
+  variant?: "gold" | "ornamental";
 }
 
 export const Divider: React.FC<DividerProps> = ({
@@ -11,10 +11,6 @@ export const Divider: React.FC<DividerProps> = ({
 }) => {
   if (variant === "gold") {
     return <hr className={`border-t border-gold/40 my-8 ${className}`} />;
-  }
-
-  if (variant === "warmgrey") {
-    return <hr className={`border-t border-warmgrey/20 my-8 ${className}`} />;
   }
 
   // Ornamental floral/diamond delicate stationery divider

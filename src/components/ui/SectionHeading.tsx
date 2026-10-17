@@ -23,7 +23,7 @@ export const SectionHeading: React.FC<SectionHeadingProps> = ({
   return (
     <div className={`max-w-2xl mb-12 lg:mb-16 ${alignClass} ${className}`}>
       {eyebrow && (
-        <p className="font-sans text-xs uppercase tracking-[0.25em] text-gold font-medium mb-3">
+        <p className="font-sans text-xs uppercase tracking-[0.25em] text-gold-gradient font-medium mb-3">
           {eyebrow}
         </p>
       )}

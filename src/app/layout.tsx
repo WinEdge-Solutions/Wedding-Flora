@@ -6,14 +6,14 @@ import { Footer } from "@/components/layout/Footer";
 
 const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
-  weight: ["400", "500", "600"],
+  weight: ["400"],
   variable: "--font-cormorant",
   display: "swap",
 });
 
 const lato = Lato({
   subsets: ["latin"],
-  weight: ["300", "400", "700"],
+  weight: ["300", "400"],
   variable: "--font-lato",
   display: "swap",
 });
