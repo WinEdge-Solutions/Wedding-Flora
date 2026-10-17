@@ -72,9 +72,9 @@ export const ServicesOverview: React.FC = () => {
     <Section variant="cream">
       <Container>
         <SectionHeading
-          eyebrow="Our Expertise"
-          title="Curated Wedding Services"
-          subtitle="From concept design to flawless day-of orchestration, we offer comprehensive services tailored to your personal aesthetic."
+          eyebrow="Royal Wedding Services"
+          title="Grandeur in Every Celebration"
+          subtitle="From heritage palace procurement and opulent floral mandaps to concert-grade Sangeet production and bespoke hospitality across India."
         />
 
         <motion.div

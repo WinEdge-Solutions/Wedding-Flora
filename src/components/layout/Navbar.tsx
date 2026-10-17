@@ -61,7 +61,7 @@ export const Navbar: React.FC = () => {
             Wedding Flora
           </span>
           <span className="text-[10px] uppercase tracking-[0.3em] text-warmgrey font-light group-hover:text-gold/70 transition-colors duration-300">
-            Luxury Planning
+            Royal Indian Weddings
           </span>
           {/* Subtle shimmer under logo on hover */}
           <span className="h-px w-0 group-hover:w-full bg-gradient-to-r from-transparent via-gold/40 to-transparent transition-all duration-500 mt-0.5" />

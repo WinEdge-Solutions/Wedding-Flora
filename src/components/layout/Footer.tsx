@@ -19,12 +19,11 @@ export const Footer: React.FC = () => {
                 Wedding Flora
               </span>
               <span className="text-[11px] uppercase tracking-[0.25em] text-gold font-medium">
-                Wedding Planning & Styling
+                Royal Indian Wedding Planning &amp; Floral Artistry
               </span>
             </Link>
             <p className="text-warmgrey text-sm font-light max-w-sm leading-relaxed">
-              Curating romantic, timeless, and effortlessly elegant celebrations.
-              Designed with bespoke care for couples who cherish meaningful moments.
+              Curating regal palace weddings, bespoke Sangeet productions, and sacred Mandap ceremonies across Udaipur, Jaipur, Jodhpur, and destination sanctuaries in India.
             </p>
             <div className="flex items-center space-x-4 pt-2">
               <a

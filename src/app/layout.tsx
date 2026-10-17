@@ -19,9 +19,9 @@ const lato = Lato({
 });
 
 export const metadata: Metadata = {
-  title: "Wedding Flora | Luxury Wedding Planning & Management",
+  title: "Wedding Flora | Luxury Indian Wedding Planning & Royal Floral Artistry",
   description:
-    "Classic, romantic, and timeless wedding planning and event management. Crafting unforgettable memories for your special day.",
+    "Premier luxury wedding planning, royal palace celebrations, opulent floral mandaps, and bespoke Sangeet productions across Udaipur, Jaipur, Jodhpur, and Goa.",
 };
 
 export default function RootLayout({

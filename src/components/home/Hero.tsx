@@ -128,7 +128,7 @@ export const Hero: React.FC = () => {
               className="font-sans text-xs sm:text-sm uppercase tracking-[0.35em] text-gold font-medium"
               variants={fadeUp} initial="hidden" animate="visible" custom={0}
             >
-              Bespoke Wedding Planning &amp; Floral Artistry
+              Royal Indian Wedding Planning &amp; Floral Artistry
             </motion.p>
 
             <motion.h1
@@ -136,10 +136,10 @@ export const Hero: React.FC = () => {
               variants={fadeUp} initial="hidden" animate="visible" custom={1}
             >
               Crafting{" "}
-              <span className="text-gold-gradient">Timeless</span>{" "}
+              <span className="text-gold-gradient">Royal</span>{" "}
               Weddings
               <br className="hidden sm:block" />
-              <span className="italic"> With Romance &amp; Grace</span>
+              <span className="italic"> With Grandeur &amp; Soul</span>
             </motion.h1>
 
             <motion.div variants={fadeUp} initial="hidden" animate="visible" custom={2}>
@@ -150,8 +150,8 @@ export const Hero: React.FC = () => {
               className="font-sans text-base sm:text-lg lg:text-xl text-warmgrey font-light max-w-2xl mx-auto leading-relaxed"
               variants={fadeUp} initial="hidden" animate="visible" custom={3}
             >
-              We curate intimate gatherings and grand celebrations across scenic estates
-              and destination sanctuaries—transforming your vision into an unforgettable heirloom.
+              From starlit palace Sangeets in Udaipur to ethereal Mandap ceremonies across heritage fortresses,
+              we curate unforgettable Indian wedding heirlooms tailored to your family&apos;s heritage.
             </motion.p>
 
             <motion.div
@@ -159,10 +159,10 @@ export const Hero: React.FC = () => {
               variants={fadeUp} initial="hidden" animate="visible" custom={4}
             >
               <Button href="/contact" variant="primary" size="lg">
-                Begin Your Journey
+                Plan Your Royal Wedding
               </Button>
               <Button href="/portfolio" variant="outline" size="lg">
-                Explore Our Portfolio
+                Explore Celebrations
               </Button>
             </motion.div>
 

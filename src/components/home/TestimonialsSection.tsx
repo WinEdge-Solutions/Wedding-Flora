@@ -15,9 +15,9 @@ export const TestimonialsSection: React.FC = () => {
     <Section variant="cream">
       <Container size="narrow">
         <SectionHeading
-          eyebrow="Words of Gratitude"
-          title="From Our Couples"
-          subtitle="The heartfelt memories and experiences of couples who entrusted us with their most cherished day."
+          eyebrow="Royal Reflections"
+          title="Love Stories From Regal Palaces"
+          subtitle="Cherished words from couples and families who celebrated their royal Indian weddings with Wedding Flora."
         />
 
         <div ref={ref} className="space-y-16">

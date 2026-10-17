@@ -42,13 +42,13 @@ export const CtaBanner: React.FC = () => {
           className="space-y-6"
         >
           <p className="font-sans text-xs uppercase tracking-[0.3em] text-gold font-medium">
-            Your Love Story Deserves Perfection
+            Your Royal Celebration Awaits
           </p>
 
           <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-normal text-ivory tracking-tight leading-tight">
-            Let Us Create Something{" "}
-            <span className="text-gold-gradient italic">Beautiful</span>{" "}
-            Together
+            Let Us Craft Your{" "}
+            <span className="text-gold-gradient italic">Royal Wedding</span>{" "}
+            Celebration
           </h2>
 
           <div className="flex justify-center">
@@ -56,8 +56,8 @@ export const CtaBanner: React.FC = () => {
           </div>
 
           <p className="font-sans text-base sm:text-lg text-ivory/75 font-light max-w-xl mx-auto leading-relaxed">
-            We accept a limited number of weddings each season to ensure every couple receives
-            our devoted attention, bespoke artistry, and seamless coordination.
+            We curate a select number of luxury palace and destination weddings each season across India,
+            ensuring undivided devotion, opulent floral artistry, and seamless coordination for your family.
           </p>
 
           <motion.div
@@ -67,10 +67,10 @@ export const CtaBanner: React.FC = () => {
             transition={{ delay: 0.25, duration: 0.6 }}
           >
             <Button href="/contact" variant="outline" className="border-gold text-ivory hover:bg-gold/20" size="lg">
-              Reserve Your Date
+              Begin Planning
             </Button>
             <Button href="/packages" variant="text" className="text-ivory/80 hover:text-gold" size="lg">
-              View Our Packages &amp; Investment
+              View Royal Packages &amp; Services
             </Button>
           </motion.div>
         </motion.div>
