@@ -41,13 +41,13 @@ export const CtaBanner: React.FC = () => {
           transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
           className="space-y-6"
         >
-          <p className="font-sans text-xs uppercase tracking-[0.3em] text-gold font-medium">
+          <p className="font-sans text-xs uppercase tracking-[0.3em] text-[#D4AF37] font-bold">
             Your Royal Celebration Awaits
           </p>
 
-          <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-normal text-ivory tracking-tight leading-tight">
+          <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-semibold text-ivory tracking-tight leading-tight">
             Let Us Craft Your{" "}
-            <span className="text-gold-gradient italic">Royal Wedding</span>{" "}
+            <span className="text-gold-gradient italic font-bold">Royal Wedding</span>{" "}
             Celebration
           </h2>
 
@@ -55,7 +55,7 @@ export const CtaBanner: React.FC = () => {
             <Divider variant="ornamental" className="text-gold/50" />
           </div>
 
-          <p className="font-sans text-base sm:text-lg text-ivory/75 font-light max-w-xl mx-auto leading-relaxed">
+          <p className="font-sans text-base sm:text-lg text-ivory font-medium max-w-xl mx-auto leading-relaxed">
             We curate a select number of luxury palace and destination weddings each season across India,
             ensuring undivided devotion, opulent floral artistry, and seamless coordination for your family.
           </p>
@@ -69,7 +69,7 @@ export const CtaBanner: React.FC = () => {
             <Button href="/contact" variant="outline" className="border-gold text-ivory hover:bg-gold/20" size="lg">
               Begin Planning
             </Button>
-            <Button href="/packages" variant="text" className="text-ivory/80 hover:text-gold" size="lg">
+            <Button href="/packages" variant="text" className="text-ivory font-semibold hover:text-gold" size="lg">
               View Royal Packages &amp; Services
             </Button>
           </motion.div>

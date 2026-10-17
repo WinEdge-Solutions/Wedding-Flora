@@ -125,21 +125,21 @@ export const Hero: React.FC = () => {
           <div className="max-w-3xl mx-auto space-y-7">
 
             <motion.p
-              className="font-sans text-xs sm:text-sm uppercase tracking-[0.35em] text-gold font-medium"
+              className="font-sans text-xs sm:text-sm uppercase tracking-[0.35em] text-[#8C6D2D] font-bold"
               variants={fadeUp} initial="hidden" animate="visible" custom={0}
             >
               Royal Indian Wedding Planning &amp; Floral Artistry
             </motion.p>
 
             <motion.h1
-              className="font-serif text-4xl sm:text-6xl lg:text-7xl font-normal text-charcoal tracking-tight leading-[1.12]"
+              className="font-serif text-4xl sm:text-6xl lg:text-7xl font-semibold sm:font-bold text-charcoal tracking-tight leading-[1.12]"
               variants={fadeUp} initial="hidden" animate="visible" custom={1}
             >
               Crafting{" "}
-              <span className="text-gold-gradient">Royal</span>{" "}
+              <span className="text-gold-gradient font-bold">Royal</span>{" "}
               Weddings
               <br className="hidden sm:block" />
-              <span className="italic"> With Grandeur &amp; Soul</span>
+              <span className="italic font-medium"> With Grandeur &amp; Soul</span>
             </motion.h1>
 
             <motion.div variants={fadeUp} initial="hidden" animate="visible" custom={2}>
@@ -147,7 +147,7 @@ export const Hero: React.FC = () => {
             </motion.div>
 
             <motion.p
-              className="font-sans text-base sm:text-lg lg:text-xl text-warmgrey font-light max-w-2xl mx-auto leading-relaxed"
+              className="font-sans text-base sm:text-lg lg:text-xl text-charcoal font-medium max-w-2xl mx-auto leading-relaxed drop-shadow-sm"
               variants={fadeUp} initial="hidden" animate="visible" custom={3}
             >
               From starlit palace Sangeets in Udaipur to ethereal Mandap ceremonies across heritage fortresses,
@@ -174,10 +174,10 @@ export const Hero: React.FC = () => {
               <motion.div
                 animate={{ y: [0, 8, 0] }}
                 transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
-                className="flex flex-col items-center gap-2 cursor-pointer opacity-50 hover:opacity-80 transition-opacity"
+                className="flex flex-col items-center gap-2 cursor-pointer opacity-70 hover:opacity-100 transition-opacity"
               >
-                <span className="text-[9px] uppercase tracking-[0.3em] text-charcoal font-sans">Scroll</span>
-                <div className="w-px h-8 bg-gradient-to-b from-charcoal/60 to-transparent" />
+                <span className="text-[10px] uppercase tracking-[0.3em] text-charcoal font-bold font-sans">Scroll</span>
+                <div className="w-px h-8 bg-gradient-to-b from-charcoal/80 to-transparent" />
               </motion.div>
             </motion.div>
 

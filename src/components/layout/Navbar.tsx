@@ -14,7 +14,7 @@ function NavLink({ href, label, isActive, onClick }: { href: string; label: stri
       href={href}
       onClick={onClick}
       className={`relative text-xs uppercase tracking-[0.2em] transition-colors duration-200 group/nav ${
-        isActive ? "text-charcoal font-medium" : "text-warmgrey hover:text-charcoal"
+        isActive ? "text-charcoal font-bold" : "text-charcoal/85 hover:text-charcoal font-semibold"
       }`}
     >
       {label}
@@ -57,10 +57,10 @@ export const Navbar: React.FC = () => {
           href="/"
           className="flex flex-col items-center group text-center focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gold"
         >
-          <span className="font-serif text-2xl sm:text-3xl tracking-wide text-charcoal group-hover:text-gold-gradient transition-colors duration-300">
+          <span className="font-serif text-2xl sm:text-3xl font-semibold tracking-wide text-charcoal group-hover:text-gold-gradient transition-colors duration-300">
             Wedding Flora
           </span>
-          <span className="text-[10px] uppercase tracking-[0.3em] text-warmgrey font-light group-hover:text-gold/70 transition-colors duration-300">
+          <span className="text-[10px] uppercase tracking-[0.3em] text-[#8C6D2D] font-bold group-hover:text-gold transition-colors duration-300">
             Royal Indian Weddings
           </span>
           {/* Subtle shimmer under logo on hover */}

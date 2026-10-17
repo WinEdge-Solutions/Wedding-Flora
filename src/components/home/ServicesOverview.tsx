@@ -106,22 +106,21 @@ export const ServicesOverview: React.FC = () => {
                 {/* Content */}
                 <div className="p-6 flex-1 flex flex-col justify-between">
                   <div>
-                    <h3 className="font-serif text-xl text-charcoal mb-2 font-normal group-hover:text-gold transition-colors duration-300">
+                    <h3 className="font-serif text-xl sm:text-2xl text-charcoal mb-2 font-semibold group-hover:text-gold transition-colors duration-300">
                       {service.title}
                     </h3>
-                    <p className="text-xs font-sans uppercase tracking-wider mb-3"
-                      style={{ background: "linear-gradient(90deg, #B79A5B, #D4B87A)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
+                    <p className="text-xs font-sans uppercase tracking-wider mb-3 text-[#8C6D2D] font-bold">
                       {service.tagline}
                     </p>
-                    <p className="text-sm text-warmgrey font-light line-clamp-3 leading-relaxed">
+                    <p className="text-sm text-charcoal/90 font-medium line-clamp-3 leading-relaxed">
                       {service.description}
                     </p>
                   </div>
 
-                  <div className="pt-6 mt-4 border-t border-gold/10">
+                  <div className="pt-6 mt-4 border-t border-gold/15">
                     <Link
                       href={`/services#${service.id}`}
-                      className="inline-flex items-center text-xs uppercase tracking-widest text-charcoal font-medium hover:text-gold transition-colors group/link"
+                      className="inline-flex items-center text-xs uppercase tracking-widest text-charcoal font-semibold hover:text-gold transition-colors group/link"
                     >
                       <span>Discover More</span>
                       <ArrowRight size={14} className="ml-1.5 transition-transform duration-300 group-hover/link:translate-x-1.5" />

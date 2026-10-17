@@ -157,13 +157,13 @@ function ReelCard({
 
       {/* Caption & Location metadata */}
       <div className="space-y-1 px-1">
-        <p className="text-[10px] font-sans text-gold uppercase tracking-[0.2em] font-medium">
+        <p className="text-[11px] font-sans text-[#8C6D2D] uppercase tracking-[0.2em] font-bold">
           {item.category}
         </p>
-        <h3 className="font-serif text-lg sm:text-xl md:text-2xl text-charcoal font-normal group-hover:text-gold transition-colors duration-300 leading-snug">
+        <h3 className="font-serif text-lg sm:text-xl md:text-2xl text-charcoal font-semibold group-hover:text-gold transition-colors duration-300 leading-snug">
           {item.title}
         </h3>
-        <p className="text-xs font-sans text-warmgrey tracking-wide">
+        <p className="text-xs font-sans text-charcoal/90 font-medium tracking-wide">
           {item.location} • {item.year}
         </p>
         {/* Animated underline */}
@@ -236,7 +236,7 @@ export const FeaturedWork: React.FC = () => {
         {/* Mobile Swipe Navigation Controls Bar */}
         <div className="md:hidden flex items-center justify-between text-xs text-charcoal mb-4 px-1">
           <div className="flex items-center gap-2">
-            <span className="text-[10px] uppercase tracking-[0.25em] text-gold font-medium">
+            <span className="text-[10px] uppercase tracking-[0.25em] text-[#8C6D2D] font-bold">
               Reel {activeIndex + 1} of {featured.length}
             </span>
           </div>

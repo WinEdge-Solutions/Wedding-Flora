@@ -15,14 +15,14 @@ export const Footer: React.FC = () => {
           {/* Brand & Monogram Column */}
           <div className="md:col-span-5 flex flex-col space-y-4">
             <Link href="/" className="inline-block">
-              <span className="font-serif text-3xl tracking-wide text-charcoal block">
+              <span className="font-serif text-3xl font-semibold tracking-wide text-charcoal block">
                 Wedding Flora
               </span>
-              <span className="text-[11px] uppercase tracking-[0.25em] text-gold font-medium">
+              <span className="text-[11px] uppercase tracking-[0.25em] text-[#8C6D2D] font-bold">
                 Royal Indian Wedding Planning &amp; Floral Artistry
               </span>
             </Link>
-            <p className="text-warmgrey text-sm font-light max-w-sm leading-relaxed">
+            <p className="text-charcoal/90 text-sm font-medium max-w-sm leading-relaxed">
               Curating regal palace weddings, bespoke Sangeet productions, and sacred Mandap ceremonies across Udaipur, Jaipur, Jodhpur, and destination sanctuaries in India.
             </p>
             <div className="flex items-center space-x-4 pt-2">
@@ -54,15 +54,15 @@ export const Footer: React.FC = () => {
 
           {/* Quick Links Column */}
           <div className="md:col-span-3">
-            <h4 className="font-serif text-lg text-charcoal mb-4 tracking-wide">
+            <h4 className="font-serif text-lg text-charcoal mb-4 font-semibold tracking-wide">
               Navigation
             </h4>
-            <ul className="space-y-2.5 text-sm font-light text-warmgrey">
+            <ul className="space-y-2.5 text-sm font-medium text-charcoal/90">
               {siteConfig.navItems.map((item) => (
                 <li key={item.href}>
                   <Link
                     href={item.href}
-                    className="hover:text-charcoal transition-colors duration-200"
+                    className="hover:text-gold transition-colors duration-200"
                   >
                     {item.label}
                   </Link>
@@ -73,10 +73,10 @@ export const Footer: React.FC = () => {
 
           {/* Contact Details Column */}
           <div className="md:col-span-4">
-            <h4 className="font-serif text-lg text-charcoal mb-4 tracking-wide">
+            <h4 className="font-serif text-lg text-charcoal mb-4 font-semibold tracking-wide">
               Get in Touch
             </h4>
-            <div className="space-y-3 text-sm font-light text-warmgrey">
+            <div className="space-y-3 text-sm font-medium text-charcoal/90">
               <div className="flex items-start space-x-3">
                 <MapPin size={16} className="text-gold mt-1 shrink-0" />
                 <span>{siteConfig.contact.address}</span>
@@ -105,9 +105,9 @@ export const Footer: React.FC = () => {
 
         <Divider variant="gold" className="my-6 opacity-30" />
 
-        <div className="flex flex-col sm:flex-row items-center justify-between text-xs text-warmgrey/80 font-light pt-2 gap-4">
+        <div className="flex flex-col sm:flex-row items-center justify-between text-xs text-charcoal/85 font-medium pt-2 gap-4">
           <p>© {currentYear} Wedding Flora. All rights reserved.</p>
-          <p className="tracking-widest uppercase text-[10px]">
+          <p className="tracking-widest uppercase text-[10px] font-bold text-charcoal/70">
             Designed with timeless grace
           </p>
         </div>

@@ -31,7 +31,7 @@ export const Button: React.FC<ButtonProps> = ({
   ...rest
 }) => {
   const baseClasses =
-    "relative inline-flex items-center justify-center font-sans tracking-wider uppercase text-xs transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none rounded-[2px] overflow-hidden";
+    "relative inline-flex items-center justify-center font-sans tracking-wider uppercase text-xs font-semibold transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none rounded-[2px] overflow-hidden";
 
   const variantClasses = {
     primary:
