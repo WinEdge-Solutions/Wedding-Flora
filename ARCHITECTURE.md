@@ -135,7 +135,7 @@ Only variables prefixed `NEXT_PUBLIC_` reach the browser. Keep real values in `.
 
 ## 11. Deployment and workflow
 
-- GitHub repo `winedgesolutions/Wedding-Flora`, `main` is protected.
+- GitHub repo `WinEdge-Solutions/Wedding-Flora`, `main` is protected.
 - Each Pull Request gets a Vercel preview URL for review.
 - Merging to `main` deploys to production.
 - Before merging: `npm run lint` and `npm run build` must pass (see `CONTRIBUTING.md`).

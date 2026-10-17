@@ -13,14 +13,14 @@ Maintained by the WinEdge Solutions team.
 | **Fonts** | Cormorant Garamond (headings), Lato (body) via `next/font` |
 | **Forms / email** | Next.js API route + Resend (or any SMTP provider) |
 | **Hosting** | Vercel |
-| **Version control** | GitHub (`winedgesolutions/Wedding-Flora`) |
+| **Version control** | GitHub (`WinEdge-Solutions/Wedding-Flora`) |
 
 ## Getting started
 
 Requirements: Node.js 20+ and Git.
 
 ```bash
-git clone https://github.com/winedgesolutions/Wedding-Flora.git
+git clone https://github.com/WinEdge-Solutions/Wedding-Flora.git
 cd Wedding-Flora
 npm install
 cp .env.example .env.local # then fill in the values
