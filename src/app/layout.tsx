@@ -30,7 +30,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${cormorant.variable} ${lato.variable}`}>
+    <html lang="en" data-scroll-behavior="smooth" className={`${cormorant.variable} ${lato.variable}`}>
       <body className="bg-ivory text-charcoal font-sans min-h-screen flex flex-col">
         <Navbar />
         <div className="flex-1">{children}</div>
