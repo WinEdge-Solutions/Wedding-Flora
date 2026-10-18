@@ -3,7 +3,7 @@ import Link from "next/link";
 
 interface ButtonBaseProps {
   children: React.ReactNode;
-  variant?: "primary" | "sage" | "outline" | "text";
+  variant?: "primary" | "outline" | "text";
   size?: "sm" | "md" | "lg";
   className?: string;
   fullWidth?: boolean;
@@ -31,17 +31,15 @@ export const Button: React.FC<ButtonProps> = ({
   ...rest
 }) => {
   const baseClasses =
-    "inline-flex items-center justify-center font-sans tracking-wider uppercase text-xs transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none rounded-[2px]";
+    "relative inline-flex items-center justify-center font-sans tracking-wider uppercase text-xs font-semibold transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none rounded-[2px] overflow-hidden";
 
   const variantClasses = {
     primary:
-      "bg-charcoal text-ivory hover:bg-black active:bg-charcoal/90 border border-charcoal",
-    sage:
-      "bg-sage text-ivory hover:bg-[#6b7b69] active:bg-sage/90 border border-sage",
+      "bg-charcoal text-ivory border border-charcoal hover:shadow-[0_0_24px_rgba(183,154,91,0.3)] hover:border-gold/60 hover:-translate-y-0.5 active:translate-y-0",
     outline:
-      "bg-transparent text-charcoal border border-gold hover:bg-gold/10 active:bg-gold/20",
+      "shimmer-card bg-transparent text-charcoal border border-gold hover:bg-gold/10 hover:shadow-[0_0_20px_rgba(183,154,91,0.2)] hover:-translate-y-0.5 active:translate-y-0",
     text:
-      "bg-transparent text-charcoal hover:text-gold underline underline-offset-8 decoration-gold/60 p-0 border-0",
+      "bg-transparent text-charcoal hover:text-gold underline underline-offset-8 decoration-gold/60 p-0 border-0 overflow-visible",
   };
 
   const sizeClasses = {

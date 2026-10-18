@@ -6,7 +6,7 @@ import { Footer } from "@/components/layout/Footer";
 
 const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
-  weight: ["400", "500", "600"],
+  weight: ["400", "500", "600", "700"],
   variable: "--font-cormorant",
   display: "swap",
 });
@@ -19,9 +19,14 @@ const lato = Lato({
 });
 
 export const metadata: Metadata = {
-  title: "Wedding Flora | Luxury Wedding Planning & Management",
+  title: "Wedding Flora | Luxury Indian Wedding Planning & Royal Floral Artistry",
   description:
-    "Classic, romantic, and timeless wedding planning and event management. Crafting unforgettable memories for your special day.",
+    "Premier luxury wedding planning, royal palace celebrations, opulent floral mandaps, and bespoke Sangeet productions across Udaipur, Jaipur, Jodhpur, and Goa.",
+  icons: {
+    icon: "/images/logo-emblem.png",
+    shortcut: "/images/logo-emblem.png",
+    apple: "/images/logo-emblem.png",
+  },
 };
 
 export default function RootLayout({
@@ -30,7 +35,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${cormorant.variable} ${lato.variable}`}>
+    <html lang="en" data-scroll-behavior="smooth" className={`${cormorant.variable} ${lato.variable}`}>
       <body className="bg-ivory text-charcoal font-sans min-h-screen flex flex-col">
         <Navbar />
         <div className="flex-1">{children}</div>

@@ -5,22 +5,24 @@ export interface NavItem {
 
 export const siteConfig = {
   name: "Wedding Flora",
-  tagline: "Timeless elegance for your special day",
+  tagline: "Royal Grandeur & Bespoke Indian Weddings",
   description:
-    "Luxury wedding planning, styling, and coordination tailored to capture the beauty and romance of your love story.",
+    "Premier luxury Indian wedding planning, royal palace celebrations, opulent floral mandaps, and bespoke event management across Udaipur, Jaipur, Jodhpur, and Goa.",
   url: process.env.NEXT_PUBLIC_SITE_URL || "https://weddingflora.com",
   contact: {
     email: "enquiries@weddingflora.com", // TODO: replace with real client email
-    phone: "+1 (555) 234-5678", // TODO: replace with real client phone
-    address: "142 Beverly Hills Avenue, Suite 400", // TODO: replace with real client address
-    instagram: "https://instagram.com/weddingflora",
+    phone: "+91 98101 23456", // TODO: replace with real client phone
+    address: "DLF Phase 5, Golf Course Road, Gurugram, Delhi NCR • Studio in Civil Lines, Jaipur",
+    instagram: "https://www.instagram.com/weddingflora_theweddingplanner/",
+    instagramHandle: "weddingflora_theweddingplanner",
     pinterest: "https://pinterest.com/weddingflora",
+    whatsapp: "https://wa.me/919810123456",
   },
   navItems: [
     { label: "Home", href: "/" },
     { label: "About", href: "/about" },
     { label: "Services", href: "/services" },
-    { label: "Portfolio", href: "/portfolio" },
+    { label: "Celebrations", href: "/celebrations" },
     { label: "Packages", href: "/packages" },
     { label: "Contact", href: "/contact" },
   ] as NavItem[],

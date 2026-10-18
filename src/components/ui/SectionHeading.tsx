@@ -23,12 +23,12 @@ export const SectionHeading: React.FC<SectionHeadingProps> = ({
   return (
     <div className={`max-w-2xl mb-12 lg:mb-16 ${alignClass} ${className}`}>
       {eyebrow && (
-        <p className="font-sans text-xs uppercase tracking-[0.25em] text-gold font-medium mb-3">
+        <p className="font-sans text-xs uppercase tracking-[0.25em] text-[#8C6D2D] font-bold mb-3">
           {eyebrow}
         </p>
       )}
 
-      <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-normal text-charcoal tracking-tight leading-tight">
+      <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-medium sm:font-semibold text-charcoal tracking-tight leading-tight">
         {title}
       </h2>
 
@@ -39,7 +39,7 @@ export const SectionHeading: React.FC<SectionHeadingProps> = ({
       )}
 
       {subtitle && (
-        <p className="font-sans text-base sm:text-lg text-warmgrey font-light leading-relaxed mt-2">
+        <p className="font-sans text-base sm:text-lg text-charcoal/90 font-normal sm:font-medium leading-relaxed mt-2">
           {subtitle}
         </p>
       )}

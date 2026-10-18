@@ -3,7 +3,7 @@ import React from "react";
 interface ContainerProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
   className?: string;
-  size?: "default" | "narrow" | "wide";
+  size?: "default" | "narrow";
 }
 
 export const Container: React.FC<ContainerProps> = ({
@@ -15,7 +15,6 @@ export const Container: React.FC<ContainerProps> = ({
   const sizeClasses = {
     narrow: "max-w-3xl",
     default: "max-w-[1200px]",
-    wide: "max-w-7xl",
   };
 
   return (
