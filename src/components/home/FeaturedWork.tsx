@@ -2,7 +2,7 @@
 
 import React, { useRef, useState, useEffect } from "react";
 import { motion, useInView } from "framer-motion";
-import { Volume2, VolumeX, ChevronLeft, ChevronRight } from "lucide-react";
+import { Volume2, VolumeX, ChevronLeft, ChevronRight, Play } from "lucide-react";
 import { Container } from "@/components/layout/Container";
 import { Section } from "@/components/layout/Section";
 import { SectionHeading } from "@/components/ui/SectionHeading";
@@ -111,6 +111,7 @@ function ReelCard({
           <video
             ref={videoRef}
             src={`${item.videoUrl}#t=0.001`}
+            poster={item.imageUrl}
             loop
             muted={isMuted}
             playsInline
@@ -122,6 +123,15 @@ function ReelCard({
               isPlaying ? "scale-100" : "scale-[1.03] group-hover:scale-100"
             }`}
           />
+        )}
+
+        {/* Play Icon Overlay when paused */}
+        {!isPlaying && (
+          <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+            <div className="w-12 h-12 rounded-full bg-charcoal/60 backdrop-blur-md border border-gold/40 flex items-center justify-center text-gold shadow-lg group-hover:scale-110 group-hover:bg-charcoal/80 transition-all duration-300">
+              <Play className="w-5 h-5 fill-gold translate-x-0.5" />
+            </div>
+          </div>
         )}
 
         {/* Ambient dark gradient vignette for text legibility */}
@@ -254,6 +264,7 @@ export const FeaturedWork: React.FC = () => {
   return (
     <Section variant="ivory">
       <Container>
+        <div ref={containerRef}>
         <SectionHeading
           eyebrow="Royal Celebrations"
           title="Recent Wedding Celebrations"
@@ -306,7 +317,6 @@ export const FeaturedWork: React.FC = () => {
 
         {/* ── Mobile 1-Reel-Per-Swipe Carousel (md:hidden) ── */}
         <div
-          ref={containerRef}
           className="md:hidden relative w-full overflow-hidden pb-4 touch-pan-y"
           onTouchStart={handleTouchStart}
           onTouchMove={handleTouchMove}
@@ -368,6 +378,7 @@ export const FeaturedWork: React.FC = () => {
             View All Royal Celebrations
           </Button>
         </motion.div>
+        </div>
       </Container>
     </Section>
   );
