@@ -95,7 +95,7 @@ export default function ServicesPage() {
                         src={service.imageUrl}
                         alt={service.title}
                         fill
-                        className="object-cover transition-transform duration-700 group-hover:scale-105"
+                        className="object-cover object-top transition-transform duration-700 group-hover:scale-105"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-charcoal/40 via-transparent to-transparent" />
                     </div>

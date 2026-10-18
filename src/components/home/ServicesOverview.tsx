@@ -91,13 +91,13 @@ export const ServicesOverview: React.FC = () => {
             >
               <MagneticCard className="group bg-ivory border border-gold/15 rounded-[2px] flex flex-col h-full">
                 {/* Image */}
-                <div className="relative h-60 w-full overflow-hidden bg-cream">
+                <div className="relative h-64 sm:h-72 w-full overflow-hidden bg-cream">
                   <Image
                     src={service.imageUrl}
                     alt={`${service.title} by Wedding Flora`}
                     fill
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
-                    className="object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+                    className="object-cover object-top transition-transform duration-700 ease-out group-hover:scale-105"
                   />
                   {/* Gold gradient bleed up from bottom */}
                   <div className="absolute inset-0 bg-gradient-to-t from-charcoal/30 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
