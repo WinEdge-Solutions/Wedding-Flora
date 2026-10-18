@@ -97,22 +97,22 @@ export const Hero: React.FC = () => {
         style={{ y: smoothImageY }}
       >
         <Image
-          src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=2000&q=85"
-          alt="Luxury wedding ceremony altar styled with romantic white florals and cascading greenery"
+          src="/images/hero-bg.jpg"
+          alt="Royal Indian wedding stage decor with opulent floral arches and chandeliers by Wedding Flora"
           fill
           priority
           sizes="100vw"
-          className="object-cover object-center scale-110"
+          className="object-cover object-center scale-105"
         />
       </motion.div>
 
-      {/* ── Gradient overlay (brightens as you scroll) */}
+      {/* ── Gradient overlay (allows stage floral grandeur to shine while keeping text legible) */}
       <motion.div
         className="absolute inset-0 z-[3]"
         style={{
           opacity: overlayOpacity,
           background:
-            "linear-gradient(to bottom, rgba(250,247,242,0.88) 0%, rgba(250,247,242,0.72) 40%, rgba(250,247,242,0.96) 100%)",
+            "linear-gradient(to bottom, rgba(250,247,242,0.78) 0%, rgba(250,247,242,0.55) 45%, rgba(250,247,242,0.88) 100%)",
         }}
       />
 
