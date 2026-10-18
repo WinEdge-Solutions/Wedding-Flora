@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import Image from "next/image";
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import { Button } from "@/components/ui/Button";
@@ -52,6 +52,41 @@ function BokehLayer() {
   );
 }
 
+/* ── Hero Slideshow configuration ─────────────────────── */
+interface HeroSlide {
+  src: string;
+  alt: string;
+  position?: string;
+}
+
+export const HERO_SLIDES: HeroSlide[] = [
+  {
+    src: "/images/hero/hero-slide-1.jpg",
+    alt: "Royal palace wedding stage with stone arches, terracotta drapes and glowing elephants by Wedding Flora",
+    position: "object-center",
+  },
+  {
+    src: "/images/hero/hero-slide-2.jpg",
+    alt: "Grand emerald draped entrance corridor with floral arches, candles and chandeliers by Wedding Flora",
+    position: "object-center",
+  },
+  {
+    src: "/images/hero/hero-slide-3.jpg",
+    alt: "Illuminated teal triple-arch palace stage with fairy light canopy by Wedding Flora",
+    position: "object-center",
+  },
+  {
+    src: "/images/hero/hero-slide-4.jpg",
+    alt: "Enchanting garden wedding celebration with pink floral tablescapes by Wedding Flora",
+    position: "object-center",
+  },
+  {
+    src: "/images/hero/hero-slide-5.jpg",
+    alt: "Opulent golden crystal chandelier suspended beneath royal blue drapery by Wedding Flora",
+    position: "object-top",
+  },
+];
+
 /* ── Fade/slide up stagger for text ───────────────────── */
 const fadeUp = {
   hidden: { opacity: 0, y: 28 },
@@ -76,6 +111,16 @@ export const Hero: React.FC = () => {
 
   const smoothImageY = useSpring(imageY, { stiffness: 80, damping: 20 });
 
+  /* Slideshow rotation state */
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % HERO_SLIDES.length);
+    }, 6500);
+    return () => clearInterval(timer);
+  }, []);
+
   return (
     <section
       ref={sectionRef}
@@ -91,28 +136,56 @@ export const Hero: React.FC = () => {
       {/* ── Mouse-tracking bokeh ──────────────────── */}
       <BokehLayer />
 
-      {/* ── Parallax hero image ───────────────────── */}
+      {/* ── Parallax cross-fade hero slideshow ───── */}
       <motion.div
-        className="absolute inset-0 z-0"
+        className="absolute inset-0 z-0 overflow-hidden"
         style={{ y: smoothImageY }}
       >
-        <Image
-          src="/images/hero-bg.jpg"
-          alt="Royal Indian wedding stage decor with opulent floral arches and chandeliers by Wedding Flora"
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover object-center scale-105"
-        />
+        {HERO_SLIDES.map((slide, index) => {
+          const isActive = index === currentSlide;
+          return (
+            <motion.div
+              key={slide.src}
+              initial={false}
+              animate={{
+                opacity: isActive ? 1 : 0,
+                scale: isActive ? 1.08 : 1.02,
+              }}
+              transition={{
+                opacity: { duration: 1.8, ease: "easeInOut" },
+                scale: { duration: 6.5, ease: "easeOut" },
+              }}
+              className="absolute inset-0 w-full h-full pointer-events-none"
+            >
+              <Image
+                src={slide.src}
+                alt={slide.alt}
+                fill
+                priority={index === 0}
+                sizes="100vw"
+                className={`object-cover ${slide.position || "object-center"}`}
+              />
+            </motion.div>
+          );
+        })}
       </motion.div>
 
-      {/* ── Gradient overlay (allows stage floral grandeur to shine while keeping text legible) */}
+      {/* ── Gradient overlay: ensures luxury warmth & reliable text contrast */}
       <motion.div
         className="absolute inset-0 z-[3]"
         style={{
           opacity: overlayOpacity,
           background:
-            "linear-gradient(to bottom, rgba(250,247,242,0.78) 0%, rgba(250,247,242,0.55) 45%, rgba(250,247,242,0.88) 100%)",
+            "linear-gradient(to bottom, rgba(250,247,242,0.85) 0%, rgba(250,247,242,0.68) 45%, rgba(250,247,242,0.92) 100%)",
+        }}
+      />
+
+      {/* ── Central contrast halo behind text card ── */}
+      <div
+        className="absolute inset-0 z-[4] pointer-events-none"
+        style={{
+          background:
+            "radial-gradient(ellipse 70% 60% at 50% 48%, rgba(250,247,242,0.6) 0%, rgba(250,247,242,0.15) 70%, transparent 100%)",
         }}
       />
 
@@ -122,7 +195,7 @@ export const Hero: React.FC = () => {
         className="relative z-[5] w-full"
       >
         <Container className="text-center py-6 sm:py-8 lg:py-10 my-auto">
-          <div className="max-w-3xl mx-auto space-y-3.5 sm:space-y-4">
+          <div className="max-w-3xl mx-auto space-y-3.5 sm:space-y-4 px-4 sm:px-8 py-6 sm:py-8 rounded-[4px] bg-ivory/70 sm:bg-ivory/55 backdrop-blur-[5px] border border-gold/25 shadow-[0_12px_45px_rgba(43,43,43,0.06)]">
 
             {/* Floral Wreath Crest Monogram */}
             <motion.div
@@ -178,12 +251,32 @@ export const Hero: React.FC = () => {
               className="pt-2 sm:pt-4 flex flex-row items-center justify-center gap-3 sm:gap-4 flex-wrap"
               variants={fadeUp} initial="hidden" animate="visible" custom={5}
             >
-              <Button href="/contact" variant="primary" size="md" className="px-5 sm:px-7 py-3 text-xs shadow-md">
+              <Button href="/contact" variant="primary" size="md" className="px-5 sm:px-7 py-3 text-xs shadow-lg bg-charcoal text-ivory border border-gold/50 hover:border-gold">
                 Plan Your Royal Wedding
               </Button>
-              <Button href="/celebrations" variant="outline" size="md" className="px-5 sm:px-7 py-3 text-xs">
+              <Button href="/celebrations" variant="outline" size="md" className="px-5 sm:px-7 py-3 text-xs bg-ivory/95 text-charcoal border border-gold/60 hover:bg-gold/15 shadow-sm">
                 Explore Celebrations
               </Button>
+            </motion.div>
+
+            {/* Slideshow subtle indicators */}
+            <motion.div
+              className="flex items-center justify-center gap-1.5 pt-1"
+              variants={fadeUp}
+              initial="hidden"
+              animate="visible"
+              custom={5.5}
+            >
+              {HERO_SLIDES.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => setCurrentSlide(i)}
+                  aria-label={`Go to slide ${i + 1}`}
+                  className={`h-1 rounded-full transition-all duration-500 focus:outline-none ${
+                    i === currentSlide ? "w-6 bg-gold" : "w-1.5 bg-charcoal/25 hover:bg-charcoal/50"
+                  }`}
+                />
+              ))}
             </motion.div>
 
             {/* Scroll nudge */}
