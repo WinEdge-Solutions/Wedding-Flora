@@ -112,35 +112,26 @@ export const Hero: React.FC = () => {
         style={{
           opacity: overlayOpacity,
           background:
-            "linear-gradient(to bottom, rgba(43,43,43,0.35) 0%, rgba(250,247,242,0.18) 35%, rgba(250,247,242,0.45) 75%, rgba(250,247,242,0.92) 100%)",
+            "linear-gradient(to bottom, rgba(250,247,242,0.68) 0%, rgba(250,247,242,0.42) 35%, rgba(250,247,242,0.62) 75%, rgba(250,247,242,0.95) 100%)",
         }}
       />
 
-      {/* ── Central contrast halo behind text card ── */}
+      {/* ── Central contrast halo behind text ── */}
       <div
         className="absolute inset-0 z-[4] pointer-events-none"
         style={{
           background:
-            "radial-gradient(ellipse 75% 65% at 50% 50%, rgba(250,247,242,0.55) 0%, rgba(250,247,242,0.15) 70%, transparent 100%)",
+            "radial-gradient(ellipse 85% 70% at 50% 50%, rgba(250,247,242,0.75) 0%, rgba(250,247,242,0.38) 60%, transparent 100%)",
         }}
       />
 
-      {/* ── Text Content wrapped in Luxury Glassmorphism Card ── */}
+      {/* ── Text Content and Buttons (clean floating layout without card box) ── */}
       <motion.div
         style={{ y: textY }}
         className="relative z-[5] w-full"
       >
-        <Container className="text-center py-4 sm:py-6 my-auto">
-          {/* Glassmorphic box */}
-          <div className="max-w-3xl mx-auto space-y-3.5 sm:space-y-4 px-6 sm:px-12 py-8 sm:py-10 rounded-xl sm:rounded-2xl bg-ivory/80 backdrop-blur-xl border border-white/70 shadow-[0_20px_50px_rgba(43,43,43,0.18),0_1px_2px_rgba(255,255,255,0.9)_inset,0_0_0_1px_rgba(183,154,91,0.3)] relative overflow-hidden transition-all duration-500 hover:shadow-[0_25px_60px_rgba(183,154,91,0.25),0_1px_3px_rgba(255,255,255,1)_inset,0_0_0_1px_rgba(183,154,91,0.45)]">
-            
-            {/* Top glass reflection sheen highlight */}
-            <div className="absolute inset-x-0 top-0 h-[1.5px] bg-gradient-to-r from-transparent via-white to-transparent opacity-90" />
-            
-            {/* Ambient gold corner glow */}
-            <div className="absolute -top-24 -right-24 w-48 h-48 rounded-full bg-gold/15 blur-2xl pointer-events-none" />
-            <div className="absolute -bottom-24 -left-24 w-48 h-48 rounded-full bg-gold/15 blur-2xl pointer-events-none" />
-
+        <Container className="text-center py-6 sm:py-10 my-auto">
+          <div className="max-w-3xl mx-auto space-y-4 sm:space-y-5">
             {/* Floral Wreath Crest Monogram */}
             <motion.div
               className="flex justify-center -mb-1"
@@ -149,7 +140,7 @@ export const Hero: React.FC = () => {
               animate="visible"
               custom={0}
             >
-              <div className="relative w-12 h-12 sm:w-16 sm:h-16 drop-shadow-sm transition-transform duration-500 hover:scale-105">
+              <div className="relative w-12 h-12 sm:w-16 sm:h-16 drop-shadow-md transition-transform duration-500 hover:scale-105">
                 <Image
                   src="/images/logo-emblem.png"
                   alt="Wedding Flora Crest"
@@ -161,7 +152,7 @@ export const Hero: React.FC = () => {
             </motion.div>
 
             <motion.p
-              className="font-sans text-[11px] sm:text-xs uppercase tracking-[0.3em] text-[#8C6D2D] font-bold"
+              className="font-sans text-[11px] sm:text-xs uppercase tracking-[0.3em] text-[#8C6D2D] font-bold drop-shadow-sm"
               variants={fadeUp}
               initial="hidden"
               animate="visible"
@@ -171,7 +162,7 @@ export const Hero: React.FC = () => {
             </motion.p>
 
             <motion.h1
-              className="font-serif text-3xl sm:text-5xl lg:text-6xl font-semibold sm:font-bold text-charcoal tracking-tight leading-[1.14]"
+              className="font-serif text-3xl sm:text-5xl lg:text-6xl font-semibold sm:font-bold text-charcoal tracking-tight leading-[1.14] drop-shadow-sm"
               variants={fadeUp}
               initial="hidden"
               animate="visible"
@@ -185,7 +176,7 @@ export const Hero: React.FC = () => {
             </motion.h1>
 
             <motion.div variants={fadeUp} initial="hidden" animate="visible" custom={3}>
-              <Divider variant="ornamental" className="my-1.5 sm:my-2" />
+              <Divider variant="ornamental" className="my-2 sm:my-2.5" />
             </motion.div>
 
             <motion.p
@@ -201,7 +192,7 @@ export const Hero: React.FC = () => {
 
             {/* CTA Buttons */}
             <motion.div
-              className="pt-2 sm:pt-4 flex flex-row items-center justify-center gap-3 sm:gap-4 flex-wrap"
+              className="pt-3 sm:pt-5 flex flex-row items-center justify-center gap-3 sm:gap-4 flex-wrap"
               variants={fadeUp}
               initial="hidden"
               animate="visible"
@@ -219,7 +210,7 @@ export const Hero: React.FC = () => {
                 href="/celebrations"
                 variant="outline"
                 size="md"
-                className="px-6 sm:px-8 py-3.5 text-xs bg-white/70 backdrop-blur-md text-charcoal border border-gold/70 shadow-sm hover:bg-gold/15 transition-all duration-300"
+                className="px-6 sm:px-8 py-3.5 text-xs bg-white/80 backdrop-blur-md text-charcoal border border-gold/70 shadow-sm hover:bg-gold/15 transition-all duration-300"
               >
                 Explore Celebrations
               </Button>
@@ -227,7 +218,7 @@ export const Hero: React.FC = () => {
 
             {/* Scroll nudge */}
             <motion.div
-              className="pt-3 sm:pt-4 flex justify-center"
+              className="pt-4 sm:pt-6 flex justify-center"
               variants={fadeUp}
               initial="hidden"
               animate="visible"
@@ -242,7 +233,6 @@ export const Hero: React.FC = () => {
                 <div className="w-px h-5 sm:h-6 bg-gradient-to-b from-charcoal/80 to-transparent" />
               </motion.div>
             </motion.div>
-
           </div>
         </Container>
       </motion.div>
