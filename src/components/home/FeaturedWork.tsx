@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useState, useEffect, useCallback } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { motion, useInView } from "framer-motion";
 import { Volume2, VolumeX, ChevronLeft, ChevronRight } from "lucide-react";
 import { Container } from "@/components/layout/Container";
@@ -14,12 +14,14 @@ function ReelCard({
   item,
   index,
   inView,
-  isMobileActive,
+  isMobileActive = false,
+  isDesktop = false,
 }: {
   item: GalleryItem;
   index: number;
   inView: boolean;
-  isMobileActive: boolean;
+  isMobileActive?: boolean;
+  isDesktop?: boolean;
 }) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -30,9 +32,12 @@ function ReelCard({
   const handleMouseEnter = () => {
     if (typeof window !== "undefined" && window.innerWidth < 768) return;
     if (!videoRef.current) return;
-    videoRef.current.play().then(() => {
-      setIsPlaying(true);
-    }).catch(() => {});
+    videoRef.current
+      .play()
+      .then(() => {
+        setIsPlaying(true);
+      })
+      .catch(() => {});
   };
 
   const handleMouseLeave = () => {
@@ -60,16 +65,19 @@ function ReelCard({
     }
   };
 
-  // Mobile tap-to-toggle
+  // Tap-to-toggle
   const handleCardClick = () => {
     if (!videoRef.current) return;
     if (isPlaying) {
       videoRef.current.pause();
       setIsPlaying(false);
     } else {
-      videoRef.current.play().then(() => {
-        setIsPlaying(true);
-      }).catch(() => {});
+      videoRef.current
+        .play()
+        .then(() => {
+          setIsPlaying(true);
+        })
+        .catch(() => {});
     }
   };
 
@@ -89,18 +97,16 @@ function ReelCard({
   return (
     <motion.div
       initial={{ opacity: 0, y: 50 }}
-      animate={inView ? { opacity: 1, y: index === 1 ? 24 : 0 } : {}}
+      animate={inView ? { opacity: 1, y: isDesktop && index === 1 ? 24 : 0 } : {}}
       transition={{ delay: index * 0.15, duration: 0.7, ease: [0.22, 1, 0.36, 1] as const }}
-      className="group flex flex-col cursor-pointer snap-center w-[84vw] sm:w-[60vw] md:w-auto flex-shrink-0 md:flex-shrink select-none"
-      style={{ scrollSnapStop: "always", scrollSnapAlign: "center" }}
+      className="group flex flex-col cursor-pointer w-full select-none"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       onClick={handleCardClick}
     >
-      {/* Reel container with 9:16 portrait proportions (compact aspect-4/5 on mobile so it fits in screen) */}
+      {/* Reel container with portrait proportions */}
       <div className="relative aspect-[4/5] sm:aspect-[9/16] w-full overflow-hidden bg-[#181513] rounded-[3px] mb-3.5 shadow-[0_8px_30px_rgba(43,43,43,0.08)] group-hover:shadow-[0_20px_45px_rgba(183,154,91,0.25)] transition-all duration-500">
-        
-        {/* Native Video Element — displays the real Indian wedding reel frame as poster */}
+        {/* Native Video Element */}
         {item.videoUrl && (
           <video
             ref={videoRef}
@@ -121,7 +127,7 @@ function ReelCard({
         {/* Ambient dark gradient vignette for text legibility */}
         <div className="absolute inset-0 bg-gradient-to-t from-charcoal/80 via-transparent to-charcoal/30 pointer-events-none" />
 
-        {/* Top Badges: Category (Sangeet / Detailing Decor) + Audio toggle */}
+        {/* Top Badges: Category + Audio toggle */}
         <div className="absolute top-3.5 inset-x-3.5 flex items-center justify-between z-10 pointer-events-auto">
           <span className="inline-block bg-charcoal/85 backdrop-blur-md px-2.5 py-1 text-[10px] uppercase tracking-[0.25em] text-gold font-sans font-semibold rounded-[2px] border border-gold/40 shadow-sm">
             {item.category}
@@ -177,51 +183,72 @@ export const FeaturedWork: React.FC = () => {
   const featured = galleryData.slice(0, 3);
   const containerRef = useRef<HTMLDivElement>(null);
   const inView = useInView(containerRef, { once: true, margin: "-80px" });
+
+  // Mobile Carousel State — strictly controlled single-slide stepper
   const [activeIndex, setActiveIndex] = useState(0);
+  const [dragOffset, setDragOffset] = useState(0);
+  const [isDragging, setIsDragging] = useState(false);
+
   const touchStartX = useRef(0);
+  const touchStartY = useRef(0);
+  const isHorizontalSwipe = useRef<boolean | null>(null);
 
-  // Smooth scroll to card index
-  const scrollToIndex = useCallback((index: number) => {
-    const el = containerRef.current;
-    if (!el) return;
-    const cards = el.children;
-    if (cards[index]) {
-      (cards[index] as HTMLElement).scrollIntoView({
-        behavior: "smooth",
-        inline: "center",
-        block: "nearest",
-      });
-      setActiveIndex(index);
-    }
-  }, []);
-
-  // Update active index on scroll
-  const handleScroll = () => {
-    const el = containerRef.current;
-    if (!el) return;
-    const scrollLeft = el.scrollLeft;
-    const cardWidth = el.clientWidth * 0.84;
-    const newIndex = Math.round(scrollLeft / (cardWidth || 1));
-    if (newIndex !== activeIndex && newIndex >= 0 && newIndex < featured.length) {
-      setActiveIndex(newIndex);
-    }
-  };
-
-  // 1-swipe gesture detection (light 35px flick immediately jumps to next/prev reel)
+  // Touch gesture handlers: precisely advance ONLY 1 reel per swipe
   const handleTouchStart = (e: React.TouchEvent) => {
     touchStartX.current = e.touches[0].clientX;
+    touchStartY.current = e.touches[0].clientY;
+    isHorizontalSwipe.current = null;
+    setIsDragging(true);
   };
 
-  const handleTouchEnd = (e: React.TouchEvent) => {
-    const touchEndX = e.changedTouches[0].clientX;
-    const diff = touchStartX.current - touchEndX;
-    if (Math.abs(diff) > 35) {
-      if (diff > 0 && activeIndex < featured.length - 1) {
-        scrollToIndex(activeIndex + 1);
-      } else if (diff < 0 && activeIndex > 0) {
-        scrollToIndex(activeIndex - 1);
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (!isDragging) return;
+    const currentX = e.touches[0].clientX;
+    const currentY = e.touches[0].clientY;
+    const diffX = currentX - touchStartX.current;
+    const diffY = currentY - touchStartY.current;
+
+    // Detect direction lock on first movement
+    if (isHorizontalSwipe.current === null) {
+      if (Math.abs(diffX) > 8 || Math.abs(diffY) > 8) {
+        isHorizontalSwipe.current = Math.abs(diffX) > Math.abs(diffY);
       }
     }
+
+    if (isHorizontalSwipe.current) {
+      // Rubber-band resistance on boundary edges
+      let resistedDiff = diffX;
+      if (
+        (activeIndex === 0 && diffX > 0) ||
+        (activeIndex === featured.length - 1 && diffX < 0)
+      ) {
+        resistedDiff = diffX * 0.25;
+      }
+      setDragOffset(resistedDiff);
+    }
+  };
+
+  const handleTouchEnd = () => {
+    if (!isDragging) return;
+    setIsDragging(false);
+
+    if (isHorizontalSwipe.current) {
+      // Light flick threshold (35px): strictly advance or retreat by 1 reel ONLY
+      if (dragOffset < -35 && activeIndex < featured.length - 1) {
+        setActiveIndex((prev) => prev + 1);
+      } else if (dragOffset > 35 && activeIndex > 0) {
+        setActiveIndex((prev) => prev - 1);
+      }
+    }
+
+    setDragOffset(0);
+    isHorizontalSwipe.current = null;
+  };
+
+  const handleTouchCancel = () => {
+    setIsDragging(false);
+    setDragOffset(0);
+    isHorizontalSwipe.current = null;
   };
 
   return (
@@ -233,7 +260,7 @@ export const FeaturedWork: React.FC = () => {
           subtitle="Glimpses into bespoke Sangeet productions, grand palace Mandaps, and royal celebrations across India. Hover on desktop or swipe on mobile to experience each moment."
         />
 
-        {/* Mobile Swipe Navigation Controls Bar */}
+        {/* ── Mobile Carousel Navigation Bar (md:hidden) ── */}
         <div className="md:hidden flex items-center justify-between text-xs text-charcoal mb-4 px-1">
           <div className="flex items-center gap-2">
             <span className="text-[10px] uppercase tracking-[0.25em] text-[#8C6D2D] font-bold">
@@ -244,7 +271,7 @@ export const FeaturedWork: React.FC = () => {
           {/* Quick Prev / Next Arrows */}
           <div className="flex items-center gap-1.5">
             <button
-              onClick={() => scrollToIndex(Math.max(0, activeIndex - 1))}
+              onClick={() => setActiveIndex((prev) => Math.max(0, prev - 1))}
               disabled={activeIndex === 0}
               aria-label="Previous reel"
               className="p-1.5 rounded-full border border-gold/30 bg-ivory text-charcoal disabled:opacity-30 disabled:cursor-not-allowed hover:bg-gold/10 transition-colors"
@@ -257,7 +284,7 @@ export const FeaturedWork: React.FC = () => {
               {featured.map((_, i) => (
                 <button
                   key={i}
-                  onClick={() => scrollToIndex(i)}
+                  onClick={() => setActiveIndex(i)}
                   aria-label={`Go to reel ${i + 1}`}
                   className={`h-1.5 rounded-full transition-all duration-300 ${
                     i === activeIndex ? "w-5 bg-gold" : "w-1.5 bg-charcoal/20"
@@ -267,7 +294,7 @@ export const FeaturedWork: React.FC = () => {
             </div>
 
             <button
-              onClick={() => scrollToIndex(Math.min(featured.length - 1, activeIndex + 1))}
+              onClick={() => setActiveIndex((prev) => Math.min(featured.length - 1, prev + 1))}
               disabled={activeIndex === featured.length - 1}
               aria-label="Next reel"
               className="p-1.5 rounded-full border border-gold/30 bg-ivory text-charcoal disabled:opacity-30 disabled:cursor-not-allowed hover:bg-gold/10 transition-colors"
@@ -277,25 +304,56 @@ export const FeaturedWork: React.FC = () => {
           </div>
         </div>
 
-        {/* Responsive Grid on Desktop / 1-Swipe Smooth Carousel on Mobile */}
+        {/* ── Mobile 1-Reel-Per-Swipe Carousel (md:hidden) ── */}
         <div
           ref={containerRef}
-          onScroll={handleScroll}
+          className="md:hidden relative w-full overflow-hidden pb-4 touch-pan-y"
           onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
           onTouchEnd={handleTouchEnd}
-          className="flex overflow-x-auto snap-x snap-mandatory scroll-smooth scrollbar-none gap-4 pb-4 -mx-4 px-4 md:grid md:grid-cols-3 md:gap-8 lg:gap-10 md:overflow-visible md:mx-0 md:px-0"
-          style={{
-            WebkitOverflowScrolling: "touch",
-            scrollSnapType: "x mandatory",
-          }}
+          onTouchCancel={handleTouchCancel}
         >
+          <div
+            className="flex items-center gap-4 will-change-transform"
+            style={{
+              transform: `translateX(calc(8vw - ${activeIndex} * (84vw + 16px) + ${dragOffset}px))`,
+              transition: isDragging ? "none" : "transform 0.4s cubic-bezier(0.22, 1, 0.36, 1)",
+            }}
+          >
+            {featured.map((item, index) => (
+              <div
+                key={item.id}
+                className={`w-[84vw] flex-shrink-0 transition-opacity duration-300 ${
+                  index === activeIndex ? "opacity-100" : "opacity-60"
+                }`}
+                onClick={() => {
+                  if (index !== activeIndex) {
+                    setActiveIndex(index);
+                  }
+                }}
+              >
+                <ReelCard
+                  item={item}
+                  index={index}
+                  inView={inView}
+                  isMobileActive={index === activeIndex}
+                  isDesktop={false}
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* ── Desktop 3-Column Grid (hidden md:grid) ── */}
+        <div className="hidden md:grid md:grid-cols-3 md:gap-8 lg:gap-10">
           {featured.map((item, index) => (
             <ReelCard
               key={item.id}
               item={item}
               index={index}
               inView={inView}
-              isMobileActive={index === activeIndex}
+              isMobileActive={false}
+              isDesktop={true}
             />
           ))}
         </div>
