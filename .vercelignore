@@ -1,0 +1,8 @@
+.next
+.vercel
+node_modules
+.git
+.agent
+.agents
+.gemini
+.gsd
