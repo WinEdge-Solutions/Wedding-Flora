@@ -17,22 +17,38 @@ function BokehLayer() {
   const rafId = useRef<number | null>(null);
 
   useEffect(() => {
+    if (typeof window === "undefined" || window.innerWidth < 768) return;
+
+    let isRunning = false;
+
+    const animate = () => {
+      const diffX = mouseX.current - posX.current;
+      const diffY = mouseY.current - posY.current;
+      posX.current += diffX * 0.04;
+      posY.current += diffY * 0.04;
+
+      if (ref.current) {
+        ref.current.style.setProperty("--orb-x", `${posX.current.toFixed(2)}%`);
+        ref.current.style.setProperty("--orb-y", `${posY.current.toFixed(2)}%`);
+      }
+
+      if (Math.abs(diffX) > 0.05 || Math.abs(diffY) > 0.05) {
+        rafId.current = requestAnimationFrame(animate);
+      } else {
+        isRunning = false;
+      }
+    };
+
     const handleMove = (e: MouseEvent) => {
       mouseX.current = (e.clientX / window.innerWidth) * 100;
       mouseY.current = (e.clientY / window.innerHeight) * 100;
-    };
-    window.addEventListener("mousemove", handleMove);
-
-    const animate = () => {
-      posX.current += (mouseX.current - posX.current) * 0.04;
-      posY.current += (mouseY.current - posY.current) * 0.04;
-      if (ref.current) {
-        ref.current.style.setProperty("--orb-x", `${posX.current}%`);
-        ref.current.style.setProperty("--orb-y", `${posY.current}%`);
+      if (!isRunning) {
+        isRunning = true;
+        rafId.current = requestAnimationFrame(animate);
       }
-      rafId.current = requestAnimationFrame(animate);
     };
-    rafId.current = requestAnimationFrame(animate);
+
+    window.addEventListener("mousemove", handleMove, { passive: true });
 
     return () => {
       window.removeEventListener("mousemove", handleMove);

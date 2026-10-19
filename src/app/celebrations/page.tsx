@@ -201,7 +201,7 @@ export default function CelebrationsPage() {
                       muted
                       playsInline
                       controls
-                      preload="auto"
+                      preload="metadata"
                       className="w-full h-full object-cover"
                     />
                   ) : (

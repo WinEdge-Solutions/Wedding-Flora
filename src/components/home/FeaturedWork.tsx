@@ -111,7 +111,7 @@ function ReelCard({
             loop
             muted={isMuted}
             playsInline
-            preload="auto"
+            preload="metadata"
             onTimeUpdate={handleTimeUpdate}
             onPlay={() => setIsPlaying(true)}
             onPause={() => setIsPlaying(false)}
