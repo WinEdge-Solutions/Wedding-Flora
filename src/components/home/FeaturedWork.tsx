@@ -28,23 +28,25 @@ function ReelCard({
   const [isMuted, setIsMuted] = useState(true);
   const [progress, setProgress] = useState(0);
 
-  // Desktop hover controls
+  // Strictly enforce muted attribute on the DOM node for browser autoplay compliance
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.muted = isMuted;
+      videoRef.current.defaultMuted = true;
+    }
+  }, [isMuted]);
+
+  // Desktop hover controls: play strictly on hover
   const handleMouseEnter = () => {
     if (typeof window !== "undefined" && window.innerWidth < 768) return;
     if (!videoRef.current) return;
-    videoRef.current
-      .play()
-      .then(() => {
-        setIsPlaying(true);
-      })
-      .catch(() => {});
+    videoRef.current.play().catch(() => {});
   };
 
   const handleMouseLeave = () => {
     if (typeof window !== "undefined" && window.innerWidth < 768) return;
     if (!videoRef.current) return;
     videoRef.current.pause();
-    setIsPlaying(false);
   };
 
   // Sound toggle
@@ -65,23 +67,17 @@ function ReelCard({
     }
   };
 
-  // Tap-to-toggle
+  // Tap-to-toggle pause/play
   const handleCardClick = () => {
     if (!videoRef.current) return;
     if (isPlaying) {
       videoRef.current.pause();
-      setIsPlaying(false);
     } else {
-      videoRef.current
-        .play()
-        .then(() => {
-          setIsPlaying(true);
-        })
-        .catch(() => {});
+      videoRef.current.play().catch(() => {});
     }
   };
 
-  // Sync mobile active state from parent carousel
+  // Sync mobile active state from parent carousel (mobile only)
   useEffect(() => {
     if (typeof window === "undefined" || window.innerWidth >= 768) return;
     const video = videoRef.current;
@@ -110,12 +106,12 @@ function ReelCard({
         {item.videoUrl && (
           <video
             ref={videoRef}
-            src={`${item.videoUrl}#t=0.001`}
+            src={item.videoUrl}
             poster={item.imageUrl}
             loop
             muted={isMuted}
             playsInline
-            preload="auto"
+            preload="metadata"
             onTimeUpdate={handleTimeUpdate}
             onPlay={() => setIsPlaying(true)}
             onPause={() => setIsPlaying(false)}
@@ -124,7 +120,6 @@ function ReelCard({
             }`}
           />
         )}
-
 
         {/* Ambient dark gradient vignette for text legibility */}
         <div className="absolute inset-0 bg-gradient-to-t from-charcoal/80 via-transparent to-charcoal/30 pointer-events-none" />

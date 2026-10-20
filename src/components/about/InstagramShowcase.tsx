@@ -1,9 +1,6 @@
 "use client";
 
 import React, { useState } from "react";
-import Image from "next/image";
-import Link from "next/link";
-import { siteConfig } from "@/lib/site";
 import { InstagramIcon } from "@/components/ui/InstagramIcon";
 import {
   RotateCw,
@@ -16,14 +13,13 @@ import {
   Film,
   Globe,
   Heart,
-  Play,
 } from "lucide-react";
 
 export const InstagramShowcase: React.FC = () => {
   const [iframeKey, setIframeKey] = useState(1);
   const [isReloading, setIsReloading] = useState(false);
   const [copied, setCopied] = useState(false);
-  const [viewMode, setViewMode] = useState<"realtime" | "reels">("realtime");
+  const [viewMode, setViewMode] = useState<"realtime" | "reels">("reels");
 
   const profileUrl = "https://www.instagram.com/weddingflora_theweddingplanner/";
   const embedUrl = "https://www.instagram.com/weddingflora_theweddingplanner/embed";
@@ -225,6 +221,7 @@ export const InstagramShowcase: React.FC = () => {
                   title: "Sangeet Night",
                   desc: "Umaid Bhawan Palace, Jodhpur. Sandstone ramparts & royal Sufi melodies.",
                   video: "/videos/reel-1.mp4",
+                  poster: "/images/reel-1-poster.jpg",
                   likes: "6,420",
                 },
                 {
@@ -232,6 +229,7 @@ export const InstagramShowcase: React.FC = () => {
                   title: "Mandap Decor",
                   desc: "Floating Lotus Mandap with 40,000 fragrant Rajnigandhas on Lake Pichola.",
                   video: "/videos/reel-2.mp4",
+                  poster: "/images/reel-2-poster.jpg",
                   likes: "8,910",
                 },
                 {
@@ -239,6 +237,7 @@ export const InstagramShowcase: React.FC = () => {
                   title: "Midnight Sangeet",
                   desc: "Concert-grade acoustics & starlit palace courtyards in Udaipur.",
                   video: "/videos/reel-3.mp4",
+                  poster: "/images/reel-3-poster.jpg",
                   likes: "5,830",
                 },
               ].map((reel) => (
@@ -249,9 +248,13 @@ export const InstagramShowcase: React.FC = () => {
                   <div className="relative aspect-[9/16] w-full bg-charcoal">
                     <video
                       src={reel.video}
-                      controls
-                      playsInline
+                      poster={reel.poster}
+                      autoPlay
+                      muted
                       loop
+                      playsInline
+                      controls
+                      preload="auto"
                       className="w-full h-full object-cover"
                     />
                     <div className="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-charcoal/80 backdrop-blur-md text-[10px] font-bold text-gold uppercase tracking-wider">

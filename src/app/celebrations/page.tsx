@@ -195,6 +195,11 @@ export default function CelebrationsPage() {
                   {item.videoUrl ? (
                     <video
                       src={item.videoUrl}
+                      poster={item.imageUrl}
+                      autoPlay
+                      loop
+                      muted
+                      playsInline
                       controls
                       preload="metadata"
                       className="w-full h-full object-cover"
