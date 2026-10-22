@@ -44,16 +44,16 @@ export const TestimonialsSection: React.FC = () => {
               </span>
 
               {/* Quote */}
-              <blockquote className="font-serif text-xl sm:text-2xl lg:text-3xl font-semibold text-charcoal leading-relaxed italic max-w-2xl mx-auto group-hover:text-black transition-colors duration-300">
+              <blockquote className="font-serif text-xl sm:text-2xl lg:text-[1.85rem] font-normal text-ivory/95 leading-relaxed italic max-w-2xl mx-auto group-hover:text-white transition-colors duration-300 tracking-wide">
                 {item.quote}
               </blockquote>
 
               {/* Attribution */}
               <div className="pt-2 space-y-1">
-                <p className="font-sans text-xs uppercase tracking-[0.25em] text-charcoal font-bold group-hover:text-gold transition-colors duration-300">
+                <p className="font-sans text-xs uppercase tracking-[0.25em] text-gold font-bold group-hover:text-white transition-colors duration-300">
                   {item.couple}
                 </p>
-                <p className="font-sans text-xs text-charcoal/95 font-semibold tracking-wide">
+                <p className="font-sans text-xs text-ivory/80 font-semibold tracking-wide">
                   {item.venue} • {item.date}
                 </p>
                 {/* Animated accent line */}

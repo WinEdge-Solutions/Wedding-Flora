@@ -15,7 +15,7 @@ function NavLink({ href, label, isActive, onClick }: { href: string; label: stri
       href={href}
       onClick={onClick}
       className={`relative text-xs uppercase tracking-[0.2em] transition-colors duration-200 group/nav ${
-        isActive ? "text-charcoal font-bold" : "text-charcoal/85 hover:text-charcoal font-semibold"
+        isActive ? "text-ivory font-bold" : "text-ivory/75 hover:text-ivory font-semibold"
       }`}
     >
       {label}
@@ -37,11 +37,11 @@ export const Navbar: React.FC = () => {
   return (
     <header className="sticky top-0 z-50 w-full transition-all duration-300"
       style={{
-        background: "rgba(250,247,242,0.88)",
-        backdropFilter: "blur(20px) saturate(180%)",
-        WebkitBackdropFilter: "blur(20px) saturate(180%)",
-        borderBottom: "1px solid rgba(183,154,91,0.15)",
-        boxShadow: "0 2px 20px rgba(43,43,43,0.04), 0 1px 0 rgba(183,154,91,0.08)",
+        background: "rgba(3, 3, 8, 0.78)",
+        backdropFilter: "blur(24px) saturate(180%)",
+        WebkitBackdropFilter: "blur(24px) saturate(180%)",
+        borderBottom: "1px solid rgba(212, 175, 55, 0.18)",
+        boxShadow: "0 10px 35px rgba(0, 0, 0, 0.5)",
       }}
     >
       <div className="max-w-[1200px] mx-auto px-6 lg:px-12 flex items-center justify-between py-3">
@@ -68,10 +68,10 @@ export const Navbar: React.FC = () => {
             />
           </div>
           <div className="flex flex-col text-left">
-            <span className="font-serif text-xl sm:text-2xl font-semibold tracking-wide text-charcoal group-hover:text-gold-gradient transition-colors duration-300 leading-tight">
+            <span className="font-serif text-xl sm:text-2xl font-semibold tracking-wide text-ivory group-hover:text-gold-gradient transition-colors duration-300 leading-tight">
               Wedding Flora
             </span>
-            <span className="text-[9px] sm:text-[10px] uppercase tracking-[0.25em] text-[#8C6D2D] font-bold group-hover:text-gold transition-colors duration-300">
+            <span className="text-[9px] sm:text-[10px] uppercase tracking-[0.25em] text-[#D4AF37] font-bold group-hover:text-gold transition-colors duration-300">
               The Wedding Planner
             </span>
           </div>
@@ -92,7 +92,7 @@ export const Navbar: React.FC = () => {
           <button
             type="button"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="p-2 text-charcoal hover:text-gold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold rounded"
+            className="p-2 text-ivory hover:text-gold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold rounded"
             aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
             aria-expanded={mobileMenuOpen}
           >
@@ -115,7 +115,7 @@ export const Navbar: React.FC = () => {
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
             className="md:hidden overflow-hidden border-b border-gold/20"
-            style={{ background: "rgba(250,247,242,0.97)", backdropFilter: "blur(20px)" }}
+            style={{ background: "rgba(5, 4, 12, 0.98)", backdropFilter: "blur(25px)" }}
           >
             <nav className="flex flex-col space-y-4 text-center px-6 pt-5 pb-8">
               <div className="flex items-center justify-center gap-2.5 pb-3 border-b border-gold/15">
@@ -123,8 +123,8 @@ export const Navbar: React.FC = () => {
                   <Image src="/images/logo-emblem.png" alt="Wedding Flora Emblem" fill className="object-contain" />
                 </div>
                 <div className="text-left">
-                  <span className="font-serif text-lg font-semibold text-charcoal block leading-none">Wedding Flora</span>
-                  <span className="text-[8px] uppercase tracking-[0.2em] text-[#8C6D2D] font-bold">The Wedding Planner</span>
+                  <span className="font-serif text-lg font-semibold text-ivory block leading-none">Wedding Flora</span>
+                  <span className="text-[8px] uppercase tracking-[0.2em] text-[#D4AF37] font-bold">The Wedding Planner</span>
                 </div>
               </div>
               {siteConfig.navItems.map((item) => (

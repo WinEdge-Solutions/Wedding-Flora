@@ -13,9 +13,9 @@ export const Section: React.FC<SectionProps> = ({
   ...props
 }) => {
   const variantClasses = {
-    ivory: "bg-ivory text-charcoal",
-    cream: "bg-cream text-charcoal",
-    charcoal: "bg-charcoal text-ivory",
+    ivory: "bg-transparent text-ivory",
+    cream: "bg-white/[0.02] backdrop-blur-[2px] text-ivory border-y border-white/[0.05]",
+    charcoal: "bg-black/40 backdrop-blur-md text-ivory border-y border-gold/20",
   };
 
   return (

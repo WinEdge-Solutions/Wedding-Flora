@@ -41,13 +41,15 @@ export const CtaBanner: React.FC = () => {
           transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
           className="space-y-6"
         >
-          <p className="font-sans text-xs uppercase tracking-[0.3em] text-[#D4AF37] font-bold">
-            Your Royal Celebration Awaits
+          <p className="font-sans text-[11px] sm:text-xs uppercase tracking-[0.32em] text-[#D4AF37] font-bold flex items-center justify-center gap-2">
+            <span>✦</span>
+            <span>Your Royal Celebration Awaits</span>
+            <span>✦</span>
           </p>
 
-          <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-semibold text-ivory tracking-tight leading-tight">
+          <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-ivory tracking-[0.03em] leading-[1.2]">
             Let Us Craft Your{" "}
-            <span className="text-gold-gradient italic font-bold">Royal Wedding</span>{" "}
+            <span className="text-gold-gradient font-serif italic font-normal">Royal Wedding</span>{" "}
             Celebration
           </h2>
 

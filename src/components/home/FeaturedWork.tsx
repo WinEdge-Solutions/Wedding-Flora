@@ -160,13 +160,13 @@ function ReelCard({
 
       {/* Caption & Location metadata */}
       <div className="space-y-1 px-1">
-        <p className="text-[11px] font-sans text-[#8C6D2D] uppercase tracking-[0.2em] font-bold">
+        <p className="text-[11px] font-sans text-[#D4AF37] uppercase tracking-[0.2em] font-bold">
           {item.category}
         </p>
-        <h3 className="font-serif text-lg sm:text-xl md:text-2xl text-charcoal font-semibold group-hover:text-gold transition-colors duration-300 leading-snug">
+        <h3 className="font-serif text-lg sm:text-xl md:text-2xl text-ivory font-semibold group-hover:text-gold transition-colors duration-300 leading-snug">
           {item.title}
         </h3>
-        <p className="text-xs font-sans text-charcoal/90 font-medium tracking-wide">
+        <p className="text-xs font-sans text-ivory/80 font-medium tracking-wide">
           {item.location} • {item.year}
         </p>
         {/* Animated underline */}
@@ -259,9 +259,9 @@ export const FeaturedWork: React.FC = () => {
         />
 
         {/* ── Mobile Carousel Navigation Bar (md:hidden) ── */}
-        <div className="md:hidden flex items-center justify-between text-xs text-charcoal mb-4 px-1">
+        <div className="md:hidden flex items-center justify-between text-xs text-ivory mb-4 px-1">
           <div className="flex items-center gap-2">
-            <span className="text-[10px] uppercase tracking-[0.25em] text-[#8C6D2D] font-bold">
+            <span className="text-[10px] uppercase tracking-[0.25em] text-[#D4AF37] font-bold">
               Reel {activeIndex + 1} of {featured.length}
             </span>
           </div>
@@ -272,9 +272,9 @@ export const FeaturedWork: React.FC = () => {
               onClick={() => setActiveIndex((prev) => Math.max(0, prev - 1))}
               disabled={activeIndex === 0}
               aria-label="Previous reel"
-              className="p-1.5 rounded-full border border-gold/30 bg-ivory text-charcoal disabled:opacity-30 disabled:cursor-not-allowed hover:bg-gold/10 transition-colors"
+              className="p-1.5 rounded-full border border-white/20 bg-[#090614]/80 text-ivory disabled:opacity-30 disabled:cursor-not-allowed hover:bg-gold/10 transition-colors"
             >
-              <ChevronLeft className="w-4 h-4 text-charcoal" />
+              <ChevronLeft className="w-4 h-4 text-ivory" />
             </button>
 
             {/* Dot indicators */}
@@ -285,7 +285,7 @@ export const FeaturedWork: React.FC = () => {
                   onClick={() => setActiveIndex(i)}
                   aria-label={`Go to reel ${i + 1}`}
                   className={`h-1.5 rounded-full transition-all duration-300 ${
-                    i === activeIndex ? "w-5 bg-gold" : "w-1.5 bg-charcoal/20"
+                    i === activeIndex ? "w-5 bg-gold" : "w-1.5 bg-white/20"
                   }`}
                 />
               ))}
@@ -295,9 +295,9 @@ export const FeaturedWork: React.FC = () => {
               onClick={() => setActiveIndex((prev) => Math.min(featured.length - 1, prev + 1))}
               disabled={activeIndex === featured.length - 1}
               aria-label="Next reel"
-              className="p-1.5 rounded-full border border-gold/30 bg-ivory text-charcoal disabled:opacity-30 disabled:cursor-not-allowed hover:bg-gold/10 transition-colors"
+              className="p-1.5 rounded-full border border-white/20 bg-[#090614]/80 text-ivory disabled:opacity-30 disabled:cursor-not-allowed hover:bg-gold/10 transition-colors"
             >
-              <ChevronRight className="w-4 h-4 text-charcoal" />
+              <ChevronRight className="w-4 h-4 text-ivory" />
             </button>
           </div>
         </div>

@@ -47,27 +47,24 @@ const processSteps = [
 
 export default function ServicesPage() {
   return (
-    <main className="bg-ivory text-charcoal">
+    <main className="min-h-screen text-ivory relative z-10">
       {/* ── Services Hero ── */}
-      <section className="relative py-20 sm:py-28 overflow-hidden bg-cream/50 border-b border-gold/20">
-        <div className="absolute inset-0 pointer-events-none">
-          <div className="aurora-orb aurora-orb-a opacity-60" />
-          <div className="aurora-orb aurora-orb-b opacity-40" />
-        </div>
-
+      <section className="relative py-20 sm:py-28 overflow-hidden bg-white/[0.02] backdrop-blur-[2px] border-b border-gold/20">
         <Container className="relative z-10 text-center">
           <div className="max-w-3xl mx-auto space-y-4">
-            <p className="font-sans text-xs uppercase tracking-[0.3em] text-[#8C6D2D] font-bold">
-              Bespoke Indian Wedding Services &amp; Packages
+            <p className="font-sans text-[11px] sm:text-xs uppercase tracking-[0.32em] text-[#D4AF37] font-bold flex items-center justify-center gap-2">
+              <span>✦</span>
+              <span>Bespoke Indian Wedding Services &amp; Packages</span>
+              <span>✦</span>
             </p>
 
-            <h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl font-semibold sm:font-bold text-charcoal tracking-tight leading-tight">
+            <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold text-ivory tracking-[0.03em] leading-[1.15]">
               Regal Artistry for Every Sacred Ritual
             </h1>
 
             <Divider variant="ornamental" className="my-3" />
 
-            <p className="font-sans text-base sm:text-lg text-charcoal/90 font-medium leading-relaxed max-w-2xl mx-auto">
+            <p className="font-sans text-base sm:text-lg text-ivory/80 font-medium leading-relaxed max-w-2xl mx-auto">
               From majestic palace destination procurement and opulent botanical mandaps to concert-grade Sangeets and royal hospitality, explore our signature services and curated packages.
             </p>
           </div>
@@ -90,24 +87,24 @@ export default function ServicesPage() {
                 >
                   {/* Image Column */}
                   <div className={`lg:col-span-6 ${isEven ? "lg:order-2" : "lg:order-1"}`}>
-                    <div className="relative aspect-[4/3] rounded-2xl overflow-hidden border border-gold/30 shadow-[0_15px_40px_rgba(43,43,43,0.08)] group">
+                    <div className="relative aspect-[4/3] rounded-2xl overflow-hidden border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.5)] group">
                       <Image
                         src={service.imageUrl}
                         alt={service.title}
                         fill
                         className="object-cover object-top transition-transform duration-700 group-hover:scale-105"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-charcoal/40 via-transparent to-transparent" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#090614]/80 via-transparent to-transparent" />
                     </div>
                   </div>
 
                   {/* Text Column */}
                   <div className={`lg:col-span-6 space-y-5 ${isEven ? "lg:order-1" : "lg:order-2"}`}>
-                    <span className="text-xs font-sans uppercase tracking-[0.25em] text-[#8C6D2D] font-bold">
+                    <span className="text-xs font-sans uppercase tracking-[0.25em] text-[#D4AF37] font-bold">
                       Service 0{index + 1}
                     </span>
 
-                    <h2 className="font-serif text-3xl sm:text-4xl font-semibold text-charcoal tracking-tight leading-tight">
+                    <h2 className="font-serif text-3xl sm:text-4xl font-semibold text-ivory tracking-tight leading-tight">
                       {service.title}
                     </h2>
 
@@ -115,19 +112,19 @@ export default function ServicesPage() {
                       {service.tagline}
                     </p>
 
-                    <p className="text-sm sm:text-base text-charcoal/90 font-medium leading-relaxed">
+                    <p className="text-sm sm:text-base text-ivory/80 font-medium leading-relaxed">
                       {service.description}
                     </p>
 
                     <div className="space-y-2.5 pt-2">
-                      <p className="text-xs uppercase tracking-wider text-charcoal font-bold">
+                      <p className="text-xs uppercase tracking-wider text-ivory font-bold">
                         Signature Inclusions:
                       </p>
                       <ul className="space-y-2">
                         {service.features.map((feature, fIdx) => (
-                          <li key={fIdx} className="flex items-start gap-2.5 text-xs sm:text-sm text-charcoal/90 font-medium">
-                            <span className="mt-0.5 p-0.5 rounded-full bg-gold/20 text-[#8C6D2D] shrink-0">
-                              <Check className="w-3.5 h-3.5 text-[#8C6D2D]" />
+                          <li key={fIdx} className="flex items-start gap-2.5 text-xs sm:text-sm text-ivory/80 font-medium">
+                            <span className="mt-0.5 p-0.5 rounded-full bg-gold/20 text-[#D4AF37] shrink-0">
+                              <Check className="w-3.5 h-3.5 text-[#D4AF37]" />
                             </span>
                             <span>{feature}</span>
                           </li>
@@ -164,12 +161,12 @@ export default function ServicesPage() {
                 key={pkg.id}
                 className={`relative rounded-2xl p-6 sm:p-7 flex flex-col justify-between transition-all duration-300 ${
                   pkg.recommended
-                    ? "bg-ivory border-2 border-gold shadow-[0_15px_40px_rgba(183,154,91,0.2)] md:-translate-y-2"
-                    : "bg-ivory/80 border border-gold/25 hover:border-gold/60 hover:shadow-lg"
+                    ? "bg-[#090614]/80 backdrop-blur-xl border-2 border-gold shadow-[0_20px_50px_rgba(212,175,55,0.2)] md:-translate-y-2"
+                    : "bg-[#090614]/60 backdrop-blur-xl border border-white/10 hover:border-gold/60 hover:shadow-xl"
                 }`}
               >
                 {pkg.recommended && (
-                  <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-3.5 py-1 rounded-full bg-gradient-to-r from-gold via-amber-600 to-gold text-white text-[10px] font-bold uppercase tracking-widest shadow-md flex items-center gap-1 whitespace-nowrap">
+                  <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-3.5 py-1 rounded-full bg-gradient-to-r from-gold via-amber-600 to-gold text-black text-[10px] font-bold uppercase tracking-widest shadow-md flex items-center gap-1 whitespace-nowrap">
                     <Sparkles className="w-3 h-3" />
                     <span>Signature Package</span>
                   </div>
@@ -177,38 +174,38 @@ export default function ServicesPage() {
 
                 <div className="space-y-4">
                   <div>
-                    <span className="text-[10px] font-sans uppercase tracking-[0.2em] text-[#8C6D2D] font-bold block mb-1">
+                    <span className="text-[10px] font-sans uppercase tracking-[0.2em] text-[#D4AF37] font-bold block mb-1">
                       {pkg.eyebrow}
                     </span>
-                    <h3 className="font-serif text-xl sm:text-2xl font-semibold text-charcoal leading-snug">
+                    <h3 className="font-serif text-xl sm:text-2xl font-semibold text-ivory leading-snug">
                       {pkg.name}
                     </h3>
                   </div>
 
                   {/* Price display with ₹ XXXX as requested */}
-                  <div className="py-2.5 px-3 rounded-lg bg-cream/70 border border-gold/20">
-                    <span className="text-xs uppercase tracking-wider text-charcoal/70 block font-semibold">
+                  <div className="py-2.5 px-3 rounded-lg bg-white/[0.04] border border-white/10">
+                    <span className="text-xs uppercase tracking-wider text-ivory/60 block font-semibold">
                       Investment Guide
                     </span>
-                    <span className="font-serif text-2xl font-bold text-charcoal">
+                    <span className="font-serif text-2xl font-bold text-gold">
                       {pkg.priceNote}
                     </span>
-                    <span className="text-[10px] text-charcoal/70 block font-medium">
+                    <span className="text-[10px] text-ivory/60 block font-medium">
                       Customized based on venue &amp; scale
                     </span>
                   </div>
 
-                  <p className="text-xs text-charcoal/90 font-medium leading-relaxed">
+                  <p className="text-xs text-ivory/80 font-medium leading-relaxed">
                     {pkg.description}
                   </p>
 
-                  <div className="pt-2 border-t border-gold/15 space-y-2">
-                    <span className="text-[11px] uppercase tracking-wider text-charcoal font-bold block">
+                  <div className="pt-2 border-t border-white/10 space-y-2">
+                    <span className="text-[11px] uppercase tracking-wider text-ivory font-bold block">
                       What&apos;s Included:
                     </span>
                     <ul className="space-y-2">
                       {pkg.features.map((feat, i) => (
-                        <li key={i} className="flex items-start gap-2 text-xs text-charcoal/90 font-medium">
+                        <li key={i} className="flex items-start gap-2 text-xs text-ivory/80 font-medium">
                           <Check className="w-3.5 h-3.5 text-gold shrink-0 mt-0.5" />
                           <span>{feat}</span>
                         </li>
@@ -217,7 +214,7 @@ export default function ServicesPage() {
                   </div>
                 </div>
 
-                <div className="pt-6 mt-6 border-t border-gold/15">
+                <div className="pt-6 mt-6 border-t border-white/10">
                   <Button
                     href={`/contact?package=${pkg.id}`}
                     variant={pkg.recommended ? "primary" : "outline"}
@@ -232,12 +229,12 @@ export default function ServicesPage() {
           </div>
 
           <div className="mt-12 text-center">
-            <p className="text-xs text-charcoal/80 font-medium mb-3">
+            <p className="text-xs text-ivory/80 font-medium mb-3">
               Need a completely bespoke multi-city or palace celebration package?
             </p>
             <Link
               href="/packages"
-              className="inline-flex items-center gap-1.5 text-xs uppercase tracking-widest text-charcoal font-bold hover:text-gold transition-colors"
+              className="inline-flex items-center gap-1.5 text-xs uppercase tracking-widest text-gold font-bold hover:text-white transition-colors"
             >
               <span>Explore Detailed Packages Page &amp; FAQs</span>
               <ArrowRight className="w-3.5 h-3.5" />
@@ -258,15 +255,15 @@ export default function ServicesPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-5 gap-6 pt-6">
             {processSteps.map((s, idx) => (
-              <div key={idx} className="relative p-6 rounded-2xl bg-cream/40 border border-gold/20 flex flex-col justify-between">
+              <div key={idx} className="relative p-6 rounded-2xl bg-[#090614]/70 backdrop-blur-xl border border-white/10 flex flex-col justify-between hover:border-gold/50 transition-all duration-300">
                 <div>
-                  <span className="font-serif text-3xl font-bold text-gold/60 block mb-2">
+                  <span className="font-serif text-3xl font-bold text-gold/80 block mb-2">
                     {s.step}
                   </span>
-                  <h4 className="font-serif text-lg font-semibold text-charcoal mb-2">
+                  <h4 className="font-serif text-lg font-semibold text-ivory mb-2">
                     {s.title}
                   </h4>
-                  <p className="font-sans text-xs text-charcoal/90 font-medium leading-relaxed">
+                  <p className="font-sans text-xs text-ivory/80 font-medium leading-relaxed">
                     {s.desc}
                   </p>
                 </div>
@@ -277,7 +274,7 @@ export default function ServicesPage() {
       </Section>
 
       {/* ── Consultation CTA ── */}
-      <section className="bg-charcoal text-ivory py-16 text-center relative overflow-hidden grain-overlay">
+      <section className="bg-black/50 backdrop-blur-md text-ivory py-16 text-center relative overflow-hidden grain-overlay border-t border-gold/20">
         <Container size="narrow" className="relative z-10 space-y-5">
           <p className="font-sans text-xs uppercase tracking-[0.3em] text-[#D4AF37] font-bold">
             Personalized Consultation
@@ -287,12 +284,12 @@ export default function ServicesPage() {
             Let Us Structure Your Royal Wedding Package
           </h2>
 
-          <p className="font-sans text-base text-ivory font-medium max-w-xl mx-auto leading-relaxed">
+          <p className="font-sans text-base text-ivory/80 font-medium max-w-xl mx-auto leading-relaxed">
             Every family and love story is unique. Schedule a private consultation with our principal wedding designers to get an itemized quote for your desired destination and dates.
           </p>
 
           <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Button href="/contact" variant="primary" size="lg" className="bg-ivory text-charcoal hover:bg-gold hover:text-charcoal border-none">
+            <Button href="/contact" variant="primary" size="lg">
               Schedule Consultation
             </Button>
             <a

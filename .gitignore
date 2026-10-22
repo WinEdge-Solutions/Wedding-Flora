@@ -42,3 +42,16 @@ next-env.d.ts
 
 .vercel
 .env*
+
+# agent scaffolding
+.agent/
+.agents/
+.gemini/
+.gsd/
+GSD-STYLE.md
+PROJECT_RULES.md
+VERSION
+adapters/
+model_capabilities.yaml
+skills-lock.json
+scripts/

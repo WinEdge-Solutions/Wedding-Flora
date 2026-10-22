@@ -35,11 +35,11 @@ export const Button: React.FC<ButtonProps> = ({
 
   const variantClasses = {
     primary:
-      "bg-charcoal text-ivory border border-charcoal hover:shadow-[0_0_24px_rgba(183,154,91,0.3)] hover:border-gold/60 hover:-translate-y-0.5 active:translate-y-0",
+      "bg-gradient-to-r from-[#B79A5B] via-[#D4B87A] to-[#B79A5B] text-[#0A0509] font-bold border border-gold/50 shadow-[0_0_20px_rgba(183,154,91,0.25)] hover:shadow-[0_0_35px_rgba(183,154,91,0.5)] hover:scale-[1.02] hover:-translate-y-0.5 active:translate-y-0",
     outline:
-      "shimmer-card bg-transparent text-charcoal border border-gold hover:bg-gold/10 hover:shadow-[0_0_20px_rgba(183,154,91,0.2)] hover:-translate-y-0.5 active:translate-y-0",
+      "shimmer-card bg-white/[0.05] backdrop-blur-md text-ivory border border-gold/70 hover:bg-gold/15 hover:border-gold hover:shadow-[0_0_25px_rgba(183,154,91,0.35)] hover:-translate-y-0.5 active:translate-y-0",
     text:
-      "bg-transparent text-charcoal hover:text-gold underline underline-offset-8 decoration-gold/60 p-0 border-0 overflow-visible",
+      "bg-transparent text-ivory hover:text-gold underline underline-offset-8 decoration-gold/60 p-0 border-0 overflow-visible",
   };
 
   const sizeClasses = {

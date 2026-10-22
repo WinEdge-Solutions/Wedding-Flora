@@ -1,147 +1,224 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import Image from "next/image";
-import { motion } from "framer-motion";
-import { Button } from "@/components/ui/Button";
+import { motion, useScroll, useTransform } from "framer-motion";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Container } from "@/components/layout/Container";
 import { Divider } from "@/components/ui/Divider";
+import { FloralParticles } from "@/components/ui/FloralParticles";
 
-/* ── Fade/slide up stagger for text ───────────────────── */
+gsap.registerPlugin(ScrollTrigger);
+
+/* ── Staggered fade-up for initial mount ─────────────── */
 const fadeUp = {
-  hidden: { opacity: 0, y: 28 },
+  hidden: { opacity: 0, y: 36 },
   visible: (i: number) => ({
     opacity: 1,
     y: 0,
-    transition: { delay: i * 0.14, duration: 0.75, ease: [0.22, 1, 0.36, 1] as const },
+    transition: {
+      delay: i * 0.14,
+      duration: 0.9,
+      ease: [0.22, 1, 0.36, 1] as const,
+    },
   }),
 };
 
 export const Hero: React.FC = () => {
+  const sectionRef = useRef<HTMLElement>(null);
+  const textContentRef = useRef<HTMLDivElement>(null);
+
+  /* ── Scroll-driven parallax + fade ────────────────── */
+  const { scrollY } = useScroll();
+  const textY = useTransform(scrollY, [0, 600], [0, -70]);
+  const heroOpacity = useTransform(scrollY, [0, 380], [1, 0]);
+
+  /* ── GSAP letter-by-letter H1 on mount ────────────── */
+  useEffect(() => {
+    const title = textContentRef.current?.querySelector(".hero-title");
+    if (!title) return;
+    const chars = title.querySelectorAll<HTMLSpanElement>(".hero-char");
+    if (!chars.length) return;
+
+    const ctx = gsap.context(() => {
+      gsap.from(chars, {
+        y: "115%",
+        opacity: 0,
+        rotationZ: 4,
+        duration: 1.2,
+        ease: "power4.out",
+        stagger: 0.028,
+        delay: 0.55,
+      });
+    });
+
+    return () => ctx.revert();
+  }, []);
+
+  /* Helper — split string into per-char spans */
+  const splitChars = (text: string, charClassName = "") =>
+    text.split("").map((ch, i) => (
+      <span
+        key={i}
+        className={`hero-char inline-block ${charClassName}`}
+        style={{ willChange: "transform, opacity" }}
+      >
+        {ch === " " ? "\u00A0" : ch}
+      </span>
+    ));
+
   return (
-    <section className="relative w-full min-h-[calc(100svh-64px)] sm:min-h-[calc(100vh-70px)] flex items-center justify-center overflow-hidden py-8 sm:py-12">
-      {/* ── Normal Static Royal Palace Stage Background with Blur ──── */}
-      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-        <Image
-          src="/images/hero-bg.jpg"
-          alt="Royal white jharokha palace stage adorned with red roses and chandeliers by Wedding Flora"
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover object-center scale-105 blur-[4px]"
-        />
+    <section
+      ref={sectionRef}
+      className="relative w-full min-h-screen flex items-center justify-center overflow-hidden"
+    >
+
+      {/* ══════════════════════════════════════════════
+          LAYER 1 — Floating gold bokeh particles
+      ══════════════════════════════════════════════ */}
+      <div className="absolute inset-0 z-[2] pointer-events-none">
+        <FloralParticles />
       </div>
 
-      {/* ── Ambient luxury lighting & vignette overlay ─ */}
-      <div
-        className="absolute inset-0 z-[1] pointer-events-none"
-        style={{
-          background:
-            "linear-gradient(to bottom, rgba(250,247,242,0.45) 0%, rgba(250,247,242,0.22) 35%, rgba(250,247,242,0.38) 75%, rgba(250,247,242,0.88) 100%)",
-        }}
-      />
+      {/* ══════════════════════════════════════════════
+          LAYER 2 — Text content (fades + lifts on scroll)
+      ══════════════════════════════════════════════ */}
+      <motion.div
+        ref={textContentRef}
+        className="relative z-[10] w-full pt-16 pb-6 sm:pt-20 sm:pb-8 lg:pt-20 lg:pb-8"
+        style={{ y: textY, opacity: heroOpacity }}
+      >
+        <Container className="text-center">
+          <div className="max-w-6xl mx-auto space-y-3 sm:space-y-4 lg:space-y-4">
 
-      {/* ── Central contrast halo behind text ── */}
-      <div
-        className="absolute inset-0 z-[2] pointer-events-none"
-        style={{
-          background:
-            "radial-gradient(ellipse 85% 70% at 50% 50%, rgba(250,247,242,0.58) 0%, rgba(250,247,242,0.22) 60%, transparent 100%)",
-        }}
-      />
-
-      {/* ── Text Content and Buttons ── */}
-      <div className="relative z-[3] w-full">
-        <Container className="text-center py-6 sm:py-10 my-auto">
-          <div className="max-w-3xl mx-auto space-y-4 sm:space-y-5">
-            {/* Floral Wreath Crest Monogram */}
+            {/* ── Crest monogram ────────────────────── */}
             <motion.div
-              className="flex justify-center -mb-1"
+              className="flex justify-center"
               variants={fadeUp}
               initial="hidden"
               animate="visible"
               custom={0}
             >
-              <div className="relative w-12 h-12 sm:w-16 sm:h-16 drop-shadow-md transition-transform duration-500 hover:scale-105">
+              <div
+                className="relative w-12 h-12 sm:w-16 sm:h-16 transition-all duration-500
+                  hover:scale-110 hover:drop-shadow-[0_0_24px_rgba(183,154,91,0.75)]"
+              >
                 <Image
                   src="/images/logo-emblem.png"
                   alt="Wedding Flora Crest"
                   fill
                   sizes="(max-width: 640px) 48px, 64px"
-                  className="object-contain"
+                  className="object-contain drop-shadow-[0_2px_10px_rgba(183,154,91,0.5)]"
                   priority
                 />
               </div>
             </motion.div>
 
+            {/* ── Eyebrow label ─────────────────────── */}
             <motion.p
-              className="font-sans text-[11px] sm:text-xs uppercase tracking-[0.3em] text-[#8C6D2D] font-bold drop-shadow-sm"
+              className="font-sans text-[10px] sm:text-xs uppercase tracking-[0.35em] text-gold font-bold flex items-center justify-center gap-2"
               variants={fadeUp}
               initial="hidden"
               animate="visible"
               custom={1}
             >
-              Royal Indian Wedding Planning &amp; Floral Artistry
+              <span>✦</span>
+              <span>Royal Indian Wedding Planning &amp; Floral Artistry</span>
+              <span>✦</span>
             </motion.p>
 
-            <motion.h1
-              className="font-serif text-3xl sm:text-5xl lg:text-6xl font-semibold sm:font-bold text-charcoal tracking-tight leading-[1.14] drop-shadow-sm"
+            {/* ── H1 — split char GSAP animation ───── */}
+            <motion.div
               variants={fadeUp}
               initial="hidden"
               animate="visible"
               custom={2}
             >
-              Crafting{" "}
-              <span className="text-gold-gradient font-bold">Royal</span>{" "}
-              Weddings
-              <br className="hidden sm:block" />
-              <span className="italic font-medium"> With Grandeur &amp; Soul</span>
-            </motion.h1>
+              <h1
+                className="hero-title leading-[1.12] tracking-tight"
+                aria-label="Crafting Royal Weddings With Grandeur & Soul"
+              >
+                <div className="flex flex-wrap items-center justify-center gap-x-2.5 sm:gap-x-3.5 lg:gap-x-4">
+                  <span className="inline-block overflow-hidden font-display text-2xl sm:text-4xl md:text-5xl lg:text-[3.15rem] xl:text-[3.65rem] text-ivory font-bold tracking-[0.03em]">
+                    {splitChars("Crafting")}
+                  </span>
+                  <span className="inline-block overflow-hidden font-display text-2xl sm:text-4xl md:text-5xl lg:text-[3.15rem] xl:text-[3.65rem] font-extrabold tracking-[0.03em]">
+                    {splitChars("Royal", "gold-char-gradient")}
+                  </span>
+                  <span className="inline-block overflow-hidden font-display text-2xl sm:text-4xl md:text-5xl lg:text-[3.15rem] xl:text-[3.65rem] text-ivory font-bold tracking-[0.03em]">
+                    {splitChars("Weddings")}
+                  </span>
+                </div>
 
-            <motion.div variants={fadeUp} initial="hidden" animate="visible" custom={3}>
-              <Divider variant="ornamental" className="my-2 sm:my-2.5" />
+                <div className="mt-1.5 sm:mt-2.5 flex items-center justify-center">
+                  <span className="inline-block overflow-hidden font-serif text-xl sm:text-3xl md:text-4xl lg:text-[2.65rem] text-[#E8D5D0]/95 font-light italic tracking-wide">
+                    {splitChars("With Grandeur & Soul")}
+                  </span>
+                </div>
+              </h1>
             </motion.div>
 
+            {/* ── Ornamental divider (ivory on dark) ── */}
+            <motion.div variants={fadeUp} initial="hidden" animate="visible" custom={3}>
+              <Divider variant="ornamental" className="my-0.5 sm:my-1 [&>*]:border-gold/40 [&>*]:text-gold/60" />
+            </motion.div>
+
+            {/* ── Subtitle ──────────────────────────── */}
             <motion.p
-              className="font-sans text-xs sm:text-base lg:text-lg text-charcoal font-medium max-w-2xl mx-auto leading-relaxed drop-shadow-sm px-2 sm:px-0"
+              className="font-sans text-xs sm:text-sm lg:text-[15px] text-ivory/75 font-normal max-w-2xl mx-auto leading-relaxed px-4 sm:px-0"
               variants={fadeUp}
               initial="hidden"
               animate="visible"
               custom={4}
             >
-              From starlit palace Sangeets in Udaipur to ethereal Mandap ceremonies across heritage fortresses,
-              we curate unforgettable Indian wedding heirlooms tailored to your family&apos;s heritage.
+              From starlit palace Sangeets in Udaipur to ethereal Mandap ceremonies
+              across heritage fortresses, we curate unforgettable Indian wedding
+              heirlooms tailored to your family&apos;s heritage.
             </motion.p>
 
-            {/* CTA Buttons */}
+            {/* ── CTA Buttons ───────────────────────── */}
             <motion.div
-              className="pt-3 sm:pt-5 flex flex-row items-center justify-center gap-3 sm:gap-4 flex-wrap"
+              className="pt-2 sm:pt-3.5 flex flex-row items-center justify-center gap-3 sm:gap-4 flex-wrap"
               variants={fadeUp}
               initial="hidden"
               animate="visible"
               custom={5}
             >
-              <Button
+              {/* Primary — gold fill */}
+              <a
                 href="/contact"
-                variant="primary"
-                size="md"
-                className="px-6 sm:px-8 py-3.5 text-xs shadow-lg bg-charcoal text-ivory border border-gold/50 hover:border-gold hover:shadow-[0_0_24px_rgba(183,154,91,0.35)] transition-all duration-300"
+                className="inline-flex items-center justify-center px-6 sm:px-8 py-3 sm:py-3.5
+                  font-sans text-xs uppercase tracking-[0.18em] font-bold
+                  bg-gradient-to-r from-[#B79A5B] via-[#D4B87A] to-[#B79A5B]
+                  text-[#0A0509] rounded-[3px]
+                  shadow-[0_0_0_1px_rgba(183,154,91,0.4),0_8px_32px_rgba(183,154,91,0.3)]
+                  hover:shadow-[0_0_0_1px_rgba(183,154,91,0.8),0_8px_48px_rgba(183,154,91,0.55)]
+                  hover:scale-[1.03] active:scale-[0.98]
+                  transition-all duration-300 ease-out"
               >
                 Plan Your Royal Wedding
-              </Button>
-              <Button
+              </a>
+
+              {/* Secondary — glass */}
+              <a
                 href="/celebrations"
-                variant="outline"
-                size="md"
-                className="px-6 sm:px-8 py-3.5 text-xs bg-white/80 backdrop-blur-md text-charcoal border border-gold/70 shadow-sm hover:bg-gold/15 transition-all duration-300"
+                className="inline-flex items-center justify-center px-6 sm:px-8 py-3 sm:py-3.5
+                  font-sans text-xs uppercase tracking-[0.18em] font-bold
+                  bg-white/8 backdrop-blur-md text-ivory
+                  border border-white/20 rounded-[3px]
+                  hover:bg-white/14 hover:border-gold/60
+                  hover:shadow-[0_0_24px_rgba(183,154,91,0.25)]
+                  hover:scale-[1.03] active:scale-[0.98]
+                  transition-all duration-300 ease-out"
               >
                 Explore Celebrations
-              </Button>
+              </a>
             </motion.div>
 
-            {/* Scroll nudge */}
+            {/* ── Scroll nudge ──────────────────────── */}
             <motion.div
-              className="pt-4 sm:pt-6 flex justify-center"
+              className="pt-2 sm:pt-3 flex justify-center"
               variants={fadeUp}
               initial="hidden"
               animate="visible"
@@ -149,16 +226,20 @@ export const Hero: React.FC = () => {
             >
               <motion.div
                 animate={{ y: [0, 6, 0] }}
-                transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
-                className="flex flex-col items-center gap-1 cursor-pointer opacity-70 hover:opacity-100 transition-opacity"
+                transition={{ repeat: Infinity, duration: 2.3, ease: "easeInOut" }}
+                className="flex flex-col items-center gap-1 opacity-50 hover:opacity-90 transition-opacity cursor-pointer"
               >
-                <span className="text-[9px] uppercase tracking-[0.25em] text-charcoal font-bold font-sans">Scroll</span>
-                <div className="w-px h-5 sm:h-6 bg-gradient-to-b from-charcoal/80 to-transparent" />
+                <span className="text-[9px] uppercase tracking-[0.3em] text-ivory font-bold font-sans">
+                  Scroll
+                </span>
+                <div className="w-px h-5 bg-gradient-to-b from-gold/80 to-transparent" />
               </motion.div>
             </motion.div>
+
           </div>
         </Container>
-      </div>
+      </motion.div>
+
     </section>
   );
 };
