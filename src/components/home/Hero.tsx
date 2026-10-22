@@ -140,20 +140,29 @@ export const Hero: React.FC = () => {
                 aria-label="Crafting Royal Weddings With Grandeur & Soul"
               >
                 <div className="flex flex-wrap items-center justify-center gap-x-2 sm:gap-x-3.5 lg:gap-x-4">
-                  <span className="inline-block overflow-hidden font-display text-2xl sm:text-4xl md:text-5xl lg:text-[3.15rem] xl:text-[3.65rem] text-ivory font-bold tracking-[0.03em]">
+                  <span className="inline-block overflow-hidden whitespace-nowrap font-display text-2xl sm:text-4xl md:text-5xl lg:text-[3.15rem] xl:text-[3.65rem] text-ivory font-bold tracking-[0.03em]">
                     {splitChars("Crafting")}
                   </span>
-                  <span className="inline-block overflow-hidden font-display text-2xl sm:text-4xl md:text-5xl lg:text-[3.15rem] xl:text-[3.65rem] font-extrabold tracking-[0.03em]">
+                  <span className="inline-block overflow-hidden whitespace-nowrap font-display text-2xl sm:text-4xl md:text-5xl lg:text-[3.15rem] xl:text-[3.65rem] font-extrabold tracking-[0.03em]">
                     {splitChars("Royal", "gold-char-gradient")}
                   </span>
-                  <span className="inline-block overflow-hidden font-display text-2xl sm:text-4xl md:text-5xl lg:text-[3.15rem] xl:text-[3.65rem] text-ivory font-bold tracking-[0.03em]">
+                  <span className="inline-block overflow-hidden whitespace-nowrap font-display text-2xl sm:text-4xl md:text-5xl lg:text-[3.15rem] xl:text-[3.65rem] text-ivory font-bold tracking-[0.03em]">
                     {splitChars("Weddings")}
                   </span>
                 </div>
 
-                <div className="mt-1 sm:mt-2.5 flex items-center justify-center">
-                  <span className="inline-block overflow-hidden font-serif text-lg sm:text-3xl md:text-4xl lg:text-[2.65rem] text-[#E8D5D0]/95 font-light italic tracking-wide">
-                    {splitChars("With Grandeur & Soul")}
+                <div className="mt-1 sm:mt-2.5 flex flex-wrap items-center justify-center gap-x-1.5 sm:gap-x-2.5">
+                  <span className="inline-block overflow-hidden whitespace-nowrap font-serif text-lg sm:text-3xl md:text-4xl lg:text-[2.65rem] text-[#E8D5D0]/95 font-light italic tracking-wide">
+                    {splitChars("With")}
+                  </span>
+                  <span className="inline-block overflow-hidden whitespace-nowrap font-serif text-lg sm:text-3xl md:text-4xl lg:text-[2.65rem] text-[#E8D5D0]/95 font-light italic tracking-wide">
+                    {splitChars("Grandeur")}
+                  </span>
+                  <span className="inline-block overflow-hidden whitespace-nowrap font-serif text-lg sm:text-3xl md:text-4xl lg:text-[2.65rem] text-[#E8D5D0]/95 font-light italic tracking-wide">
+                    {splitChars("&")}
+                  </span>
+                  <span className="inline-block overflow-hidden whitespace-nowrap font-serif text-lg sm:text-3xl md:text-4xl lg:text-[2.65rem] text-[#E8D5D0]/95 font-light italic tracking-wide">
+                    {splitChars("Soul")}
                   </span>
                 </div>
               </h1>
