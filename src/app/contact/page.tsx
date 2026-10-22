@@ -18,28 +18,28 @@ export default function ContactPage() {
   return (
     <main className="min-h-screen text-ivory relative z-10">
       {/* ── Contact Hero ── */}
-      <section className="relative py-16 sm:py-24 overflow-hidden bg-white/[0.02] backdrop-blur-[2px] border-b border-gold/20">
+      <section className="relative py-14 sm:py-20 overflow-hidden bg-white/[0.02] backdrop-blur-[2px] border-b border-gold/20">
         <Container className="relative z-10 text-center">
-          <div className="max-w-2xl mx-auto space-y-3.5">
+          <div className="max-w-2xl mx-auto space-y-3 sm:space-y-3.5">
             <div className="flex justify-center -mb-2">
-              <div className="relative w-14 h-14 shrink-0 transition-transform hover:scale-105">
+              <div className="relative w-12 h-12 sm:w-14 sm:h-14 shrink-0 transition-transform hover:scale-105">
                 <Image src="/images/logo-emblem.png" alt="Wedding Flora Crest" fill className="object-contain" priority />
               </div>
             </div>
 
-            <p className="font-sans text-[11px] sm:text-xs uppercase tracking-[0.32em] text-[#D4AF37] font-bold flex items-center justify-center gap-2">
+            <p className="font-sans text-[9px] sm:text-xs uppercase tracking-[0.16em] sm:tracking-[0.32em] text-[#D4AF37] font-bold flex items-center justify-center gap-1.5 sm:gap-2 px-2">
               <span>✦</span>
               <span>Private Consultations &amp; Bespoke Proposals</span>
               <span>✦</span>
             </p>
 
-            <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold text-ivory tracking-[0.03em] leading-[1.15]">
+            <h1 className="font-display text-2xl sm:text-5xl lg:text-6xl font-bold text-ivory tracking-[0.03em] leading-[1.18]">
               Begin Planning Your Royal Celebration
             </h1>
 
-            <Divider variant="ornamental" className="my-2.5" />
+            <Divider variant="ornamental" className="my-2 sm:my-2.5" />
 
-            <p className="font-sans text-base text-ivory/80 font-medium leading-relaxed max-w-xl mx-auto">
+            <p className="font-sans text-sm sm:text-base text-ivory/80 font-medium leading-relaxed max-w-xl mx-auto">
               We look forward to honoring your family&apos;s heritage. Share your envisioned dates and destinations below, or connect with our directors directly.
             </p>
           </div>

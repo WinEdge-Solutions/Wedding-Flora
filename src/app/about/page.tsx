@@ -19,27 +19,27 @@ export default function AboutPage() {
   return (
     <main className="min-h-screen text-ivory relative z-10">
       {/* ── About Hero ── */}
-      <section className="relative py-20 sm:py-28 overflow-hidden bg-white/[0.02] backdrop-blur-[2px] border-b border-gold/20">
+      <section className="relative py-14 sm:py-24 overflow-hidden bg-white/[0.02] backdrop-blur-[2px] border-b border-gold/20">
         <Container className="relative z-10 text-center">
-          <div className="max-w-3xl mx-auto space-y-4">
+          <div className="max-w-3xl mx-auto space-y-3.5 sm:space-y-4">
             <div className="flex justify-center -mb-2">
-              <div className="relative w-16 h-16 shrink-0 transition-transform hover:scale-105">
+              <div className="relative w-14 h-14 sm:w-16 sm:h-16 shrink-0 transition-transform hover:scale-105">
                 <Image src="/images/logo-emblem.png" alt="Wedding Flora Crest" fill className="object-contain" priority />
               </div>
             </div>
 
-            <p className="font-sans text-[11px] sm:text-xs uppercase tracking-[0.32em] text-[#D4AF37] font-bold flex items-center justify-center gap-2">
+            <p className="font-sans text-[9px] sm:text-xs uppercase tracking-[0.16em] sm:tracking-[0.32em] text-[#D4AF37] font-bold flex items-center justify-center gap-1.5 sm:gap-2 px-2">
               <span>✦</span>
               <span>The Wedding Planner • Born from Heritage &amp; Passion</span>
               <span>✦</span>
             </p>
 
-            <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold text-ivory tracking-[0.03em] leading-[1.15]">
+            <h1 className="font-display text-2xl sm:text-5xl lg:text-6xl font-bold text-ivory tracking-[0.03em] leading-[1.18]">
               Curating Royal Heirlooms, <br className="hidden sm:block" />
               <span className="text-gold-gradient font-serif font-normal italic">Not Just Weddings</span>
             </h1>
 
-            <Divider variant="ornamental" className="my-3" />
+            <Divider variant="ornamental" className="my-2.5 sm:my-3" />
 
             <p className="font-sans text-base sm:text-lg text-ivory/80 font-normal leading-relaxed max-w-2xl mx-auto">
               At Wedding Flora, we weave the opulent grandeur of royal Indian palaces with fragrant botanical artistry and flawless multi-day guest care. Every celebration is an immortal tapestry of love, tradition, and soul.
@@ -86,7 +86,7 @@ export default function AboutPage() {
                 <span>Our Genesis &amp; Devotion</span>
               </span>
 
-              <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-ivory tracking-[0.03em] leading-[1.2]">
+              <h2 className="font-display text-2xl sm:text-4xl lg:text-5xl font-bold text-ivory tracking-[0.03em] leading-[1.2]">
                 Where Sacred Tradition Meets Haute Couture Scenography
               </h2>
 

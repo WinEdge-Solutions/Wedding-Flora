@@ -49,22 +49,22 @@ export default function ServicesPage() {
   return (
     <main className="min-h-screen text-ivory relative z-10">
       {/* ── Services Hero ── */}
-      <section className="relative py-20 sm:py-28 overflow-hidden bg-white/[0.02] backdrop-blur-[2px] border-b border-gold/20">
+      <section className="relative py-14 sm:py-24 overflow-hidden bg-white/[0.02] backdrop-blur-[2px] border-b border-gold/20">
         <Container className="relative z-10 text-center">
-          <div className="max-w-3xl mx-auto space-y-4">
-            <p className="font-sans text-[11px] sm:text-xs uppercase tracking-[0.32em] text-[#D4AF37] font-bold flex items-center justify-center gap-2">
+          <div className="max-w-3xl mx-auto space-y-3.5 sm:space-y-4">
+            <p className="font-sans text-[9px] sm:text-xs uppercase tracking-[0.16em] sm:tracking-[0.32em] text-[#D4AF37] font-bold flex items-center justify-center gap-1.5 sm:gap-2 px-2">
               <span>✦</span>
               <span>Bespoke Indian Wedding Services &amp; Packages</span>
               <span>✦</span>
             </p>
 
-            <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold text-ivory tracking-[0.03em] leading-[1.15]">
+            <h1 className="font-display text-2xl sm:text-5xl lg:text-6xl font-bold text-ivory tracking-[0.03em] leading-[1.18]">
               Regal Artistry for Every Sacred Ritual
             </h1>
 
-            <Divider variant="ornamental" className="my-3" />
+            <Divider variant="ornamental" className="my-2.5 sm:my-3" />
 
-            <p className="font-sans text-base sm:text-lg text-ivory/80 font-medium leading-relaxed max-w-2xl mx-auto">
+            <p className="font-sans text-sm sm:text-lg text-ivory/80 font-medium leading-relaxed max-w-2xl mx-auto">
               From majestic palace destination procurement and opulent botanical mandaps to concert-grade Sangeets and royal hospitality, explore our signature services and curated packages.
             </p>
           </div>

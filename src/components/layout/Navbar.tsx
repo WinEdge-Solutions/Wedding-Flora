@@ -9,22 +9,39 @@ import { siteConfig } from "@/lib/site";
 import { Button } from "@/components/ui/Button";
 import { Menu, X } from "lucide-react";
 
-function NavLink({ href, label, isActive, onClick }: { href: string; label: string; isActive: boolean; onClick?: () => void }) {
+function NavLink({
+  href,
+  label,
+  isActive,
+  onClick,
+  isMobile = false,
+}: {
+  href: string;
+  label: string;
+  isActive: boolean;
+  onClick?: () => void;
+  isMobile?: boolean;
+}) {
   return (
     <Link
       href={href}
       onClick={onClick}
-      className={`relative text-xs uppercase tracking-[0.2em] transition-colors duration-200 group/nav ${
-        isActive ? "text-ivory font-bold" : "text-ivory/75 hover:text-ivory font-semibold"
+      className={`relative uppercase tracking-[0.2em] transition-colors duration-200 group/nav ${
+        isMobile
+          ? "py-2.5 px-4 text-sm font-semibold rounded-md flex items-center justify-center " +
+            (isActive ? "text-gold bg-white/[0.06] font-bold" : "text-ivory/80 hover:text-white hover:bg-white/[0.04]")
+          : "text-xs " + (isActive ? "text-ivory font-bold" : "text-ivory/75 hover:text-ivory font-semibold")
       }`}
     >
       {label}
-      {/* Animated gold underline */}
-      <span
-        className={`absolute -bottom-1 left-0 h-px bg-gradient-to-r from-gold to-gold/30 transition-all duration-300 ${
-          isActive ? "w-full" : "w-0 group-hover/nav:w-full"
-        }`}
-      />
+      {/* Animated gold underline for desktop */}
+      {!isMobile && (
+        <span
+          className={`absolute -bottom-1 left-0 h-px bg-gradient-to-r from-gold to-gold/30 transition-all duration-300 ${
+            isActive ? "w-full" : "w-0 group-hover/nav:w-full"
+          }`}
+        />
+      )}
     </Link>
   );
 }
@@ -44,7 +61,7 @@ export const Navbar: React.FC = () => {
         boxShadow: "0 10px 35px rgba(0, 0, 0, 0.5)",
       }}
     >
-      <div className="max-w-[1200px] mx-auto px-6 lg:px-12 flex items-center justify-between py-3">
+      <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-12 flex items-center justify-between py-2.5 sm:py-3">
 
         {/* Left nav */}
         <nav className="hidden md:flex items-center space-x-8" aria-label="Main Navigation">
@@ -56,9 +73,9 @@ export const Navbar: React.FC = () => {
         {/* Logo */}
         <Link
           href="/"
-          className="flex items-center gap-2.5 sm:gap-3 group focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gold"
+          className="flex items-center gap-2 sm:gap-3 group focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gold"
         >
-          <div className="relative w-9 h-9 sm:w-11 sm:h-11 shrink-0 transition-transform duration-500 group-hover:scale-105">
+          <div className="relative w-8 h-8 sm:w-11 sm:h-11 shrink-0 transition-transform duration-500 group-hover:scale-105">
             <Image
               src="/images/logo-emblem.png"
               alt="Wedding Flora Crest"
@@ -68,10 +85,10 @@ export const Navbar: React.FC = () => {
             />
           </div>
           <div className="flex flex-col text-left">
-            <span className="font-serif text-xl sm:text-2xl font-semibold tracking-wide text-ivory group-hover:text-gold-gradient transition-colors duration-300 leading-tight">
+            <span className="font-serif text-lg sm:text-2xl font-semibold tracking-wide text-ivory group-hover:text-gold-gradient transition-colors duration-300 leading-tight">
               Wedding Flora
             </span>
-            <span className="text-[9px] sm:text-[10px] uppercase tracking-[0.25em] text-[#D4AF37] font-bold group-hover:text-gold transition-colors duration-300">
+            <span className="text-[8px] sm:text-[10px] uppercase tracking-[0.22em] sm:tracking-[0.25em] text-[#D4AF37] font-bold group-hover:text-gold transition-colors duration-300">
               The Wedding Planner
             </span>
           </div>
@@ -117,20 +134,27 @@ export const Navbar: React.FC = () => {
             className="md:hidden overflow-hidden border-b border-gold/20"
             style={{ background: "rgba(5, 4, 12, 0.98)", backdropFilter: "blur(25px)" }}
           >
-            <nav className="flex flex-col space-y-4 text-center px-6 pt-5 pb-8">
-              <div className="flex items-center justify-center gap-2.5 pb-3 border-b border-gold/15">
-                <div className="relative w-8 h-8 shrink-0">
+            <nav className="flex flex-col space-y-2 text-center px-4 pt-4 pb-6">
+              <div className="flex items-center justify-center gap-2 pb-3 mb-2 border-b border-gold/15">
+                <div className="relative w-7 h-7 shrink-0">
                   <Image src="/images/logo-emblem.png" alt="Wedding Flora Emblem" fill className="object-contain" />
                 </div>
                 <div className="text-left">
-                  <span className="font-serif text-lg font-semibold text-ivory block leading-none">Wedding Flora</span>
-                  <span className="text-[8px] uppercase tracking-[0.2em] text-[#D4AF37] font-bold">The Wedding Planner</span>
+                  <span className="font-serif text-base font-semibold text-ivory block leading-none">Wedding Flora</span>
+                  <span className="text-[7.5px] uppercase tracking-[0.2em] text-[#D4AF37] font-bold">The Wedding Planner</span>
                 </div>
               </div>
               {siteConfig.navItems.map((item) => (
-                <NavLink key={item.href} href={item.href} label={item.label} isActive={pathname === item.href} onClick={closeMobileMenu} />
+                <NavLink
+                  key={item.href}
+                  href={item.href}
+                  label={item.label}
+                  isActive={pathname === item.href}
+                  onClick={closeMobileMenu}
+                  isMobile
+                />
               ))}
-              <div className="pt-4">
+              <div className="pt-3">
                 <Button href="/contact" variant="primary" fullWidth size="md" onClick={closeMobileMenu}>
                   Enquire Now
                 </Button>

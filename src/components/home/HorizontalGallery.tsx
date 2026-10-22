@@ -26,9 +26,9 @@ export function HorizontalGallery() {
     const track = trackRef.current;
     if (!section || !track) return;
 
-    // Skip on mobile — not enough horizontal space
-    const isMobile = window.innerWidth < 768;
-    if (isMobile) return;
+    // Check if desktop
+    const checkDesktop = () => window.innerWidth >= 768;
+    if (!checkDesktop()) return;
 
     const ctx = gsap.context(() => {
       const totalWidth = track.scrollWidth - window.innerWidth;
@@ -71,15 +71,39 @@ export function HorizontalGallery() {
     return () => ctx.revert();
   }, [panels.length]);
 
+  // Touch scroll handler for mobile
+  const handleMobileScroll = (e: React.UIEvent<HTMLDivElement>) => {
+    if (typeof window !== "undefined" && window.innerWidth >= 768) return;
+    const target = e.currentTarget;
+    const scrollLeft = target.scrollLeft;
+    const cardWidth = target.firstElementChild
+      ? (target.firstElementChild as HTMLElement).offsetWidth + 16
+      : 300;
+    const newIdx = Math.round(scrollLeft / cardWidth);
+    if (newIdx !== activeIdx && newIdx >= 0 && newIdx < panels.length) {
+      setActiveIdx(newIdx);
+    }
+  };
+
+  const scrollToPanel = (idx: number) => {
+    setActiveIdx(idx);
+    if (trackRef.current && window.innerWidth < 768) {
+      const card = trackRef.current.children[idx] as HTMLElement;
+      if (card) {
+        card.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
+      }
+    }
+  };
+
   return (
     <section
       ref={sectionRef}
       className="relative w-full overflow-hidden bg-black/40 backdrop-blur-sm border-y border-white/[0.05]"
       aria-label="Royal Celebrations Gallery"
     >
-      {/* Section header (visible above the pinned strip) */}
-      <div className="relative z-10 pt-20 pb-8 text-center">
-        <p className="font-sans text-[11px] uppercase tracking-[0.35em] text-[#D4AF37] font-bold mb-3 flex items-center justify-center gap-2">
+      {/* Section header */}
+      <div className="relative z-10 pt-14 sm:pt-20 pb-6 sm:pb-8 text-center px-4">
+        <p className="font-sans text-[10px] sm:text-[11px] uppercase tracking-[0.2em] sm:tracking-[0.35em] text-[#D4AF37] font-bold mb-2.5 sm:mb-3 flex items-center justify-center gap-2">
           <span>✦</span>
           <span>Royal Celebrations</span>
           <span>✦</span>
@@ -87,29 +111,38 @@ export function HorizontalGallery() {
         <SplitTextReveal
           text="A Legacy of Grand Moments"
           as="h2"
-          className="font-display text-4xl sm:text-5xl lg:text-6xl text-ivory font-bold tracking-[0.03em]"
+          className="font-display text-2xl sm:text-5xl lg:text-6xl text-ivory font-bold tracking-[0.03em]"
           stagger={0.03}
         />
+        {/* Mobile swipe helper hint */}
+        <p className="md:hidden font-sans text-[11px] text-[#D4AF37] font-semibold uppercase tracking-[0.2em] mt-3">
+          Swipe sideways to view all celebrations →
+        </p>
       </div>
 
-      {/* Horizontal track */}
+      {/* Horizontal track — touch swipeable on mobile, pinned GSAP on desktop */}
       <div
         ref={trackRef}
-        className="flex items-center gap-6 px-8 md:px-16 pb-24 will-change-transform"
-        style={{ width: `${panels.length * 420 + 120}px` }}
+        onScroll={handleMobileScroll}
+        className="flex items-center gap-4 md:gap-6 px-4 md:px-16 pb-16 md:pb-24 overflow-x-auto md:overflow-x-visible snap-x snap-mandatory md:snap-none no-scrollbar will-change-transform"
+        style={{
+          width: undefined, // Let CSS govern mobile; on desktop GSAP calculates scrollWidth
+        }}
       >
         {panels.map((item, i) => (
           <div
             key={item.id}
-            className={`gallery-panel relative flex-shrink-0 overflow-hidden rounded-[3px] cursor-pointer transition-all duration-500 ${
-              i % 3 === 1 ? "w-[340px] h-[500px]" : "w-[340px] h-[440px]"
+            className={`gallery-panel relative flex-shrink-0 overflow-hidden rounded-2xl md:rounded-[3px] cursor-pointer transition-all duration-500 snap-center md:snap-align-none ${
+              i % 3 === 1
+                ? "w-[82vw] sm:w-[320px] md:w-[340px] h-[440px] md:h-[500px]"
+                : "w-[82vw] sm:w-[320px] md:w-[340px] h-[400px] md:h-[440px]"
             }`}
           >
             <Image
               src={item.imageUrl}
               alt={item.title}
               fill
-              sizes="340px"
+              sizes="(max-width: 768px) 85vw, 340px"
               className="object-cover transition-transform duration-700 ease-out hover:scale-105"
             />
 
@@ -117,20 +150,20 @@ export function HorizontalGallery() {
             <div className="absolute inset-0 bg-gradient-to-t from-[#030308]/95 via-transparent to-transparent" />
 
             {/* Panel label */}
-            <div className="absolute bottom-0 left-0 right-0 p-6">
-              <p className="font-sans text-[10px] uppercase tracking-[0.3em] text-gold font-bold mb-1">
+            <div className="absolute bottom-0 left-0 right-0 p-5 sm:p-6">
+              <p className="font-sans text-[10px] uppercase tracking-[0.25em] text-gold font-bold mb-1">
                 {item.category}
               </p>
-              <h3 className="font-serif text-xl text-ivory font-semibold leading-snug">
+              <h3 className="font-serif text-lg sm:text-xl text-ivory font-semibold leading-snug">
                 {item.title}
               </h3>
-              <p className="font-sans text-xs text-ivory/60 mt-1">
+              <p className="font-sans text-xs text-ivory/70 mt-1">
                 {item.location} · {item.year}
               </p>
             </div>
 
             {/* Gold border on hover */}
-            <div className="absolute inset-0 border border-gold/0 hover:border-gold/50 transition-all duration-500 rounded-[3px]" />
+            <div className="absolute inset-0 border border-gold/0 hover:border-gold/50 transition-all duration-500 rounded-2xl md:rounded-[3px]" />
 
             {/* Active dot indicator */}
             {activeIdx === i && (
@@ -141,14 +174,16 @@ export function HorizontalGallery() {
       </div>
 
       {/* Progress bar at bottom */}
-      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2 z-20">
+      <div className="absolute bottom-5 sm:bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-2 z-20">
         {panels.map((_, i) => (
-          <div
+          <button
             key={i}
-            className={`rounded-full transition-all duration-400 ${
+            onClick={() => scrollToPanel(i)}
+            aria-label={`Jump to panel ${i + 1}`}
+            className={`rounded-full transition-all duration-400 p-0 border-0 ${
               i === activeIdx
                 ? "w-6 h-1.5 bg-gold"
-                : "w-1.5 h-1.5 bg-ivory/30"
+                : "w-1.5 h-1.5 bg-ivory/30 hover:bg-ivory/60"
             }`}
           />
         ))}

@@ -93,7 +93,7 @@ export const EnquiryForm: React.FC = () => {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="p-8 sm:p-10 rounded-3xl bg-[#090614]/75 backdrop-blur-xl border border-white/10 shadow-[0_20px_60px_rgba(0,0,0,0.5)] space-y-6">
+    <form onSubmit={handleSubmit} className="p-5 sm:p-10 rounded-3xl bg-[#090614]/75 backdrop-blur-xl border border-white/10 shadow-[0_20px_60px_rgba(0,0,0,0.5)] space-y-5 sm:space-y-6">
       <div className="space-y-1 border-b border-white/10 pb-4">
         <div className="flex items-center gap-1.5 text-gold text-xs font-bold uppercase tracking-wider">
           <Sparkles className="w-4 h-4" />

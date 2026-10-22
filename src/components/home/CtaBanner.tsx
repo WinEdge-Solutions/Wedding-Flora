@@ -41,37 +41,37 @@ export const CtaBanner: React.FC = () => {
           transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
           className="space-y-6"
         >
-          <p className="font-sans text-[11px] sm:text-xs uppercase tracking-[0.32em] text-[#D4AF37] font-bold flex items-center justify-center gap-2">
+          <p className="font-sans text-[10px] sm:text-xs uppercase tracking-[0.18em] sm:tracking-[0.32em] text-[#D4AF37] font-bold flex items-center justify-center gap-1.5 sm:gap-2 px-2 text-center">
             <span>✦</span>
             <span>Your Royal Celebration Awaits</span>
             <span>✦</span>
           </p>
 
-          <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-ivory tracking-[0.03em] leading-[1.2]">
+          <h2 className="font-display text-2xl sm:text-4xl lg:text-5xl font-bold text-ivory tracking-[0.03em] leading-[1.2]">
             Let Us Craft Your{" "}
             <span className="text-gold-gradient font-serif italic font-normal">Royal Wedding</span>{" "}
             Celebration
           </h2>
 
           <div className="flex justify-center">
-            <Divider variant="ornamental" className="text-gold/50" />
+            <Divider variant="ornamental" className="text-gold/50 my-2 sm:my-3" />
           </div>
 
-          <p className="font-sans text-base sm:text-lg text-ivory font-medium max-w-xl mx-auto leading-relaxed">
+          <p className="font-sans text-sm sm:text-lg text-ivory font-medium max-w-xl mx-auto leading-relaxed px-2 sm:px-0">
             We curate a select number of luxury palace and destination weddings each season across India,
             ensuring undivided devotion, opulent floral artistry, and seamless coordination for your family.
           </p>
 
           <motion.div
-            className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4"
+            className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 pt-3 sm:pt-4 w-full max-w-xs sm:max-w-none mx-auto"
             initial={{ opacity: 0, y: 16 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ delay: 0.25, duration: 0.6 }}
           >
-            <Button href="/contact" variant="outline" className="border-gold text-ivory hover:bg-gold/20" size="lg">
+            <Button href="/contact" variant="outline" className="w-full sm:w-auto border-gold text-ivory hover:bg-gold/20" size="lg">
               Begin Planning
             </Button>
-            <Button href="/packages" variant="text" className="text-ivory font-semibold hover:text-gold" size="lg">
+            <Button href="/packages" variant="text" className="w-full sm:w-auto text-ivory font-semibold hover:text-gold" size="lg">
               View Royal Packages &amp; Services
             </Button>
           </motion.div>

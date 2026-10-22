@@ -19,22 +19,22 @@ export default function CelebrationsPage() {
   return (
     <main className="min-h-screen text-ivory relative z-10">
       {/* ── Celebrations Hero ── */}
-      <section className="relative py-20 sm:py-28 overflow-hidden bg-white/[0.02] backdrop-blur-[2px] border-b border-gold/20">
+      <section className="relative py-14 sm:py-24 overflow-hidden bg-white/[0.02] backdrop-blur-[2px] border-b border-gold/20">
         <Container className="relative z-10 text-center">
-          <div className="max-w-3xl mx-auto space-y-4">
-            <p className="font-sans text-[11px] sm:text-xs uppercase tracking-[0.32em] text-[#D4AF37] font-bold flex items-center justify-center gap-2">
+          <div className="max-w-3xl mx-auto space-y-3.5 sm:space-y-4">
+            <p className="font-sans text-[9px] sm:text-xs uppercase tracking-[0.16em] sm:tracking-[0.32em] text-[#D4AF37] font-bold flex items-center justify-center gap-1.5 sm:gap-2 px-2">
               <span>✦</span>
               <span>Real Royal Wedding Stories &amp; Visual Archives</span>
               <span>✦</span>
             </p>
 
-            <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold text-ivory tracking-[0.03em] leading-[1.15]">
+            <h1 className="font-display text-2xl sm:text-5xl lg:text-6xl font-bold text-ivory tracking-[0.03em] leading-[1.18]">
               Love Celebrated in Regal Grandeur
             </h1>
 
-            <Divider variant="ornamental" className="my-3" />
+            <Divider variant="ornamental" className="my-2.5 sm:my-3" />
 
-            <p className="font-sans text-base sm:text-lg text-ivory/80 font-medium leading-relaxed max-w-2xl mx-auto">
+            <p className="font-sans text-sm sm:text-lg text-ivory/80 font-medium leading-relaxed max-w-2xl mx-auto">
               Step inside our world of regal palace celebrations across Udaipur, Jaipur, Jodhpur, and coastal sanctuaries. Explore sample stories, sacred rituals, and bespoke floral architecture.
             </p>
           </div>
@@ -51,12 +51,12 @@ export default function CelebrationsPage() {
             subtitle="Explore how we curated three days of unforgettable palace ceremonies for each of our distinguished couples."
           />
 
-          <div className="space-y-24 pt-4">
+          <div className="space-y-16 sm:space-y-24 pt-4">
             {celebrationStories.map((story) => (
               <article
                 key={story.id}
                 id={story.slug}
-                className="rounded-3xl bg-[#090614]/70 backdrop-blur-xl border border-white/10 p-6 sm:p-10 lg:p-12 shadow-[0_20px_60px_rgba(0,0,0,0.5)] space-y-10"
+                className="rounded-3xl bg-[#090614]/70 backdrop-blur-xl border border-white/10 p-5 sm:p-10 lg:p-12 shadow-[0_20px_60px_rgba(0,0,0,0.5)] space-y-8 sm:space-y-10"
               >
                 {/* Story Header */}
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">

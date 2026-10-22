@@ -117,7 +117,7 @@ export const Hero: React.FC = () => {
 
             {/* ── Eyebrow label ─────────────────────── */}
             <motion.p
-              className="font-sans text-[10px] sm:text-xs uppercase tracking-[0.35em] text-gold font-bold flex items-center justify-center gap-2"
+              className="font-sans text-[9px] sm:text-xs uppercase tracking-[0.16em] sm:tracking-[0.35em] text-gold font-bold flex items-center justify-center gap-1.5 sm:gap-2 px-2 text-center"
               variants={fadeUp}
               initial="hidden"
               animate="visible"
@@ -139,7 +139,7 @@ export const Hero: React.FC = () => {
                 className="hero-title leading-[1.12] tracking-tight"
                 aria-label="Crafting Royal Weddings With Grandeur & Soul"
               >
-                <div className="flex flex-wrap items-center justify-center gap-x-2.5 sm:gap-x-3.5 lg:gap-x-4">
+                <div className="flex flex-wrap items-center justify-center gap-x-2 sm:gap-x-3.5 lg:gap-x-4">
                   <span className="inline-block overflow-hidden font-display text-2xl sm:text-4xl md:text-5xl lg:text-[3.15rem] xl:text-[3.65rem] text-ivory font-bold tracking-[0.03em]">
                     {splitChars("Crafting")}
                   </span>
@@ -151,8 +151,8 @@ export const Hero: React.FC = () => {
                   </span>
                 </div>
 
-                <div className="mt-1.5 sm:mt-2.5 flex items-center justify-center">
-                  <span className="inline-block overflow-hidden font-serif text-xl sm:text-3xl md:text-4xl lg:text-[2.65rem] text-[#E8D5D0]/95 font-light italic tracking-wide">
+                <div className="mt-1 sm:mt-2.5 flex items-center justify-center">
+                  <span className="inline-block overflow-hidden font-serif text-lg sm:text-3xl md:text-4xl lg:text-[2.65rem] text-[#E8D5D0]/95 font-light italic tracking-wide">
                     {splitChars("With Grandeur & Soul")}
                   </span>
                 </div>
@@ -166,7 +166,7 @@ export const Hero: React.FC = () => {
 
             {/* ── Subtitle ──────────────────────────── */}
             <motion.p
-              className="font-sans text-xs sm:text-sm lg:text-[15px] text-ivory/75 font-normal max-w-2xl mx-auto leading-relaxed px-4 sm:px-0"
+              className="font-sans text-xs sm:text-sm lg:text-[15px] text-ivory/75 font-normal max-w-2xl mx-auto leading-relaxed px-3 sm:px-0"
               variants={fadeUp}
               initial="hidden"
               animate="visible"
@@ -179,7 +179,7 @@ export const Hero: React.FC = () => {
 
             {/* ── CTA Buttons ───────────────────────── */}
             <motion.div
-              className="pt-2 sm:pt-3.5 flex flex-row items-center justify-center gap-3 sm:gap-4 flex-wrap"
+              className="pt-2 sm:pt-3.5 flex flex-col sm:flex-row items-center justify-center gap-2.5 sm:gap-4 w-full max-w-xs sm:max-w-none mx-auto"
               variants={fadeUp}
               initial="hidden"
               animate="visible"
@@ -188,10 +188,10 @@ export const Hero: React.FC = () => {
               {/* Primary — gold fill */}
               <a
                 href="/contact"
-                className="inline-flex items-center justify-center px-6 sm:px-8 py-3 sm:py-3.5
+                className="w-full sm:w-auto inline-flex items-center justify-center px-6 sm:px-8 py-2.5 sm:py-3.5
                   font-sans text-xs uppercase tracking-[0.18em] font-bold
                   bg-gradient-to-r from-[#B79A5B] via-[#D4B87A] to-[#B79A5B]
-                  text-[#0A0509] rounded-[3px]
+                  text-[#0A0509] rounded-[3px] text-center
                   shadow-[0_0_0_1px_rgba(183,154,91,0.4),0_8px_32px_rgba(183,154,91,0.3)]
                   hover:shadow-[0_0_0_1px_rgba(183,154,91,0.8),0_8px_48px_rgba(183,154,91,0.55)]
                   hover:scale-[1.03] active:scale-[0.98]
@@ -203,9 +203,9 @@ export const Hero: React.FC = () => {
               {/* Secondary — glass */}
               <a
                 href="/celebrations"
-                className="inline-flex items-center justify-center px-6 sm:px-8 py-3 sm:py-3.5
+                className="w-full sm:w-auto inline-flex items-center justify-center px-6 sm:px-8 py-2.5 sm:py-3.5
                   font-sans text-xs uppercase tracking-[0.18em] font-bold
-                  bg-white/8 backdrop-blur-md text-ivory
+                  bg-white/8 backdrop-blur-md text-ivory text-center
                   border border-white/20 rounded-[3px]
                   hover:bg-white/14 hover:border-gold/60
                   hover:shadow-[0_0_24px_rgba(183,154,91,0.25)]

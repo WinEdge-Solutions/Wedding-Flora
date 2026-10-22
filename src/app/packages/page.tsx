@@ -64,22 +64,22 @@ export default function PackagesPage() {
   return (
     <main className="min-h-screen text-ivory relative z-10">
       {/* ── Packages Hero ── */}
-      <section className="relative py-20 sm:py-28 overflow-hidden bg-white/[0.02] backdrop-blur-[2px] border-b border-gold/20">
+      <section className="relative py-14 sm:py-24 overflow-hidden bg-white/[0.02] backdrop-blur-[2px] border-b border-gold/20">
         <Container className="relative z-10 text-center">
-          <div className="max-w-3xl mx-auto space-y-4">
-            <p className="font-sans text-[11px] sm:text-xs uppercase tracking-[0.32em] text-[#D4AF37] font-bold flex items-center justify-center gap-2">
+          <div className="max-w-3xl mx-auto space-y-3.5 sm:space-y-4">
+            <p className="font-sans text-[9px] sm:text-xs uppercase tracking-[0.16em] sm:tracking-[0.32em] text-[#D4AF37] font-bold flex items-center justify-center gap-1.5 sm:gap-2 px-2">
               <span>✦</span>
               <span>Bespoke Investment &amp; Curation Suites</span>
               <span>✦</span>
             </p>
 
-            <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold text-ivory tracking-[0.03em] leading-[1.15]">
+            <h1 className="font-display text-2xl sm:text-5xl lg:text-6xl font-bold text-ivory tracking-[0.03em] leading-[1.18]">
               Royal Wedding Packages
             </h1>
 
-            <Divider variant="ornamental" className="my-3" />
+            <Divider variant="ornamental" className="my-2.5 sm:my-3" />
 
-            <p className="font-sans text-base sm:text-lg text-ivory/80 font-medium leading-relaxed max-w-2xl mx-auto">
+            <p className="font-sans text-sm sm:text-lg text-ivory/80 font-medium leading-relaxed max-w-2xl mx-auto">
               Transparent, meticulously composed packages designed to give your family complete clarity and peace of mind. Every tier is tailored to scale with the grandeur of your chosen venue.
             </p>
           </div>
@@ -89,11 +89,11 @@ export default function PackagesPage() {
       {/* ── Package Tiers Grid ── */}
       <Section variant="ivory">
         <Container>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-7">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-7">
             {packagesData.map((pkg) => (
               <div
                 key={pkg.id}
-                className={`relative rounded-3xl p-7 flex flex-col justify-between transition-all duration-300 ${
+                className={`relative rounded-3xl p-5 sm:p-7 flex flex-col justify-between transition-all duration-300 ${
                   pkg.recommended
                     ? "bg-[#090614]/80 backdrop-blur-xl border-2 border-gold shadow-[0_20px_50px_rgba(212,175,55,0.25)] md:-translate-y-3"
                     : "bg-[#090614]/60 backdrop-blur-xl border border-white/10 hover:border-gold/60 hover:shadow-2xl"

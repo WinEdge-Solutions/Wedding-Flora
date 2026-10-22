@@ -21,9 +21,15 @@ export function MagneticCursor() {
     const dot = dotRef.current!;
     const ring = ringRef.current!;
 
-    document.body.style.cursor = "none";
+    let hasMoved = false;
 
     const onMove = (e: MouseEvent) => {
+      if (!hasMoved) {
+        hasMoved = true;
+        document.body.style.cursor = "none";
+        gsap.to([dot, ring], { opacity: 1, duration: 0.2 });
+      }
+
       // Dot: snaps instantly
       gsap.set(dot, { x: e.clientX - 4, y: e.clientY - 4 });
       // Ring: follows with lag
@@ -67,17 +73,17 @@ export function MagneticCursor() {
 
   return (
     <>
-      {/* Gold dot */}
+      {/* Gold dot — desktop only, initially hidden until mouse movement */}
       <div
         ref={dotRef}
-        className="fixed top-0 left-0 w-2 h-2 rounded-full bg-gold pointer-events-none z-[9999] shadow-[0_0_10px_rgba(212,175,55,0.9)]"
-        style={{ willChange: "transform" }}
+        className="hidden md:block opacity-0 fixed top-0 left-0 w-2 h-2 rounded-full bg-gold pointer-events-none z-[9999] shadow-[0_0_10px_rgba(212,175,55,0.9)]"
+        style={{ willChange: "transform, opacity" }}
       />
-      {/* Follower ring */}
+      {/* Follower ring — desktop only, initially hidden until mouse movement */}
       <div
         ref={ringRef}
-        className="fixed top-0 left-0 w-9 h-9 rounded-full border border-gold/80 pointer-events-none z-[9998] shadow-[0_0_15px_rgba(212,175,55,0.35)]"
-        style={{ willChange: "transform" }}
+        className="hidden md:block opacity-0 fixed top-0 left-0 w-9 h-9 rounded-full border border-gold/80 pointer-events-none z-[9998] shadow-[0_0_15px_rgba(212,175,55,0.35)]"
+        style={{ willChange: "transform, opacity" }}
       />
     </>
   );

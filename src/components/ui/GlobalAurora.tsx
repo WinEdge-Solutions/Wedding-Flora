@@ -386,10 +386,10 @@ export function GlobalAurora() {
           />
         </div>
 
-        {/* Interactive Pointer Spotlight */}
+        {/* Interactive Pointer Spotlight — desktop only */}
         <div
           ref={spotlightRef}
-          className="absolute top-0 left-0 w-[600px] h-[600px] rounded-full will-change-transform"
+          className="hidden md:block absolute top-0 left-0 w-[600px] h-[600px] rounded-full will-change-transform"
           style={{ filter: "blur(50px)" }}
         >
           <div

@@ -304,16 +304,16 @@ export const FeaturedWork: React.FC = () => {
 
         {/* ── Mobile 1-Reel-Per-Swipe Carousel (md:hidden) ── */}
         <div
-          className="md:hidden relative w-full overflow-hidden pb-4 touch-pan-y"
+          className="md:hidden relative w-[calc(100%+2rem)] -mx-4 overflow-hidden pb-4 touch-pan-y"
           onTouchStart={handleTouchStart}
           onTouchMove={handleTouchMove}
           onTouchEnd={handleTouchEnd}
           onTouchCancel={handleTouchCancel}
         >
           <div
-            className="flex items-center gap-4 will-change-transform"
+            className="flex items-center gap-4 will-change-transform px-4"
             style={{
-              transform: `translateX(calc(8vw - ${activeIndex} * (84vw + 16px) + ${dragOffset}px))`,
+              transform: `translateX(calc(4vw - ${activeIndex} * (84vw + 16px) + ${dragOffset}px))`,
               transition: isDragging ? "none" : "transform 0.4s cubic-bezier(0.22, 1, 0.36, 1)",
             }}
           >

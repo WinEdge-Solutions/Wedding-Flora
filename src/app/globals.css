@@ -242,6 +242,15 @@ h1, h2, h3, h4, h5, h6 {
   pointer-events: none;
 }
 
+/* ─── Touch scrollbar utilities ──────────────────────── */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
 /* ─── Section reveal utility (GSAP handles animation) */
 .reveal-hidden {
   opacity: 0;

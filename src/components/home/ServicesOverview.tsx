@@ -27,6 +27,7 @@ function MagneticCard({
   const cardRef = useRef<HTMLDivElement>(null);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (typeof window !== "undefined" && window.matchMedia("(pointer: coarse)").matches) return;
     const el = cardRef.current;
     if (!el) return;
     const rect = el.getBoundingClientRect();
@@ -98,8 +99,8 @@ export const ServicesOverview: React.FC = () => {
     <Section variant="cream">
       <Container>
         {/* Section heading with split-text title */}
-        <div className="text-center mb-12 md:mb-16" ref={headingRef}>
-          <p className="eyebrow font-sans text-[11px] uppercase tracking-[0.35em] text-[#D4AF37] font-bold mb-3 flex items-center justify-center gap-2">
+        <div className="text-center mb-8 sm:mb-12 md:mb-16" ref={headingRef}>
+          <p className="eyebrow font-sans text-[10px] sm:text-[11px] uppercase tracking-[0.18em] sm:tracking-[0.35em] text-[#D4AF37] font-bold mb-2.5 sm:mb-3 flex items-center justify-center gap-1.5 sm:gap-2 px-2 text-center">
             <span>✦</span>
             <span>Royal Wedding Services</span>
             <span>✦</span>
@@ -107,10 +108,10 @@ export const ServicesOverview: React.FC = () => {
           <SplitTextReveal
             text="Grandeur in Every Celebration"
             as="h2"
-            className="font-display text-3xl sm:text-4xl lg:text-5xl text-ivory font-bold mb-4 tracking-[0.03em]"
+            className="font-display text-2xl sm:text-4xl lg:text-5xl text-ivory font-bold mb-3 sm:mb-4 tracking-[0.03em]"
             stagger={0.025}
           />
-          <p className="font-sans text-sm sm:text-base text-ivory/80 max-w-2xl mx-auto leading-relaxed">
+          <p className="font-sans text-xs sm:text-base text-ivory/80 max-w-2xl mx-auto leading-relaxed px-2 sm:px-0">
             From heritage palace procurement and opulent floral mandaps to
             concert-grade Sangeet production and bespoke hospitality across India.
           </p>
