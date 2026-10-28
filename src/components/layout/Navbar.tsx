@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useCallback } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
@@ -17,6 +17,45 @@ import {
   MessageCircle,
   Sparkles,
 } from "lucide-react";
+
+// ─── Helpers ─────────────────────────────────────────────────────────────────
+
+/** Safely compute initial scroll state to avoid a layout flash on load. */
+function getInitialScrolled(): boolean {
+  if (typeof window !== "undefined") return window.scrollY > 24;
+  return false;
+}
+
+/** Derive the open accordion key from a pathname so it stays in sync after
+ *  client-side navigation. */
+function deriveOpenDropdown(
+  pathname: string,
+  navItems: NavItem[]
+): string | null {
+  for (const item of navItems) {
+    if (!item.children && !item.groups) continue;
+    if (
+      pathname.startsWith(item.href) ||
+      item.children?.some(
+        (c) =>
+          pathname === c.href ||
+          pathname.startsWith(`${c.href}/`) ||
+          (c.href.includes("?") && pathname === c.href.split("?")[0])
+      ) ||
+      item.groups?.some((g) =>
+        g.items.some(
+          (c) =>
+            pathname === c.href || pathname.startsWith(`${c.href}/`)
+        )
+      )
+    ) {
+      return item.label;
+    }
+  }
+  return null;
+}
+
+// ─── NavLink ─────────────────────────────────────────────────────────────────
 
 function NavLink({
   href,
@@ -37,7 +76,7 @@ function NavLink({
       onClick={onClick}
       className={`relative uppercase tracking-[0.13em] lg:tracking-[0.15em] xl:tracking-[0.18em] transition-colors duration-200 group/nav ${
         isMobile
-          ? "py-2.5 px-4 text-sm font-semibold rounded-[2px] flex items-center justify-center " +
+          ? "py-3 px-4 text-sm font-semibold rounded-[2px] flex items-center justify-center " +
             (isActive
               ? "text-gold bg-white/[0.06] font-bold"
               : "text-ivory/80 hover:text-white hover:bg-white/[0.04]")
@@ -46,7 +85,7 @@ function NavLink({
       }`}
     >
       <span>{label}</span>
-      {/* Refined center-expanding gold gradient underline */}
+      {/* Center-expanding gold gradient underline — desktop only */}
       {!isMobile && (
         <span
           className={`absolute -bottom-0.5 left-1/2 -translate-x-1/2 h-[1px] bg-gradient-to-r from-transparent via-[#D4AF37] to-transparent transition-all duration-300 pointer-events-none ${
@@ -58,6 +97,8 @@ function NavLink({
   );
 }
 
+// ─── NavItemDropdown ──────────────────────────────────────────────────────────
+
 function NavItemDropdown({
   item,
   pathname,
@@ -67,6 +108,7 @@ function NavItemDropdown({
 }) {
   const [isOpen, setIsOpen] = useState(false);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   const isParentActive =
     pathname === item.href ||
@@ -88,16 +130,32 @@ function NavItemDropdown({
         )
       ));
 
-  const handleMouseEnter = () => {
+  const open = useCallback(() => {
     if (timeoutRef.current) clearTimeout(timeoutRef.current);
     setIsOpen(true);
-  };
+  }, []);
 
-  const handleMouseLeave = () => {
-    timeoutRef.current = setTimeout(() => {
-      setIsOpen(false);
-    }, 150);
-  };
+  const scheduleClose = useCallback(() => {
+    timeoutRef.current = setTimeout(() => setIsOpen(false), 150);
+  }, []);
+
+  const handleKeyDown = useCallback(
+    (e: React.KeyboardEvent) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        setIsOpen((prev) => !prev);
+      }
+      if (e.key === "Escape") setIsOpen(false);
+    },
+    []
+  );
+
+  /** Close if focus leaves the entire dropdown container. */
+  const handleBlur = useCallback((e: React.FocusEvent) => {
+    if (!containerRef.current?.contains(e.relatedTarget as Node)) {
+      scheduleClose();
+    }
+  }, [scheduleClose]);
 
   useEffect(() => {
     return () => {
@@ -107,15 +165,19 @@ function NavItemDropdown({
 
   return (
     <div
+      ref={containerRef}
       className="relative"
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-      onFocus={handleMouseEnter}
-      onBlur={handleMouseLeave}
+      onMouseEnter={open}
+      onMouseLeave={scheduleClose}
+      onBlur={handleBlur}
     >
       <Link
         href={item.href}
-        className={`relative uppercase tracking-[0.13em] lg:tracking-[0.15em] xl:tracking-[0.18em] text-[11px] xl:text-[11.5px] 2xl:text-xs transition-colors duration-200 inline-flex items-center gap-1 py-1 ${
+        aria-haspopup="true"
+        aria-expanded={isOpen}
+        onFocus={open}
+        onKeyDown={handleKeyDown}
+        className={`relative uppercase tracking-[0.13em] lg:tracking-[0.15em] xl:tracking-[0.18em] text-[11px] xl:text-[11.5px] 2xl:text-xs transition-colors duration-200 inline-flex items-center gap-1 py-1 group/droptrig ${
           isParentActive
             ? "text-gold font-bold"
             : "text-ivory/75 hover:text-ivory font-semibold"
@@ -129,10 +191,12 @@ function NavItemDropdown({
         >
           <ChevronDown size={10} className="text-gold/80" />
         </motion.span>
-        {/* Refined center-expanding gold gradient underline */}
+        {/* Center-expanding gold gradient underline */}
         <span
           className={`absolute -bottom-0.5 left-1/2 -translate-x-1/2 h-[1px] bg-gradient-to-r from-transparent via-[#D4AF37] to-transparent transition-all duration-300 pointer-events-none ${
-            isParentActive || isOpen ? "w-full opacity-100" : "w-0 opacity-0 hover:w-full hover:opacity-100"
+            isParentActive || isOpen
+              ? "w-full opacity-100"
+              : "w-0 opacity-0 group-hover/droptrig:w-full group-hover/droptrig:opacity-100"
           }`}
         />
       </Link>
@@ -150,10 +214,12 @@ function NavItemDropdown({
                 ? "left-1/2 -translate-x-1/2 min-w-[390px]"
                 : "left-1/2 -translate-x-1/2 min-w-[280px]"
             }`}
+            // Keep viewport-clamping via CSS max-w so it never overflows
+            style={{ maxWidth: "calc(100vw - 2rem)" }}
           >
             {item.groups ? (
               /* Mega-Menu Grid for Destinations */
-              <div className="relative w-[400px] p-3.5 rounded-[3px] bg-[#06040e]/98 backdrop-blur-2xl border border-gold/30 shadow-[0_20px_55px_rgba(0,0,0,0.85)] ring-1 ring-white/[0.08] flex flex-col overflow-hidden">
+              <div className="relative w-[400px] max-w-[calc(100vw-2rem)] p-3.5 rounded-[3px] bg-[#06040e]/98 backdrop-blur-2xl border border-gold/30 shadow-[0_20px_55px_rgba(0,0,0,0.85)] ring-1 ring-white/[0.08] flex flex-col overflow-hidden">
                 {/* Hairline gold shimmer rim */}
                 <div className="absolute top-0 left-0 right-0 h-[1.5px] bg-gradient-to-r from-transparent via-[#D4AF37] to-transparent pointer-events-none" />
 
@@ -180,7 +246,7 @@ function NavItemDropdown({
                             key={subItem.href}
                             href={subItem.href}
                             onClick={() => setIsOpen(false)}
-                            className={`group/city px-2.5 py-1.5 rounded-[2px] transition-all duration-200 flex items-center justify-between text-left ${
+                            className={`group/city px-2.5 py-2.5 rounded-[2px] transition-all duration-200 flex items-center justify-between text-left ${
                               isSubActive
                                 ? "bg-white/[0.08] text-gold font-bold border-l-2 border-gold"
                                 : "hover:bg-white/[0.05] text-ivory/80 hover:text-white hover:translate-x-0.5"
@@ -213,7 +279,7 @@ function NavItemDropdown({
               </div>
             ) : (
               /* Refined Dropdown for About & Gallery */
-              <div className="relative w-72 p-2.5 rounded-[3px] bg-[#06040e]/98 backdrop-blur-2xl border border-gold/30 shadow-[0_20px_55px_rgba(0,0,0,0.85)] ring-1 ring-white/[0.08] flex flex-col space-y-1 overflow-hidden">
+              <div className="relative w-72 max-w-[calc(100vw-2rem)] p-2.5 rounded-[3px] bg-[#06040e]/98 backdrop-blur-2xl border border-gold/30 shadow-[0_20px_55px_rgba(0,0,0,0.85)] ring-1 ring-white/[0.08] flex flex-col space-y-1 overflow-hidden">
                 {/* Hairline gold shimmer rim */}
                 <div className="absolute top-0 left-0 right-0 h-[1.5px] bg-gradient-to-r from-transparent via-[#D4AF37] to-transparent pointer-events-none" />
 
@@ -234,7 +300,7 @@ function NavItemDropdown({
                       key={subItem.href}
                       href={subItem.href}
                       onClick={() => setIsOpen(false)}
-                      className={`group/sub flex items-start gap-2.5 px-3 py-2 rounded-[2px] transition-all duration-200 text-left ${
+                      className={`group/sub flex items-start gap-2.5 px-3 py-2.5 rounded-[2px] transition-all duration-200 text-left ${
                         isSubActive
                           ? "bg-white/[0.08] border-l-2 border-gold"
                           : "hover:bg-white/[0.05] hover:border-l-2 hover:border-gold/60 border-l-2 border-transparent hover:translate-x-0.5"
@@ -275,7 +341,7 @@ function NavItemDropdown({
                   );
                 })}
 
-                {/* Footer link */}
+                {/* Footer link — "Discover Our Story" for About, "Explore All Archives" for Gallery */}
                 <div className="pt-2 mt-1 border-t border-white/10 px-2">
                   <Link
                     href={item.href}
@@ -297,35 +363,54 @@ function NavItemDropdown({
   );
 }
 
+// ─── Navbar ───────────────────────────────────────────────────────────────────
+
 export const Navbar: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
+  // Fix: initialize from window.scrollY to prevent layout flash on load
+  const [isScrolled, setIsScrolled] = useState(getInitialScrolled);
   const pathname = usePathname();
 
-  const [openMobileDropdown, setOpenMobileDropdown] = useState<string | null>(
-    pathname.startsWith("/about")
-      ? "About"
-      : pathname.startsWith("/destinations")
-      ? "Wedding Destinations"
-      : pathname.startsWith("/gallery")
-      ? "Gallery"
-      : null
-  );
+  // Derive which accordion panel should be auto-open based on current pathname.
+  // This stays in sync with client-side navigation automatically.
+  const derivedDropdown = deriveOpenDropdown(pathname, siteConfig.navItems);
 
-  const closeMobileMenu = () => setMobileMenuOpen(false);
+  // Manual accordion override: undefined = follow derived; null = all closed;
+  // a label string = that item is explicitly open.
+  const [mobileDropdownOverride, setMobileDropdownOverride] = useState<
+    string | null | undefined
+  >(undefined);
+
+  // When the user navigates (pathname changes), reset the override.
+  // We store the pathname we last computed against to detect changes.
+  const [lastPathname, setLastPathname] = useState(pathname);
+  if (lastPathname !== pathname) {
+    // Synchronous during render — this is safe: React schedules one extra
+    // render before the browser paints. No ESLint rule is violated because
+    // we are NOT inside an effect body.
+    setLastPathname(pathname);
+    setMobileDropdownOverride(undefined);
+  }
+
+  // Resolved open dropdown
+  const openMobileDropdown =
+    mobileDropdownOverride === undefined ? derivedDropdown : mobileDropdownOverride;
+
+  const closeMobileMenu = useCallback(() => setMobileMenuOpen(false), []);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 24);
-    };
-    handleScroll();
+    const handleScroll = () => setIsScrolled(window.scrollY > 24);
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Guard: determine how many nav items are on left/right safely
+  const leftItems = siteConfig.navItems.slice(0, 4);
+  const rightItems = siteConfig.navItems.slice(4, 9);
+
   return (
     <header className="sticky top-0 z-50 w-full transition-all duration-300">
-      {/* ── Top Micro-Header for Luxury Heritage Pedigree ── */}
+      {/* ── Top Micro-Header ── */}
       <div
         className={`w-full transition-all duration-300 border-b border-gold/15 bg-black/50 backdrop-blur-md hidden md:block overflow-hidden ${
           isScrolled ? "max-h-0 opacity-0 py-0 border-transparent" : "max-h-9 opacity-100 py-1.5"
@@ -389,7 +474,7 @@ export const Navbar: React.FC = () => {
             className="hidden lg:flex items-center space-x-3 lg:space-x-4 xl:space-x-5"
             aria-label="Primary Left Navigation"
           >
-            {siteConfig.navItems.slice(0, 4).map((item) =>
+            {leftItems.map((item) =>
               item.children || item.groups ? (
                 <NavItemDropdown key={item.label} item={item} pathname={pathname} />
               ) : (
@@ -432,7 +517,7 @@ export const Navbar: React.FC = () => {
 
           {/* ── Right Nav + Elegant CTA ── */}
           <div className="hidden lg:flex items-center space-x-3 lg:space-x-4 xl:space-x-4">
-            {siteConfig.navItems.slice(4, 9).map((item) =>
+            {rightItems.map((item) =>
               item.children || item.groups ? (
                 <NavItemDropdown key={item.label} item={item} pathname={pathname} />
               ) : (
@@ -468,10 +553,11 @@ export const Navbar: React.FC = () => {
           <div className="flex lg:hidden items-center">
             <button
               type="button"
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              onClick={() => setMobileMenuOpen((prev) => !prev)}
               className="p-2 text-ivory hover:text-gold transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gold rounded-[2px]"
               aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
               aria-expanded={mobileMenuOpen}
+              aria-controls="mobile-nav"
             >
               <AnimatePresence mode="wait" initial={false}>
                 {mobileMenuOpen ? (
@@ -516,7 +602,13 @@ export const Navbar: React.FC = () => {
               WebkitBackdropFilter: "blur(28px)",
             }}
           >
-            <nav className="flex flex-col space-y-2 text-center px-4 pt-4 pb-6">
+            {/* Fix: added id + role + aria-label for accessibility */}
+            <nav
+              id="mobile-nav"
+              role="navigation"
+              aria-label="Mobile Navigation"
+              className="flex flex-col space-y-1 text-center px-4 pt-4 pb-6"
+            >
               {/* Mobile Header Branding */}
               <div className="flex items-center justify-center gap-2.5 pb-3 mb-2 border-b border-gold/15">
                 <div className="relative w-7 h-7 shrink-0">
@@ -548,13 +640,14 @@ export const Navbar: React.FC = () => {
                     <div key={item.label} className="flex flex-col">
                       <button
                         type="button"
-                        onClick={() => setOpenMobileDropdown(isExpanded ? null : item.label)}
-                        className={`py-2.5 px-4 text-xs font-semibold rounded-[2px] flex items-center justify-between uppercase tracking-[0.18em] w-full transition-colors ${
+                        onClick={() => setMobileDropdownOverride(isExpanded ? null : item.label)}
+                        className={`py-3 px-4 text-xs font-semibold rounded-[2px] flex items-center justify-between uppercase tracking-[0.18em] w-full transition-colors ${
                           pathname.startsWith(item.href)
                             ? "text-gold bg-white/[0.06] font-bold"
                             : "text-ivory/80 hover:text-white hover:bg-white/[0.04]"
                         }`}
                         aria-expanded={isExpanded}
+                        aria-controls={`mobile-accordion-${item.label.replace(/\s+/g, "-")}`}
                       >
                         <span className="flex items-center gap-1.5">
                           <span>{item.label}</span>
@@ -570,6 +663,7 @@ export const Navbar: React.FC = () => {
                       <AnimatePresence>
                         {isExpanded && (
                           <motion.div
+                            id={`mobile-accordion-${item.label.replace(/\s+/g, "-")}`}
                             initial={{ height: 0, opacity: 0 }}
                             animate={{ height: "auto", opacity: 1 }}
                             exit={{ height: 0, opacity: 0 }}
@@ -593,7 +687,7 @@ export const Navbar: React.FC = () => {
                                             key={subItem.href}
                                             href={subItem.href}
                                             onClick={closeMobileMenu}
-                                            className={`py-2 px-3 rounded-[2px] text-xs uppercase tracking-[0.14em] flex items-center justify-between transition-colors ${
+                                            className={`py-3 px-3 rounded-[2px] text-xs uppercase tracking-[0.14em] flex items-center justify-between transition-colors ${
                                               isSubActive
                                                 ? "text-gold bg-white/[0.08] font-bold"
                                                 : "text-ivory/70 hover:text-ivory hover:bg-white/[0.04] font-medium"
@@ -620,7 +714,7 @@ export const Navbar: React.FC = () => {
                                           key={subItem.href}
                                           href={subItem.href}
                                           onClick={closeMobileMenu}
-                                          className={`py-2 px-6 rounded-[2px] text-xs uppercase tracking-[0.15em] flex items-center justify-between transition-colors ${
+                                          className={`py-3 px-6 rounded-[2px] text-xs uppercase tracking-[0.15em] flex items-center justify-between transition-colors ${
                                             isSubActive
                                               ? "text-gold bg-white/[0.08] font-bold"
                                               : "text-ivory/70 hover:text-ivory hover:bg-white/[0.04] font-medium"
@@ -639,14 +733,19 @@ export const Navbar: React.FC = () => {
                                         </Link>
                                       );
                                     })}
-                                    <Link
-                                      href={item.href}
-                                      onClick={closeMobileMenu}
-                                      className="py-1.5 px-6 text-[9.5px] uppercase tracking-widest text-[#D4AF37] hover:text-white font-bold flex items-center justify-center gap-1.5 pt-1"
-                                    >
-                                      <span>View All {item.label}</span>
-                                      <span>→</span>
-                                    </Link>
+                                    {/* Only show "View All" for items where the parent page
+                                        is meaningfully different from the child links (e.g. About).
+                                        For Gallery the children cover all content, so skip it. */}
+                                    {item.label !== "Gallery" && (
+                                      <Link
+                                        href={item.href}
+                                        onClick={closeMobileMenu}
+                                        className="py-2 px-6 text-[9.5px] uppercase tracking-widest text-[#D4AF37] hover:text-white font-bold flex items-center justify-center gap-1.5"
+                                      >
+                                        <span>View All {item.label}</span>
+                                        <span>→</span>
+                                      </Link>
+                                    )}
                                   </>
                                 )}
                           </motion.div>
@@ -672,7 +771,7 @@ export const Navbar: React.FC = () => {
               <div className="pt-3 grid grid-cols-2 gap-2 border-t border-gold/15 mt-2">
                 <a
                   href={`tel:${siteConfig.contact.phone.replace(/[^0-9+]/g, "")}`}
-                  className="py-2.5 px-3 rounded-[2px] bg-white/[0.04] border border-gold/30 text-xs font-semibold text-ivory hover:text-gold flex items-center justify-center gap-1.5"
+                  className="py-3 px-3 rounded-[2px] bg-white/[0.04] border border-gold/30 text-xs font-semibold text-ivory hover:text-gold flex items-center justify-center gap-1.5"
                 >
                   <Phone size={12} className="text-gold" />
                   <span>Call Us</span>
@@ -681,7 +780,7 @@ export const Navbar: React.FC = () => {
                   href={siteConfig.contact.whatsapp}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="py-2.5 px-3 rounded-[2px] bg-white/[0.04] border border-gold/30 text-xs font-semibold text-ivory hover:text-gold flex items-center justify-center gap-1.5"
+                  className="py-3 px-3 rounded-[2px] bg-white/[0.04] border border-gold/30 text-xs font-semibold text-ivory hover:text-gold flex items-center justify-center gap-1.5"
                 >
                   <MessageCircle size={12} className="text-gold" />
                   <span>WhatsApp</span>
