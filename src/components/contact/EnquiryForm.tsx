@@ -70,7 +70,7 @@ export const EnquiryForm: React.FC = () => {
 
         <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-3">
           <a
-            href={`https://wa.me/919810123456?text=${whatsappMessage}`}
+            href={`${siteConfig.contact.whatsapp}?text=${whatsappMessage}`}
             target="_blank"
             rel="noopener noreferrer"
             className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-[2px] bg-emerald-700 text-white font-sans text-xs uppercase tracking-wider font-bold hover:bg-emerald-800 transition-all shadow-md"
@@ -186,7 +186,7 @@ export const EnquiryForm: React.FC = () => {
           <input
             type="tel"
             required
-            placeholder="+91 98101 23456"
+            placeholder="+91 63671 25514"
             value={formData.phone}
             onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
             className="w-full px-4 py-3 rounded-lg bg-white/[0.04] border border-white/15 text-ivory placeholder-white/40 text-sm font-medium focus:outline-none focus:ring-1 focus:ring-gold focus:border-gold"

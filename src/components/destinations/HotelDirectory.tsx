@@ -3,6 +3,7 @@
 import React, { useState, useMemo } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { siteConfig } from "@/lib/site";
 import { HotelVenue } from "@/lib/content/destinations";
 import { Users, BedDouble, MapPin, Sparkles, Search, MessageCircle, ArrowRight } from "lucide-react";
 
@@ -135,7 +136,7 @@ export const HotelDirectory: React.FC<HotelDirectoryProps> = ({
             const whatsappMsg = encodeURIComponent(
               `Hello Wedding Flora! I am interested in planning a royal destination wedding at ${hotel.name} in ${cityName}. Please share venue buyout details and availability.`
             );
-            const whatsappLink = `https://wa.me/919810123456?text=${whatsappMsg}`;
+            const whatsappLink = `${siteConfig.contact.whatsapp}?text=${whatsappMsg}`;
 
             return (
               <div

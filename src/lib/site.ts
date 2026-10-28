@@ -24,12 +24,12 @@ export const siteConfig = {
   url: process.env.NEXT_PUBLIC_SITE_URL || "https://weddingflora.com",
   contact: {
     email: "enquiries@weddingflora.com", // TODO: replace with real client email
-    phone: "+91 98101 23456", // TODO: replace with real client phone
+    phone: "+91 63671 25514",
     address: "DLF Phase 5, Golf Course Road, Gurugram, Delhi NCR • Studio in Civil Lines, Jaipur",
     instagram: "https://www.instagram.com/weddingflora_theweddingplanner/",
     instagramHandle: "weddingflora_theweddingplanner",
     pinterest: "https://pinterest.com/weddingflora",
-    whatsapp: "https://wa.me/919810123456",
+    whatsapp: "https://wa.me/916367125514",
   },
   navItems: [
     { label: "Home", href: "/" },
