@@ -5,7 +5,7 @@ import { Section } from "@/components/layout/Section";
 import { Divider } from "@/components/ui/Divider";
 import { EnquiryForm } from "@/components/contact/EnquiryForm";
 import { siteConfig } from "@/lib/site";
-import { MapPin, Phone, Mail, MessageCircle, Clock, ShieldCheck } from "lucide-react";
+import { MapPin, Phone, Mail, MessageCircle, Clock, ShieldCheck, ExternalLink, Navigation } from "lucide-react";
 import { InstagramIcon } from "@/components/ui/InstagramIcon";
 
 export const metadata = {
@@ -95,11 +95,20 @@ export default function ContactPage() {
                 <div className="space-y-4 text-sm font-medium text-ivory/80">
                   <div className="flex items-start gap-3.5">
                     <MapPin className="w-5 h-5 text-gold shrink-0 mt-0.5" />
-                    <div>
+                    <div className="space-y-1">
                       <span className="text-xs uppercase tracking-wider text-[#D4AF37] font-bold block">
-                        Studios in Delhi NCR &amp; Rajasthan
+                        Head Office &amp; Planning Studio (Jaipur)
                       </span>
-                      <p>{siteConfig.contact.address}</p>
+                      <p className="text-ivory leading-relaxed">{siteConfig.contact.address}</p>
+                      <a
+                        href={siteConfig.contact.mapsUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 text-xs text-gold hover:text-white font-bold underline transition-colors pt-0.5"
+                      >
+                        <span>Open in Google Maps / Get Directions</span>
+                        <ExternalLink size={12} />
+                      </a>
                     </div>
                   </div>
 
@@ -148,6 +157,36 @@ export default function ContactPage() {
                       <p>Monday – Sunday: 10:00 AM – 8:00 PM IST (By Appointment)</p>
                     </div>
                   </div>
+                </div>
+              </div>
+
+              {/* Google Maps Location Card */}
+              <div className="p-6 rounded-2xl bg-[#090614]/75 backdrop-blur-xl border border-gold/30 shadow-lg space-y-3">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-gold">
+                    <Navigation className="w-4 h-4 text-gold" />
+                    <span>Office Location</span>
+                  </div>
+                  <span className="text-[10px] uppercase font-bold text-emerald-400 bg-emerald-950/60 border border-emerald-500/30 px-2 py-0.5 rounded">
+                    Open for Appointments
+                  </span>
+                </div>
+                <h5 className="font-serif text-lg font-bold text-ivory">
+                  Visit Wedding Flora Studio in Jaipur
+                </h5>
+                <p className="text-xs text-ivory/80 leading-relaxed font-medium">
+                  {siteConfig.contact.address}
+                </p>
+                <div className="pt-1">
+                  <a
+                    href={siteConfig.contact.mapsUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-[2px] bg-white/[0.06] hover:bg-gold hover:text-midnight text-ivory text-xs uppercase tracking-wider font-extrabold transition-all border border-white/10 hover:border-gold"
+                  >
+                    <span>Open in Google Maps / Directions</span>
+                    <ExternalLink className="w-3.5 h-3.5" />
+                  </a>
                 </div>
               </div>
 

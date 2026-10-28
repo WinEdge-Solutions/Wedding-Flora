@@ -74,3 +74,4 @@ export const RitualsFaqSection: React.FC = () => {
     </div>
   );
 };
+

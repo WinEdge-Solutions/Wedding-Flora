@@ -266,3 +266,4 @@ export const ritualsFaqs: RitualFaq[] = [
       "For premier palace buyouts in Rajasthan (such as Udaipur and Jaipur), we recommend commencing Step 01 between 9 to 14 months prior to your wedding date to ensure your preferred palace dates and auspicious muhurats are secured.",
   },
 ];
+

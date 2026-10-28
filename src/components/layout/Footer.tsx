@@ -114,7 +114,15 @@ export const Footer: React.FC = () => {
             <div className="space-y-3 text-sm font-medium text-ivory/75">
               <div className="flex items-start space-x-3">
                 <MapPin size={16} className="text-gold mt-1 shrink-0" />
-                <span>{siteConfig.contact.address}</span>
+                <a
+                  href={siteConfig.contact.mapsUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-gold transition-colors"
+                  title="Open office location in Google Maps"
+                >
+                  <span>{siteConfig.contact.address}</span>
+                </a>
               </div>
               <div className="flex items-center space-x-3">
                 <Phone size={16} className="text-gold shrink-0" />

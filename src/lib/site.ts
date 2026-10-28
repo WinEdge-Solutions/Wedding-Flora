@@ -25,7 +25,8 @@ export const siteConfig = {
   contact: {
     email: "enquiries@weddingflora.com", // TODO: replace with real client email
     phone: "+91 63671 25514",
-    address: "DLF Phase 5, Golf Course Road, Gurugram, Delhi NCR • Studio in Civil Lines, Jaipur",
+    address: "D-52, Saket Colony, Shopping Centre, Adarsh Nagar, Jaipur, Rajasthan 302004",
+    mapsUrl: "https://maps.app.goo.gl/MfUB3DwYFQhCr4S27",
     instagram: "https://www.instagram.com/weddingflora_theweddingplanner/",
     instagramHandle: "weddingflora_theweddingplanner",
     pinterest: "https://pinterest.com/weddingflora",
