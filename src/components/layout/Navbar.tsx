@@ -26,11 +26,11 @@ function NavLink({
     <Link
       href={href}
       onClick={onClick}
-      className={`relative uppercase tracking-[0.16em] lg:tracking-[0.2em] transition-colors duration-200 group/nav ${
+      className={`relative uppercase tracking-[0.14em] lg:tracking-[0.15em] xl:tracking-[0.18em] transition-colors duration-200 group/nav ${
         isMobile
           ? "py-2.5 px-4 text-sm font-semibold rounded-md flex items-center justify-center " +
             (isActive ? "text-gold bg-white/[0.06] font-bold" : "text-ivory/80 hover:text-white hover:bg-white/[0.04]")
-          : "text-xs " + (isActive ? "text-ivory font-bold" : "text-ivory/75 hover:text-ivory font-semibold")
+          : "text-[11px] xl:text-xs " + (isActive ? "text-ivory font-bold" : "text-ivory/75 hover:text-ivory font-semibold")
       }`}
     >
       {label}
@@ -247,10 +247,10 @@ export const Navbar: React.FC = () => {
         boxShadow: "0 10px 35px rgba(0, 0, 0, 0.5)",
       }}
     >
-      <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-12 flex items-center justify-between py-2.5 sm:py-3">
+      <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 flex items-center justify-between py-2.5 sm:py-3">
 
         {/* Left nav */}
-        <nav className="hidden md:flex items-center space-x-4 lg:space-x-6 xl:space-x-7" aria-label="Main Navigation">
+        <nav className="hidden lg:flex items-center space-x-3.5 xl:space-x-5" aria-label="Main Navigation">
           {siteConfig.navItems.slice(0, 4).map((item) =>
             item.children || item.groups ? (
               <NavItemDropdown key={item.label} item={item} pathname={pathname} />
@@ -263,7 +263,7 @@ export const Navbar: React.FC = () => {
         {/* Logo */}
         <Link
           href="/"
-          className="flex items-center gap-2 sm:gap-3 group focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gold"
+          className="flex items-center gap-2 sm:gap-3 group focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gold shrink-0"
         >
           <div className="relative w-8 h-8 sm:w-11 sm:h-11 shrink-0 transition-transform duration-500 group-hover:scale-105">
             <Image
@@ -285,8 +285,8 @@ export const Navbar: React.FC = () => {
         </Link>
 
         {/* Right nav + CTA */}
-        <div className="hidden md:flex items-center space-x-4 lg:space-x-6 xl:space-x-7">
-          {siteConfig.navItems.slice(4, 7).map((item) =>
+        <div className="hidden lg:flex items-center space-x-3 xl:space-x-4">
+          {siteConfig.navItems.slice(4, 9).map((item) =>
             item.children || item.groups ? (
               <NavItemDropdown key={item.label} item={item} pathname={pathname} />
             ) : (
@@ -299,7 +299,7 @@ export const Navbar: React.FC = () => {
         </div>
 
         {/* Mobile hamburger */}
-        <div className="flex md:hidden items-center">
+        <div className="flex lg:hidden items-center">
           <button
             type="button"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -325,7 +325,7 @@ export const Navbar: React.FC = () => {
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-            className="md:hidden overflow-hidden border-b border-gold/20"
+            className="lg:hidden overflow-hidden border-b border-gold/20"
             style={{ background: "rgba(5, 4, 12, 0.98)", backdropFilter: "blur(25px)" }}
           >
             <nav className="flex flex-col space-y-2 text-center px-4 pt-4 pb-6">
