@@ -119,9 +119,9 @@ export const ServicesOverview: React.FC = () => {
 
         <motion.div
           ref={ref}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8"
         >
-          {servicesData.map((service, i) => (
+          {servicesData.slice(0, 6).map((service, i) => (
             <motion.div
               key={service.id}
               variants={cardVariants}
@@ -187,7 +187,7 @@ export const ServicesOverview: React.FC = () => {
           transition={{ delay: 0.55, duration: 0.6 }}
         >
           <Button href="/services" variant="outline" size="md">
-            View All Services &amp; Details
+            Explore All 7 Services &amp; Packages
           </Button>
         </motion.div>
       </Container>

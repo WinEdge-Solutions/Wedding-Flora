@@ -12,9 +12,9 @@ import { Check, Sparkles, ArrowRight, PhoneCall } from "lucide-react";
 import { siteConfig } from "@/lib/site";
 
 export const metadata = {
-  title: "Royal Wedding Services & Packages | Wedding Flora",
+  title: "Wedding Planning & Event Management Services | Wedding Flora",
   description:
-    "Explore our royal palace wedding planning services, opulent floral mandap scenography, concert-grade Sangeet production, and curated packages across India.",
+    "Comprehensive luxury wedding planning and event management: Destination Wedding Planning, Destination Management, Space Management & Scenography, Experiential Events, Hotel Bookings, Social Gatherings, and Bespoke Retreats.",
 };
 
 const processSteps = [
@@ -54,22 +54,51 @@ export default function ServicesPage() {
           <div className="max-w-3xl mx-auto space-y-3.5 sm:space-y-4">
             <p className="font-sans text-[9px] sm:text-xs uppercase tracking-[0.16em] sm:tracking-[0.32em] text-[#D4AF37] font-bold flex items-center justify-center gap-1.5 sm:gap-2 px-2">
               <span>✦</span>
-              <span>Bespoke Indian Wedding Services &amp; Packages</span>
+              <span>Wedding Planning &amp; Event Management Services</span>
               <span>✦</span>
             </p>
 
             <h1 className="font-display text-2xl sm:text-5xl lg:text-6xl font-bold text-ivory tracking-[0.03em] leading-[1.18]">
-              Regal Artistry for Every Sacred Ritual
+              Orchestrating Grandeur, Flawless Logistics &amp; Sacred Artistry
             </h1>
 
             <Divider variant="ornamental" className="my-2.5 sm:my-3" />
 
             <p className="font-sans text-sm sm:text-lg text-ivory/80 font-medium leading-relaxed max-w-2xl mx-auto">
-              From majestic palace destination procurement and opulent botanical mandaps to concert-grade Sangeets and royal hospitality, explore our signature services and curated packages.
+              Our full-service wedding management supports you every step of the way — providing bespoke planning, architectural scenography, experiential entertainment, luxury hotel bookings, and seamless on-ground coordination across Rajasthan and global destinations.
             </p>
           </div>
         </Container>
       </section>
+
+      {/* ── Services Quick Jump Bar ── */}
+      <nav
+        aria-label="Services Navigation"
+        className="sticky top-[68px] z-30 bg-[#090614]/90 backdrop-blur-xl border-b border-gold/20 py-2.5 overflow-x-auto no-scrollbar shadow-lg"
+      >
+        <Container>
+          <div className="flex items-center justify-start lg:justify-center gap-2 min-w-max px-2">
+            <span className="text-[10px] uppercase tracking-widest text-gold/80 font-bold mr-1 hidden sm:inline-flex items-center gap-1">
+              <span>✦</span> Quick Jump:
+            </span>
+            {servicesData.map((s, idx) => (
+              <a
+                key={s.id}
+                href={`#${s.id}`}
+                className="px-3 py-1 rounded-full text-xs font-semibold text-ivory/80 bg-white/[0.04] border border-white/10 hover:border-gold hover:text-gold hover:bg-gold/10 transition-all duration-200 whitespace-nowrap"
+              >
+                0{idx + 1}. {s.title}
+              </a>
+            ))}
+            <a
+              href="#packages"
+              className="px-3 py-1 rounded-full text-xs font-bold text-black bg-gradient-to-r from-gold via-amber-400 to-gold hover:opacity-90 transition-opacity whitespace-nowrap shadow-sm"
+            >
+              Packages &amp; Pricing
+            </a>
+          </div>
+        </Container>
+      </nav>
 
       {/* ── Detailed Services Breakdown ── */}
       <Section variant="ivory">
@@ -81,7 +110,7 @@ export default function ServicesPage() {
                 <div
                   key={service.id}
                   id={service.id}
-                  className={`grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center ${
+                  className={`grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center scroll-mt-32 ${
                     isEven ? "lg:flex-row-reverse" : ""
                   }`}
                 >
