@@ -7,7 +7,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { usePathname } from "next/navigation";
 import { siteConfig, NavItem } from "@/lib/site";
 import { Button } from "@/components/ui/Button";
-import { Menu, X, ChevronDown } from "lucide-react";
+import { Menu, X, ChevronDown, Camera, Video } from "lucide-react";
 
 function NavLink({
   href,
@@ -58,8 +58,23 @@ function NavItemDropdown({
 
   const isParentActive =
     pathname === item.href ||
-    (item.children && item.children.some((child) => pathname === child.href)) ||
-    (item.groups && item.groups.some((g) => g.items.some((child) => pathname === child.href)));
+    pathname.startsWith(`${item.href}/`) ||
+    (item.children &&
+      item.children.some(
+        (child) =>
+          pathname === child.href ||
+          pathname.startsWith(`${child.href}/`) ||
+          (child.href.includes("?") && pathname === child.href.split("?")[0])
+      )) ||
+    (item.groups &&
+      item.groups.some((g) =>
+        g.items.some(
+          (child) =>
+            pathname === child.href ||
+            pathname.startsWith(`${child.href}/`) ||
+            (child.href.includes("?") && pathname === child.href.split("?")[0])
+        )
+      ));
 
   const handleMouseEnter = () => {
     if (timeoutRef.current) clearTimeout(timeoutRef.current);
@@ -88,7 +103,7 @@ function NavItemDropdown({
     >
       <Link
         href={item.href}
-        className={`relative uppercase tracking-[0.16em] lg:tracking-[0.2em] text-xs transition-colors duration-200 inline-flex items-center gap-1.5 py-1 ${
+        className={`relative uppercase tracking-[0.14em] lg:tracking-[0.15em] xl:tracking-[0.18em] text-[11px] xl:text-xs transition-colors duration-200 inline-flex items-center gap-1.5 py-1 ${
           isParentActive
             ? "text-ivory font-bold"
             : "text-ivory/75 hover:text-ivory font-semibold"
@@ -179,42 +194,69 @@ function NavItemDropdown({
                 ))}
               </div>
             ) : (
-              <div className="w-64 p-2 rounded-xl bg-[#090614]/95 backdrop-blur-2xl border border-gold/30 shadow-[0_18px_50px_rgba(0,0,0,0.8)] ring-1 ring-white/10 flex flex-col space-y-1">
+              <div className="w-72 p-2.5 rounded-xl bg-[#090614]/98 backdrop-blur-2xl border border-gold/30 shadow-[0_18px_50px_rgba(0,0,0,0.85)] ring-1 ring-white/10 flex flex-col space-y-1">
                 {item.children?.map((subItem) => {
-                  const isSubActive = pathname === subItem.href;
+                  const isSubActive =
+                    pathname === subItem.href ||
+                    pathname.startsWith(`${subItem.href}/`) ||
+                    (subItem.href.includes("?") && pathname === subItem.href.split("?")[0]);
                   return (
                     <Link
                       key={subItem.href}
                       href={subItem.href}
                       onClick={() => setIsOpen(false)}
-                      className={`group/sub flex flex-col px-3.5 py-2.5 rounded-lg transition-all duration-200 text-left ${
+                      className={`group/sub flex items-start gap-3 px-3 py-2.5 rounded-lg transition-all duration-200 text-left ${
                         isSubActive
                           ? "bg-white/[0.08] border-l-2 border-gold"
                           : "hover:bg-white/[0.05] hover:border-l-2 hover:border-gold/60 border-l-2 border-transparent"
                       }`}
                     >
-                      <div className="flex items-center justify-between">
-                        <span
-                          className={`font-serif text-sm tracking-wide transition-colors ${
-                            isSubActive
-                              ? "text-gold font-bold"
-                              : "text-ivory group-hover/sub:text-gold font-medium"
-                          }`}
-                        >
-                          {subItem.label}
-                        </span>
-                        <span className="text-[10px] text-gold/60 opacity-0 -translate-x-1 group-hover/sub:opacity-100 group-hover/sub:translate-x-0 transition-all duration-200">
-                          ✦
-                        </span>
-                      </div>
-                      {subItem.description && (
-                        <span className="text-[10px] tracking-wide text-ivory/60 font-sans mt-0.5 line-clamp-1">
-                          {subItem.description}
-                        </span>
+                      {subItem.icon === "camera" && (
+                        <div className="w-7 h-7 rounded-lg bg-gold/10 border border-gold/30 flex items-center justify-center shrink-0 text-gold group-hover/sub:bg-gold group-hover/sub:text-midnight transition-colors mt-0.5">
+                          <Camera size={13} />
+                        </div>
                       )}
+                      {subItem.icon === "video" && (
+                        <div className="w-7 h-7 rounded-lg bg-gold/10 border border-gold/30 flex items-center justify-center shrink-0 text-gold group-hover/sub:bg-gold group-hover/sub:text-midnight transition-colors mt-0.5">
+                          <Video size={13} />
+                        </div>
+                      )}
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center justify-between">
+                          <span
+                            className={`font-serif text-[15px] tracking-wide transition-colors ${
+                              isSubActive
+                                ? "text-gold font-bold"
+                                : "text-ivory group-hover/sub:text-gold font-medium"
+                            }`}
+                          >
+                            {subItem.label}
+                          </span>
+                          <span className="text-[10px] text-gold opacity-0 -translate-x-1 group-hover/sub:opacity-100 group-hover/sub:translate-x-0 transition-all duration-200">
+                            ✦
+                          </span>
+                        </div>
+                        {subItem.description && (
+                          <span className="text-[11px] tracking-wide text-ivory/60 font-sans mt-0.5 line-clamp-1 block">
+                            {subItem.description}
+                          </span>
+                        )}
+                      </div>
                     </Link>
                   );
                 })}
+                {item.label === "Gallery" && (
+                  <div className="pt-2 mt-1 border-t border-white/10 px-2">
+                    <Link
+                      href={item.href}
+                      onClick={() => setIsOpen(false)}
+                      className="text-[10px] uppercase tracking-widest text-[#D4AF37] hover:text-white font-bold transition-colors inline-flex items-center justify-between w-full py-1"
+                    >
+                      <span>Explore All Gallery Archives</span>
+                      <span>→</span>
+                    </Link>
+                  </div>
+                )}
               </div>
             )}
           </motion.div>
@@ -232,6 +274,8 @@ export const Navbar: React.FC = () => {
       ? "About"
       : pathname.startsWith("/destinations")
       ? "Wedding Destinations"
+      : pathname.startsWith("/gallery")
+      ? "Gallery"
       : null
   );
 
@@ -398,24 +442,45 @@ export const Navbar: React.FC = () => {
                                     })}
                                   </div>
                                 ))
-                              : item.children?.map((subItem) => {
-                                  const isSubActive = pathname === subItem.href;
-                                  return (
-                                    <Link
-                                      key={subItem.href}
-                                      href={subItem.href}
-                                      onClick={closeMobileMenu}
-                                      className={`py-2 px-6 rounded-md text-xs uppercase tracking-[0.16em] flex items-center justify-between transition-colors ${
-                                        isSubActive
-                                          ? "text-gold bg-white/[0.08] font-bold"
-                                          : "text-ivory/70 hover:text-ivory hover:bg-white/[0.04] font-medium"
-                                      }`}
-                                    >
-                                      <span>{subItem.label}</span>
-                                      <span className="text-gold text-[10px]">✦</span>
-                                    </Link>
-                                  );
-                                })}
+                              : (
+                                  <>
+                                    {item.children?.map((subItem) => {
+                                      const isSubActive =
+                                        pathname === subItem.href ||
+                                        pathname.startsWith(`${subItem.href}/`) ||
+                                        (subItem.href.includes("?") && pathname === subItem.href.split("?")[0]);
+                                      return (
+                                        <Link
+                                          key={subItem.href}
+                                          href={subItem.href}
+                                          onClick={closeMobileMenu}
+                                          className={`py-2 px-6 rounded-md text-xs uppercase tracking-[0.16em] flex items-center justify-between transition-colors ${
+                                            isSubActive
+                                              ? "text-gold bg-white/[0.08] font-bold"
+                                              : "text-ivory/70 hover:text-ivory hover:bg-white/[0.04] font-medium"
+                                          }`}
+                                        >
+                                          <div className="flex items-center gap-2.5">
+                                            {subItem.icon === "camera" && <Camera size={13} className="text-gold" />}
+                                            {subItem.icon === "video" && <Video size={13} className="text-gold" />}
+                                            <span>{subItem.label}</span>
+                                          </div>
+                                          <span className="text-gold text-[10px]">✦</span>
+                                        </Link>
+                                      );
+                                    })}
+                                    {item.label === "Gallery" && (
+                                      <Link
+                                        href={item.href}
+                                        onClick={closeMobileMenu}
+                                        className="py-1.5 px-6 text-[10px] uppercase tracking-widest text-[#D4AF37] hover:text-white font-bold flex items-center justify-center gap-1.5 pt-1"
+                                      >
+                                        <span>View All Archives</span>
+                                        <span>→</span>
+                                      </Link>
+                                    )}
+                                  </>
+                                )}
                           </motion.div>
                         )}
                       </AnimatePresence>

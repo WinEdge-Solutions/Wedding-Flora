@@ -2,6 +2,7 @@ export interface NavSubItem {
   label: string;
   href: string;
   description?: string;
+  icon?: string;
 }
 
 export interface NavItemGroup {
@@ -71,7 +72,24 @@ export const siteConfig = {
       ],
     },
     { label: "Rituals", href: "/rituals" },
-    { label: "Gallery", href: "/gallery" },
+    {
+      label: "Gallery",
+      href: "/gallery",
+      children: [
+        {
+          label: "Photo Gallery",
+          href: "/gallery/photos",
+          description: "Opulent mandaps, palace florals & sacred decor",
+          icon: "camera",
+        },
+        {
+          label: "Video Gallery",
+          href: "/gallery/videos",
+          description: "4K cinematic reels & celebration highlights",
+          icon: "video",
+        },
+      ],
+    },
     { label: "Celebrations", href: "/celebrations" },
     { label: "Blog", href: "/blog" },
     { label: "Packages", href: "/packages" },

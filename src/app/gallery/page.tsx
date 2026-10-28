@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Container } from "@/components/layout/Container";
@@ -74,7 +74,14 @@ export default function GalleryPage() {
       {/* ── Main Gallery Grid Section ── */}
       <Section variant="charcoal">
         <Container>
-          <GalleryGrid />
+          <Suspense fallback={
+            <div className="py-20 text-center flex flex-col items-center justify-center space-y-3">
+              <div className="w-8 h-8 rounded-full border-2 border-gold border-t-transparent animate-spin" />
+              <p className="text-xs uppercase tracking-widest text-gold font-bold">Loading Royal Archives...</p>
+            </div>
+          }>
+            <GalleryGrid mode="all" />
+          </Suspense>
         </Container>
       </Section>
 

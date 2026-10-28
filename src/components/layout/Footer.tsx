@@ -70,38 +70,14 @@ export const Footer: React.FC = () => {
             </h4>
             <ul className="space-y-2.5 text-sm font-medium text-ivory/75">
               {siteConfig.navItems.map((item) => (
-                <React.Fragment key={item.label}>
-                  {item.groups ? (
-                    <li key={item.href}>
-                      <Link
-                        href={item.href}
-                        className="hover:text-gold transition-colors duration-200"
-                      >
-                        {item.label}
-                      </Link>
-                    </li>
-                  ) : item.children ? (
-                    item.children.map((child) => (
-                      <li key={child.href}>
-                        <Link
-                          href={child.href}
-                          className="hover:text-gold transition-colors duration-200"
-                        >
-                          {child.label}
-                        </Link>
-                      </li>
-                    ))
-                  ) : (
-                    <li key={item.href}>
-                      <Link
-                        href={item.href}
-                        className="hover:text-gold transition-colors duration-200"
-                      >
-                        {item.label}
-                      </Link>
-                    </li>
-                  )}
-                </React.Fragment>
+                <li key={item.label}>
+                  <Link
+                    href={item.href}
+                    className="hover:text-gold transition-colors duration-200"
+                  >
+                    {item.label}
+                  </Link>
+                </li>
               ))}
             </ul>
           </div>

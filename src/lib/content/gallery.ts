@@ -13,6 +13,18 @@ export interface GalleryItem {
 
 export const galleryData: GalleryItem[] = [
   {
+    id: "g0",
+    title: "The Imperial Rajasthan Royal Wedding Film",
+    category: "CINEMATIC REELS",
+    location: "Rambagh Palace & Fairmont, Jaipur",
+    year: "2025",
+    imageUrl: "/images/hero-bg.jpg",
+    videoUrl: "/videos/hero-bg.mp4",
+    aspect: "landscape",
+    alt: "The Imperial Rajasthan Royal Wedding Film at Rambagh Palace",
+    caption: "Cinematic grand film capturing royal bridal entry, floral mandap, and magnificent Sangeet fireworks.",
+  },
+  {
     id: "g1",
     title: "The Royal Jodhpur Sangeet & Sufi Night",
     category: "CINEMATIC REELS",

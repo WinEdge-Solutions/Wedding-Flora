@@ -3,64 +3,166 @@
 import React, { useState, useMemo } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import { galleryData, GalleryItem } from "@/lib/content/gallery";
-import { Sparkles, MapPin, Play, X, ArrowRight, Eye, Calendar } from "lucide-react";
+import { Sparkles, MapPin, Play, X, ArrowRight, Eye, Calendar, Camera, Video } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
-export const GalleryGrid: React.FC = () => {
+interface GalleryGridProps {
+  mode?: "all" | "photos" | "videos";
+}
+
+export const GalleryGrid: React.FC<GalleryGridProps> = ({ mode }) => {
+  const searchParams = useSearchParams();
+  const typeParam = searchParams.get("type"); // "photos" | "videos" | null
+
+  // User tab override (if on general gallery page)
+  const [selectedMode, setSelectedMode] = useState<"all" | "photos" | "videos" | null>(null);
   const [activeCategory, setActiveCategory] = useState<string>("ALL");
   const [activeItem, setActiveItem] = useState<GalleryItem | null>(null);
 
-  const categories = [
-    { id: "ALL", label: "All Works" },
-    { id: "MANDAP & DECOR", label: "Mandap & Sacred Decor" },
-    { id: "SANGEET", label: "Sangeet Spectaculars" },
-    { id: "MEHENDI & HALDI", label: "Mehendi & Haldi" },
-    { id: "ROYAL BARAAT", label: "Royal Baraat" },
-    { id: "RECEPTION", label: "Grand Reception" },
-    { id: "CINEMATIC REELS", label: "Cinematic Reels" },
-  ];
+  // Derived effective mode without useEffect
+  const currentMode: "all" | "photos" | "videos" =
+    mode ||
+    selectedMode ||
+    (typeParam === "photos" ? "photos" : typeParam === "videos" ? "videos" : "all");
 
-  const filteredItems = useMemo(() => {
-    if (activeCategory === "ALL") return galleryData;
-    return galleryData.filter((item) => item.category === activeCategory);
-  }, [activeCategory]);
+  // Counts
+  const photoCount = useMemo(() => galleryData.filter((i) => !i.videoUrl).length, []);
+  const videoCount = useMemo(() => galleryData.filter((i) => Boolean(i.videoUrl)).length, []);
+
+  // Filter items by media mode
+  const modeFilteredItems = useMemo(() => {
+    if (currentMode === "photos") {
+      return galleryData.filter((item) => !item.videoUrl);
+    }
+    if (currentMode === "videos") {
+      return galleryData.filter((item) => Boolean(item.videoUrl));
+    }
+    return galleryData;
+  }, [currentMode]);
+
+  // Dynamic category options based on mode
+  const categories = useMemo(() => {
+    if (currentMode === "videos") {
+      return [{ id: "ALL", label: "All 4K Reels" }];
+    }
+    if (currentMode === "photos") {
+      return [
+        { id: "ALL", label: "All Photos" },
+        { id: "MANDAP & DECOR", label: "Mandap & Sacred Decor" },
+        { id: "SANGEET", label: "Sangeet Spectaculars" },
+        { id: "MEHENDI & HALDI", label: "Mehendi & Haldi" },
+        { id: "ROYAL BARAAT", label: "Royal Baraat" },
+        { id: "RECEPTION", label: "Grand Reception" },
+      ];
+    }
+    return [
+      { id: "ALL", label: "All Works" },
+      { id: "MANDAP & DECOR", label: "Mandap & Sacred Decor" },
+      { id: "SANGEET", label: "Sangeet Spectaculars" },
+      { id: "MEHENDI & HALDI", label: "Mehendi & Haldi" },
+      { id: "ROYAL BARAAT", label: "Royal Baraat" },
+      { id: "RECEPTION", label: "Grand Reception" },
+      { id: "CINEMATIC REELS", label: "Cinematic Reels" },
+    ];
+  }, [currentMode]);
+
+  // Final filtered items
+  const finalItems = useMemo(() => {
+    if (activeCategory === "ALL") return modeFilteredItems;
+    return modeFilteredItems.filter((item) => item.category === activeCategory);
+  }, [modeFilteredItems, activeCategory]);
 
   return (
     <div className="space-y-8 sm:space-y-12">
-      {/* ── Category Filter Pills ── */}
-      <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3">
-        {categories.map((cat) => {
-          const count =
-            cat.id === "ALL"
-              ? galleryData.length
-              : galleryData.filter((i) => i.category === cat.id).length;
-          const active = activeCategory === cat.id;
+      {/* ── Mode Switcher Tabs (Only shown when not restricted by page prop) ── */}
+      {!mode && (
+        <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 p-1.5 max-w-xl mx-auto rounded-full bg-white/[0.03] border border-gold/25 backdrop-blur-md">
+          <button
+            type="button"
+            onClick={() => {
+              setSelectedMode("all");
+              setActiveCategory("ALL");
+            }}
+            className={`px-4 sm:px-5 py-2 rounded-full text-xs font-bold uppercase tracking-wider transition-all duration-300 ${
+              currentMode === "all"
+                ? "bg-gold text-midnight shadow-[0_0_15px_rgba(212,175,55,0.4)]"
+                : "text-ivory/70 hover:text-ivory hover:bg-white/[0.04]"
+            }`}
+          >
+            All Archives ({galleryData.length})
+          </button>
 
-          if (cat.id !== "ALL" && count === 0) return null;
+          <button
+            type="button"
+            onClick={() => {
+              setSelectedMode("photos");
+              setActiveCategory("ALL");
+            }}
+            className={`px-4 sm:px-5 py-2 rounded-full text-xs font-bold uppercase tracking-wider transition-all duration-300 flex items-center gap-1.5 ${
+              currentMode === "photos"
+                ? "bg-gold text-midnight shadow-[0_0_15px_rgba(212,175,55,0.4)]"
+                : "text-ivory/70 hover:text-ivory hover:bg-white/[0.04]"
+            }`}
+          >
+            <Camera size={13} />
+            <span>Photo Gallery ({photoCount})</span>
+          </button>
 
-          return (
-            <button
-              key={cat.id}
-              onClick={() => setActiveCategory(cat.id)}
-              className={`px-4 py-2 rounded-full text-xs font-bold tracking-wider uppercase transition-all duration-300 flex items-center gap-2 ${
-                active
-                  ? "bg-gold text-midnight font-extrabold shadow-[0_0_15px_rgba(212,175,55,0.4)]"
-                  : "bg-white/[0.04] text-ivory/80 hover:text-ivory hover:bg-white/[0.08] border border-white/10"
-              }`}
-            >
-              <span>{cat.label}</span>
-              <span
-                className={`px-1.5 py-0.5 rounded-full text-[10px] ${
-                  active ? "bg-midnight/20 text-midnight" : "bg-white/10 text-gold"
+          <button
+            type="button"
+            onClick={() => {
+              setSelectedMode("videos");
+              setActiveCategory("ALL");
+            }}
+            className={`px-4 sm:px-5 py-2 rounded-full text-xs font-bold uppercase tracking-wider transition-all duration-300 flex items-center gap-1.5 ${
+              currentMode === "videos"
+                ? "bg-gold text-midnight shadow-[0_0_15px_rgba(212,175,55,0.4)]"
+                : "text-ivory/70 hover:text-ivory hover:bg-white/[0.04]"
+            }`}
+          >
+            <Video size={13} />
+            <span>Video Gallery ({videoCount})</span>
+          </button>
+        </div>
+      )}
+
+      {/* ── Subcategory Filter Pills (Shown for all or photos) ── */}
+      {categories.length > 1 && (
+        <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-2.5">
+          {categories.map((cat) => {
+            const count =
+              cat.id === "ALL"
+                ? modeFilteredItems.length
+                : modeFilteredItems.filter((i) => i.category === cat.id).length;
+            const active = activeCategory === cat.id;
+
+            if (cat.id !== "ALL" && count === 0) return null;
+
+            return (
+              <button
+                key={cat.id}
+                onClick={() => setActiveCategory(cat.id)}
+                className={`px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-full text-[11px] sm:text-xs font-bold tracking-wider uppercase transition-all duration-300 flex items-center gap-2 ${
+                  active
+                    ? "bg-gold text-midnight font-extrabold shadow-[0_0_15px_rgba(212,175,55,0.4)]"
+                    : "bg-white/[0.04] text-ivory/80 hover:text-ivory hover:bg-white/[0.08] border border-white/10"
                 }`}
               >
-                {count}
-              </span>
-            </button>
-          );
-        })}
-      </div>
+                <span>{cat.label}</span>
+                <span
+                  className={`px-1.5 py-0.5 rounded-full text-[10px] ${
+                    active ? "bg-midnight/20 text-midnight" : "bg-white/10 text-gold"
+                  }`}
+                >
+                  {count}
+                </span>
+              </button>
+            );
+          })}
+        </div>
+      )}
 
       {/* ── Gallery Grid ── */}
       <motion.div
@@ -68,7 +170,7 @@ export const GalleryGrid: React.FC = () => {
         className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8"
       >
         <AnimatePresence>
-          {filteredItems.map((item) => {
+          {finalItems.map((item) => {
             const isVideo = Boolean(item.videoUrl);
 
             return (
@@ -96,8 +198,9 @@ export const GalleryGrid: React.FC = () => {
 
                   {/* Category Pill */}
                   <div className="absolute top-3 left-3">
-                    <span className="px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-midnight/90 backdrop-blur-md text-gold border border-gold/30">
-                      {item.category}
+                    <span className="px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-midnight/90 backdrop-blur-md text-gold border border-gold/30 flex items-center gap-1.5">
+                      {isVideo ? <Video size={10} /> : <Camera size={10} />}
+                      <span>{item.category}</span>
                     </span>
                   </div>
 
@@ -119,7 +222,7 @@ export const GalleryGrid: React.FC = () => {
                 <div className="p-5 space-y-2">
                   <div className="flex items-center justify-between text-[11px] text-ivory/50">
                     <span className="font-bold text-gold uppercase tracking-wider">
-                      ✦ Royal Celebration
+                      ✦ {isVideo ? "4K Cinematic Film" : "Royal Celebration"}
                     </span>
                     <span className="flex items-center gap-1">
                       <Calendar size={11} className="text-gold" />
