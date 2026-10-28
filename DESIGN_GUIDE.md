@@ -4,20 +4,25 @@
 
 ## Colour palette
 
-| Role | Name | Hex |
-| :--- | :--- | :--- |
-| Background | Ivory | `#FAF7F2` |
-| Alt background | Warm cream | `#F1EBE0` |
-| Soft accent | Blush | `#E8D5D0` |
-| Primary accent | Antique gold | `#B79A5B` |
-| Deep accent | Dusty sage | `#7A8B78` |
-| Text | Charcoal | `#2B2B2B` |
-| Muted text | Warm grey | `#6B645C` |
+The color theme directly revolves around the official **Wedding Flora crest & logo** palette (`/public/images/logo.png` and `logo-emblem.png`):
+
+| Role | Name | Hex | Origin / Purpose |
+| :--- | :--- | :--- | :--- |
+| Primary Base | Ivory | `#FAF7F2` | Canvas & high-end wedding stationery background |
+| Alt Base | Warm cream | `#F1EBE0` | Alternating section backgrounds & subtle cards |
+| Floral Accent | Blossom Blush | `#F1DCE1` | Exact logo blossom petal hue; soft badges & aurora glow |
+| Rich Floral | Petal Rose | `#E5B8C3` | Deeper floral tint for hover states & romantic accents |
+| Brand Accent | Antique gold | `#AB9178` | Exact logo champagne bronze / antique leaf tone |
+| Highlight Accent| Radiant gold | `#D4AF37` | Luminous metallic gold for CTAs, stars, borders, and shimmer |
+| Botanical Accent| Dusty sage | `#9DB49B` | Natural floral foliage companion |
+| Dark Neutral | Emblem Charcoal| `#5D5956` | Exact logo emblem linework & typography |
+| Light Neutral | Warm grey | `#D7D3CF` | Soft logo-matched hairline borders & dividers |
+| Night Backdrop | Midnight Onyx | `#030308` | Luxury nocturnal atmosphere for palace / royal theme |
 
 Notes:
-- Gold has low contrast on ivory. Use it for lines, icons, borders and large headings, **not** small body text.
-- Buttons: charcoal or deep sage fill with ivory text, or a gold outline with charcoal text.
-- Keep colour use restrained: mostly ivory, cream and charcoal, with gold as the highlight.
+- Gold has low contrast on ivory. Use it for lines, icons, borders, large headings, and buttons with dark ink, **not** small body text.
+- Buttons: gradient gold fill with dark ink, or subtle glass with gold outline and hover glow.
+- Keep colour use restrained: 60% ivory/midnight canvas, 30% structural charcoal/linen, with gold and blossom blush as the 10% focal accents.
 
 ## Typography
 
