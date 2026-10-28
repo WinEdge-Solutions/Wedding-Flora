@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
@@ -53,12 +53,38 @@ function NavItemDropdown({
   item: NavItem;
   pathname: string;
 }) {
+  const [isOpen, setIsOpen] = useState(false);
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+
   const isParentActive =
     pathname === item.href ||
     (item.children && item.children.some((child) => pathname === child.href));
 
+  const handleMouseEnter = () => {
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    setIsOpen(true);
+  };
+
+  const handleMouseLeave = () => {
+    timeoutRef.current = setTimeout(() => {
+      setIsOpen(false);
+    }, 150);
+  };
+
+  useEffect(() => {
+    return () => {
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    };
+  }, []);
+
   return (
-    <div className="relative group/dropdown">
+    <div
+      className="relative"
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+      onFocus={handleMouseEnter}
+      onBlur={handleMouseLeave}
+    >
       <Link
         href={item.href}
         className={`relative uppercase tracking-[0.2em] text-xs transition-colors duration-200 inline-flex items-center gap-1.5 py-1 ${
@@ -68,57 +94,71 @@ function NavItemDropdown({
         }`}
       >
         <span>{item.label}</span>
-        <ChevronDown
-          size={11}
-          className="text-gold/80 transition-transform duration-300 group-hover/dropdown:rotate-180"
-        />
+        <motion.span
+          animate={{ rotate: isOpen ? 180 : 0 }}
+          transition={{ duration: 0.2 }}
+          className="inline-flex items-center"
+        >
+          <ChevronDown size={11} className="text-gold/80" />
+        </motion.span>
         {/* Animated gold underline for desktop */}
         <span
           className={`absolute -bottom-0.5 left-0 h-px bg-gradient-to-r from-gold to-gold/30 transition-all duration-300 ${
-            isParentActive ? "w-full" : "w-0 group-hover/dropdown:w-full"
+            isParentActive || isOpen ? "w-full" : "w-0 hover:w-full"
           }`}
         />
       </Link>
 
-      {/* Dropdown Menu Container with bridge padding to avoid hover loss */}
-      <div className="absolute left-1/2 -translate-x-1/2 top-full pt-3.5 opacity-0 invisible -translate-y-1 group-hover/dropdown:opacity-100 group-hover/dropdown:visible group-hover/dropdown:translate-y-0 group-focus-within/dropdown:opacity-100 group-focus-within/dropdown:visible group-focus-within/dropdown:translate-y-0 transition-all duration-250 ease-out z-50 pointer-events-none group-hover/dropdown:pointer-events-auto group-focus-within/dropdown:pointer-events-auto">
-        <div className="w-64 p-2 rounded-xl bg-[#090614]/95 backdrop-blur-2xl border border-gold/30 shadow-[0_18px_50px_rgba(0,0,0,0.8)] ring-1 ring-white/10 flex flex-col space-y-1">
-          {item.children?.map((subItem) => {
-            const isSubActive = pathname === subItem.href;
-            return (
-              <Link
-                key={subItem.href}
-                href={subItem.href}
-                className={`group/sub flex flex-col px-3.5 py-2.5 rounded-lg transition-all duration-200 text-left ${
-                  isSubActive
-                    ? "bg-white/[0.08] border-l-2 border-gold"
-                    : "hover:bg-white/[0.05] hover:border-l-2 hover:border-gold/60 border-l-2 border-transparent"
-                }`}
-              >
-                <div className="flex items-center justify-between">
-                  <span
-                    className={`font-serif text-sm tracking-wide transition-colors ${
+      {/* Dropdown Menu Container */}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: 8, scale: 0.98 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 6, scale: 0.98 }}
+            transition={{ duration: 0.18, ease: "easeOut" }}
+            className="absolute left-1/2 -translate-x-1/2 top-full pt-3 z-50 min-w-[260px]"
+          >
+            <div className="w-64 p-2 rounded-xl bg-[#090614]/95 backdrop-blur-2xl border border-gold/30 shadow-[0_18px_50px_rgba(0,0,0,0.8)] ring-1 ring-white/10 flex flex-col space-y-1">
+              {item.children?.map((subItem) => {
+                const isSubActive = pathname === subItem.href;
+                return (
+                  <Link
+                    key={subItem.href}
+                    href={subItem.href}
+                    onClick={() => setIsOpen(false)}
+                    className={`group/sub flex flex-col px-3.5 py-2.5 rounded-lg transition-all duration-200 text-left ${
                       isSubActive
-                        ? "text-gold font-bold"
-                        : "text-ivory group-hover/sub:text-gold font-medium"
+                        ? "bg-white/[0.08] border-l-2 border-gold"
+                        : "hover:bg-white/[0.05] hover:border-l-2 hover:border-gold/60 border-l-2 border-transparent"
                     }`}
                   >
-                    {subItem.label}
-                  </span>
-                  <span className="text-[10px] text-gold/60 opacity-0 -translate-x-1 group-hover/sub:opacity-100 group-hover/sub:translate-x-0 transition-all duration-200">
-                    ✦
-                  </span>
-                </div>
-                {subItem.description && (
-                  <span className="text-[10px] tracking-wide text-ivory/60 font-sans mt-0.5 line-clamp-1">
-                    {subItem.description}
-                  </span>
-                )}
-              </Link>
-            );
-          })}
-        </div>
-      </div>
+                    <div className="flex items-center justify-between">
+                      <span
+                        className={`font-serif text-sm tracking-wide transition-colors ${
+                          isSubActive
+                            ? "text-gold font-bold"
+                            : "text-ivory group-hover/sub:text-gold font-medium"
+                        }`}
+                      >
+                        {subItem.label}
+                      </span>
+                      <span className="text-[10px] text-gold/60 opacity-0 -translate-x-1 group-hover/sub:opacity-100 group-hover/sub:translate-x-0 transition-all duration-200">
+                        ✦
+                      </span>
+                    </div>
+                    {subItem.description && (
+                      <span className="text-[10px] tracking-wide text-ivory/60 font-sans mt-0.5 line-clamp-1">
+                        {subItem.description}
+                      </span>
+                    )}
+                  </Link>
+                );
+              })}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
