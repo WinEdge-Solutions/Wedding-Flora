@@ -1,6 +1,13 @@
+export interface NavSubItem {
+  label: string;
+  href: string;
+  description?: string;
+}
+
 export interface NavItem {
   label: string;
   href: string;
+  children?: NavSubItem[];
 }
 
 export const siteConfig = {
@@ -20,7 +27,22 @@ export const siteConfig = {
   },
   navItems: [
     { label: "Home", href: "/" },
-    { label: "About", href: "/about" },
+    {
+      label: "About",
+      href: "/about",
+      children: [
+        {
+          label: "About Us",
+          href: "/about",
+          description: "Our heritage, philosophy & artistry",
+        },
+        {
+          label: "About Director",
+          href: "/about/director",
+          description: "The visionary behind Wedding Flora",
+        },
+      ],
+    },
     { label: "Services", href: "/services" },
     { label: "Celebrations", href: "/celebrations" },
     { label: "Packages", href: "/packages" },
