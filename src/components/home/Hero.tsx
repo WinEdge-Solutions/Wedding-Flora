@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import Image from "next/image";
 import { motion, useScroll, useTransform } from "framer-motion";
 import gsap from "gsap";
@@ -8,7 +8,6 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Container } from "@/components/layout/Container";
 import { Divider } from "@/components/ui/Divider";
 import { FloralParticles } from "@/components/ui/FloralParticles";
-import { Volume2, VolumeX } from "lucide-react";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -29,8 +28,6 @@ const fadeUp = {
 export const Hero: React.FC = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const textContentRef = useRef<HTMLDivElement>(null);
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const [isMuted, setIsMuted] = useState(true);
 
   /* ── Scroll-driven parallax + fade ────────────────── */
   const { scrollY } = useScroll();
@@ -38,17 +35,6 @@ export const Hero: React.FC = () => {
   const heroOpacity = useTransform(scrollY, [0, 420], [1, 0]);
   const videoY = useTransform(scrollY, [0, 600], [0, 100]);
   const videoScale = useTransform(scrollY, [0, 600], [1.05, 1.15]);
-
-  /* ── Sound toggle handler ──────────────────────────── */
-  const toggleSound = () => {
-    if (!videoRef.current) return;
-    const nextMuted = !isMuted;
-    videoRef.current.muted = nextMuted;
-    setIsMuted(nextMuted);
-    if (!nextMuted) {
-      videoRef.current.play().catch(() => {});
-    }
-  };
 
   /* ── GSAP letter-by-letter H1 on mount ────────────── */
   useEffect(() => {
@@ -98,10 +84,9 @@ export const Hero: React.FC = () => {
           className="relative w-full h-full will-change-transform"
         >
           <video
-            ref={videoRef}
             autoPlay
             loop
-            muted={isMuted}
+            muted
             playsInline
             preload="auto"
             poster="/images/hero-bg.jpg"
@@ -324,34 +309,6 @@ export const Hero: React.FC = () => {
           </div>
         </Container>
       </motion.div>
-
-      {/* ══════════════════════════════════════════════
-          LAYER 3 — Interactive Sound Toggle Pill
-      ══════════════════════════════════════════════ */}
-      <div className="absolute bottom-6 right-6 z-30">
-        <button
-          type="button"
-          onClick={toggleSound}
-          className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-black/60 backdrop-blur-xl border border-gold/40 text-ivory text-xs font-semibold hover:border-gold hover:text-gold hover:bg-black/85 transition-all duration-300 shadow-[0_8px_30px_rgba(0,0,0,0.7)] group"
-          aria-label={isMuted ? "Unmute background sound" : "Mute background sound"}
-        >
-          {isMuted ? (
-            <>
-              <VolumeX size={14} className="text-gold/80 group-hover:text-gold" />
-              <span className="text-[10px] sm:text-[11px] uppercase tracking-wider text-ivory/80 group-hover:text-ivory font-bold">
-                Sound On
-              </span>
-            </>
-          ) : (
-            <>
-              <Volume2 size={14} className="text-gold animate-pulse" />
-              <span className="text-[10px] sm:text-[11px] uppercase tracking-wider text-gold font-bold">
-                Sound Active
-              </span>
-            </>
-          )}
-        </button>
-      </div>
 
     </section>
   );
