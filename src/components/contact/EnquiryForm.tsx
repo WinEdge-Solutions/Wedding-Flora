@@ -10,6 +10,11 @@ import { InstagramIcon } from "@/components/ui/InstagramIcon";
 export const EnquiryForm: React.FC = () => {
   const searchParams = useSearchParams();
   const initialPackage = searchParams.get("package") || "complete-regal-wedding";
+  const rawDestination = searchParams.get("destination") || "Udaipur";
+  // Format destination nicely (e.g. jaipur -> Jaipur)
+  const initialDestination =
+    rawDestination.charAt(0).toUpperCase() + rawDestination.slice(1);
+  const initialVenue = searchParams.get("venue") || "";
 
   const [formData, setFormData] = useState({
     fullName: "",
@@ -17,11 +22,14 @@ export const EnquiryForm: React.FC = () => {
     email: "",
     phone: "",
     weddingDate: "",
-    destination: "Udaipur",
+    destination: initialDestination,
+    venue: initialVenue,
     guestCount: "150 - 300",
     packageChoice: initialPackage,
     budgetRange: "₹ 50L - ₹ 1 Cr",
-    message: "",
+    message: initialVenue
+      ? `Enquiring for a royal wedding celebration at ${initialVenue} in ${initialDestination}.`
+      : "",
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -105,6 +113,24 @@ export const EnquiryForm: React.FC = () => {
         <p className="text-xs sm:text-sm text-ivory/80 font-medium">
           Fill in the details below to receive a customized master proposal and consultation slot.
         </p>
+
+        {formData.venue && (
+          <div className="mt-3 p-3 rounded-lg bg-gold/15 border border-gold/40 flex items-center justify-between">
+            <div className="flex items-center gap-2 text-xs text-gold font-bold">
+              <span>✦</span>
+              <span>
+                Enquiring for: <strong className="text-ivory underline">{formData.venue}</strong> ({formData.destination})
+              </span>
+            </div>
+            <button
+              type="button"
+              onClick={() => setFormData({ ...formData, venue: "" })}
+              className="text-[10px] uppercase tracking-wider text-ivory/60 hover:text-white"
+            >
+              Clear
+            </button>
+          </div>
+        )}
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
@@ -192,12 +218,17 @@ export const EnquiryForm: React.FC = () => {
             onChange={(e) => setFormData({ ...formData, destination: e.target.value })}
             className="w-full px-4 py-3 rounded-lg bg-[#090614] border border-white/15 text-ivory text-sm font-medium focus:outline-none focus:ring-1 focus:ring-gold focus:border-gold"
           >
-            <option value="Udaipur">Udaipur (Lake Palaces &amp; Heritage)</option>
-            <option value="Jaipur">Jaipur (Pink City Forts &amp; Haveli)</option>
-            <option value="Jodhpur">Jodhpur (Sandstone Royal Palaces)</option>
+            <option value="Jaipur">Jaipur (Pink City Palaces &amp; Fortresses)</option>
+            <option value="Udaipur">Udaipur (Lake Palaces &amp; Island Venues)</option>
+            <option value="Jodhpur">Jodhpur (Art Deco Citadel &amp; Forts)</option>
+            <option value="Bikaner">Bikaner (Red Sandstone Aristocracy)</option>
+            <option value="Pushkar">Pushkar (Sacred Oasis &amp; Desert Glamour)</option>
+            <option value="Ranthambore">Ranthambore (Royal Wilderness Sanctuaries)</option>
+            <option value="Jaisalmer">Jaisalmer (Golden Dune Castles)</option>
+            <option value="Jhunjhunu">Jhunjhunu (Shekhawati Painted Havelis)</option>
             <option value="Delhi NCR">Delhi NCR (Luxury Farmhouses &amp; 5-Star)</option>
             <option value="Goa">Goa (Scenic Coastal &amp; Beach)</option>
-            <option value="Other Destination">Other Royal Destination</option>
+            <option value="Other Royal Destination">Other Royal Destination</option>
           </select>
         </div>
 

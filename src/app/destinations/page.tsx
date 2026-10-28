@@ -114,8 +114,11 @@ export default function DestinationsPage() {
                       Destination 0{index + 1} • Rajasthan
                     </span>
 
-                    <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-semibold text-ivory tracking-tight leading-tight">
-                      {city.name}
+                    <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-semibold text-ivory tracking-tight leading-tight flex flex-wrap items-center gap-3">
+                      <span>{city.name}</span>
+                      <span className="text-xs font-sans font-bold px-3 py-1 rounded-full bg-gold/15 text-gold border border-gold/30">
+                        {city.hotels.length} Venues
+                      </span>
                     </h2>
 
                     <p className="text-xs sm:text-sm font-sans font-bold text-gold uppercase tracking-wider">
@@ -146,7 +149,7 @@ export default function DestinationsPage() {
                     {/* CTAs */}
                     <div className="pt-3 flex flex-wrap items-center gap-3">
                       <Button href={`/destinations/${city.id}`} variant="primary" size="sm">
-                        Explore {city.name} Guide
+                        Explore All {city.hotels.length} Venues
                       </Button>
                       <Button href={`/contact?destination=${city.id}`} variant="outline" size="sm">
                         Plan In {city.name}
