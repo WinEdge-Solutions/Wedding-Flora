@@ -337,8 +337,6 @@ export const Navbar: React.FC = () => {
             <span className="font-serif tracking-[0.18em] text-[#D4AF37] font-semibold">
               The Royal Wedding Planner
             </span>
-            <span className="text-ivory/30">•</span>
-            <span>Jaipur • Udaipur • Jodhpur • Goa</span>
           </div>
 
           <div className="flex items-center gap-4 xl:gap-6 font-sans">
