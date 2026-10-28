@@ -26,7 +26,7 @@ function NavLink({
     <Link
       href={href}
       onClick={onClick}
-      className={`relative uppercase tracking-[0.2em] transition-colors duration-200 group/nav ${
+      className={`relative uppercase tracking-[0.16em] lg:tracking-[0.2em] transition-colors duration-200 group/nav ${
         isMobile
           ? "py-2.5 px-4 text-sm font-semibold rounded-md flex items-center justify-center " +
             (isActive ? "text-gold bg-white/[0.06] font-bold" : "text-ivory/80 hover:text-white hover:bg-white/[0.04]")
@@ -58,7 +58,8 @@ function NavItemDropdown({
 
   const isParentActive =
     pathname === item.href ||
-    (item.children && item.children.some((child) => pathname === child.href));
+    (item.children && item.children.some((child) => pathname === child.href)) ||
+    (item.groups && item.groups.some((g) => g.items.some((child) => pathname === child.href)));
 
   const handleMouseEnter = () => {
     if (timeoutRef.current) clearTimeout(timeoutRef.current);
@@ -87,7 +88,7 @@ function NavItemDropdown({
     >
       <Link
         href={item.href}
-        className={`relative uppercase tracking-[0.2em] text-xs transition-colors duration-200 inline-flex items-center gap-1.5 py-1 ${
+        className={`relative uppercase tracking-[0.16em] lg:tracking-[0.2em] text-xs transition-colors duration-200 inline-flex items-center gap-1.5 py-1 ${
           isParentActive
             ? "text-ivory font-bold"
             : "text-ivory/75 hover:text-ivory font-semibold"
@@ -117,45 +118,105 @@ function NavItemDropdown({
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 6, scale: 0.98 }}
             transition={{ duration: 0.18, ease: "easeOut" }}
-            className="absolute left-1/2 -translate-x-1/2 top-full pt-3 z-50 min-w-[260px]"
+            className={`absolute z-50 pt-3 ${
+              item.groups
+                ? "left-1/2 -translate-x-1/2 min-w-[280px]"
+                : "left-1/2 -translate-x-1/2 min-w-[260px]"
+            }`}
           >
-            <div className="w-64 p-2 rounded-xl bg-[#090614]/95 backdrop-blur-2xl border border-gold/30 shadow-[0_18px_50px_rgba(0,0,0,0.8)] ring-1 ring-white/10 flex flex-col space-y-1">
-              {item.children?.map((subItem) => {
-                const isSubActive = pathname === subItem.href;
-                return (
-                  <Link
-                    key={subItem.href}
-                    href={subItem.href}
-                    onClick={() => setIsOpen(false)}
-                    className={`group/sub flex flex-col px-3.5 py-2.5 rounded-lg transition-all duration-200 text-left ${
-                      isSubActive
-                        ? "bg-white/[0.08] border-l-2 border-gold"
-                        : "hover:bg-white/[0.05] hover:border-l-2 hover:border-gold/60 border-l-2 border-transparent"
-                    }`}
-                  >
-                    <div className="flex items-center justify-between">
-                      <span
-                        className={`font-serif text-sm tracking-wide transition-colors ${
-                          isSubActive
-                            ? "text-gold font-bold"
-                            : "text-ivory group-hover/sub:text-gold font-medium"
-                        }`}
-                      >
-                        {subItem.label}
+            {item.groups ? (
+              <div className="w-72 p-3.5 rounded-xl bg-[#090614]/98 backdrop-blur-2xl border border-gold/35 shadow-[0_20px_50px_rgba(0,0,0,0.85)] ring-1 ring-white/10 flex flex-col">
+                {item.groups.map((group) => (
+                  <div key={group.title} className="flex flex-col">
+                    {/* Category Header as in user's screenshot */}
+                    <div className="pb-2 mb-1.5 border-b border-gold/25 flex items-center justify-between px-1">
+                      <span className="font-display text-[11px] font-bold uppercase tracking-[0.22em] text-[#D4AF37]">
+                        {group.title}
                       </span>
-                      <span className="text-[10px] text-gold/60 opacity-0 -translate-x-1 group-hover/sub:opacity-100 group-hover/sub:translate-x-0 transition-all duration-200">
-                        ✦
+                      <span className="text-[9px] uppercase tracking-wider text-ivory/50 font-sans font-semibold">
+                        {group.items.length} Venues
                       </span>
                     </div>
-                    {subItem.description && (
-                      <span className="text-[10px] tracking-wide text-ivory/60 font-sans mt-0.5 line-clamp-1">
-                        {subItem.description}
-                      </span>
-                    )}
-                  </Link>
-                );
-              })}
-            </div>
+
+                    {/* Cities List matching screenshot vertical flow */}
+                    <div className="flex flex-col space-y-0.5 py-0.5">
+                      {group.items.map((subItem) => {
+                        const isSubActive = pathname === subItem.href;
+                        return (
+                          <Link
+                            key={subItem.href}
+                            href={subItem.href}
+                            onClick={() => setIsOpen(false)}
+                            className={`group/city px-3 py-1.5 rounded-md transition-all duration-200 flex items-center justify-between text-left ${
+                              isSubActive
+                                ? "bg-white/[0.08] text-gold font-bold"
+                                : "hover:bg-white/[0.05] text-ivory/80 hover:text-white"
+                            }`}
+                          >
+                            <span className="font-serif text-[15px] tracking-wide group-hover/city:text-gold transition-colors">
+                              {subItem.label}
+                            </span>
+                            <span className="text-[10px] text-gold opacity-0 -translate-x-1 group-hover/city:opacity-100 group-hover/city:translate-x-0 transition-all duration-200">
+                              ✦
+                            </span>
+                          </Link>
+                        );
+                      })}
+                    </div>
+
+                    {/* View All link */}
+                    <div className="pt-2.5 mt-2 border-t border-white/10 px-1">
+                      <Link
+                        href={item.href}
+                        onClick={() => setIsOpen(false)}
+                        className="text-[10px] uppercase tracking-widest text-[#D4AF37] hover:text-white font-bold transition-colors inline-flex items-center gap-1.5"
+                      >
+                        <span>View All Rajasthan Venues</span>
+                        <span>→</span>
+                      </Link>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div className="w-64 p-2 rounded-xl bg-[#090614]/95 backdrop-blur-2xl border border-gold/30 shadow-[0_18px_50px_rgba(0,0,0,0.8)] ring-1 ring-white/10 flex flex-col space-y-1">
+                {item.children?.map((subItem) => {
+                  const isSubActive = pathname === subItem.href;
+                  return (
+                    <Link
+                      key={subItem.href}
+                      href={subItem.href}
+                      onClick={() => setIsOpen(false)}
+                      className={`group/sub flex flex-col px-3.5 py-2.5 rounded-lg transition-all duration-200 text-left ${
+                        isSubActive
+                          ? "bg-white/[0.08] border-l-2 border-gold"
+                          : "hover:bg-white/[0.05] hover:border-l-2 hover:border-gold/60 border-l-2 border-transparent"
+                      }`}
+                    >
+                      <div className="flex items-center justify-between">
+                        <span
+                          className={`font-serif text-sm tracking-wide transition-colors ${
+                            isSubActive
+                              ? "text-gold font-bold"
+                              : "text-ivory group-hover/sub:text-gold font-medium"
+                          }`}
+                        >
+                          {subItem.label}
+                        </span>
+                        <span className="text-[10px] text-gold/60 opacity-0 -translate-x-1 group-hover/sub:opacity-100 group-hover/sub:translate-x-0 transition-all duration-200">
+                          ✦
+                        </span>
+                      </div>
+                      {subItem.description && (
+                        <span className="text-[10px] tracking-wide text-ivory/60 font-sans mt-0.5 line-clamp-1">
+                          {subItem.description}
+                        </span>
+                      )}
+                    </Link>
+                  );
+                })}
+              </div>
+            )}
           </motion.div>
         )}
       </AnimatePresence>
@@ -166,7 +227,13 @@ function NavItemDropdown({
 export const Navbar: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const pathname = usePathname();
-  const [mobileAboutOpen, setMobileAboutOpen] = useState(pathname.startsWith("/about"));
+  const [openMobileDropdown, setOpenMobileDropdown] = useState<string | null>(
+    pathname.startsWith("/about")
+      ? "About"
+      : pathname.startsWith("/destinations")
+      ? "Wedding Destinations"
+      : null
+  );
 
   const closeMobileMenu = () => setMobileMenuOpen(false);
 
@@ -183,9 +250,9 @@ export const Navbar: React.FC = () => {
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-12 flex items-center justify-between py-2.5 sm:py-3">
 
         {/* Left nav */}
-        <nav className="hidden md:flex items-center space-x-8" aria-label="Main Navigation">
+        <nav className="hidden md:flex items-center space-x-6 lg:space-x-8" aria-label="Main Navigation">
           {siteConfig.navItems.slice(0, 3).map((item) =>
-            item.children ? (
+            item.children || item.groups ? (
               <NavItemDropdown key={item.label} item={item} pathname={pathname} />
             ) : (
               <NavLink key={item.href} href={item.href} label={item.label} isActive={pathname === item.href} />
@@ -218,9 +285,9 @@ export const Navbar: React.FC = () => {
         </Link>
 
         {/* Right nav + CTA */}
-        <div className="hidden md:flex items-center space-x-8">
-          {siteConfig.navItems.slice(3, 5).map((item) =>
-            item.children ? (
+        <div className="hidden md:flex items-center space-x-5 lg:space-x-7">
+          {siteConfig.navItems.slice(3, 6).map((item) =>
+            item.children || item.groups ? (
               <NavItemDropdown key={item.label} item={item} pathname={pathname} />
             ) : (
               <NavLink key={item.href} href={item.href} label={item.label} isActive={pathname === item.href} />
@@ -271,59 +338,91 @@ export const Navbar: React.FC = () => {
                   <span className="text-[7.5px] uppercase tracking-[0.2em] text-[#D4AF37] font-bold">The Wedding Planner</span>
                 </div>
               </div>
-              {siteConfig.navItems.map((item) =>
-                item.children ? (
-                  <div key={item.label} className="flex flex-col">
-                    <button
-                      type="button"
-                      onClick={() => setMobileAboutOpen(!mobileAboutOpen)}
-                      className={`py-2.5 px-4 text-sm font-semibold rounded-md flex items-center justify-center gap-2 uppercase tracking-[0.2em] w-full transition-colors ${
-                        pathname.startsWith(item.href)
-                          ? "text-gold bg-white/[0.06]"
-                          : "text-ivory/80 hover:text-white hover:bg-white/[0.04]"
-                      }`}
-                      aria-expanded={mobileAboutOpen}
-                    >
-                      <span>{item.label}</span>
-                      <ChevronDown
-                        size={14}
-                        className={`text-gold transition-transform duration-300 ${
-                          mobileAboutOpen ? "rotate-180" : ""
+              {siteConfig.navItems.map((item) => {
+                const hasChildren = Boolean(item.children && item.children.length > 0);
+                const hasGroups = Boolean(item.groups && item.groups.length > 0);
+                if (hasChildren || hasGroups) {
+                  const isExpanded = openMobileDropdown === item.label;
+                  return (
+                    <div key={item.label} className="flex flex-col">
+                      <button
+                        type="button"
+                        onClick={() => setOpenMobileDropdown(isExpanded ? null : item.label)}
+                        className={`py-2.5 px-4 text-sm font-semibold rounded-md flex items-center justify-center gap-2 uppercase tracking-[0.2em] w-full transition-colors ${
+                          pathname.startsWith(item.href)
+                            ? "text-gold bg-white/[0.06]"
+                            : "text-ivory/80 hover:text-white hover:bg-white/[0.04]"
                         }`}
-                      />
-                    </button>
-                    <AnimatePresence>
-                      {mobileAboutOpen && (
-                        <motion.div
-                          initial={{ height: 0, opacity: 0 }}
-                          animate={{ height: "auto", opacity: 1 }}
-                          exit={{ height: 0, opacity: 0 }}
-                          transition={{ duration: 0.2 }}
-                          className="overflow-hidden flex flex-col space-y-1 py-1"
-                        >
-                          {item.children.map((subItem) => {
-                            const isSubActive = pathname === subItem.href;
-                            return (
-                              <Link
-                                key={subItem.href}
-                                href={subItem.href}
-                                onClick={closeMobileMenu}
-                                className={`py-2 px-6 rounded-md text-xs uppercase tracking-[0.16em] flex items-center justify-between transition-colors ${
-                                  isSubActive
-                                    ? "text-gold bg-white/[0.08] font-bold"
-                                    : "text-ivory/70 hover:text-ivory hover:bg-white/[0.04] font-medium"
-                                }`}
-                              >
-                                <span>{subItem.label}</span>
-                                <span className="text-gold text-[10px]">✦</span>
-                              </Link>
-                            );
-                          })}
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
-                  </div>
-                ) : (
+                        aria-expanded={isExpanded}
+                      >
+                        <span>{item.label}</span>
+                        <ChevronDown
+                          size={14}
+                          className={`text-gold transition-transform duration-300 ${
+                            isExpanded ? "rotate-180" : ""
+                          }`}
+                        />
+                      </button>
+                      <AnimatePresence>
+                        {isExpanded && (
+                          <motion.div
+                            initial={{ height: 0, opacity: 0 }}
+                            animate={{ height: "auto", opacity: 1 }}
+                            exit={{ height: 0, opacity: 0 }}
+                            transition={{ duration: 0.2 }}
+                            className="overflow-hidden flex flex-col space-y-1 py-1"
+                          >
+                            {hasGroups
+                              ? item.groups?.map((group) => (
+                                  <div key={group.title} className="flex flex-col space-y-1 pt-1 pb-1">
+                                    <span className="text-[10px] uppercase tracking-[0.25em] text-[#D4AF37] font-bold px-6 py-1">
+                                      ✦ {group.title}
+                                    </span>
+                                    {group.items.map((subItem) => {
+                                      const isSubActive = pathname === subItem.href;
+                                      return (
+                                        <Link
+                                          key={subItem.href}
+                                          href={subItem.href}
+                                          onClick={closeMobileMenu}
+                                          className={`py-2 px-8 rounded-md text-xs uppercase tracking-[0.16em] flex items-center justify-between transition-colors ${
+                                            isSubActive
+                                              ? "text-gold bg-white/[0.08] font-bold"
+                                              : "text-ivory/70 hover:text-ivory hover:bg-white/[0.04] font-medium"
+                                          }`}
+                                        >
+                                          <span>{subItem.label}</span>
+                                          <span className="text-gold text-[10px]">✦</span>
+                                        </Link>
+                                      );
+                                    })}
+                                  </div>
+                                ))
+                              : item.children?.map((subItem) => {
+                                  const isSubActive = pathname === subItem.href;
+                                  return (
+                                    <Link
+                                      key={subItem.href}
+                                      href={subItem.href}
+                                      onClick={closeMobileMenu}
+                                      className={`py-2 px-6 rounded-md text-xs uppercase tracking-[0.16em] flex items-center justify-between transition-colors ${
+                                        isSubActive
+                                          ? "text-gold bg-white/[0.08] font-bold"
+                                          : "text-ivory/70 hover:text-ivory hover:bg-white/[0.04] font-medium"
+                                      }`}
+                                    >
+                                      <span>{subItem.label}</span>
+                                      <span className="text-gold text-[10px]">✦</span>
+                                    </Link>
+                                  );
+                                })}
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </div>
+                  );
+                }
+                return (
                   <NavLink
                     key={item.href}
                     href={item.href}
@@ -332,8 +431,8 @@ export const Navbar: React.FC = () => {
                     onClick={closeMobileMenu}
                     isMobile
                   />
-                )
-              )}
+                );
+              })}
               <div className="pt-3">
                 <Button href="/contact" variant="primary" fullWidth size="md" onClick={closeMobileMenu}>
                   Enquire Now

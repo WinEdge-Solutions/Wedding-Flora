@@ -4,10 +4,16 @@ export interface NavSubItem {
   description?: string;
 }
 
+export interface NavItemGroup {
+  title: string;
+  items: NavSubItem[];
+}
+
 export interface NavItem {
   label: string;
   href: string;
   children?: NavSubItem[];
+  groups?: NavItemGroup[];
 }
 
 export const siteConfig = {
@@ -44,6 +50,25 @@ export const siteConfig = {
       ],
     },
     { label: "Services", href: "/services" },
+    {
+      label: "Wedding Destinations",
+      href: "/destinations",
+      groups: [
+        {
+          title: "RAJASTHAN",
+          items: [
+            { label: "Jaipur", href: "/destinations/jaipur", description: "The Pink City & Grand Royal Palaces" },
+            { label: "Udaipur", href: "/destinations/udaipur", description: "City of Lakes & Fairytale Waterfronts" },
+            { label: "Jodhpur", href: "/destinations/jodhpur", description: "The Blue City & Majestic Forts" },
+            { label: "Bikaner", href: "/destinations/bikaner", description: "Red Sandstone Haveli Sanctuaries" },
+            { label: "Pushkar", href: "/destinations/pushkar", description: "Sacred Lake Oasis & Luxury Glamping" },
+            { label: "Ranthambore", href: "/destinations/ranthambore", description: "Royal Wilderness & Safari Lodges" },
+            { label: "Jaisalmer", href: "/destinations/jaisalmer", description: "The Golden City & Starlit Dunes" },
+            { label: "Jhunjhunu", href: "/destinations/jhunjhunu", description: "Shekhawati's Frescoed Havelis" },
+          ],
+        },
+      ],
+    },
     { label: "Celebrations", href: "/celebrations" },
     { label: "Packages", href: "/packages" },
     { label: "Contact", href: "/contact" },

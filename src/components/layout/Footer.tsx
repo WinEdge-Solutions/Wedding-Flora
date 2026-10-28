@@ -71,7 +71,16 @@ export const Footer: React.FC = () => {
             <ul className="space-y-2.5 text-sm font-medium text-ivory/75">
               {siteConfig.navItems.map((item) => (
                 <React.Fragment key={item.label}>
-                  {item.children ? (
+                  {item.groups ? (
+                    <li key={item.href}>
+                      <Link
+                        href={item.href}
+                        className="hover:text-gold transition-colors duration-200"
+                      >
+                        {item.label}
+                      </Link>
+                    </li>
+                  ) : item.children ? (
                     item.children.map((child) => (
                       <li key={child.href}>
                         <Link
