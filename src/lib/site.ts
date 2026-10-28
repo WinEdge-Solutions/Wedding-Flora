@@ -69,6 +69,7 @@ export const siteConfig = {
         },
       ],
     },
+    { label: "Rituals", href: "/rituals" },
     { label: "Celebrations", href: "/celebrations" },
     { label: "Packages", href: "/packages" },
     { label: "Contact", href: "/contact" },

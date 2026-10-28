@@ -250,8 +250,8 @@ export const Navbar: React.FC = () => {
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-12 flex items-center justify-between py-2.5 sm:py-3">
 
         {/* Left nav */}
-        <nav className="hidden md:flex items-center space-x-6 lg:space-x-8" aria-label="Main Navigation">
-          {siteConfig.navItems.slice(0, 3).map((item) =>
+        <nav className="hidden md:flex items-center space-x-4 lg:space-x-6 xl:space-x-7" aria-label="Main Navigation">
+          {siteConfig.navItems.slice(0, 4).map((item) =>
             item.children || item.groups ? (
               <NavItemDropdown key={item.label} item={item} pathname={pathname} />
             ) : (
@@ -285,8 +285,8 @@ export const Navbar: React.FC = () => {
         </Link>
 
         {/* Right nav + CTA */}
-        <div className="hidden md:flex items-center space-x-5 lg:space-x-7">
-          {siteConfig.navItems.slice(3, 6).map((item) =>
+        <div className="hidden md:flex items-center space-x-4 lg:space-x-6 xl:space-x-7">
+          {siteConfig.navItems.slice(4, 7).map((item) =>
             item.children || item.groups ? (
               <NavItemDropdown key={item.label} item={item} pathname={pathname} />
             ) : (
