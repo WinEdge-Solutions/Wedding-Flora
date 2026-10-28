@@ -6,8 +6,17 @@ import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { usePathname } from "next/navigation";
 import { siteConfig, NavItem } from "@/lib/site";
-import { Button } from "@/components/ui/Button";
-import { Menu, X, ChevronDown, Camera, Video } from "lucide-react";
+import {
+  Menu,
+  X,
+  ChevronDown,
+  Camera,
+  Video,
+  Phone,
+  MapPin,
+  MessageCircle,
+  Sparkles,
+} from "lucide-react";
 
 function NavLink({
   href,
@@ -26,19 +35,22 @@ function NavLink({
     <Link
       href={href}
       onClick={onClick}
-      className={`relative uppercase tracking-[0.14em] lg:tracking-[0.15em] xl:tracking-[0.18em] transition-colors duration-200 group/nav ${
+      className={`relative uppercase tracking-[0.13em] lg:tracking-[0.15em] xl:tracking-[0.18em] transition-colors duration-200 group/nav ${
         isMobile
-          ? "py-2.5 px-4 text-sm font-semibold rounded-md flex items-center justify-center " +
-            (isActive ? "text-gold bg-white/[0.06] font-bold" : "text-ivory/80 hover:text-white hover:bg-white/[0.04]")
-          : "text-[11px] xl:text-xs " + (isActive ? "text-ivory font-bold" : "text-ivory/75 hover:text-ivory font-semibold")
+          ? "py-2.5 px-4 text-sm font-semibold rounded-[2px] flex items-center justify-center " +
+            (isActive
+              ? "text-gold bg-white/[0.06] font-bold"
+              : "text-ivory/80 hover:text-white hover:bg-white/[0.04]")
+          : "text-[11px] xl:text-[11.5px] 2xl:text-xs py-1 " +
+            (isActive ? "text-gold font-bold" : "text-ivory/75 hover:text-ivory font-semibold")
       }`}
     >
-      {label}
-      {/* Animated gold underline for desktop */}
+      <span>{label}</span>
+      {/* Refined center-expanding gold gradient underline */}
       {!isMobile && (
         <span
-          className={`absolute -bottom-1 left-0 h-px bg-gradient-to-r from-gold to-gold/30 transition-all duration-300 ${
-            isActive ? "w-full" : "w-0 group-hover/nav:w-full"
+          className={`absolute -bottom-0.5 left-1/2 -translate-x-1/2 h-[1px] bg-gradient-to-r from-transparent via-[#D4AF37] to-transparent transition-all duration-300 pointer-events-none ${
+            isActive ? "w-full opacity-100" : "w-0 opacity-0 group-hover/nav:w-full group-hover/nav:opacity-100"
           }`}
         />
       )}
@@ -103,9 +115,9 @@ function NavItemDropdown({
     >
       <Link
         href={item.href}
-        className={`relative uppercase tracking-[0.14em] lg:tracking-[0.15em] xl:tracking-[0.18em] text-[11px] xl:text-xs transition-colors duration-200 inline-flex items-center gap-1.5 py-1 ${
+        className={`relative uppercase tracking-[0.13em] lg:tracking-[0.15em] xl:tracking-[0.18em] text-[11px] xl:text-[11.5px] 2xl:text-xs transition-colors duration-200 inline-flex items-center gap-1 py-1 ${
           isParentActive
-            ? "text-ivory font-bold"
+            ? "text-gold font-bold"
             : "text-ivory/75 hover:text-ivory font-semibold"
         }`}
       >
@@ -115,12 +127,12 @@ function NavItemDropdown({
           transition={{ duration: 0.2 }}
           className="inline-flex items-center"
         >
-          <ChevronDown size={11} className="text-gold/80" />
+          <ChevronDown size={10} className="text-gold/80" />
         </motion.span>
-        {/* Animated gold underline for desktop */}
+        {/* Refined center-expanding gold gradient underline */}
         <span
-          className={`absolute -bottom-0.5 left-0 h-px bg-gradient-to-r from-gold to-gold/30 transition-all duration-300 ${
-            isParentActive || isOpen ? "w-full" : "w-0 hover:w-full"
+          className={`absolute -bottom-0.5 left-1/2 -translate-x-1/2 h-[1px] bg-gradient-to-r from-transparent via-[#D4AF37] to-transparent transition-all duration-300 pointer-events-none ${
+            isParentActive || isOpen ? "w-full opacity-100" : "w-0 opacity-0 hover:w-full hover:opacity-100"
           }`}
         />
       </Link>
@@ -129,49 +141,55 @@ function NavItemDropdown({
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0, y: 8, scale: 0.98 }}
+            initial={{ opacity: 0, y: 6, scale: 0.98 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 6, scale: 0.98 }}
-            transition={{ duration: 0.18, ease: "easeOut" }}
-            className={`absolute z-50 pt-3 ${
+            exit={{ opacity: 0, y: 4, scale: 0.98 }}
+            transition={{ duration: 0.16, ease: "easeOut" }}
+            className={`absolute z-50 pt-2.5 ${
               item.groups
-                ? "left-1/2 -translate-x-1/2 min-w-[280px]"
-                : "left-1/2 -translate-x-1/2 min-w-[260px]"
+                ? "left-1/2 -translate-x-1/2 min-w-[390px]"
+                : "left-1/2 -translate-x-1/2 min-w-[280px]"
             }`}
           >
             {item.groups ? (
-              <div className="w-72 p-3.5 rounded-xl bg-[#090614]/98 backdrop-blur-2xl border border-gold/35 shadow-[0_20px_50px_rgba(0,0,0,0.85)] ring-1 ring-white/10 flex flex-col">
+              /* Mega-Menu Grid for Destinations */
+              <div className="relative w-[400px] p-3.5 rounded-[3px] bg-[#06040e]/98 backdrop-blur-2xl border border-gold/30 shadow-[0_20px_55px_rgba(0,0,0,0.85)] ring-1 ring-white/[0.08] flex flex-col overflow-hidden">
+                {/* Hairline gold shimmer rim */}
+                <div className="absolute top-0 left-0 right-0 h-[1.5px] bg-gradient-to-r from-transparent via-[#D4AF37] to-transparent pointer-events-none" />
+
                 {item.groups.map((group) => (
                   <div key={group.title} className="flex flex-col">
-                    {/* Category Header as in user's screenshot */}
-                    <div className="pb-2 mb-1.5 border-b border-gold/25 flex items-center justify-between px-1">
-                      <span className="font-display text-[11px] font-bold uppercase tracking-[0.22em] text-[#D4AF37]">
-                        {group.title}
+                    {/* Category Header */}
+                    <div className="pb-2 mb-2 border-b border-gold/20 flex items-center justify-between px-1">
+                      <span className="font-serif text-[11.5px] font-bold uppercase tracking-[0.24em] text-[#D4AF37]">
+                        ✦ {group.title}
                       </span>
                       <span className="text-[9px] uppercase tracking-wider text-ivory/50 font-sans font-semibold">
-                        {group.items.length} Venues
+                        {group.items.length} Royal Venues
                       </span>
                     </div>
 
-                    {/* Cities List matching screenshot vertical flow */}
-                    <div className="flex flex-col space-y-0.5 py-0.5">
+                    {/* 2-Column Cities Grid */}
+                    <div className="grid grid-cols-2 gap-1 py-0.5">
                       {group.items.map((subItem) => {
-                        const isSubActive = pathname === subItem.href;
+                        const isSubActive =
+                          pathname === subItem.href ||
+                          pathname.startsWith(`${subItem.href}/`);
                         return (
                           <Link
                             key={subItem.href}
                             href={subItem.href}
                             onClick={() => setIsOpen(false)}
-                            className={`group/city px-3 py-1.5 rounded-md transition-all duration-200 flex items-center justify-between text-left ${
+                            className={`group/city px-2.5 py-1.5 rounded-[2px] transition-all duration-200 flex items-center justify-between text-left ${
                               isSubActive
-                                ? "bg-white/[0.08] text-gold font-bold"
-                                : "hover:bg-white/[0.05] text-ivory/80 hover:text-white"
+                                ? "bg-white/[0.08] text-gold font-bold border-l-2 border-gold"
+                                : "hover:bg-white/[0.05] text-ivory/80 hover:text-white hover:translate-x-0.5"
                             }`}
                           >
-                            <span className="font-serif text-[15px] tracking-wide group-hover/city:text-gold transition-colors">
+                            <span className="font-serif text-[13.5px] tracking-wide group-hover/city:text-gold transition-colors">
                               {subItem.label}
                             </span>
-                            <span className="text-[10px] text-gold opacity-0 -translate-x-1 group-hover/city:opacity-100 group-hover/city:translate-x-0 transition-all duration-200">
+                            <span className="text-[9px] text-gold opacity-0 -translate-x-1 group-hover/city:opacity-100 group-hover/city:translate-x-0 transition-all duration-200">
                               ✦
                             </span>
                           </Link>
@@ -179,14 +197,14 @@ function NavItemDropdown({
                       })}
                     </div>
 
-                    {/* View All link */}
-                    <div className="pt-2.5 mt-2 border-t border-white/10 px-1">
+                    {/* View All footer link */}
+                    <div className="pt-2.5 mt-2 border-t border-white/10 px-1 flex items-center justify-between">
                       <Link
                         href={item.href}
                         onClick={() => setIsOpen(false)}
-                        className="text-[10px] uppercase tracking-widest text-[#D4AF37] hover:text-white font-bold transition-colors inline-flex items-center gap-1.5"
+                        className="text-[9.5px] uppercase tracking-[0.18em] text-[#D4AF37] hover:text-white font-bold transition-colors inline-flex items-center gap-1.5"
                       >
-                        <span>View All Rajasthan Venues</span>
+                        <span>Explore All Rajasthan Venues</span>
                         <span>→</span>
                       </Link>
                     </div>
@@ -194,7 +212,18 @@ function NavItemDropdown({
                 ))}
               </div>
             ) : (
-              <div className="w-72 p-2.5 rounded-xl bg-[#090614]/98 backdrop-blur-2xl border border-gold/30 shadow-[0_18px_50px_rgba(0,0,0,0.85)] ring-1 ring-white/10 flex flex-col space-y-1">
+              /* Refined Dropdown for About & Gallery */
+              <div className="relative w-72 p-2.5 rounded-[3px] bg-[#06040e]/98 backdrop-blur-2xl border border-gold/30 shadow-[0_20px_55px_rgba(0,0,0,0.85)] ring-1 ring-white/[0.08] flex flex-col space-y-1 overflow-hidden">
+                {/* Hairline gold shimmer rim */}
+                <div className="absolute top-0 left-0 right-0 h-[1.5px] bg-gradient-to-r from-transparent via-[#D4AF37] to-transparent pointer-events-none" />
+
+                {/* Micro Header */}
+                <div className="px-2 pt-1 pb-1.5 border-b border-gold/15 flex items-center justify-between">
+                  <span className="font-serif text-[10px] font-bold uppercase tracking-[0.24em] text-[#D4AF37]">
+                    ✦ {item.label === "Gallery" ? "Visual Archives" : "The Heritage"}
+                  </span>
+                </div>
+
                 {item.children?.map((subItem) => {
                   const isSubActive =
                     pathname === subItem.href ||
@@ -205,26 +234,26 @@ function NavItemDropdown({
                       key={subItem.href}
                       href={subItem.href}
                       onClick={() => setIsOpen(false)}
-                      className={`group/sub flex items-start gap-3 px-3 py-2.5 rounded-lg transition-all duration-200 text-left ${
+                      className={`group/sub flex items-start gap-2.5 px-3 py-2 rounded-[2px] transition-all duration-200 text-left ${
                         isSubActive
                           ? "bg-white/[0.08] border-l-2 border-gold"
-                          : "hover:bg-white/[0.05] hover:border-l-2 hover:border-gold/60 border-l-2 border-transparent"
+                          : "hover:bg-white/[0.05] hover:border-l-2 hover:border-gold/60 border-l-2 border-transparent hover:translate-x-0.5"
                       }`}
                     >
                       {subItem.icon === "camera" && (
-                        <div className="w-7 h-7 rounded-lg bg-gold/10 border border-gold/30 flex items-center justify-center shrink-0 text-gold group-hover/sub:bg-gold group-hover/sub:text-midnight transition-colors mt-0.5">
-                          <Camera size={13} />
+                        <div className="w-6 h-6 rounded-[2px] bg-gold/10 border border-gold/30 flex items-center justify-center shrink-0 text-gold group-hover/sub:bg-gold group-hover/sub:text-midnight transition-colors mt-0.5">
+                          <Camera size={12} />
                         </div>
                       )}
                       {subItem.icon === "video" && (
-                        <div className="w-7 h-7 rounded-lg bg-gold/10 border border-gold/30 flex items-center justify-center shrink-0 text-gold group-hover/sub:bg-gold group-hover/sub:text-midnight transition-colors mt-0.5">
-                          <Video size={13} />
+                        <div className="w-6 h-6 rounded-[2px] bg-gold/10 border border-gold/30 flex items-center justify-center shrink-0 text-gold group-hover/sub:bg-gold group-hover/sub:text-midnight transition-colors mt-0.5">
+                          <Video size={12} />
                         </div>
                       )}
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center justify-between">
                           <span
-                            className={`font-serif text-[15px] tracking-wide transition-colors ${
+                            className={`font-serif text-[14px] tracking-wide transition-colors ${
                               isSubActive
                                 ? "text-gold font-bold"
                                 : "text-ivory group-hover/sub:text-gold font-medium"
@@ -232,12 +261,12 @@ function NavItemDropdown({
                           >
                             {subItem.label}
                           </span>
-                          <span className="text-[10px] text-gold opacity-0 -translate-x-1 group-hover/sub:opacity-100 group-hover/sub:translate-x-0 transition-all duration-200">
+                          <span className="text-[9px] text-gold/60 opacity-0 -translate-x-1 group-hover/sub:opacity-100 group-hover/sub:translate-x-0 transition-all duration-200">
                             ✦
                           </span>
                         </div>
                         {subItem.description && (
-                          <span className="text-[11px] tracking-wide text-ivory/60 font-sans mt-0.5 line-clamp-1 block">
+                          <span className="text-[10px] tracking-normal text-ivory/60 font-sans mt-0.5 line-clamp-1 block">
                             {subItem.description}
                           </span>
                         )}
@@ -245,18 +274,20 @@ function NavItemDropdown({
                     </Link>
                   );
                 })}
-                {item.label === "Gallery" && (
-                  <div className="pt-2 mt-1 border-t border-white/10 px-2">
-                    <Link
-                      href={item.href}
-                      onClick={() => setIsOpen(false)}
-                      className="text-[10px] uppercase tracking-widest text-[#D4AF37] hover:text-white font-bold transition-colors inline-flex items-center justify-between w-full py-1"
-                    >
-                      <span>Explore All Gallery Archives</span>
-                      <span>→</span>
-                    </Link>
-                  </div>
-                )}
+
+                {/* Footer link */}
+                <div className="pt-2 mt-1 border-t border-white/10 px-2">
+                  <Link
+                    href={item.href}
+                    onClick={() => setIsOpen(false)}
+                    className="text-[9.5px] uppercase tracking-[0.18em] text-[#D4AF37] hover:text-white font-bold transition-colors inline-flex items-center justify-between w-full py-1"
+                  >
+                    <span>
+                      {item.label === "Gallery" ? "Explore All Archives" : "Discover Our Story"}
+                    </span>
+                    <span>→</span>
+                  </Link>
+                </div>
               </div>
             )}
           </motion.div>
@@ -268,7 +299,9 @@ function NavItemDropdown({
 
 export const Navbar: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const pathname = usePathname();
+
   const [openMobileDropdown, setOpenMobileDropdown] = useState<string | null>(
     pathname.startsWith("/about")
       ? "About"
@@ -281,87 +314,196 @@ export const Navbar: React.FC = () => {
 
   const closeMobileMenu = () => setMobileMenuOpen(false);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 24);
+    };
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    <header className="sticky top-0 z-50 w-full transition-all duration-300"
-      style={{
-        background: "rgba(3, 3, 8, 0.78)",
-        backdropFilter: "blur(24px) saturate(180%)",
-        WebkitBackdropFilter: "blur(24px) saturate(180%)",
-        borderBottom: "1px solid rgba(212, 175, 55, 0.18)",
-        boxShadow: "0 10px 35px rgba(0, 0, 0, 0.5)",
-      }}
-    >
-      <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 flex items-center justify-between py-2.5 sm:py-3">
-
-        {/* Left nav */}
-        <nav className="hidden lg:flex items-center space-x-3.5 xl:space-x-5" aria-label="Main Navigation">
-          {siteConfig.navItems.slice(0, 4).map((item) =>
-            item.children || item.groups ? (
-              <NavItemDropdown key={item.label} item={item} pathname={pathname} />
-            ) : (
-              <NavLink key={item.href} href={item.href} label={item.label} isActive={pathname === item.href} />
-            )
-          )}
-        </nav>
-
-        {/* Logo */}
-        <Link
-          href="/"
-          className="flex items-center gap-2 sm:gap-3 group focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gold shrink-0"
-        >
-          <div className="relative w-8 h-8 sm:w-11 sm:h-11 shrink-0 transition-transform duration-500 group-hover:scale-105">
-            <Image
-              src="/images/logo-emblem.png"
-              alt="Wedding Flora Crest"
-              fill
-              className="object-contain"
-              priority
-            />
-          </div>
-          <div className="flex flex-col text-left">
-            <span className="font-serif text-lg sm:text-2xl font-semibold tracking-wide text-ivory group-hover:text-gold-gradient transition-colors duration-300 leading-tight">
-              Wedding Flora
+    <header className="sticky top-0 z-50 w-full transition-all duration-300">
+      {/* ── Top Micro-Header for Luxury Heritage Pedigree ── */}
+      <div
+        className={`w-full transition-all duration-300 border-b border-gold/15 bg-black/50 backdrop-blur-md hidden md:block overflow-hidden ${
+          isScrolled ? "max-h-0 opacity-0 py-0 border-transparent" : "max-h-9 opacity-100 py-1.5"
+        }`}
+      >
+        <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 flex items-center justify-between text-[10px] tracking-[0.16em] uppercase text-ivory/70">
+          <div className="flex items-center gap-2">
+            <span className="text-gold text-[9px]">✦</span>
+            <span className="font-serif tracking-[0.18em] text-[#D4AF37] font-semibold">
+              The Royal Wedding Planner
             </span>
-            <span className="text-[8px] sm:text-[10px] uppercase tracking-[0.22em] sm:tracking-[0.25em] text-gold font-bold group-hover:text-gold transition-colors duration-300">
-              The Wedding Planner
-            </span>
+            <span className="text-ivory/30">•</span>
+            <span>Jaipur • Udaipur • Jodhpur • Goa</span>
           </div>
-        </Link>
 
-        {/* Right nav + CTA */}
-        <div className="hidden lg:flex items-center space-x-3 xl:space-x-4">
-          {siteConfig.navItems.slice(4, 9).map((item) =>
-            item.children || item.groups ? (
-              <NavItemDropdown key={item.label} item={item} pathname={pathname} />
-            ) : (
-              <NavLink key={item.href} href={item.href} label={item.label} isActive={pathname === item.href} />
-            )
-          )}
-          <Button href="/contact" size="sm" variant="primary">
-            Enquire
-          </Button>
-        </div>
-
-        {/* Mobile hamburger */}
-        <div className="flex lg:hidden items-center">
-          <button
-            type="button"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="p-2 text-ivory hover:text-gold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold rounded"
-            aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
-            aria-expanded={mobileMenuOpen}
-          >
-            <AnimatePresence mode="wait" initial={false}>
-              {mobileMenuOpen
-                ? <motion.span key="x" initial={{ rotate: -90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: 90, opacity: 0 }} transition={{ duration: 0.2 }}><X size={24} /></motion.span>
-                : <motion.span key="menu" initial={{ rotate: 90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: -90, opacity: 0 }} transition={{ duration: 0.2 }}><Menu size={24} /></motion.span>
-              }
-            </AnimatePresence>
-          </button>
+          <div className="flex items-center gap-4 xl:gap-6 font-sans">
+            <a
+              href={`tel:${siteConfig.contact.phone.replace(/[^0-9+]/g, "")}`}
+              className="hover:text-gold transition-colors flex items-center gap-1.5"
+            >
+              <Phone size={10} className="text-gold" />
+              <span>{siteConfig.contact.phone}</span>
+            </a>
+            <span className="text-white/20">|</span>
+            <a
+              href={siteConfig.contact.whatsapp}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-gold transition-colors flex items-center gap-1.5"
+            >
+              <MessageCircle size={10} className="text-gold" />
+              <span>WhatsApp Concierge</span>
+            </a>
+            <span className="text-white/20">|</span>
+            <a
+              href={siteConfig.contact.mapsUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-gold transition-colors flex items-center gap-1.5"
+            >
+              <MapPin size={10} className="text-gold" />
+              <span>Adarsh Nagar, Jaipur</span>
+            </a>
+          </div>
         </div>
       </div>
 
-      {/* Mobile drawer */}
+      {/* ── Main Navigation Bar ── */}
+      <div
+        className={`w-full transition-all duration-300 relative ${
+          isScrolled
+            ? "bg-[#04030a]/94 backdrop-blur-2xl shadow-[0_12px_45px_rgba(0,0,0,0.7)] border-b border-[#D4AF37]/25"
+            : "bg-[#04030a]/78 backdrop-blur-xl border-b border-[#D4AF37]/15"
+        }`}
+      >
+        {/* Hairline ambient shimmer lines */}
+        <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[#D4AF37]/35 to-transparent pointer-events-none" />
+        <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[#D4AF37]/25 to-transparent pointer-events-none" />
+
+        <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 flex items-center justify-between py-2 sm:py-2.5">
+          {/* ── Left Nav ── */}
+          <nav
+            className="hidden lg:flex items-center space-x-3 lg:space-x-4 xl:space-x-5"
+            aria-label="Primary Left Navigation"
+          >
+            {siteConfig.navItems.slice(0, 4).map((item) =>
+              item.children || item.groups ? (
+                <NavItemDropdown key={item.label} item={item} pathname={pathname} />
+              ) : (
+                <NavLink
+                  key={item.href}
+                  href={item.href}
+                  label={item.label}
+                  isActive={pathname === item.href}
+                />
+              )
+            )}
+          </nav>
+
+          {/* ── Central Royal Monogram & Crest ── */}
+          <Link
+            href="/"
+            className="flex items-center gap-2.5 sm:gap-3 group focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gold shrink-0 py-0.5"
+            aria-label="Wedding Flora Home"
+          >
+            <div className="relative w-8 h-8 sm:w-10 sm:h-10 shrink-0 transition-transform duration-500 group-hover:scale-105">
+              {/* Ambient radial gold halo behind crest */}
+              <div className="absolute -inset-1 bg-gradient-to-r from-gold/20 via-gold/10 to-transparent rounded-full blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+              <Image
+                src="/images/logo-emblem.png"
+                alt="Wedding Flora Crest"
+                fill
+                className="object-contain relative z-10"
+                priority
+              />
+            </div>
+            <div className="flex flex-col text-left">
+              <span className="font-serif text-lg sm:text-[22px] font-semibold tracking-[0.04em] text-ivory group-hover:text-gold-gradient transition-colors duration-300 leading-none">
+                Wedding Flora
+              </span>
+              <span className="text-[7.5px] sm:text-[8.5px] uppercase tracking-[0.28em] text-[#D4AF37] font-semibold mt-1 transition-colors">
+                The Wedding Planner
+              </span>
+            </div>
+          </Link>
+
+          {/* ── Right Nav + Elegant CTA ── */}
+          <div className="hidden lg:flex items-center space-x-3 lg:space-x-4 xl:space-x-4">
+            {siteConfig.navItems.slice(4, 9).map((item) =>
+              item.children || item.groups ? (
+                <NavItemDropdown key={item.label} item={item} pathname={pathname} />
+              ) : (
+                <NavLink
+                  key={item.href}
+                  href={item.href}
+                  label={item.label}
+                  isActive={pathname === item.href}
+                />
+              )
+            )}
+
+            {/* Bespoke Luxury CTA Badge */}
+            <Link
+              href="/contact"
+              className="relative group inline-flex items-center justify-center px-4 xl:px-4.5 py-1.5 text-[10px] xl:text-[10.5px] font-sans font-bold uppercase tracking-[0.2em] rounded-[2px] transition-all duration-300 overflow-hidden shadow-[0_0_15px_rgba(212,175,55,0.2)] hover:shadow-[0_0_25px_rgba(212,175,55,0.45)] hover:-translate-y-0.5 active:translate-y-0 border border-gold/60"
+              style={{
+                background: "linear-gradient(135deg, #FAF7F2 0%, #D4AF37 55%, #AB9178 100%)",
+                color: "#08040a",
+              }}
+            >
+              <span className="relative z-10 flex items-center gap-1.5">
+                <span>Enquire</span>
+                <span className="text-[9px] text-[#08040a] transition-transform duration-300 group-hover:translate-x-0.5">
+                  ✦
+                </span>
+              </span>
+              <span className="absolute inset-0 bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+            </Link>
+          </div>
+
+          {/* ── Mobile Hamburger Toggle ── */}
+          <div className="flex lg:hidden items-center">
+            <button
+              type="button"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="p-2 text-ivory hover:text-gold transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gold rounded-[2px]"
+              aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
+              aria-expanded={mobileMenuOpen}
+            >
+              <AnimatePresence mode="wait" initial={false}>
+                {mobileMenuOpen ? (
+                  <motion.span
+                    key="x"
+                    initial={{ rotate: -90, opacity: 0 }}
+                    animate={{ rotate: 0, opacity: 1 }}
+                    exit={{ rotate: 90, opacity: 0 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <X size={22} className="text-gold" />
+                  </motion.span>
+                ) : (
+                  <motion.span
+                    key="menu"
+                    initial={{ rotate: 90, opacity: 0 }}
+                    animate={{ rotate: 0, opacity: 1 }}
+                    exit={{ rotate: -90, opacity: 0 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <Menu size={22} />
+                  </motion.span>
+                )}
+              </AnimatePresence>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* ── Mobile Navigation Drawer ── */}
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
@@ -369,22 +511,39 @@ export const Navbar: React.FC = () => {
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-            className="lg:hidden overflow-hidden border-b border-gold/20"
-            style={{ background: "rgba(5, 4, 12, 0.98)", backdropFilter: "blur(25px)" }}
+            className="lg:hidden overflow-hidden border-b border-gold/25"
+            style={{
+              background: "rgba(5, 3, 10, 0.98)",
+              backdropFilter: "blur(28px)",
+              WebkitBackdropFilter: "blur(28px)",
+            }}
           >
             <nav className="flex flex-col space-y-2 text-center px-4 pt-4 pb-6">
-              <div className="flex items-center justify-center gap-2 pb-3 mb-2 border-b border-gold/15">
+              {/* Mobile Header Branding */}
+              <div className="flex items-center justify-center gap-2.5 pb-3 mb-2 border-b border-gold/15">
                 <div className="relative w-7 h-7 shrink-0">
-                  <Image src="/images/logo-emblem.png" alt="Wedding Flora Emblem" fill className="object-contain" />
+                  <Image
+                    src="/images/logo-emblem.png"
+                    alt="Wedding Flora Emblem"
+                    fill
+                    className="object-contain"
+                  />
                 </div>
                 <div className="text-left">
-                  <span className="font-serif text-base font-semibold text-ivory block leading-none">Wedding Flora</span>
-                  <span className="text-[7.5px] uppercase tracking-[0.2em] text-[#D4AF37] font-bold">The Wedding Planner</span>
+                  <span className="font-serif text-base font-semibold text-ivory block leading-none">
+                    Wedding Flora
+                  </span>
+                  <span className="text-[7.5px] uppercase tracking-[0.24em] text-[#D4AF37] font-semibold">
+                    The Wedding Planner
+                  </span>
                 </div>
               </div>
+
+              {/* Mobile Navigation List */}
               {siteConfig.navItems.map((item) => {
                 const hasChildren = Boolean(item.children && item.children.length > 0);
                 const hasGroups = Boolean(item.groups && item.groups.length > 0);
+
                 if (hasChildren || hasGroups) {
                   const isExpanded = openMobileDropdown === item.label;
                   return (
@@ -392,21 +551,24 @@ export const Navbar: React.FC = () => {
                       <button
                         type="button"
                         onClick={() => setOpenMobileDropdown(isExpanded ? null : item.label)}
-                        className={`py-2.5 px-4 text-sm font-semibold rounded-md flex items-center justify-center gap-2 uppercase tracking-[0.2em] w-full transition-colors ${
+                        className={`py-2.5 px-4 text-xs font-semibold rounded-[2px] flex items-center justify-between uppercase tracking-[0.18em] w-full transition-colors ${
                           pathname.startsWith(item.href)
-                            ? "text-gold bg-white/[0.06]"
+                            ? "text-gold bg-white/[0.06] font-bold"
                             : "text-ivory/80 hover:text-white hover:bg-white/[0.04]"
                         }`}
                         aria-expanded={isExpanded}
                       >
-                        <span>{item.label}</span>
+                        <span className="flex items-center gap-1.5">
+                          <span>{item.label}</span>
+                        </span>
                         <ChevronDown
-                          size={14}
+                          size={13}
                           className={`text-gold transition-transform duration-300 ${
                             isExpanded ? "rotate-180" : ""
                           }`}
                         />
                       </button>
+
                       <AnimatePresence>
                         {isExpanded && (
                           <motion.div
@@ -418,28 +580,33 @@ export const Navbar: React.FC = () => {
                           >
                             {hasGroups
                               ? item.groups?.map((group) => (
-                                  <div key={group.title} className="flex flex-col space-y-1 pt-1 pb-1">
-                                    <span className="text-[10px] uppercase tracking-[0.25em] text-[#D4AF37] font-bold px-6 py-1">
+                                  <div
+                                    key={group.title}
+                                    className="flex flex-col space-y-1 pt-1 pb-1"
+                                  >
+                                    <span className="text-[9.5px] uppercase tracking-[0.25em] text-[#D4AF37] font-bold px-6 py-1 text-left">
                                       ✦ {group.title}
                                     </span>
-                                    {group.items.map((subItem) => {
-                                      const isSubActive = pathname === subItem.href;
-                                      return (
-                                        <Link
-                                          key={subItem.href}
-                                          href={subItem.href}
-                                          onClick={closeMobileMenu}
-                                          className={`py-2 px-8 rounded-md text-xs uppercase tracking-[0.16em] flex items-center justify-between transition-colors ${
-                                            isSubActive
-                                              ? "text-gold bg-white/[0.08] font-bold"
-                                              : "text-ivory/70 hover:text-ivory hover:bg-white/[0.04] font-medium"
-                                          }`}
-                                        >
-                                          <span>{subItem.label}</span>
-                                          <span className="text-gold text-[10px]">✦</span>
-                                        </Link>
-                                      );
-                                    })}
+                                    <div className="grid grid-cols-2 gap-1 px-4">
+                                      {group.items.map((subItem) => {
+                                        const isSubActive = pathname === subItem.href;
+                                        return (
+                                          <Link
+                                            key={subItem.href}
+                                            href={subItem.href}
+                                            onClick={closeMobileMenu}
+                                            className={`py-2 px-3 rounded-[2px] text-xs uppercase tracking-[0.14em] flex items-center justify-between transition-colors ${
+                                              isSubActive
+                                                ? "text-gold bg-white/[0.08] font-bold"
+                                                : "text-ivory/70 hover:text-ivory hover:bg-white/[0.04] font-medium"
+                                            }`}
+                                          >
+                                            <span className="truncate">{subItem.label}</span>
+                                            <span className="text-gold text-[9px]">✦</span>
+                                          </Link>
+                                        );
+                                      })}
+                                    </div>
                                   </div>
                                 ))
                               : (
@@ -448,37 +615,40 @@ export const Navbar: React.FC = () => {
                                       const isSubActive =
                                         pathname === subItem.href ||
                                         pathname.startsWith(`${subItem.href}/`) ||
-                                        (subItem.href.includes("?") && pathname === subItem.href.split("?")[0]);
+                                        (subItem.href.includes("?") &&
+                                          pathname === subItem.href.split("?")[0]);
                                       return (
                                         <Link
                                           key={subItem.href}
                                           href={subItem.href}
                                           onClick={closeMobileMenu}
-                                          className={`py-2 px-6 rounded-md text-xs uppercase tracking-[0.16em] flex items-center justify-between transition-colors ${
+                                          className={`py-2 px-6 rounded-[2px] text-xs uppercase tracking-[0.15em] flex items-center justify-between transition-colors ${
                                             isSubActive
                                               ? "text-gold bg-white/[0.08] font-bold"
                                               : "text-ivory/70 hover:text-ivory hover:bg-white/[0.04] font-medium"
                                           }`}
                                         >
-                                          <div className="flex items-center gap-2.5">
-                                            {subItem.icon === "camera" && <Camera size={13} className="text-gold" />}
-                                            {subItem.icon === "video" && <Video size={13} className="text-gold" />}
+                                          <div className="flex items-center gap-2">
+                                            {subItem.icon === "camera" && (
+                                              <Camera size={13} className="text-gold" />
+                                            )}
+                                            {subItem.icon === "video" && (
+                                              <Video size={13} className="text-gold" />
+                                            )}
                                             <span>{subItem.label}</span>
                                           </div>
-                                          <span className="text-gold text-[10px]">✦</span>
+                                          <span className="text-gold text-[9px]">✦</span>
                                         </Link>
                                       );
                                     })}
-                                    {item.label === "Gallery" && (
-                                      <Link
-                                        href={item.href}
-                                        onClick={closeMobileMenu}
-                                        className="py-1.5 px-6 text-[10px] uppercase tracking-widest text-[#D4AF37] hover:text-white font-bold flex items-center justify-center gap-1.5 pt-1"
-                                      >
-                                        <span>View All Archives</span>
-                                        <span>→</span>
-                                      </Link>
-                                    )}
+                                    <Link
+                                      href={item.href}
+                                      onClick={closeMobileMenu}
+                                      className="py-1.5 px-6 text-[9.5px] uppercase tracking-widest text-[#D4AF37] hover:text-white font-bold flex items-center justify-center gap-1.5 pt-1"
+                                    >
+                                      <span>View All {item.label}</span>
+                                      <span>→</span>
+                                    </Link>
                                   </>
                                 )}
                           </motion.div>
@@ -487,6 +657,7 @@ export const Navbar: React.FC = () => {
                     </div>
                   );
                 }
+
                 return (
                   <NavLink
                     key={item.href}
@@ -498,10 +669,41 @@ export const Navbar: React.FC = () => {
                   />
                 );
               })}
-              <div className="pt-3">
-                <Button href="/contact" variant="primary" fullWidth size="md" onClick={closeMobileMenu}>
-                  Enquire Now
-                </Button>
+
+              {/* Mobile Concierge Action Bar */}
+              <div className="pt-3 grid grid-cols-2 gap-2 border-t border-gold/15 mt-2">
+                <a
+                  href={`tel:${siteConfig.contact.phone.replace(/[^0-9+]/g, "")}`}
+                  className="py-2.5 px-3 rounded-[2px] bg-white/[0.04] border border-gold/30 text-xs font-semibold text-ivory hover:text-gold flex items-center justify-center gap-1.5"
+                >
+                  <Phone size={12} className="text-gold" />
+                  <span>Call Us</span>
+                </a>
+                <a
+                  href={siteConfig.contact.whatsapp}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="py-2.5 px-3 rounded-[2px] bg-white/[0.04] border border-gold/30 text-xs font-semibold text-ivory hover:text-gold flex items-center justify-center gap-1.5"
+                >
+                  <MessageCircle size={12} className="text-gold" />
+                  <span>WhatsApp</span>
+                </a>
+              </div>
+
+              {/* Primary Mobile CTA */}
+              <div className="pt-2">
+                <Link
+                  href="/contact"
+                  onClick={closeMobileMenu}
+                  className="w-full py-3 px-4 rounded-[2px] text-xs font-sans font-bold uppercase tracking-[0.2em] flex items-center justify-center gap-2 border border-gold/60 shadow-[0_0_20px_rgba(212,175,55,0.3)]"
+                  style={{
+                    background: "linear-gradient(135deg, #FAF7F2 0%, #D4AF37 55%, #AB9178 100%)",
+                    color: "#08040a",
+                  }}
+                >
+                  <Sparkles size={14} />
+                  <span>Book Private Consultation</span>
+                </Link>
               </div>
             </nav>
           </motion.div>
