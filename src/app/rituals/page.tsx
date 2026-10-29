@@ -57,7 +57,7 @@ export default function RitualsPage() {
       {/* ── Quick Jump Bar ── */}
       <nav
         aria-label="Rituals Quick Jump"
-        className="sticky top-[68px] z-30 bg-[#090614]/90 backdrop-blur-xl border-b border-gold/20 py-2.5 overflow-x-auto no-scrollbar shadow-lg"
+        className="sticky top-[64px] z-30 bg-[#090614]/90 backdrop-blur-xl border-b border-gold/20 py-2.5 overflow-x-auto no-scrollbar shadow-lg"
       >
         <Container>
           <div className="flex items-center justify-start sm:justify-center gap-3 min-w-max px-2">
@@ -66,19 +66,19 @@ export default function RitualsPage() {
             </span>
             <a
               href="#planning-process"
-              className="px-4 py-1.5 rounded-full text-xs font-semibold text-ivory/85 bg-white/[0.04] border border-white/10 hover:border-gold hover:text-gold hover:bg-gold/10 transition-all duration-200 whitespace-nowrap"
+              className="px-4 py-1.5 rounded-[2px] text-xs font-semibold text-ivory/85 bg-white/[0.04] border border-white/10 hover:border-gold hover:text-gold hover:bg-gold/10 transition-all duration-200 whitespace-nowrap"
             >
               The 7-Step Planning Process
             </a>
             <a
               href="#sacred-rituals"
-              className="px-4 py-1.5 rounded-full text-xs font-semibold text-ivory/85 bg-white/[0.04] border border-white/10 hover:border-gold hover:text-gold hover:bg-gold/10 transition-all duration-200 whitespace-nowrap"
+              className="px-4 py-1.5 rounded-[2px] text-xs font-semibold text-ivory/85 bg-white/[0.04] border border-white/10 hover:border-gold hover:text-gold hover:bg-gold/10 transition-all duration-200 whitespace-nowrap"
             >
               Sacred Ceremonies We Curate
             </a>
             <a
               href="#faqs"
-              className="px-4 py-1.5 rounded-full text-xs font-semibold text-ivory/85 bg-white/[0.04] border border-white/10 hover:border-gold hover:text-gold hover:bg-gold/10 transition-all duration-200 whitespace-nowrap"
+              className="px-4 py-1.5 rounded-[2px] text-xs font-semibold text-ivory/85 bg-white/[0.04] border border-white/10 hover:border-gold hover:text-gold hover:bg-gold/10 transition-all duration-200 whitespace-nowrap"
             >
               Rituals &amp; Timing FAQ
             </a>

@@ -39,7 +39,7 @@ export const PlanningProcessSection: React.FC = () => {
                   isEven ? "lg:order-2" : "lg:order-1"
                 }`}
               >
-                <div className="relative aspect-[4/3] rounded-2xl overflow-hidden border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.5)] group bg-white/5">
+                <div className="relative aspect-[4/3] rounded-[3px] overflow-hidden border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.5)] group bg-white/5">
                   <Image
                     src={step.image}
                     alt={step.alt}

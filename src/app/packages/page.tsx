@@ -93,7 +93,7 @@ export default function PackagesPage() {
             {packagesData.map((pkg) => (
               <div
                 key={pkg.id}
-                className={`relative rounded-3xl p-5 sm:p-7 flex flex-col justify-between transition-all duration-300 ${
+                className={`relative rounded-[3px] p-5 sm:p-7 flex flex-col justify-between transition-all duration-300 ${
                   pkg.recommended
                     ? "bg-[#090614]/80 backdrop-blur-xl border-2 border-gold shadow-[0_20px_50px_rgba(212,175,55,0.25)] md:-translate-y-3"
                     : "bg-[#090614]/60 backdrop-blur-xl border border-white/10 hover:border-gold/60 hover:shadow-2xl"
@@ -117,7 +117,7 @@ export default function PackagesPage() {
                   </div>
 
                   {/* Pricing Badge with ₹ XXXX */}
-                  <div className="p-4 rounded-xl bg-white/[0.04] border border-white/10 shadow-sm">
+                  <div className="p-4 rounded-[3px] bg-white/[0.04] border border-white/10 shadow-sm">
                     <span className="text-xs uppercase tracking-wider text-ivory/60 block font-semibold">
                       Package Investment
                     </span>
@@ -179,7 +179,7 @@ export default function PackagesPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pt-4">
             {bespokeAddons.map((addon, aIdx) => (
-              <div key={aIdx} className="p-6 rounded-2xl bg-[#090614]/70 backdrop-blur-xl border border-white/10 hover:border-gold/50 shadow-md space-y-2.5 transition-all duration-300">
+              <div key={aIdx} className="p-6 rounded-[3px] bg-[#090614]/70 backdrop-blur-xl border border-white/10 hover:border-gold/50 shadow-md space-y-2.5 transition-all duration-300">
                 <div className="flex items-center gap-2 text-gold">
                   <Sparkles className="w-4 h-4" />
                   <span className="text-xs uppercase tracking-widest text-[#D4AF37] font-bold">Add-on 0{aIdx + 1}</span>
@@ -208,7 +208,7 @@ export default function PackagesPage() {
 
           <div className="space-y-6 pt-4">
             {faqs.map((faq, fIdx) => (
-              <div key={fIdx} className="p-6 rounded-2xl bg-[#090614]/70 backdrop-blur-xl border border-white/10 hover:border-gold/40 space-y-2 transition-all duration-300">
+              <div key={fIdx} className="p-6 rounded-[3px] bg-[#090614]/70 backdrop-blur-xl border border-white/10 hover:border-gold/40 space-y-2 transition-all duration-300">
                 <h4 className="font-serif text-lg sm:text-xl font-semibold text-ivory flex items-start gap-2.5">
                   <HelpCircle className="w-5 h-5 text-gold shrink-0 mt-0.5" />
                   <span>{faq.q}</span>

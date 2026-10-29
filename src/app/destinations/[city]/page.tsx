@@ -116,7 +116,7 @@ export default async function CityDestinationPage({
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
             {/* Visual Column */}
             <div className="lg:col-span-5">
-              <div className="relative aspect-[4/3] rounded-2xl overflow-hidden border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.5)] group">
+              <div className="relative aspect-[4/3] rounded-[3px] overflow-hidden border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.5)] group">
                 <Image
                   src={destination.imageUrl}
                   alt={`${destination.name} Royal Wedding Celebration`}

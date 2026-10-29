@@ -110,7 +110,7 @@ export default async function BlogPostPage({
       <Section variant="charcoal">
         <Container size="narrow" className="space-y-10 sm:space-y-12">
           {/* Main Hero Image */}
-          <div className="relative aspect-[16/9] rounded-2xl overflow-hidden border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.6)]">
+          <div className="relative aspect-[16/9] rounded-[3px] overflow-hidden border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.6)]">
             <Image
               src={post.coverImage}
               alt={post.title}
@@ -139,7 +139,7 @@ export default async function BlogPostPage({
                 ))}
 
                 {block.callout && (
-                  <div className="p-5 sm:p-6 rounded-2xl bg-gold/10 border-l-4 border-gold border-y border-r border-gold/20 my-6">
+                  <div className="p-5 sm:p-6 rounded-[3px] bg-gold/10 border-l-4 border-gold border-y border-r border-gold/20 my-6">
                     <p className="text-xs sm:text-sm text-ivory font-medium leading-relaxed italic">
                       {block.callout}
                     </p>
@@ -164,7 +164,7 @@ export default async function BlogPostPage({
           </div>
 
           {/* Consultation Box inside Article */}
-          <div className="p-6 sm:p-8 rounded-2xl bg-[#06040e]/80 border border-gold/40 shadow-xl space-y-4 text-center">
+          <div className="p-6 sm:p-8 rounded-[3px] bg-[#06040e]/80 border border-gold/40 shadow-xl space-y-4 text-center">
             <Sparkles className="w-6 h-6 text-gold mx-auto" />
             <h3 className="font-serif text-xl sm:text-2xl font-bold text-ivory">
               Planning a Destination Wedding with These Requirements?

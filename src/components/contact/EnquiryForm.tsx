@@ -51,7 +51,7 @@ export const EnquiryForm: React.FC = () => {
 
   if (isSubmitted) {
     return (
-      <div className="p-8 sm:p-12 rounded-3xl bg-[#090614]/80 backdrop-blur-xl border-2 border-gold/40 shadow-[0_20px_50px_rgba(212,175,55,0.2)] text-center space-y-6">
+      <div className="p-8 sm:p-12 rounded-[3px] bg-[#090614]/80 backdrop-blur-xl border-2 border-gold/40 shadow-[0_20px_50px_rgba(212,175,55,0.2)] text-center space-y-6">
         <div className="w-16 h-16 mx-auto rounded-full bg-gold/15 text-gold flex items-center justify-center">
           <CheckCircle2 className="w-10 h-10 text-gold" />
         </div>
@@ -101,7 +101,7 @@ export const EnquiryForm: React.FC = () => {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="p-5 sm:p-10 rounded-3xl bg-[#090614]/75 backdrop-blur-xl border border-white/10 shadow-[0_20px_60px_rgba(0,0,0,0.5)] space-y-5 sm:space-y-6">
+    <form onSubmit={handleSubmit} className="p-5 sm:p-10 rounded-[3px] bg-[#090614]/75 backdrop-blur-xl border border-white/10 shadow-[0_20px_60px_rgba(0,0,0,0.5)] space-y-5 sm:space-y-6">
       <div className="space-y-1 border-b border-white/10 pb-4">
         <div className="flex items-center gap-1.5 text-gold text-xs font-bold uppercase tracking-wider">
           <Sparkles className="w-4 h-4" />
@@ -115,7 +115,7 @@ export const EnquiryForm: React.FC = () => {
         </p>
 
         {formData.venue && (
-          <div className="mt-3 p-3 rounded-lg bg-gold/15 border border-gold/40 flex items-center justify-between">
+          <div className="mt-3 p-3 rounded-[3px] bg-gold/15 border border-gold/40 flex items-center justify-between">
             <div className="flex items-center gap-2 text-xs text-gold font-bold">
               <span>✦</span>
               <span>
@@ -145,7 +145,7 @@ export const EnquiryForm: React.FC = () => {
             placeholder="e.g. Aanya Sharma"
             value={formData.fullName}
             onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
-            className="w-full px-4 py-3 rounded-lg bg-white/[0.04] border border-white/15 text-ivory placeholder-white/40 text-sm font-medium focus:outline-none focus:ring-1 focus:ring-gold focus:border-gold"
+            className="w-full px-4 py-3 rounded-[3px] bg-white/[0.04] border border-white/15 text-ivory placeholder-white/40 text-sm font-medium focus:outline-none focus:ring-1 focus:ring-gold focus:border-gold"
           />
         </div>
 
@@ -159,7 +159,7 @@ export const EnquiryForm: React.FC = () => {
             placeholder="e.g. Kabir Singhania"
             value={formData.partnerName}
             onChange={(e) => setFormData({ ...formData, partnerName: e.target.value })}
-            className="w-full px-4 py-3 rounded-lg bg-white/[0.04] border border-white/15 text-ivory placeholder-white/40 text-sm font-medium focus:outline-none focus:ring-1 focus:ring-gold focus:border-gold"
+            className="w-full px-4 py-3 rounded-[3px] bg-white/[0.04] border border-white/15 text-ivory placeholder-white/40 text-sm font-medium focus:outline-none focus:ring-1 focus:ring-gold focus:border-gold"
           />
         </div>
 
@@ -174,7 +174,7 @@ export const EnquiryForm: React.FC = () => {
             placeholder="name@domain.com"
             value={formData.email}
             onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-            className="w-full px-4 py-3 rounded-lg bg-white/[0.04] border border-white/15 text-ivory placeholder-white/40 text-sm font-medium focus:outline-none focus:ring-1 focus:ring-gold focus:border-gold"
+            className="w-full px-4 py-3 rounded-[3px] bg-white/[0.04] border border-white/15 text-ivory placeholder-white/40 text-sm font-medium focus:outline-none focus:ring-1 focus:ring-gold focus:border-gold"
           />
         </div>
 
@@ -189,7 +189,7 @@ export const EnquiryForm: React.FC = () => {
             placeholder="+91 63671 25514"
             value={formData.phone}
             onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-            className="w-full px-4 py-3 rounded-lg bg-white/[0.04] border border-white/15 text-ivory placeholder-white/40 text-sm font-medium focus:outline-none focus:ring-1 focus:ring-gold focus:border-gold"
+            className="w-full px-4 py-3 rounded-[3px] bg-white/[0.04] border border-white/15 text-ivory placeholder-white/40 text-sm font-medium focus:outline-none focus:ring-1 focus:ring-gold focus:border-gold"
           />
         </div>
 
@@ -204,7 +204,7 @@ export const EnquiryForm: React.FC = () => {
             placeholder="e.g. Nov 2025 / Winter Season"
             value={formData.weddingDate}
             onChange={(e) => setFormData({ ...formData, weddingDate: e.target.value })}
-            className="w-full px-4 py-3 rounded-lg bg-white/[0.04] border border-white/15 text-ivory placeholder-white/40 text-sm font-medium focus:outline-none focus:ring-1 focus:ring-gold focus:border-gold"
+            className="w-full px-4 py-3 rounded-[3px] bg-white/[0.04] border border-white/15 text-ivory placeholder-white/40 text-sm font-medium focus:outline-none focus:ring-1 focus:ring-gold focus:border-gold"
           />
         </div>
 
@@ -216,7 +216,7 @@ export const EnquiryForm: React.FC = () => {
           <select
             value={formData.destination}
             onChange={(e) => setFormData({ ...formData, destination: e.target.value })}
-            className="w-full px-4 py-3 rounded-lg bg-[#090614] border border-white/15 text-ivory text-sm font-medium focus:outline-none focus:ring-1 focus:ring-gold focus:border-gold"
+            className="w-full px-4 py-3 rounded-[3px] bg-[#090614] border border-white/15 text-ivory text-sm font-medium focus:outline-none focus:ring-1 focus:ring-gold focus:border-gold"
           >
             <option value="Jaipur">Jaipur (Pink City Palaces &amp; Fortresses)</option>
             <option value="Udaipur">Udaipur (Lake Palaces &amp; Island Venues)</option>
@@ -240,7 +240,7 @@ export const EnquiryForm: React.FC = () => {
           <select
             value={formData.guestCount}
             onChange={(e) => setFormData({ ...formData, guestCount: e.target.value })}
-            className="w-full px-4 py-3 rounded-lg bg-[#090614] border border-white/15 text-ivory text-sm font-medium focus:outline-none focus:ring-1 focus:ring-gold focus:border-gold"
+            className="w-full px-4 py-3 rounded-[3px] bg-[#090614] border border-white/15 text-ivory text-sm font-medium focus:outline-none focus:ring-1 focus:ring-gold focus:border-gold"
           >
             <option value="Under 150">Under 150 Guests (Intimate Royal)</option>
             <option value="150 - 300">150 - 300 Guests</option>
@@ -257,7 +257,7 @@ export const EnquiryForm: React.FC = () => {
           <select
             value={formData.packageChoice}
             onChange={(e) => setFormData({ ...formData, packageChoice: e.target.value })}
-            className="w-full px-4 py-3 rounded-lg bg-[#090614] border border-white/15 text-ivory text-sm font-medium focus:outline-none focus:ring-1 focus:ring-gold focus:border-gold"
+            className="w-full px-4 py-3 rounded-[3px] bg-[#090614] border border-white/15 text-ivory text-sm font-medium focus:outline-none focus:ring-1 focus:ring-gold focus:border-gold"
           >
             <option value="complete-regal-wedding">The Complete Regal Palace Wedding Experience</option>
             <option value="royal-mandap-scenography">The Royal Mandap &amp; Scenography Suite</option>
@@ -278,7 +278,7 @@ export const EnquiryForm: React.FC = () => {
           placeholder="e.g. Planning a 3-day wedding with Sangeet concert, floating mandap, and 350 traveling guests..."
           value={formData.message}
           onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-          className="w-full px-4 py-3 rounded-lg bg-white/[0.04] border border-white/15 text-ivory placeholder-white/40 text-sm font-medium focus:outline-none focus:ring-1 focus:ring-gold focus:border-gold"
+          className="w-full px-4 py-3 rounded-[3px] bg-white/[0.04] border border-white/15 text-ivory placeholder-white/40 text-sm font-medium focus:outline-none focus:ring-1 focus:ring-gold focus:border-gold"
         />
       </div>
 
