@@ -28,6 +28,15 @@ const fadeUp = {
 export const Hero: React.FC = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const textContentRef = useRef<HTMLDivElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+    video.muted = true;
+    video.defaultMuted = true;
+    video.play().catch(() => {});
+  }, []);
 
   /* ── Scroll-driven parallax + fade ────────────────── */
   const { scrollY } = useScroll();
@@ -84,12 +93,13 @@ export const Hero: React.FC = () => {
           className="relative w-full h-full will-change-transform"
         >
           <video
+            ref={videoRef}
             autoPlay
             loop
             muted
             playsInline
             preload="auto"
-            poster="/images/hero-bg.jpg"
+            
             className="absolute inset-0 w-full h-full object-cover object-center filter brightness-[0.82] contrast-[1.08] saturate-[1.12]"
           >
             <source src="/videos/hero-bg.mp4" type="video/mp4" />
