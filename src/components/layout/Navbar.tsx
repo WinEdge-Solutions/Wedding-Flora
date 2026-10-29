@@ -74,13 +74,13 @@ function NavLink({
     <Link
       href={href}
       onClick={onClick}
-      className={`relative uppercase tracking-[0.13em] lg:tracking-[0.15em] xl:tracking-[0.18em] transition-colors duration-200 group/nav ${
+      className={`relative uppercase transition-colors duration-200 group/nav ${
         isMobile
-          ? "py-3 px-4 text-sm font-semibold rounded-[2px] flex items-center justify-center " +
+          ? "w-full py-3 px-4 text-xs font-semibold tracking-[0.18em] rounded-[2px] flex items-center justify-between " +
             (isActive
               ? "text-gold bg-white/[0.06] font-bold"
               : "text-ivory/80 hover:text-white hover:bg-white/[0.04]")
-          : "inline-flex items-center justify-center h-7 leading-none text-[11px] xl:text-[11.5px] 2xl:text-xs " +
+          : "inline-flex items-center justify-center h-7 leading-none tracking-[0.13em] lg:tracking-[0.15em] xl:tracking-[0.18em] text-[11px] xl:text-[11.5px] 2xl:text-xs " +
             (isActive ? "text-gold font-bold" : "text-ivory/75 hover:text-ivory font-semibold")
       }`}
     >
@@ -582,7 +582,7 @@ export const Navbar: React.FC = () => {
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-            className="lg:hidden overflow-hidden border-b border-gold/25"
+            className="lg:hidden max-h-[calc(100dvh-64px)] overflow-y-auto overscroll-contain border-b border-gold/25"
             style={{
               background: "rgba(5, 3, 10, 0.98)",
               backdropFilter: "blur(28px)",
@@ -593,28 +593,8 @@ export const Navbar: React.FC = () => {
               id="mobile-nav"
               role="navigation"
               aria-label="Mobile Navigation"
-              className="flex flex-col space-y-1 text-center px-4 pt-4 pb-6"
+              className="flex flex-col space-y-1 text-left px-4 pt-3 pb-6"
             >
-              {/* Mobile Header Branding */}
-              <div className="flex items-center justify-center gap-2.5 pb-3 mb-2 border-b border-gold/15">
-                <div className="relative w-7 h-7 shrink-0">
-                  <Image
-                    src="/images/logo-emblem.png"
-                    alt="Wedding Flora Emblem"
-                    fill
-                    className="object-contain"
-                  />
-                </div>
-                <div className="text-left">
-                  <span className="font-serif text-base font-semibold text-ivory block leading-none">
-                    Wedding Flora
-                  </span>
-                  <span className="text-[7.5px] uppercase tracking-[0.24em] text-[#D4AF37] font-semibold">
-                    The Wedding Planner
-                  </span>
-                </div>
-              </div>
-
               {/* Mobile Navigation List */}
               {siteConfig.navItems.map((item) => {
                 const hasChildren = Boolean(item.children && item.children.length > 0);
@@ -627,7 +607,7 @@ export const Navbar: React.FC = () => {
                       <button
                         type="button"
                         onClick={() => setMobileDropdownOverride(isExpanded ? null : item.label)}
-                        className={`py-3 px-4 text-xs font-semibold rounded-[2px] flex items-center justify-between uppercase tracking-[0.18em] w-full transition-colors ${
+                        className={`w-full py-3 px-4 text-xs font-semibold rounded-[2px] flex items-center justify-between uppercase tracking-[0.18em] transition-colors ${
                           pathname.startsWith(item.href)
                             ? "text-gold bg-white/[0.06] font-bold"
                             : "text-ivory/80 hover:text-white hover:bg-white/[0.04]"
@@ -635,12 +615,10 @@ export const Navbar: React.FC = () => {
                         aria-expanded={isExpanded}
                         aria-controls={`mobile-accordion-${item.label.replace(/\s+/g, "-")}`}
                       >
-                        <span className="flex items-center gap-1.5">
-                          <span>{item.label}</span>
-                        </span>
+                        <span className="leading-none">{item.label}</span>
                         <ChevronDown
                           size={13}
-                          className={`text-gold transition-transform duration-300 ${
+                          className={`text-gold transition-transform duration-300 shrink-0 ${
                             isExpanded ? "rotate-180" : ""
                           }`}
                         />
@@ -723,7 +701,7 @@ export const Navbar: React.FC = () => {
                                       <Link
                                         href={item.href}
                                         onClick={closeMobileMenu}
-                                        className="py-2 px-6 text-[9.5px] uppercase tracking-widest text-[#D4AF37] hover:text-white font-bold flex items-center justify-center gap-1.5"
+                                        className="py-2 px-6 text-[9.5px] uppercase tracking-widest text-[#D4AF37] hover:text-white font-bold flex items-center gap-1.5"
                                       >
                                         <span>View All {item.label}</span>
                                         <span>→</span>
