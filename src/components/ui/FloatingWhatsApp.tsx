@@ -1,105 +1,32 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import { siteConfig } from "@/lib/site";
-import { MessageCircle, X } from "lucide-react";
 
 export const FloatingWhatsApp: React.FC = () => {
-  const [isOpen, setIsOpen] = useState(false);
-
   return (
     <aside
       aria-label="WhatsApp Concierge"
-      className="fixed bottom-5 right-5 sm:bottom-6 sm:right-6 z-50 flex flex-col items-end pointer-events-auto"
+      className="fixed bottom-5 right-5 sm:bottom-6 sm:right-6 z-50 pointer-events-auto"
     >
-      {/* Expanded quick consultation popup */}
-      {isOpen && (
-        <div
-          role="dialog"
-          aria-label="Chat on WhatsApp"
-          className="mb-3 w-[290px] sm:w-[320px] rounded-[3px] bg-[#FAF7F2] border border-[#D4AF37]/50 shadow-[0_12px_40px_rgba(0,0,0,0.25)] overflow-hidden transition-all duration-300 animate-in fade-in slide-in-from-bottom-2"
+      <a
+        href={siteConfig.contact.whatsapp}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Chat with Wedding Flora on WhatsApp"
+        className="group relative flex items-center justify-center w-12 h-12 sm:w-13 sm:h-13 rounded-full bg-[#25D366] text-white shadow-[0_6px_24px_rgba(37,211,102,0.4)] hover:shadow-[0_8px_32px_rgba(37,211,102,0.6)] hover:scale-110 active:scale-95 transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#25D366]"
+      >
+        {/* Authentic WhatsApp SVG Logo */}
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="currentColor"
+          className="w-6 h-6 sm:w-7 sm:h-7"
+          aria-hidden="true"
         >
-          {/* Header */}
-          <div className="bg-[#030308] text-[#FAF7F2] px-4 py-3 border-b border-[#D4AF37]/30 flex items-center justify-between">
-            <div className="flex items-center gap-2.5">
-              <div className="relative w-7 h-7 rounded-full bg-[#25D366]/20 border border-[#25D366]/40 flex items-center justify-center text-[#25D366]">
-                <MessageCircle size={15} />
-                <span className="absolute -top-0.5 -right-0.5 w-2 h-2 rounded-full bg-[#25D366] ring-2 ring-[#030308]" />
-              </div>
-              <div>
-                <p className="font-serif text-[13px] font-semibold text-[#FAF7F2] leading-none">
-                  Wedding Flora Concierge
-                </p>
-                <p className="text-[8.5px] uppercase tracking-[0.16em] text-[#D4AF37] mt-0.5 font-sans">
-                  Online • Palace Wedding Desk
-                </p>
-              </div>
-            </div>
-            <button
-              type="button"
-              onClick={() => setIsOpen(false)}
-              className="text-[#FAF7F2]/60 hover:text-[#FAF7F2] transition-colors p-1"
-              aria-label="Close WhatsApp popup"
-            >
-              <X size={14} />
-            </button>
-          </div>
-
-          {/* Body message */}
-          <div className="p-4 space-y-3 bg-[#FAF7F2]">
-            <div className="bg-white p-3 rounded-[2px] border border-[#D7D3CF] text-[12px] leading-relaxed text-[#5D5956]">
-              <p className="font-serif text-[13px] text-[#030308] font-semibold mb-1">
-                Namaste! 🙏
-              </p>
-              <p>
-                Planning a royal destination wedding in Rajasthan or across India? Connect directly with our lead wedding designers on WhatsApp.
-              </p>
-            </div>
-
-            <a
-              href={siteConfig.contact.whatsapp}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-[2px] bg-[#25D366] hover:bg-[#20ba59] text-white font-sans text-[11px] font-bold uppercase tracking-[0.16em] shadow-sm hover:shadow-md transition-all duration-200"
-            >
-              <MessageCircle size={14} />
-              <span>Start WhatsApp Chat</span>
-            </a>
-            <p className="text-[9.5px] text-center text-[#5D5956]/70 tracking-wide">
-              Direct line: {siteConfig.contact.phone}
-            </p>
-          </div>
-        </div>
-      )}
-
-      {/* Main floating trigger pill / button */}
-      <div className="flex items-center gap-2">
-        <button
-          type="button"
-          onClick={() => setIsOpen(!isOpen)}
-          aria-expanded={isOpen}
-          className="group relative flex items-center gap-2.5 pl-3.5 pr-4 py-2.5 rounded-[3px] bg-[#FAF7F2] text-[#030308] border border-[#D4AF37] shadow-[0_6px_25px_rgba(0,0,0,0.2)] hover:shadow-[0_8px_32px_rgba(212,175,55,0.4)] hover:-translate-y-0.5 active:translate-y-0 transition-all duration-300"
-        >
-          {/* Pulsing indicator */}
-          <span className="relative flex h-2.5 w-2.5">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#25D366] opacity-75" />
-            <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#25D366]" />
-          </span>
-
-          <div className="flex flex-col text-left">
-            <span className="text-[10px] font-sans font-bold uppercase tracking-[0.18em] text-[#030308] group-hover:text-[#AB9178] transition-colors leading-none">
-              WhatsApp Us
-            </span>
-            <span className="text-[8px] uppercase tracking-[0.14em] text-[#D4AF37] font-semibold mt-0.5 leading-none">
-              Direct Concierge
-            </span>
-          </div>
-
-          <div className="w-6 h-6 rounded-full bg-[#25D366] text-white flex items-center justify-center shrink-0 ml-0.5 shadow-sm">
-            <MessageCircle size={13} />
-          </div>
-        </button>
-      </div>
+          <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.03 14.69 2 12.04 2ZM12.05 3.67C14.25 3.67 16.31 4.53 17.87 6.09C19.42 7.65 20.28 9.72 20.28 11.92C20.28 16.46 16.58 20.16 12.04 20.16C10.56 20.16 9.11 19.76 7.85 19.02L7.55 18.84L4.43 19.66L5.26 16.62L5.07 16.31C4.26 15.02 3.81 13.49 3.81 11.91C3.81 7.37 7.51 3.67 12.05 3.67ZM8.93 7.32C8.72 7.32 8.38 7.4 8.1 7.7C7.81 8.01 7 8.77 7 10.31C7 11.85 8.12 13.33 8.28 13.54C8.44 13.75 10.45 16.86 13.56 18.2C14.3 18.52 14.88 18.71 15.33 18.85C16.08 19.09 16.76 19.05 17.3 18.97C17.9 18.88 19.15 18.21 19.41 17.48C19.67 16.75 19.67 16.12 19.59 15.99C19.51 15.86 19.3 15.79 18.99 15.63C18.68 15.47 17.16 14.72 16.88 14.62C16.6 14.52 16.4 14.47 16.19 14.78C15.98 15.09 15.39 15.79 15.21 15.99C15.03 16.19 14.85 16.22 14.54 16.06C14.23 15.9 13.23 15.58 12.05 14.52C11.13 13.7 10.51 12.69 10.33 12.38C10.15 12.07 10.31 11.91 10.47 11.75C10.61 11.61 10.78 11.39 10.94 11.21C11.1 11.03 11.15 10.9 11.25 10.69C11.35 10.48 11.3 10.3 11.22 10.14C11.14 9.98 10.52 8.44 10.26 7.82C10.01 7.22 9.75 7.3 9.56 7.29C9.38 7.28 9.17 7.32 8.93 7.32Z" />
+        </svg>
+      </a>
     </aside>
   );
 };

@@ -15,16 +15,23 @@ import {
   Phone,
   MapPin,
   MessageCircle,
+  Sparkles,
 } from "lucide-react";
 
-// ─── Helpers ──────────────────────────────────────────────────────────────────
+// ─── Helpers ─────────────────────────────────────────────────────────────────
 
+/** Safely compute initial scroll state to avoid a layout flash on load. */
 function getInitialScrolled(): boolean {
-  if (typeof window !== "undefined") return window.scrollY > 40;
+  if (typeof window !== "undefined") return window.scrollY > 24;
   return false;
 }
 
-function deriveOpenDropdown(pathname: string, navItems: NavItem[]): string | null {
+/** Derive the open accordion key from a pathname so it stays in sync after
+ *  client-side navigation. */
+function deriveOpenDropdown(
+  pathname: string,
+  navItems: NavItem[]
+): string | null {
   for (const item of navItems) {
     if (!item.children && !item.groups) continue;
     if (
@@ -36,7 +43,10 @@ function deriveOpenDropdown(pathname: string, navItems: NavItem[]): string | nul
           (c.href.includes("?") && pathname === c.href.split("?")[0])
       ) ||
       item.groups?.some((g) =>
-        g.items.some((c) => pathname === c.href || pathname.startsWith(`${c.href}/`))
+        g.items.some(
+          (c) =>
+            pathname === c.href || pathname.startsWith(`${c.href}/`)
+        )
       )
     ) {
       return item.label;
@@ -45,7 +55,7 @@ function deriveOpenDropdown(pathname: string, navItems: NavItem[]): string | nul
   return null;
 }
 
-// ─── Desktop Nav Link ─────────────────────────────────────────────────────────
+// ─── NavLink ─────────────────────────────────────────────────────────────────
 
 function NavLink({
   href,
@@ -60,44 +70,42 @@ function NavLink({
   onClick?: () => void;
   isMobile?: boolean;
 }) {
-  if (isMobile) {
-    return (
-      <Link
-        href={href}
-        onClick={onClick}
-        className={`block w-full text-left py-3.5 px-5 text-[11px] font-sans font-semibold uppercase tracking-[0.2em] transition-colors duration-200 border-b border-[#D4AF37]/10 ${
-          isActive
-            ? "text-[#D4AF37]"
-            : "text-[#5D5956] hover:text-[#D4AF37]"
-        }`}
-      >
-        {label}
-      </Link>
-    );
-  }
-
   return (
     <Link
       href={href}
       onClick={onClick}
-      className={`relative group/nav inline-block text-[10.5px] xl:text-[11px] font-sans font-semibold uppercase tracking-[0.18em] xl:tracking-[0.2em] py-1 transition-colors duration-200 ${
-        isActive ? "text-[#D4AF37]" : "text-[#5D5956] hover:text-[#AB9178]"
+      className={`relative uppercase tracking-[0.13em] lg:tracking-[0.15em] xl:tracking-[0.18em] transition-colors duration-200 group/nav ${
+        isMobile
+          ? "py-3 px-4 text-sm font-semibold rounded-[2px] flex items-center justify-center " +
+            (isActive
+              ? "text-gold bg-white/[0.06] font-bold"
+              : "text-ivory/80 hover:text-white hover:bg-white/[0.04]")
+          : "inline-flex items-center justify-center h-7 leading-none text-[11px] xl:text-[11.5px] 2xl:text-xs " +
+            (isActive ? "text-gold font-bold" : "text-ivory/75 hover:text-ivory font-semibold")
       }`}
     >
-      {label}
-      {/* Thin gold underline that expands from centre on hover/active */}
-      <span
-        className={`absolute -bottom-px left-1/2 -translate-x-1/2 h-px bg-[#D4AF37] transition-all duration-300 ${
-          isActive ? "w-full opacity-100" : "w-0 opacity-0 group-hover/nav:w-full group-hover/nav:opacity-100"
-        }`}
-      />
+      <span className="leading-none">{label}</span>
+      {/* Center-expanding gold gradient underline — desktop only */}
+      {!isMobile && (
+        <span
+          className={`absolute -bottom-0.5 left-1/2 -translate-x-1/2 h-[1px] bg-gradient-to-r from-transparent via-[#D4AF37] to-transparent transition-all duration-300 pointer-events-none ${
+            isActive ? "w-full opacity-100" : "w-0 opacity-0 group-hover/nav:w-full group-hover/nav:opacity-100"
+          }`}
+        />
+      )}
     </Link>
   );
 }
 
-// ─── Desktop Dropdown ─────────────────────────────────────────────────────────
+// ─── NavItemDropdown ──────────────────────────────────────────────────────────
 
-function NavItemDropdown({ item, pathname }: { item: NavItem; pathname: string }) {
+function NavItemDropdown({
+  item,
+  pathname,
+}: {
+  item: NavItem;
+  pathname: string;
+}) {
   const [isOpen, setIsOpen] = useState(false);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -105,20 +113,22 @@ function NavItemDropdown({ item, pathname }: { item: NavItem; pathname: string }
   const isParentActive =
     pathname === item.href ||
     pathname.startsWith(`${item.href}/`) ||
-    item.children?.some(
-      (c) =>
-        pathname === c.href ||
-        pathname.startsWith(`${c.href}/`) ||
-        (c.href.includes("?") && pathname === c.href.split("?")[0])
-    ) ||
-    item.groups?.some((g) =>
-      g.items.some(
-        (c) =>
-          pathname === c.href ||
-          pathname.startsWith(`${c.href}/`) ||
-          (c.href.includes("?") && pathname === c.href.split("?")[0])
-      )
-    );
+    (item.children &&
+      item.children.some(
+        (child) =>
+          pathname === child.href ||
+          pathname.startsWith(`${child.href}/`) ||
+          (child.href.includes("?") && pathname === child.href.split("?")[0])
+      )) ||
+    (item.groups &&
+      item.groups.some((g) =>
+        g.items.some(
+          (child) =>
+            pathname === child.href ||
+            pathname.startsWith(`${child.href}/`) ||
+            (child.href.includes("?") && pathname === child.href.split("?")[0])
+        )
+      ));
 
   const open = useCallback(() => {
     if (timeoutRef.current) clearTimeout(timeoutRef.current);
@@ -126,171 +136,222 @@ function NavItemDropdown({ item, pathname }: { item: NavItem; pathname: string }
   }, []);
 
   const scheduleClose = useCallback(() => {
-    timeoutRef.current = setTimeout(() => setIsOpen(false), 180);
+    timeoutRef.current = setTimeout(() => setIsOpen(false), 150);
   }, []);
 
-  const handleKeyDown = useCallback((e: React.KeyboardEvent) => {
-    if (e.key === "Enter" || e.key === " ") {
-      e.preventDefault();
-      setIsOpen((p) => !p);
-    }
-    if (e.key === "Escape") setIsOpen(false);
-  }, []);
-
-  const handleBlur = useCallback(
-    (e: React.FocusEvent) => {
-      if (!containerRef.current?.contains(e.relatedTarget as Node)) scheduleClose();
+  const handleKeyDown = useCallback(
+    (e: React.KeyboardEvent) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        setIsOpen((prev) => !prev);
+      }
+      if (e.key === "Escape") setIsOpen(false);
     },
-    [scheduleClose]
+    []
   );
 
-  useEffect(() => () => { if (timeoutRef.current) clearTimeout(timeoutRef.current); }, []);
+  /** Close if focus leaves the entire dropdown container. */
+  const handleBlur = useCallback((e: React.FocusEvent) => {
+    if (!containerRef.current?.contains(e.relatedTarget as Node)) {
+      scheduleClose();
+    }
+  }, [scheduleClose]);
+
+  useEffect(() => {
+    return () => {
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    };
+  }, []);
 
   return (
     <div
       ref={containerRef}
-      className="relative"
+      className="relative inline-flex items-center h-7"
       onMouseEnter={open}
       onMouseLeave={scheduleClose}
       onBlur={handleBlur}
     >
-      {/* Trigger */}
       <Link
         href={item.href}
         aria-haspopup="true"
         aria-expanded={isOpen}
         onFocus={open}
         onKeyDown={handleKeyDown}
-        className={`relative group/trig inline-flex items-center gap-1 text-[10.5px] xl:text-[11px] font-sans font-semibold uppercase tracking-[0.18em] xl:tracking-[0.2em] py-1 transition-colors duration-200 ${
-          isParentActive ? "text-[#D4AF37]" : "text-[#5D5956] hover:text-[#AB9178]"
+        className={`relative uppercase tracking-[0.13em] lg:tracking-[0.15em] xl:tracking-[0.18em] text-[11px] xl:text-[11.5px] 2xl:text-xs transition-colors duration-200 inline-flex items-center justify-center gap-1 h-7 leading-none group/droptrig ${
+          isParentActive
+            ? "text-gold font-bold"
+            : "text-ivory/75 hover:text-ivory font-semibold"
         }`}
       >
-        <span>{item.label}</span>
+        <span className="leading-none">{item.label}</span>
         <motion.span
           animate={{ rotate: isOpen ? 180 : 0 }}
           transition={{ duration: 0.2 }}
-          className="inline-flex items-center text-[#D4AF37]"
+          className="inline-flex items-center justify-center w-2.5 h-2.5"
         >
-          <ChevronDown size={9} strokeWidth={2.5} />
+          <ChevronDown size={10} className="text-gold/80" />
         </motion.span>
+        {/* Center-expanding gold gradient underline */}
         <span
-          className={`absolute -bottom-px left-1/2 -translate-x-1/2 h-px bg-[#D4AF37] transition-all duration-300 ${
+          className={`absolute -bottom-0.5 left-1/2 -translate-x-1/2 h-[1px] bg-gradient-to-r from-transparent via-[#D4AF37] to-transparent transition-all duration-300 pointer-events-none ${
             isParentActive || isOpen
               ? "w-full opacity-100"
-              : "w-0 opacity-0 group-hover/trig:w-full group-hover/trig:opacity-100"
+              : "w-0 opacity-0 group-hover/droptrig:w-full group-hover/droptrig:opacity-100"
           }`}
         />
       </Link>
 
-      {/* Panel */}
+      {/* Dropdown Menu Container */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0, y: 8 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 4 }}
-            transition={{ duration: 0.18, ease: "easeOut" }}
-            className="absolute left-1/2 -translate-x-1/2 z-50 pt-3"
+            initial={{ opacity: 0, y: 6, scale: 0.98 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 4, scale: 0.98 }}
+            transition={{ duration: 0.16, ease: "easeOut" }}
+            className={`absolute z-50 pt-3.5 top-full ${
+              item.groups
+                ? "left-1/2 -translate-x-1/2 min-w-[390px]"
+                : "left-1/2 -translate-x-1/2 min-w-[280px]"
+            }`}
             style={{ maxWidth: "calc(100vw - 2rem)" }}
           >
             {item.groups ? (
-              /* ── Destinations mega-menu ── */
-              <div className="w-[440px] max-w-[calc(100vw-2rem)] bg-[#FAF7F2] border border-[#D7D3CF] shadow-[0_8px_40px_rgba(0,0,0,0.12)] rounded-[3px] overflow-hidden">
-                {/* Top accent line */}
-                <div className="h-[2px] bg-gradient-to-r from-transparent via-[#D4AF37] to-transparent" />
+              /* Mega-Menu Grid for Destinations */
+              <div className="relative w-[400px] max-w-[calc(100vw-2rem)] p-3.5 rounded-[3px] bg-[#06040e]/98 backdrop-blur-2xl border border-gold/30 shadow-[0_20px_55px_rgba(0,0,0,0.85)] ring-1 ring-white/[0.08] flex flex-col overflow-hidden">
+                {/* Hairline gold shimmer rim */}
+                <div className="absolute top-0 left-0 right-0 h-[1.5px] bg-gradient-to-r from-transparent via-[#D4AF37] to-transparent pointer-events-none" />
 
-                <div className="p-4">
-                  {/* Header */}
-                  <div className="flex items-center justify-between mb-3 pb-2.5 border-b border-[#D7D3CF]">
-                    <span className="font-serif text-[11px] font-semibold uppercase tracking-[0.28em] text-[#D4AF37]">
-                      ✦ {item.groups[0].title}
-                    </span>
-                    <Link
-                      href={item.href}
-                      onClick={() => setIsOpen(false)}
-                      className="text-[9px] uppercase tracking-[0.2em] text-[#AB9178] hover:text-[#D4AF37] font-semibold transition-colors"
-                    >
-                      View All →
-                    </Link>
+                {item.groups.map((group) => (
+                  <div key={group.title} className="flex flex-col">
+                    {/* Category Header */}
+                    <div className="pb-2 mb-2 border-b border-gold/20 flex items-center justify-between px-1">
+                      <span className="font-serif text-[11.5px] font-bold uppercase tracking-[0.24em] text-[#D4AF37]">
+                        ✦ {group.title}
+                      </span>
+                      <span className="text-[9px] uppercase tracking-wider text-ivory/50 font-sans font-semibold">
+                        {group.items.length} Royal Venues
+                      </span>
+                    </div>
+
+                    {/* 2-Column Cities Grid */}
+                    <div className="grid grid-cols-2 gap-1 py-0.5">
+                      {group.items.map((subItem) => {
+                        const isSubActive =
+                          pathname === subItem.href ||
+                          pathname.startsWith(`${subItem.href}/`);
+                        return (
+                          <Link
+                            key={subItem.href}
+                            href={subItem.href}
+                            onClick={() => setIsOpen(false)}
+                            className={`group/city px-2.5 py-2.5 rounded-[2px] transition-all duration-200 flex items-center justify-between text-left ${
+                              isSubActive
+                                ? "bg-white/[0.08] text-gold font-bold border-l-2 border-gold"
+                                : "hover:bg-white/[0.05] text-ivory/80 hover:text-white hover:translate-x-0.5"
+                            }`}
+                          >
+                            <span className="font-serif text-[13.5px] tracking-wide group-hover/city:text-gold transition-colors">
+                              {subItem.label}
+                            </span>
+                            <span className="text-[9px] text-gold opacity-0 -translate-x-1 group-hover/city:opacity-100 group-hover/city:translate-x-0 transition-all duration-200">
+                              ✦
+                            </span>
+                          </Link>
+                        );
+                      })}
+                    </div>
+
+                    {/* View All footer link */}
+                    <div className="pt-2.5 mt-2 border-t border-white/10 px-1 flex items-center justify-between">
+                      <Link
+                        href={item.href}
+                        onClick={() => setIsOpen(false)}
+                        className="text-[9.5px] uppercase tracking-[0.18em] text-[#D4AF37] hover:text-white font-bold transition-colors inline-flex items-center gap-1.5"
+                      >
+                        <span>Explore All Rajasthan Venues</span>
+                        <span>→</span>
+                      </Link>
+                    </div>
                   </div>
+                ))}
+              </div>
+            ) : (
+              /* Refined Dropdown for About & Gallery */
+              <div className="relative w-72 max-w-[calc(100vw-2rem)] p-2.5 rounded-[3px] bg-[#06040e]/98 backdrop-blur-2xl border border-gold/30 shadow-[0_20px_55px_rgba(0,0,0,0.85)] ring-1 ring-white/[0.08] flex flex-col space-y-1 overflow-hidden">
+                {/* Hairline gold shimmer rim */}
+                <div className="absolute top-0 left-0 right-0 h-[1.5px] bg-gradient-to-r from-transparent via-[#D4AF37] to-transparent pointer-events-none" />
 
-                  {/* 2-column city grid */}
-                  <div className="grid grid-cols-2 gap-px bg-[#D7D3CF]/50">
-                    {item.groups[0].items.map((subItem) => {
-                      const active = pathname === subItem.href || pathname.startsWith(`${subItem.href}/`);
-                      return (
-                        <Link
-                          key={subItem.href}
-                          href={subItem.href}
-                          onClick={() => setIsOpen(false)}
-                          className={`group/city flex flex-col px-3 py-2.5 transition-colors duration-150 ${
-                            active ? "bg-[#F1EBE0]" : "bg-[#FAF7F2] hover:bg-[#F1EBE0]"
-                          }`}
-                        >
+                {/* Micro Header */}
+                <div className="px-2 pt-1 pb-1.5 border-b border-gold/15 flex items-center justify-between">
+                  <span className="font-serif text-[10px] font-bold uppercase tracking-[0.24em] text-[#D4AF37]">
+                    ✦ {item.label === "Gallery" ? "Visual Archives" : "The Heritage"}
+                  </span>
+                </div>
+
+                {item.children?.map((subItem) => {
+                  const isSubActive =
+                    pathname === subItem.href ||
+                    pathname.startsWith(`${subItem.href}/`) ||
+                    (subItem.href.includes("?") && pathname === subItem.href.split("?")[0]);
+                  return (
+                    <Link
+                      key={subItem.href}
+                      href={subItem.href}
+                      onClick={() => setIsOpen(false)}
+                      className={`group/sub flex items-start gap-2.5 px-3 py-2.5 rounded-[2px] transition-all duration-200 text-left ${
+                        isSubActive
+                          ? "bg-white/[0.08] border-l-2 border-gold"
+                          : "hover:bg-white/[0.05] hover:border-l-2 hover:border-gold/60 border-l-2 border-transparent hover:translate-x-0.5"
+                      }`}
+                    >
+                      {subItem.icon === "camera" && (
+                        <div className="w-6 h-6 rounded-[2px] bg-gold/10 border border-gold/30 flex items-center justify-center shrink-0 text-gold group-hover/sub:bg-gold group-hover/sub:text-midnight transition-colors mt-0.5">
+                          <Camera size={12} />
+                        </div>
+                      )}
+                      {subItem.icon === "video" && (
+                        <div className="w-6 h-6 rounded-[2px] bg-gold/10 border border-gold/30 flex items-center justify-center shrink-0 text-gold group-hover/sub:bg-gold group-hover/sub:text-midnight transition-colors mt-0.5">
+                          <Video size={12} />
+                        </div>
+                      )}
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center justify-between">
                           <span
-                            className={`font-serif text-[13px] transition-colors ${
-                              active ? "text-[#D4AF37]" : "text-[#5D5956] group-hover/city:text-[#AB9178]"
+                            className={`font-serif text-[14px] tracking-wide transition-colors ${
+                              isSubActive
+                                ? "text-gold font-bold"
+                                : "text-ivory group-hover/sub:text-gold font-medium"
                             }`}
                           >
                             {subItem.label}
                           </span>
-                          {subItem.description && (
-                            <span className="text-[9.5px] text-[#AB9178] leading-tight mt-0.5 font-sans">
-                              {subItem.description}
-                            </span>
-                          )}
-                        </Link>
-                      );
-                    })}
-                  </div>
-                </div>
-              </div>
-            ) : (
-              /* ── About / Gallery dropdown ── */
-              <div className="w-64 bg-[#FAF7F2] border border-[#D7D3CF] shadow-[0_8px_40px_rgba(0,0,0,0.12)] rounded-[3px] overflow-hidden">
-                {/* Top accent line */}
-                <div className="h-[2px] bg-gradient-to-r from-transparent via-[#D4AF37] to-transparent" />
-
-                <div className="py-2">
-                  {item.children?.map((subItem) => {
-                    const active =
-                      pathname === subItem.href ||
-                      pathname.startsWith(`${subItem.href}/`) ||
-                      (subItem.href.includes("?") && pathname === subItem.href.split("?")[0]);
-                    return (
-                      <Link
-                        key={subItem.href}
-                        href={subItem.href}
-                        onClick={() => setIsOpen(false)}
-                        className={`group/sub flex items-center gap-3 px-4 py-3 transition-colors duration-150 border-b border-[#D7D3CF]/50 last:border-0 ${
-                          active ? "bg-[#F1EBE0]" : "hover:bg-[#F1EBE0]"
-                        }`}
-                      >
-                        {/* Icon badge */}
-                        {(subItem.icon === "camera" || subItem.icon === "video") && (
-                          <div
-                            className={`w-7 h-7 rounded-[2px] flex items-center justify-center shrink-0 transition-colors ${
-                              active ? "bg-[#D4AF37] text-white" : "bg-[#F1DCE1] text-[#AB9178] group-hover/sub:bg-[#D4AF37] group-hover/sub:text-white"
-                            }`}
-                          >
-                            {subItem.icon === "camera" ? <Camera size={12} /> : <Video size={12} />}
-                          </div>
-                        )}
-                        <div className="flex-1 min-w-0">
-                          <p className={`font-serif text-[13.5px] leading-none transition-colors ${
-                            active ? "text-[#D4AF37]" : "text-[#5D5956] group-hover/sub:text-[#AB9178]"
-                          }`}>
-                            {subItem.label}
-                          </p>
-                          {subItem.description && (
-                            <p className="text-[9.5px] text-[#AB9178] mt-0.5 leading-tight font-sans truncate">
-                              {subItem.description}
-                            </p>
-                          )}
+                          <span className="text-[9px] text-gold/60 opacity-0 -translate-x-1 group-hover/sub:opacity-100 group-hover/sub:translate-x-0 transition-all duration-200">
+                            ✦
+                          </span>
                         </div>
-                      </Link>
-                    );
-                  })}
+                        {subItem.description && (
+                          <span className="text-[10px] tracking-normal text-ivory/60 font-sans mt-0.5 line-clamp-1 block">
+                            {subItem.description}
+                          </span>
+                        )}
+                      </div>
+                    </Link>
+                  );
+                })}
+
+                {/* Footer link */}
+                <div className="pt-2 mt-1 border-t border-white/10 px-2">
+                  <Link
+                    href={item.href}
+                    onClick={() => setIsOpen(false)}
+                    className="text-[9.5px] uppercase tracking-[0.18em] text-[#D4AF37] hover:text-white font-bold transition-colors inline-flex items-center justify-between w-full py-1"
+                  >
+                    <span>
+                      {item.label === "Gallery" ? "Explore All Archives" : "Discover Our Story"}
+                    </span>
+                    <span>→</span>
+                  </Link>
                 </div>
               </div>
             )}
@@ -309,9 +370,11 @@ export const Navbar: React.FC = () => {
   const pathname = usePathname();
 
   const derivedDropdown = deriveOpenDropdown(pathname, siteConfig.navItems);
-  const [mobileDropdownOverride, setMobileDropdownOverride] = useState<string | null | undefined>(undefined);
+  const [mobileDropdownOverride, setMobileDropdownOverride] = useState<
+    string | null | undefined
+  >(undefined);
 
-  // Reset accordion override on route change (safe during render)
+  // When the user navigates (pathname changes), reset the override.
   const [lastPathname, setLastPathname] = useState(pathname);
   if (lastPathname !== pathname) {
     setLastPathname(pathname);
@@ -324,278 +387,350 @@ export const Navbar: React.FC = () => {
   const closeMobileMenu = useCallback(() => setMobileMenuOpen(false), []);
 
   useEffect(() => {
-    const onScroll = () => setIsScrolled(window.scrollY > 40);
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    const handleScroll = () => setIsScrolled(window.scrollY > 24);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const leftItems = siteConfig.navItems.slice(0, 4);
   const rightItems = siteConfig.navItems.slice(4, 9);
 
   return (
-    <header className="sticky top-0 z-50 w-full">
-      {/* ── Top micro-bar ── */}
+    <header className="sticky top-0 z-50 w-full transition-all duration-300">
+      {/* ── Top Micro-Header for Luxury Heritage Pedigree ── */}
       <div
-        className={`w-full hidden md:block overflow-hidden transition-all duration-300 bg-[#030308] border-b border-[#D4AF37]/20 ${
-          isScrolled ? "max-h-0 opacity-0" : "max-h-9 opacity-100"
+        className={`w-full transition-all duration-300 border-b border-gold/15 bg-black/50 backdrop-blur-md hidden md:block overflow-hidden ${
+          isScrolled ? "max-h-0 opacity-0 py-0 border-transparent" : "max-h-9 opacity-100 py-1.5"
         }`}
       >
-        <div className="max-w-[1200px] mx-auto px-6 lg:px-10 flex items-center justify-between py-1.5">
-          <span className="font-serif text-[9.5px] tracking-[0.24em] uppercase text-[#D4AF37]/80">
-            ✦ Rajasthan&apos;s Premier Wedding Planner
-          </span>
-          <div className="flex items-center gap-5 text-[9px] uppercase tracking-[0.16em] font-sans text-[#D7D3CF]/60">
+        <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 flex items-center justify-between text-[10px] tracking-[0.16em] uppercase text-ivory/70">
+          <div className="flex items-center gap-2">
+            <span className="text-gold text-[9px]">✦</span>
+            <span className="font-serif tracking-[0.18em] text-[#D4AF37] font-semibold">
+              The Royal Wedding Planner
+            </span>
+          </div>
+
+          <div className="flex items-center gap-4 xl:gap-6 font-sans">
             <a
               href={`tel:${siteConfig.contact.phone.replace(/[^0-9+]/g, "")}`}
-              className="hover:text-[#D4AF37] transition-colors flex items-center gap-1.5"
+              className="hover:text-gold transition-colors flex items-center gap-1.5"
             >
-              <Phone size={9} className="text-[#D4AF37]" />
-              {siteConfig.contact.phone}
+              <Phone size={10} className="text-gold" />
+              <span>{siteConfig.contact.phone}</span>
             </a>
-            <span className="text-[#D7D3CF]/20">|</span>
+            <span className="text-white/20">|</span>
             <a
               href={siteConfig.contact.whatsapp}
               target="_blank"
               rel="noopener noreferrer"
-              className="hover:text-[#D4AF37] transition-colors flex items-center gap-1.5"
+              className="hover:text-gold transition-colors flex items-center gap-1.5"
             >
-              <MessageCircle size={9} className="text-[#D4AF37]" />
-              WhatsApp
+              <MessageCircle size={10} className="text-gold" />
+              <span>WhatsApp Concierge</span>
             </a>
-            <span className="text-[#D7D3CF]/20">|</span>
+            <span className="text-white/20">|</span>
             <a
               href={siteConfig.contact.mapsUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="hover:text-[#D4AF37] transition-colors flex items-center gap-1.5"
+              className="hover:text-gold transition-colors flex items-center gap-1.5"
             >
-              <MapPin size={9} className="text-[#D4AF37]" />
-              Adarsh Nagar, Jaipur
+              <MapPin size={10} className="text-gold" />
+              <span>Adarsh Nagar, Jaipur</span>
             </a>
           </div>
         </div>
       </div>
 
-      {/* ── Main nav bar ── */}
+      {/* ── Main Navigation Bar (Regal Luxury Dark Glass) ── */}
       <div
-        className={`w-full transition-all duration-300 ${
+        className={`w-full transition-all duration-300 relative ${
           isScrolled
-            ? "bg-white/95 backdrop-blur-md shadow-[0_1px_0_#D7D3CF,0_4px_24px_rgba(0,0,0,0.06)]"
-            : "bg-white/90 backdrop-blur-sm border-b border-[#D7D3CF]/60"
+            ? "bg-[#04030a]/94 backdrop-blur-2xl shadow-[0_12px_45px_rgba(0,0,0,0.7)] border-b border-[#D4AF37]/25"
+            : "bg-[#04030a]/78 backdrop-blur-xl border-b border-[#D4AF37]/15"
         }`}
       >
-        <div className="max-w-[1200px] mx-auto px-6 lg:px-10 flex items-center justify-between h-[64px]">
+        {/* Hairline ambient shimmer lines */}
+        <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[#D4AF37]/35 to-transparent pointer-events-none" />
+        <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[#D4AF37]/25 to-transparent pointer-events-none" />
 
-          {/* ── Left nav links ── */}
+        <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 flex items-center justify-between py-2 sm:py-2.5">
+          {/* ── Left Nav ── */}
           <nav
-            className="hidden lg:flex items-center gap-5 xl:gap-6"
-            aria-label="Primary left navigation"
+            className="hidden lg:flex items-center space-x-3 lg:space-x-4 xl:space-x-5"
+            aria-label="Primary Left Navigation"
           >
             {leftItems.map((item) =>
               item.children || item.groups ? (
                 <NavItemDropdown key={item.label} item={item} pathname={pathname} />
               ) : (
-                <NavLink key={item.href} href={item.href} label={item.label} isActive={pathname === item.href} />
+                <NavLink
+                  key={item.href}
+                  href={item.href}
+                  label={item.label}
+                  isActive={pathname === item.href}
+                />
               )
             )}
           </nav>
 
-          {/* ── Logo (centre) ── */}
+          {/* ── Central Royal Monogram & Crest ── */}
           <Link
             href="/"
-            className="flex items-center gap-2.5 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D4AF37] focus-visible:ring-offset-2 rounded-sm shrink-0"
-            aria-label="Wedding Flora — Home"
+            className="flex items-center gap-2.5 sm:gap-3 group focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gold shrink-0 py-0.5"
+            aria-label="Wedding Flora Home"
           >
-            <div className="relative w-9 h-9 sm:w-10 sm:h-10 shrink-0 transition-transform duration-500 group-hover:scale-105">
+            <div className="relative w-8 h-8 sm:w-10 sm:h-10 shrink-0 transition-transform duration-500 group-hover:scale-105">
+              {/* Ambient radial gold halo behind crest */}
+              <div className="absolute -inset-1 bg-gradient-to-r from-gold/20 via-gold/10 to-transparent rounded-full blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
               <Image
                 src="/images/logo-emblem.png"
                 alt="Wedding Flora Crest"
                 fill
-                className="object-contain"
+                className="object-contain relative z-10"
                 priority
               />
             </div>
-            <div className="flex flex-col">
-              <span className="font-serif text-[20px] sm:text-[22px] font-semibold tracking-[0.03em] text-[#5D5956] leading-none group-hover:text-[#AB9178] transition-colors duration-300">
+            <div className="flex flex-col text-left">
+              <span className="font-serif text-lg sm:text-[22px] font-semibold tracking-[0.04em] text-ivory group-hover:text-gold-gradient transition-colors duration-300 leading-none">
                 Wedding Flora
               </span>
-              <span className="text-[7px] sm:text-[7.5px] uppercase tracking-[0.32em] text-[#D4AF37] font-sans font-semibold mt-0.5">
+              <span className="text-[7.5px] sm:text-[8.5px] uppercase tracking-[0.28em] text-[#D4AF37] font-semibold mt-1 transition-colors">
                 The Wedding Planner
               </span>
             </div>
           </Link>
 
-          {/* ── Right nav links + CTA ── */}
-          <div className="hidden lg:flex items-center gap-5 xl:gap-6">
+          {/* ── Right Nav + Elegant CTA ── */}
+          <div className="hidden lg:flex items-center space-x-3 lg:space-x-4 xl:space-x-4">
             {rightItems.map((item) =>
               item.children || item.groups ? (
                 <NavItemDropdown key={item.label} item={item} pathname={pathname} />
               ) : (
-                <NavLink key={item.href} href={item.href} label={item.label} isActive={pathname === item.href} />
+                <NavLink
+                  key={item.href}
+                  href={item.href}
+                  label={item.label}
+                  isActive={pathname === item.href}
+                />
               )
             )}
 
-            {/* Enquire CTA */}
+            {/* Bespoke Luxury CTA Badge */}
             <Link
               href="/contact"
-              className="group inline-flex items-center gap-1.5 px-4 py-2 text-[10px] font-sans font-bold uppercase tracking-[0.22em] rounded-[2px] transition-all duration-250 border border-[#D4AF37] text-[#5D5956] hover:bg-[#D4AF37] hover:text-white shadow-sm hover:shadow-md"
+              className="relative group inline-flex items-center justify-center px-4 xl:px-4.5 py-1.5 text-[10px] xl:text-[10.5px] font-sans font-bold uppercase tracking-[0.2em] rounded-[2px] transition-all duration-300 overflow-hidden shadow-[0_0_15px_rgba(212,175,55,0.2)] hover:shadow-[0_0_25px_rgba(212,175,55,0.45)] hover:-translate-y-0.5 active:translate-y-0 border border-gold/60"
+              style={{
+                background: "linear-gradient(135deg, #FAF7F2 0%, #D4AF37 55%, #AB9178 100%)",
+                color: "#08040a",
+              }}
             >
-              <span>Enquire</span>
-              <span className="text-[#D4AF37] group-hover:text-white transition-colors text-[9px]">✦</span>
+              <span className="relative z-10 flex items-center gap-1.5">
+                <span>Enquire</span>
+                <span className="text-[9px] text-[#08040a] transition-transform duration-300 group-hover:translate-x-0.5">
+                  ✦
+                </span>
+              </span>
+              <span className="absolute inset-0 bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             </Link>
           </div>
 
-          {/* ── Mobile hamburger ── */}
-          <button
-            type="button"
-            onClick={() => setMobileMenuOpen((p) => !p)}
-            className="flex lg:hidden items-center justify-center w-10 h-10 rounded-[2px] text-[#5D5956] hover:text-[#D4AF37] hover:bg-[#F1EBE0] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D4AF37]"
-            aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
-            aria-expanded={mobileMenuOpen}
-            aria-controls="mobile-nav"
-          >
-            <AnimatePresence mode="wait" initial={false}>
-              {mobileMenuOpen ? (
-                <motion.span key="x" initial={{ rotate: -90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: 90, opacity: 0 }} transition={{ duration: 0.18 }}>
-                  <X size={20} />
-                </motion.span>
-              ) : (
-                <motion.span key="menu" initial={{ rotate: 90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: -90, opacity: 0 }} transition={{ duration: 0.18 }}>
-                  <Menu size={20} />
-                </motion.span>
-              )}
-            </AnimatePresence>
-          </button>
+          {/* ── Mobile Hamburger Toggle ── */}
+          <div className="flex lg:hidden items-center">
+            <button
+              type="button"
+              onClick={() => setMobileMenuOpen((prev) => !prev)}
+              className="p-2 text-ivory hover:text-gold transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gold rounded-[2px]"
+              aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
+              aria-expanded={mobileMenuOpen}
+              aria-controls="mobile-nav"
+            >
+              <AnimatePresence mode="wait" initial={false}>
+                {mobileMenuOpen ? (
+                  <motion.span
+                    key="x"
+                    initial={{ rotate: -90, opacity: 0 }}
+                    animate={{ rotate: 0, opacity: 1 }}
+                    exit={{ rotate: 90, opacity: 0 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <X size={22} className="text-gold" />
+                  </motion.span>
+                ) : (
+                  <motion.span
+                    key="menu"
+                    initial={{ rotate: 90, opacity: 0 }}
+                    animate={{ rotate: 0, opacity: 1 }}
+                    exit={{ rotate: -90, opacity: 0 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <Menu size={22} />
+                  </motion.span>
+                )}
+              </AnimatePresence>
+            </button>
+          </div>
         </div>
       </div>
 
-      {/* ── Mobile drawer ── */}
+      {/* ── Mobile Navigation Drawer ── */}
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
-            className="lg:hidden overflow-hidden bg-white border-b border-[#D7D3CF] shadow-[0_8px_24px_rgba(0,0,0,0.08)]"
+            transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+            className="lg:hidden overflow-hidden border-b border-gold/25"
+            style={{
+              background: "rgba(5, 3, 10, 0.98)",
+              backdropFilter: "blur(28px)",
+              WebkitBackdropFilter: "blur(28px)",
+            }}
           >
             <nav
               id="mobile-nav"
               role="navigation"
               aria-label="Mobile Navigation"
-              className="flex flex-col"
+              className="flex flex-col space-y-1 text-center px-4 pt-4 pb-6"
             >
-              {/* Branding strip */}
-              <div className="flex items-center gap-3 px-5 py-4 border-b border-[#D7D3CF]/60 bg-[#FAF7F2]">
-                <div className="relative w-8 h-8 shrink-0">
-                  <Image src="/images/logo-emblem.png" alt="Wedding Flora" fill className="object-contain" />
+              {/* Mobile Header Branding */}
+              <div className="flex items-center justify-center gap-2.5 pb-3 mb-2 border-b border-gold/15">
+                <div className="relative w-7 h-7 shrink-0">
+                  <Image
+                    src="/images/logo-emblem.png"
+                    alt="Wedding Flora Emblem"
+                    fill
+                    className="object-contain"
+                  />
                 </div>
-                <div>
-                  <p className="font-serif text-[16px] leading-none text-[#5D5956]">Wedding Flora</p>
-                  <p className="text-[7px] uppercase tracking-[0.28em] text-[#D4AF37] font-semibold mt-0.5">The Wedding Planner</p>
+                <div className="text-left">
+                  <span className="font-serif text-base font-semibold text-ivory block leading-none">
+                    Wedding Flora
+                  </span>
+                  <span className="text-[7.5px] uppercase tracking-[0.24em] text-[#D4AF37] font-semibold">
+                    The Wedding Planner
+                  </span>
                 </div>
               </div>
 
-              {/* Nav items */}
+              {/* Mobile Navigation List */}
               {siteConfig.navItems.map((item) => {
-                const hasChildren = Boolean(item.children?.length);
-                const hasGroups = Boolean(item.groups?.length);
+                const hasChildren = Boolean(item.children && item.children.length > 0);
+                const hasGroups = Boolean(item.groups && item.groups.length > 0);
 
                 if (hasChildren || hasGroups) {
                   const isExpanded = openMobileDropdown === item.label;
-                  const isActive = pathname.startsWith(item.href);
                   return (
-                    <div key={item.label} className="border-b border-[#D7D3CF]/60">
+                    <div key={item.label} className="flex flex-col">
                       <button
                         type="button"
                         onClick={() => setMobileDropdownOverride(isExpanded ? null : item.label)}
-                        aria-expanded={isExpanded}
-                        aria-controls={`mob-acc-${item.label.replace(/\s+/g, "-")}`}
-                        className={`w-full flex items-center justify-between px-5 py-3.5 text-[11px] font-sans font-semibold uppercase tracking-[0.2em] transition-colors ${
-                          isActive ? "text-[#D4AF37] bg-[#FAF7F2]" : "text-[#5D5956] hover:text-[#AB9178] hover:bg-[#FAF7F2]"
+                        className={`py-3 px-4 text-xs font-semibold rounded-[2px] flex items-center justify-between uppercase tracking-[0.18em] w-full transition-colors ${
+                          pathname.startsWith(item.href)
+                            ? "text-gold bg-white/[0.06] font-bold"
+                            : "text-ivory/80 hover:text-white hover:bg-white/[0.04]"
                         }`}
+                        aria-expanded={isExpanded}
+                        aria-controls={`mobile-accordion-${item.label.replace(/\s+/g, "-")}`}
                       >
-                        <span>{item.label}</span>
+                        <span className="flex items-center gap-1.5">
+                          <span>{item.label}</span>
+                        </span>
                         <ChevronDown
                           size={13}
-                          className={`text-[#D4AF37] transition-transform duration-250 ${isExpanded ? "rotate-180" : ""}`}
+                          className={`text-gold transition-transform duration-300 ${
+                            isExpanded ? "rotate-180" : ""
+                          }`}
                         />
                       </button>
 
                       <AnimatePresence>
                         {isExpanded && (
                           <motion.div
-                            id={`mob-acc-${item.label.replace(/\s+/g, "-")}`}
-                            initial={{ height: 0 }}
-                            animate={{ height: "auto" }}
-                            exit={{ height: 0 }}
+                            id={`mobile-accordion-${item.label.replace(/\s+/g, "-")}`}
+                            initial={{ height: 0, opacity: 0 }}
+                            animate={{ height: "auto", opacity: 1 }}
+                            exit={{ height: 0, opacity: 0 }}
                             transition={{ duration: 0.2 }}
-                            className="overflow-hidden bg-[#FAF7F2]"
+                            className="overflow-hidden flex flex-col space-y-1 py-1"
                           >
                             {hasGroups
                               ? item.groups?.map((group) => (
-                                  <div key={group.title} className="px-5 pb-3 pt-2">
-                                    <p className="text-[9px] uppercase tracking-[0.28em] text-[#D4AF37] font-bold mb-2">
+                                  <div
+                                    key={group.title}
+                                    className="flex flex-col space-y-1 pt-1 pb-1"
+                                  >
+                                    <span className="text-[9.5px] uppercase tracking-[0.25em] text-[#D4AF37] font-bold px-6 py-1 text-left">
                                       ✦ {group.title}
-                                    </p>
-                                    <div className="grid grid-cols-2 gap-px bg-[#D7D3CF]/40">
-                                      {group.items.map((sub) => {
-                                        const active = pathname === sub.href;
+                                    </span>
+                                    <div className="grid grid-cols-2 gap-1 px-4">
+                                      {group.items.map((subItem) => {
+                                        const isSubActive = pathname === subItem.href;
                                         return (
                                           <Link
-                                            key={sub.href}
-                                            href={sub.href}
+                                            key={subItem.href}
+                                            href={subItem.href}
                                             onClick={closeMobileMenu}
-                                            className={`flex flex-col px-3 py-3 transition-colors ${
-                                              active ? "bg-[#F1EBE0] text-[#D4AF37]" : "bg-white text-[#5D5956] hover:bg-[#F1EBE0] hover:text-[#AB9178]"
+                                            className={`py-3 px-3 rounded-[2px] text-xs uppercase tracking-[0.14em] flex items-center justify-between transition-colors ${
+                                              isSubActive
+                                                ? "text-gold bg-white/[0.08] font-bold"
+                                                : "text-ivory/70 hover:text-ivory hover:bg-white/[0.04] font-medium"
                                             }`}
                                           >
-                                            <span className="text-[11px] font-serif">{sub.label}</span>
-                                            {sub.description && (
-                                              <span className="text-[9px] text-[#AB9178] mt-0.5 leading-tight truncate">{sub.description}</span>
-                                            )}
+                                            <span className="truncate">{subItem.label}</span>
+                                            <span className="text-gold text-[9px]">✦</span>
                                           </Link>
                                         );
                                       })}
                                     </div>
-                                    <Link
-                                      href={item.href}
-                                      onClick={closeMobileMenu}
-                                      className="mt-2.5 inline-flex items-center gap-1 text-[9px] uppercase tracking-[0.2em] text-[#D4AF37] hover:text-[#AB9178] font-bold transition-colors"
-                                    >
-                                      Explore All Venues →
-                                    </Link>
                                   </div>
                                 ))
                               : (
-                                <div className="pb-1">
-                                  {item.children?.map((sub) => {
-                                    const active =
-                                      pathname === sub.href ||
-                                      pathname.startsWith(`${sub.href}/`) ||
-                                      (sub.href.includes("?") && pathname === sub.href.split("?")[0]);
-                                    return (
+                                  <>
+                                    {item.children?.map((subItem) => {
+                                      const isSubActive =
+                                        pathname === subItem.href ||
+                                        pathname.startsWith(`${subItem.href}/`) ||
+                                        (subItem.href.includes("?") &&
+                                          pathname === subItem.href.split("?")[0]);
+                                      return (
+                                        <Link
+                                          key={subItem.href}
+                                          href={subItem.href}
+                                          onClick={closeMobileMenu}
+                                          className={`py-3 px-6 rounded-[2px] text-xs uppercase tracking-[0.15em] flex items-center justify-between transition-colors ${
+                                            isSubActive
+                                              ? "text-gold bg-white/[0.08] font-bold"
+                                              : "text-ivory/70 hover:text-ivory hover:bg-white/[0.04] font-medium"
+                                          }`}
+                                        >
+                                          <div className="flex items-center gap-2">
+                                            {subItem.icon === "camera" && (
+                                              <Camera size={13} className="text-gold" />
+                                            )}
+                                            {subItem.icon === "video" && (
+                                              <Video size={13} className="text-gold" />
+                                            )}
+                                            <span>{subItem.label}</span>
+                                          </div>
+                                          <span className="text-gold text-[9px]">✦</span>
+                                        </Link>
+                                      );
+                                    })}
+                                    {item.label !== "Gallery" && (
                                       <Link
-                                        key={sub.href}
-                                        href={sub.href}
+                                        href={item.href}
                                         onClick={closeMobileMenu}
-                                        className={`flex items-center gap-3 px-5 py-3.5 border-t border-[#D7D3CF]/40 transition-colors ${
-                                          active ? "text-[#D4AF37]" : "text-[#5D5956] hover:text-[#AB9178] hover:bg-[#F1EBE0]"
-                                        }`}
+                                        className="py-2 px-6 text-[9.5px] uppercase tracking-widest text-[#D4AF37] hover:text-white font-bold flex items-center justify-center gap-1.5"
                                       >
-                                        {sub.icon === "camera" && <Camera size={14} className="text-[#D4AF37] shrink-0" />}
-                                        {sub.icon === "video" && <Video size={14} className="text-[#D4AF37] shrink-0" />}
-                                        <div>
-                                          <p className="text-[11px] font-serif">{sub.label}</p>
-                                          {sub.description && (
-                                            <p className="text-[9px] text-[#AB9178] mt-0.5 leading-tight">{sub.description}</p>
-                                          )}
-                                        </div>
+                                        <span>View All {item.label}</span>
+                                        <span>→</span>
                                       </Link>
-                                    );
-                                  })}
-                                </div>
-                              )}
+                                    )}
+                                  </>
+                                )}
                           </motion.div>
                         )}
                       </AnimatePresence>
@@ -615,34 +750,39 @@ export const Navbar: React.FC = () => {
                 );
               })}
 
-              {/* Mobile action buttons */}
-              <div className="grid grid-cols-2 gap-3 p-4 bg-[#FAF7F2] border-t border-[#D7D3CF]/60">
+              {/* Mobile Concierge Action Bar */}
+              <div className="pt-3 grid grid-cols-2 gap-2 border-t border-gold/15 mt-2">
                 <a
                   href={`tel:${siteConfig.contact.phone.replace(/[^0-9+]/g, "")}`}
-                  className="flex items-center justify-center gap-2 py-3 rounded-[2px] border border-[#D7D3CF] text-[10px] font-sans font-semibold uppercase tracking-[0.16em] text-[#5D5956] hover:border-[#D4AF37] hover:text-[#D4AF37] transition-colors"
+                  className="py-3 px-3 rounded-[2px] bg-white/[0.04] border border-gold/30 text-xs font-semibold text-ivory hover:text-gold flex items-center justify-center gap-1.5"
                 >
-                  <Phone size={12} className="text-[#D4AF37]" />
-                  Call Us
+                  <Phone size={12} className="text-gold" />
+                  <span>Call Us</span>
                 </a>
                 <a
                   href={siteConfig.contact.whatsapp}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-center gap-2 py-3 rounded-[2px] border border-[#D7D3CF] text-[10px] font-sans font-semibold uppercase tracking-[0.16em] text-[#5D5956] hover:border-[#D4AF37] hover:text-[#D4AF37] transition-colors"
+                  className="py-3 px-3 rounded-[2px] bg-white/[0.04] border border-gold/30 text-xs font-semibold text-ivory hover:text-gold flex items-center justify-center gap-1.5"
                 >
-                  <MessageCircle size={12} className="text-[#D4AF37]" />
-                  WhatsApp
+                  <MessageCircle size={12} className="text-gold" />
+                  <span>WhatsApp</span>
                 </a>
               </div>
 
-              {/* Primary CTA */}
-              <div className="px-4 pb-5">
+              {/* Primary Mobile CTA */}
+              <div className="pt-2">
                 <Link
                   href="/contact"
                   onClick={closeMobileMenu}
-                  className="flex items-center justify-center gap-2 w-full py-3.5 rounded-[2px] border border-[#D4AF37] bg-[#D4AF37] text-white text-[11px] font-sans font-bold uppercase tracking-[0.2em] hover:bg-[#AB9178] hover:border-[#AB9178] transition-colors"
+                  className="w-full py-3 px-4 rounded-[2px] text-xs font-sans font-bold uppercase tracking-[0.2em] flex items-center justify-center gap-2 border border-gold/60 shadow-[0_0_20px_rgba(212,175,55,0.3)]"
+                  style={{
+                    background: "linear-gradient(135deg, #FAF7F2 0%, #D4AF37 55%, #AB9178 100%)",
+                    color: "#08040a",
+                  }}
                 >
-                  ✦ Book a Consultation
+                  <Sparkles size={14} />
+                  <span>Book Private Consultation</span>
                 </Link>
               </div>
             </nav>
