@@ -51,6 +51,9 @@ export default function RootLayout({
       lang="en"
       className={`${cinzel.variable} ${cormorant.variable} ${jakarta.variable} bg-[#030308]`}
     >
+      <head>
+        <link rel="preload" href="/videos/hero-bg.mp4" as="video" type="video/mp4" />
+      </head>
       <body className="bg-[#030308] text-[#FAF7F2] font-sans min-h-screen flex flex-col selection:bg-gold selection:text-black relative">
         <LenisProvider>
           {/* Google Stitch full-site responsive aurora gradient */}
