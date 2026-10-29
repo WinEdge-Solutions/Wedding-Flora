@@ -269,23 +269,6 @@ export const Hero: React.FC = () => {
               </a>
             </motion.div>
 
-            {/* ── Trust Credential Bar ──────────────── */}
-            <motion.div
-              variants={fadeUp}
-              initial="hidden"
-              animate="visible"
-              custom={5.5}
-              className="pt-2 flex items-center justify-center"
-            >
-              <div className="inline-flex items-center gap-2 sm:gap-4 px-4 py-1.5 rounded-full bg-white/[0.04] backdrop-blur-md border border-white/10 text-[10px] sm:text-[11px] text-ivory/80 font-sans tracking-wide">
-                <span className="text-gold font-bold">✦ 100+ Royal Palace Weddings</span>
-                <span className="text-white/20">•</span>
-                <span>Udaipur • Jaipur • Jodhpur • Goa</span>
-                <span className="text-white/20 hidden md:inline">•</span>
-                <span className="text-gold/90 font-medium hidden md:inline">Bespoke Hospitality</span>
-              </div>
-            </motion.div>
-
             {/* ── Scroll nudge ──────────────────────── */}
             <motion.div
               className="pt-1 sm:pt-2 flex justify-center"
