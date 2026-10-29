@@ -41,7 +41,7 @@ export const InstagramShowcase: React.FC = () => {
   };
 
   return (
-    <div className="w-full rounded-2xl border border-[#D4AF37]/40 bg-[#1E1E1E] shadow-[0_20px_60px_rgba(0,0,0,0.35)] overflow-hidden transition-all duration-300">
+    <div className="w-full rounded-[3px] border border-[#D4AF37]/40 bg-[#1E1E1E] shadow-[0_20px_60px_rgba(0,0,0,0.35)] overflow-hidden transition-all duration-300">
       {/* ══════════════════════════════════════════════════
           1. DUMMY WEBVIEW WINDOW TOP CHROME (macOS Titlebar)
          ══════════════════════════════════════════════════ */}
@@ -243,7 +243,7 @@ export const InstagramShowcase: React.FC = () => {
               ].map((reel) => (
                 <div
                   key={reel.id}
-                  className="rounded-2xl overflow-hidden border border-gold/30 bg-charcoal shadow-lg flex flex-col"
+                  className="rounded-[3px] overflow-hidden border border-gold/30 bg-charcoal shadow-lg flex flex-col"
                 >
                   <div className="relative aspect-[9/16] w-full bg-charcoal">
                     <video

@@ -6,6 +6,7 @@ import { Footer } from "@/components/layout/Footer";
 import { LenisProvider } from "@/components/providers/LenisProvider";
 import { MagneticCursor } from "@/components/ui/MagneticCursor";
 import { GlobalAurora } from "@/components/ui/GlobalAurora";
+import { FloatingWhatsApp } from "@/components/ui/FloatingWhatsApp";
 
 const cinzel = Cinzel({
   subsets: ["latin"],
@@ -58,6 +59,7 @@ export default function RootLayout({
           <MagneticCursor />
           <Navbar />
           <div className="flex-1 relative z-10">{children}</div>
+          <FloatingWhatsApp />
           <Footer />
         </LenisProvider>
       </body>

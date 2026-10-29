@@ -181,7 +181,7 @@ export const GalleryGrid: React.FC<GalleryGridProps> = ({ mode }) => {
                 exit={{ opacity: 0, scale: 0.95 }}
                 transition={{ duration: 0.3 }}
                 key={item.id}
-                className="group relative rounded-2xl overflow-hidden bg-[#090614]/80 backdrop-blur-xl border border-white/10 hover:border-gold/60 shadow-[0_12px_40px_rgba(0,0,0,0.5)] transition-all duration-500 hover:-translate-y-1.5 cursor-pointer flex flex-col justify-between"
+                className="group relative rounded-[3px] overflow-hidden bg-[#090614]/80 backdrop-blur-xl border border-white/10 hover:border-gold/60 shadow-[0_12px_40px_rgba(0,0,0,0.5)] transition-all duration-500 hover:-translate-y-1.5 cursor-pointer flex flex-col justify-between"
                 onClick={() => setActiveItem(item)}
               >
                 {/* Media Container */}
@@ -266,7 +266,7 @@ export const GalleryGrid: React.FC<GalleryGridProps> = ({ mode }) => {
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
               transition={{ duration: 0.25 }}
-              className="relative max-w-4xl w-full bg-[#090614] border border-gold/40 rounded-3xl overflow-hidden shadow-[0_25px_60px_rgba(0,0,0,0.8)]"
+              className="relative max-w-4xl w-full bg-[#090614] border border-gold/40 rounded-[3px] overflow-hidden shadow-[0_25px_60px_rgba(0,0,0,0.8)]"
               onClick={(e) => e.stopPropagation()}
             >
               {/* Close Button */}

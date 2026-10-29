@@ -38,7 +38,7 @@ export const BlogGrid: React.FC = () => {
   return (
     <div className="space-y-8 sm:space-y-12">
       {/* ── Search & Filter Controls ── */}
-      <div className="bg-[#090614]/70 backdrop-blur-xl border border-gold/20 rounded-2xl p-6 sm:p-8 space-y-6">
+      <div className="bg-[#090614]/70 backdrop-blur-xl border border-gold/20 rounded-[3px] p-6 sm:p-8 space-y-6">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-white/10 pb-6">
           <div>
             <div className="flex items-center gap-2 text-gold text-xs font-bold uppercase tracking-[0.2em] mb-1">
@@ -103,7 +103,7 @@ export const BlogGrid: React.FC = () => {
 
       {/* ── Articles Grid ── */}
       {filteredPosts.length === 0 ? (
-        <div className="text-center py-16 bg-[#090614]/40 rounded-2xl border border-white/10 p-8 space-y-4">
+        <div className="text-center py-16 bg-[#090614]/40 rounded-[3px] border border-white/10 p-8 space-y-4">
           <p className="text-ivory/60 font-serif text-xl">
             No articles found matching &ldquo;{searchQuery}&rdquo;.
           </p>
@@ -127,7 +127,7 @@ export const BlogGrid: React.FC = () => {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: 15 }}
                 transition={{ duration: 0.3 }}
-                className="group flex flex-col justify-between bg-[#090614]/80 backdrop-blur-xl border border-white/10 hover:border-gold/60 rounded-2xl overflow-hidden shadow-[0_12px_40px_rgba(0,0,0,0.4)] transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_15px_35px_rgba(212,175,55,0.15)]"
+                className="group flex flex-col justify-between bg-[#090614]/80 backdrop-blur-xl border border-white/10 hover:border-gold/60 rounded-[3px] overflow-hidden shadow-[0_12px_40px_rgba(0,0,0,0.4)] transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_15px_35px_rgba(212,175,55,0.15)]"
               >
                 <div>
                   {/* Cover Image Container */}

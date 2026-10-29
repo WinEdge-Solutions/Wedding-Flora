@@ -56,7 +56,7 @@ export default function CelebrationsPage() {
               <article
                 key={story.id}
                 id={story.slug}
-                className="rounded-3xl bg-[#090614]/70 backdrop-blur-xl border border-white/10 p-5 sm:p-10 lg:p-12 shadow-[0_20px_60px_rgba(0,0,0,0.5)] space-y-8 sm:space-y-10"
+                className="rounded-[3px] bg-[#090614]/70 backdrop-blur-xl border border-white/10 p-5 sm:p-10 lg:p-12 shadow-[0_20px_60px_rgba(0,0,0,0.5)] space-y-8 sm:space-y-10"
               >
                 {/* Story Header */}
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
@@ -95,7 +95,7 @@ export default function CelebrationsPage() {
 
                   {/* Main Cover Visual */}
                   <div className="lg:col-span-5">
-                    <div className="relative aspect-[4/5] rounded-2xl overflow-hidden border border-gold/30 shadow-md group">
+                    <div className="relative aspect-[4/5] rounded-[3px] overflow-hidden border border-gold/30 shadow-md group">
                       <Image
                         src={story.coverImage}
                         alt={story.title}
@@ -119,7 +119,7 @@ export default function CelebrationsPage() {
                 </div>
 
                 {/* Highlights Bar */}
-                <div className="p-6 rounded-2xl bg-[#06040e]/80 border border-white/10">
+                <div className="p-6 rounded-[3px] bg-[#06040e]/80 border border-white/10">
                   <h4 className="text-xs uppercase tracking-wider text-ivory font-bold mb-3 flex items-center gap-1.5">
                     <Sparkles className="w-4 h-4 text-gold" />
                     <span>Ceremony &amp; Scenography Highlights</span>
@@ -160,7 +160,7 @@ export default function CelebrationsPage() {
                 </div>
 
                 {/* Couple Quote */}
-                <div className="p-6 sm:p-8 rounded-2xl bg-[#06040e]/60 border-l-4 border-gold border-y border-r border-white/10 relative">
+                <div className="p-6 sm:p-8 rounded-[3px] bg-[#06040e]/60 border-l-4 border-gold border-y border-r border-white/10 relative">
                   <Quote className="w-8 h-8 text-gold/40 mb-2" />
                   <blockquote className="font-serif text-lg sm:text-xl font-semibold text-ivory italic leading-relaxed">
                     &ldquo;{story.quote.text}&rdquo;
@@ -187,7 +187,7 @@ export default function CelebrationsPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 pt-4">
             {galleryData.slice(0, 3).map((item) => (
-              <div key={item.id} className="rounded-2xl overflow-hidden bg-[#090614]/70 backdrop-blur-xl border border-white/10 shadow-[0_12px_40px_rgba(0,0,0,0.5)] group">
+              <div key={item.id} className="rounded-[3px] overflow-hidden bg-[#090614]/70 backdrop-blur-xl border border-white/10 shadow-[0_12px_40px_rgba(0,0,0,0.5)] group">
                 <div className="relative aspect-[9/16] max-h-[460px] w-full overflow-hidden bg-[#030308]">
                   {item.videoUrl ? (
                     <video

@@ -61,7 +61,7 @@ export default function DirectorPage() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
             {/* Visual Column / Editorial Portrait */}
             <div className="lg:col-span-5 relative">
-              <div className="relative aspect-[4/5] rounded-2xl overflow-hidden border border-gold/30 shadow-[0_20px_60px_rgba(0,0,0,0.6)]">
+              <div className="relative aspect-[4/5] rounded-[3px] overflow-hidden border border-gold/30 shadow-[0_20px_60px_rgba(0,0,0,0.6)]">
                 <Image
                   src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1200&q=80"
                   alt="Director and Principal Wedding Architect of Wedding Flora"
@@ -148,7 +148,7 @@ export default function DirectorPage() {
           />
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 pt-4">
-            <div className="p-6 rounded-2xl bg-[#090614]/70 backdrop-blur-xl border border-white/10 hover:border-gold/50 shadow-[0_12px_40px_rgba(0,0,0,0.5)] transition-all duration-300 space-y-3">
+            <div className="p-6 rounded-[3px] bg-[#090614]/70 backdrop-blur-xl border border-white/10 hover:border-gold/50 shadow-[0_12px_40px_rgba(0,0,0,0.5)] transition-all duration-300 space-y-3">
               <div className="w-10 h-10 rounded-full bg-gold/15 flex items-center justify-center text-ivory">
                 <Crown className="w-5 h-5 text-gold" />
               </div>
@@ -158,7 +158,7 @@ export default function DirectorPage() {
               </p>
             </div>
 
-            <div className="p-6 rounded-2xl bg-[#090614]/70 backdrop-blur-xl border border-white/10 hover:border-gold/50 shadow-[0_12px_40px_rgba(0,0,0,0.5)] transition-all duration-300 space-y-3">
+            <div className="p-6 rounded-[3px] bg-[#090614]/70 backdrop-blur-xl border border-white/10 hover:border-gold/50 shadow-[0_12px_40px_rgba(0,0,0,0.5)] transition-all duration-300 space-y-3">
               <div className="w-10 h-10 rounded-full bg-gold/15 flex items-center justify-center text-ivory">
                 <Sparkles className="w-5 h-5 text-gold" />
               </div>
@@ -168,7 +168,7 @@ export default function DirectorPage() {
               </p>
             </div>
 
-            <div className="p-6 rounded-2xl bg-[#090614]/70 backdrop-blur-xl border border-white/10 hover:border-gold/50 shadow-[0_12px_40px_rgba(0,0,0,0.5)] transition-all duration-300 space-y-3">
+            <div className="p-6 rounded-[3px] bg-[#090614]/70 backdrop-blur-xl border border-white/10 hover:border-gold/50 shadow-[0_12px_40px_rgba(0,0,0,0.5)] transition-all duration-300 space-y-3">
               <div className="w-10 h-10 rounded-full bg-gold/15 flex items-center justify-center text-ivory">
                 <HeartHandshake className="w-5 h-5 text-gold" />
               </div>
@@ -178,7 +178,7 @@ export default function DirectorPage() {
               </p>
             </div>
 
-            <div className="p-6 rounded-2xl bg-[#090614]/70 backdrop-blur-xl border border-white/10 hover:border-gold/50 shadow-[0_12px_40px_rgba(0,0,0,0.5)] transition-all duration-300 space-y-3">
+            <div className="p-6 rounded-[3px] bg-[#090614]/70 backdrop-blur-xl border border-white/10 hover:border-gold/50 shadow-[0_12px_40px_rgba(0,0,0,0.5)] transition-all duration-300 space-y-3">
               <div className="w-10 h-10 rounded-full bg-gold/15 flex items-center justify-center text-ivory">
                 <Compass className="w-5 h-5 text-gold" />
               </div>

@@ -132,7 +132,7 @@ export function HorizontalGallery() {
         {panels.map((item, i) => (
           <div
             key={item.id}
-            className={`gallery-panel relative flex-shrink-0 overflow-hidden rounded-2xl md:rounded-[3px] cursor-pointer transition-all duration-500 snap-center md:snap-align-none ${
+            className={`gallery-panel relative flex-shrink-0 overflow-hidden rounded-[3px] md:rounded-[3px] cursor-pointer transition-all duration-500 snap-center md:snap-align-none ${
               i % 3 === 1
                 ? "w-[82vw] sm:w-[320px] md:w-[340px] h-[440px] md:h-[500px]"
                 : "w-[82vw] sm:w-[320px] md:w-[340px] h-[400px] md:h-[440px]"
@@ -163,7 +163,7 @@ export function HorizontalGallery() {
             </div>
 
             {/* Gold border on hover */}
-            <div className="absolute inset-0 border border-gold/0 hover:border-gold/50 transition-all duration-500 rounded-2xl md:rounded-[3px]" />
+            <div className="absolute inset-0 border border-gold/0 hover:border-gold/50 transition-all duration-500 rounded-[3px] md:rounded-[3px]" />
 
             {/* Active dot indicator */}
             {activeIdx === i && (

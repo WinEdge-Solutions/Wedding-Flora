@@ -54,7 +54,7 @@ export default function AboutPage() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
             {/* Visual Column */}
             <div className="lg:col-span-5 relative">
-              <div className="relative aspect-[4/5] rounded-2xl overflow-hidden border border-gold/30 shadow-[0_20px_60px_rgba(0,0,0,0.6)]">
+              <div className="relative aspect-[4/5] rounded-[3px] overflow-hidden border border-gold/30 shadow-[0_20px_60px_rgba(0,0,0,0.6)]">
                 <Image
                   src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=1200&q=80"
                   alt="Royal Palace Wedding Architecture by Wedding Flora"
@@ -128,17 +128,17 @@ export default function AboutPage() {
           />
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 pt-4">
-            <div className="p-8 rounded-2xl bg-[#090614]/70 backdrop-blur-xl border border-white/10 hover:border-gold/50 shadow-[0_12px_40px_rgba(0,0,0,0.5)] transition-all duration-300 space-y-4">
+            <div className="p-8 rounded-[3px] bg-[#090614]/70 backdrop-blur-xl border border-white/10 hover:border-gold/50 shadow-[0_12px_40px_rgba(0,0,0,0.5)] transition-all duration-300 space-y-4">
               <div className="w-12 h-12 rounded-full bg-gold/15 flex items-center justify-center text-ivory">
                 <Crown className="w-6 h-6 text-gold" />
               </div>
               <h3 className="font-serif text-2xl font-semibold text-ivory">Palace Scenography</h3>
               <p className="font-sans text-sm text-ivory/80 font-medium leading-relaxed">
-                We transform historical fortresses and 5-star properties into living dreamscapes with custom 3D mandap architecture, intelligent concert lighting, and sacred sacred fire staging.
+                We transform historical fortresses and 5-star properties into living dreamscapes with custom 3D mandap architecture, intelligent concert lighting, and sacred fire staging.
               </p>
             </div>
 
-            <div className="p-8 rounded-2xl bg-[#090614]/70 backdrop-blur-xl border border-white/10 hover:border-gold/50 shadow-[0_12px_40px_rgba(0,0,0,0.5)] transition-all duration-300 space-y-4">
+            <div className="p-8 rounded-[3px] bg-[#090614]/70 backdrop-blur-xl border border-white/10 hover:border-gold/50 shadow-[0_12px_40px_rgba(0,0,0,0.5)] transition-all duration-300 space-y-4">
               <div className="w-12 h-12 rounded-full bg-gold/15 flex items-center justify-center text-ivory">
                 <Sparkles className="w-6 h-6 text-gold" />
               </div>
@@ -148,7 +148,7 @@ export default function AboutPage() {
               </p>
             </div>
 
-            <div className="p-8 rounded-2xl bg-[#090614]/70 backdrop-blur-xl border border-white/10 hover:border-gold/50 shadow-[0_12px_40px_rgba(0,0,0,0.5)] transition-all duration-300 space-y-4">
+            <div className="p-8 rounded-[3px] bg-[#090614]/70 backdrop-blur-xl border border-white/10 hover:border-gold/50 shadow-[0_12px_40px_rgba(0,0,0,0.5)] transition-all duration-300 space-y-4">
               <div className="w-12 h-12 rounded-full bg-gold/15 flex items-center justify-center text-ivory">
                 <HeartHandshake className="w-6 h-6 text-gold" />
               </div>

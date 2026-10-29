@@ -5,7 +5,16 @@ import { Section } from "@/components/layout/Section";
 import { Divider } from "@/components/ui/Divider";
 import { EnquiryForm } from "@/components/contact/EnquiryForm";
 import { siteConfig } from "@/lib/site";
-import { MapPin, Phone, Mail, MessageCircle, Clock, ShieldCheck, ExternalLink, Navigation } from "lucide-react";
+import {
+  MapPin,
+  Phone,
+  Mail,
+  MessageCircle,
+  Clock,
+  ShieldCheck,
+  ExternalLink,
+  Navigation,
+} from "lucide-react";
 import { InstagramIcon } from "@/components/ui/InstagramIcon";
 
 export const metadata = {
@@ -23,7 +32,13 @@ export default function ContactPage() {
           <div className="max-w-2xl mx-auto space-y-3 sm:space-y-3.5">
             <div className="flex justify-center -mb-2">
               <div className="relative w-12 h-12 sm:w-14 sm:h-14 shrink-0 transition-transform hover:scale-105">
-                <Image src="/images/logo-emblem.png" alt="Wedding Flora Crest" fill className="object-contain" priority />
+                <Image
+                  src="/images/logo-emblem.png"
+                  alt="Wedding Flora Crest"
+                  fill
+                  className="object-contain"
+                  priority
+                />
               </div>
             </div>
 
@@ -49,45 +64,53 @@ export default function ContactPage() {
       {/* ── Contact Form + Direct Info Grid ── */}
       <Section variant="ivory">
         <Container>
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-14">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14">
             {/* Form Column */}
             <div className="lg:col-span-7">
-              <Suspense fallback={<div className="p-12 text-center text-ivory/80 font-medium">Loading enquiry form...</div>}>
+              <Suspense
+                fallback={
+                  <div className="p-12 text-center text-ivory/80 font-medium">
+                    Loading enquiry form...
+                  </div>
+                }
+              >
                 <EnquiryForm />
               </Suspense>
             </div>
 
             {/* Direct Contact Cards Column */}
             <div className="lg:col-span-5 space-y-6">
-              {/* WhatsApp Quick Trigger */}
-              <div className="p-7 rounded-2xl bg-gradient-to-br from-emerald-900 to-emerald-950 text-white shadow-xl space-y-4 border border-emerald-500/20">
+              {/* WhatsApp Quick Trigger — Regal Brand Card */}
+              <div className="p-6 sm:p-7 rounded-[3px] bg-[#090614]/85 backdrop-blur-xl border border-[#D4AF37]/50 shadow-[0_12px_40px_rgba(0,0,0,0.5)] space-y-4">
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-emerald-700/80 flex items-center justify-center">
-                    <MessageCircle className="w-5 h-5 text-white" />
+                  <div className="w-10 h-10 rounded-full bg-[#25D366]/20 border border-[#25D366]/40 flex items-center justify-center text-[#25D366]">
+                    <MessageCircle className="w-5 h-5 text-[#25D366]" />
                   </div>
                   <div>
-                    <span className="text-[10px] uppercase tracking-widest text-emerald-300 font-bold block">
+                    <span className="text-[10px] uppercase tracking-widest text-[#D4AF37] font-bold block">
                       Fastest Response
                     </span>
-                    <h4 className="font-serif text-xl font-bold">Instant WhatsApp Desk</h4>
+                    <h4 className="font-serif text-xl font-bold text-ivory">
+                      Instant WhatsApp Concierge
+                    </h4>
                   </div>
                 </div>
-                <p className="text-xs text-white/90 font-medium leading-relaxed">
-                  Have an urgent date check for palace venues? Our planning directors answer directly on WhatsApp.
+                <p className="text-xs text-ivory/80 font-medium leading-relaxed">
+                  Have an urgent date check for palace venues? Our planning directors answer directly on WhatsApp with itemized feasibility notes.
                 </p>
                 <a
                   href={siteConfig.contact.whatsapp}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full inline-flex items-center justify-center gap-2 px-5 py-3 rounded-[2px] bg-white text-emerald-900 font-sans text-xs uppercase tracking-wider font-bold hover:bg-emerald-50 transition-all shadow"
+                  className="w-full inline-flex items-center justify-center gap-2 px-5 py-3 rounded-[2px] bg-[#25D366] hover:bg-[#20ba59] text-white font-sans text-xs uppercase tracking-wider font-bold transition-all shadow-sm"
                 >
-                  <MessageCircle className="w-4 h-4 text-emerald-800" />
+                  <MessageCircle className="w-4 h-4" />
                   <span>Chat on WhatsApp ({siteConfig.contact.phone})</span>
                 </a>
               </div>
 
-              {/* Contact Information Cards */}
-              <div className="p-7 rounded-2xl bg-[#090614]/70 backdrop-blur-xl border border-white/10 shadow-[0_15px_40px_rgba(0,0,0,0.4)] space-y-6">
+              {/* Contact Information Card */}
+              <div className="p-6 sm:p-7 rounded-[3px] bg-[#090614]/70 backdrop-blur-xl border border-white/10 shadow-[0_15px_40px_rgba(0,0,0,0.4)] space-y-5">
                 <h4 className="font-serif text-2xl font-semibold text-ivory pb-2 border-b border-white/10">
                   Studios &amp; Direct Lines
                 </h4>
@@ -99,16 +122,9 @@ export default function ContactPage() {
                       <span className="text-xs uppercase tracking-wider text-[#D4AF37] font-bold block">
                         Head Office &amp; Planning Studio (Jaipur)
                       </span>
-                      <p className="text-ivory leading-relaxed">{siteConfig.contact.address}</p>
-                      <a
-                        href={siteConfig.contact.mapsUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1.5 text-xs text-gold hover:text-white font-bold underline transition-colors pt-0.5"
-                      >
-                        <span>Open in Google Maps / Get Directions</span>
-                        <ExternalLink size={12} />
-                      </a>
+                      <p className="text-ivory leading-relaxed text-xs sm:text-sm">
+                        {siteConfig.contact.address}
+                      </p>
                     </div>
                   </div>
 
@@ -118,7 +134,10 @@ export default function ContactPage() {
                       <span className="text-xs uppercase tracking-wider text-[#D4AF37] font-bold block">
                         Direct Phone Line
                       </span>
-                      <a href={`tel:${siteConfig.contact.phone.replace(/[^0-9+]/g, "")}`} className="hover:text-gold transition-colors font-bold text-ivory">
+                      <a
+                        href={`tel:${siteConfig.contact.phone.replace(/[^0-9+]/g, "")}`}
+                        className="hover:text-gold transition-colors font-bold text-ivory text-xs sm:text-sm"
+                      >
                         {siteConfig.contact.phone}
                       </a>
                     </div>
@@ -130,7 +149,10 @@ export default function ContactPage() {
                       <span className="text-xs uppercase tracking-wider text-[#D4AF37] font-bold block">
                         Official Enquiries
                       </span>
-                      <a href={`mailto:${siteConfig.contact.email}`} className="hover:text-gold transition-colors font-bold text-ivory">
+                      <a
+                        href={`mailto:${siteConfig.contact.email}`}
+                        className="hover:text-gold transition-colors font-bold text-ivory text-xs sm:text-sm"
+                      >
                         {siteConfig.contact.email}
                       </a>
                     </div>
@@ -142,7 +164,12 @@ export default function ContactPage() {
                       <span className="text-xs uppercase tracking-wider text-[#D4AF37] font-bold block">
                         Official Instagram
                       </span>
-                      <a href={siteConfig.contact.instagram} target="_blank" rel="noopener noreferrer" className="hover:text-gold transition-colors font-bold text-ivory">
+                      <a
+                        href={siteConfig.contact.instagram}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="hover:text-gold transition-colors font-bold text-ivory text-xs sm:text-sm"
+                      >
                         @weddingflora_theweddingplanner
                       </a>
                     </div>
@@ -154,29 +181,41 @@ export default function ContactPage() {
                       <span className="text-xs uppercase tracking-wider text-[#D4AF37] font-bold block">
                         Consultation Hours
                       </span>
-                      <p>Monday – Sunday: 10:00 AM – 8:00 PM IST (By Appointment)</p>
+                      <p className="text-xs sm:text-sm">
+                        Monday – Sunday: 10:00 AM – 8:00 PM IST (By Appointment)
+                      </p>
                     </div>
                   </div>
                 </div>
               </div>
 
-              {/* Google Maps Location Card */}
-              <div className="p-6 rounded-2xl bg-[#090614]/75 backdrop-blur-xl border border-gold/30 shadow-lg space-y-3">
+              {/* Embedded Google Map Studio Card */}
+              <div className="p-6 rounded-[3px] bg-[#090614]/75 backdrop-blur-xl border border-gold/30 shadow-lg space-y-3.5">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-gold">
                     <Navigation className="w-4 h-4 text-gold" />
-                    <span>Office Location</span>
+                    <span>Jaipur Studio Location</span>
                   </div>
-                  <span className="text-[10px] uppercase font-bold text-emerald-400 bg-emerald-950/60 border border-emerald-500/30 px-2 py-0.5 rounded">
+                  <span className="text-[10px] uppercase font-bold text-emerald-400 bg-emerald-950/60 border border-emerald-500/30 px-2 py-0.5 rounded-[2px]">
                     Open for Appointments
                   </span>
                 </div>
-                <h5 className="font-serif text-lg font-bold text-ivory">
-                  Visit Wedding Flora Studio in Jaipur
-                </h5>
-                <p className="text-xs text-ivory/80 leading-relaxed font-medium">
-                  {siteConfig.contact.address}
-                </p>
+
+                {/* Embedded Interactive Map */}
+                <div className="overflow-hidden rounded-[2px] border border-white/10 relative">
+                  <iframe
+                    title="Wedding Flora Office Map"
+                    src="https://maps.google.com/maps?q=Wedding+Flora+D-52+Saket+Colony+Adarsh+Nagar+Jaipur&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                    width="100%"
+                    height="190"
+                    style={{ border: 0 }}
+                    allowFullScreen={false}
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                    className="w-full h-48 filter brightness-[0.88] contrast-[1.05]"
+                  />
+                </div>
+
                 <div className="pt-1">
                   <a
                     href={siteConfig.contact.mapsUrl}
@@ -184,14 +223,14 @@ export default function ContactPage() {
                     rel="noopener noreferrer"
                     className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-[2px] bg-white/[0.06] hover:bg-gold hover:text-midnight text-ivory text-xs uppercase tracking-wider font-extrabold transition-all border border-white/10 hover:border-gold"
                   >
-                    <span>Open in Google Maps / Directions</span>
+                    <span>Get Directions on Google Maps</span>
                     <ExternalLink className="w-3.5 h-3.5" />
                   </a>
                 </div>
               </div>
 
               {/* Peace of mind badge */}
-              <div className="p-5 rounded-2xl bg-[#090614]/70 backdrop-blur-xl border border-white/10 flex items-center gap-3.5">
+              <div className="p-5 rounded-[3px] bg-[#090614]/70 backdrop-blur-xl border border-white/10 flex items-center gap-3.5">
                 <ShieldCheck className="w-7 h-7 text-gold shrink-0" />
                 <p className="text-xs text-ivory/80 font-medium leading-relaxed">
                   Strictly confidential consultations. We regularly sign NDAs for high-profile and celebrity family celebrations.

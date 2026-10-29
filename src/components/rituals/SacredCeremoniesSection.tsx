@@ -28,7 +28,7 @@ export const SacredCeremoniesSection: React.FC = () => {
           return (
             <div
               key={ritual.id}
-              className="group flex flex-col justify-between bg-[#090614]/80 backdrop-blur-xl border border-white/10 hover:border-gold/60 rounded-2xl overflow-hidden transition-all duration-300 hover:shadow-[0_15px_35px_rgba(212,175,55,0.15)] hover:-translate-y-1"
+              className="group flex flex-col justify-between bg-[#090614]/80 backdrop-blur-xl border border-white/10 hover:border-gold/60 rounded-[3px] overflow-hidden transition-all duration-300 hover:shadow-[0_15px_35px_rgba(212,175,55,0.15)] hover:-translate-y-1"
             >
               <div>
                 {/* Visual Image */}

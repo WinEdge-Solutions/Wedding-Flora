@@ -43,7 +43,7 @@ export default function DestinationsPage() {
       {/* ── Quick City Jump Bar ── */}
       <nav
         aria-label="Rajasthan Cities"
-        className="sticky top-[68px] z-30 bg-[#090614]/90 backdrop-blur-xl border-b border-gold/20 py-2.5 overflow-x-auto no-scrollbar shadow-lg"
+        className="sticky top-[64px] z-30 bg-[#090614]/90 backdrop-blur-xl border-b border-gold/20 py-2.5 overflow-x-auto no-scrollbar shadow-lg"
       >
         <Container>
           <div className="flex items-center justify-start lg:justify-center gap-2 min-w-max px-2">
@@ -54,7 +54,7 @@ export default function DestinationsPage() {
               <a
                 key={city.id}
                 href={`#${city.id}`}
-                className="px-3.5 py-1 rounded-full text-xs font-semibold text-ivory/85 bg-white/[0.04] border border-white/10 hover:border-gold hover:text-gold hover:bg-gold/10 transition-all duration-200 whitespace-nowrap"
+                className="px-3.5 py-1 rounded-[2px] text-xs font-semibold text-ivory/85 bg-white/[0.04] border border-white/10 hover:border-gold hover:text-gold hover:bg-gold/10 transition-all duration-200 whitespace-nowrap"
               >
                 {city.name}
               </a>
@@ -79,7 +79,7 @@ export default function DestinationsPage() {
                 >
                   {/* Image Column */}
                   <div className={`lg:col-span-6 ${isEven ? "lg:order-2" : "lg:order-1"}`}>
-                    <div className="relative aspect-[4/3] rounded-2xl overflow-hidden border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.5)] group">
+                    <div className="relative aspect-[4/3] rounded-[3px] overflow-hidden border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.5)] group">
                       <Image
                         src={city.imageUrl}
                         alt={`${city.name} Destination Wedding by Wedding Flora`}
