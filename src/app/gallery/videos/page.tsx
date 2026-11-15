@@ -51,13 +51,13 @@ export default function VideoGalleryPage() {
 
             {/* Quick Stat Highlights */}
             <div className="pt-4 flex flex-wrap items-center justify-center gap-3 text-xs">
-              <div className="px-4 py-2 rounded-full bg-white/[0.04] border border-gold/30 text-ivory flex items-center gap-2">
+              <div className="px-4 py-2 rounded-full bg-white border border-gold/25 text-[#1A1209] shadow-sm flex items-center gap-2">
                 <Video className="w-4 h-4 text-gold" />
                 <span className="font-bold text-gold">4K</span>
                 <span className="text-ivory/80">Cinematic Master Reels</span>
               </div>
 
-              <div className="px-4 py-2 rounded-full bg-white/[0.04] border border-gold/30 text-ivory flex items-center gap-2">
+              <div className="px-4 py-2 rounded-full bg-white border border-gold/25 text-[#1A1209] shadow-sm flex items-center gap-2">
                 <Film className="w-4 h-4 text-gold" />
                 <span className="text-ivory/80">Full Sound &amp; Live Shows</span>
               </div>
@@ -75,7 +75,7 @@ export default function VideoGalleryPage() {
       </section>
 
       {/* ── Main Video Gallery Grid Section ── */}
-      <Section variant="charcoal">
+      <Section variant="ivory">
         <Container>
           <Suspense
             fallback={

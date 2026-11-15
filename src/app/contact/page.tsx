@@ -190,7 +190,7 @@ export default function ContactPage() {
               </div>
 
               {/* Embedded Google Map Studio Card */}
-              <div className="p-6 rounded-[3px] bg-[#090614]/75 backdrop-blur-xl border border-gold/30 shadow-lg space-y-3.5">
+              <div className="p-6 rounded-[3px] bg-white border border-gold/30 shadow-md space-y-3.5">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-gold">
                     <Navigation className="w-4 h-4 text-gold" />
@@ -221,7 +221,7 @@ export default function ContactPage() {
                     href={siteConfig.contact.mapsUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-[2px] bg-white/[0.06] hover:bg-gold hover:text-midnight text-ivory text-xs uppercase tracking-wider font-extrabold transition-all border border-white/10 hover:border-gold"
+                    className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-[2px] bg-[#FAF7F2] hover:bg-gold hover:text-black text-[#1A1209] text-xs uppercase tracking-wider font-bold transition-all border border-gold/30 hover:border-gold shadow-sm"
                   >
                     <span>Get Directions on Google Maps</span>
                     <ExternalLink className="w-3.5 h-3.5" />

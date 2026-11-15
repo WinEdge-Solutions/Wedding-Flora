@@ -190,7 +190,7 @@ export default function ServicesPage() {
                 key={pkg.id}
                 className={`relative rounded-[3px] p-6 sm:p-7 flex flex-col justify-between transition-all duration-300 ${
                   pkg.recommended
-                    ? "bg-[#090614]/80 backdrop-blur-xl border-2 border-gold shadow-[0_20px_50px_rgba(212,175,55,0.2)] md:-translate-y-2"
+                    ? "bg-[#FAF7F2] border-2 border-gold shadow-[0_16px_45px_rgba(212,175,55,0.2)] ring-1 ring-gold/40 md:-translate-y-2"
                     : "bg-white border border-gold/25 shadow-[0_8px_30px_rgba(26,18,9,0.06)] hover:border-gold/60 hover:shadow-xl"
                 }`}
               >

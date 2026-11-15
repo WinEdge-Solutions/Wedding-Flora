@@ -93,7 +93,7 @@ export const HotelDirectory: React.FC<HotelDirectoryProps> = ({
                   className={`px-4 py-2 rounded-full text-xs font-bold tracking-wider uppercase transition-all flex items-center gap-2 ${
                     active
                       ? "bg-gold text-midnight font-extrabold shadow-[0_0_15px_rgba(212,175,55,0.4)]"
-                      : "bg-white/[0.04] text-[#5C5147] hover:text-[#1A1209] hover:bg-white/[0.08] border border-white/10"
+                      : "bg-[#FAF7F2] text-[#5C5147] hover:text-[#1A1209] hover:bg-gold/10 border border-gold/20"
                   }`}
                 >
                   <span>{cat.label}</span>
@@ -112,7 +112,7 @@ export const HotelDirectory: React.FC<HotelDirectoryProps> = ({
 
       {/* ── Hotels Grid ── */}
       {filteredHotels.length === 0 ? (
-        <div className="text-center py-16 bg-[#090614]/40 rounded-[3px] border border-white/10 p-8 space-y-4">
+        <div className="text-center py-16 bg-[#FAF7F2] rounded-[3px] border border-gold/25 p-8 space-y-4">
           <p className="text-[#5C5147] font-serif text-xl">
             No hotels found matching &ldquo;{searchQuery}&rdquo;.
           </p>
@@ -154,7 +154,7 @@ export const HotelDirectory: React.FC<HotelDirectoryProps> = ({
                       className="object-cover transition-transform duration-700 group-hover:scale-105"
                       loading="lazy"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-40" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
 
                     {/* Category Badge */}
                     <div className="absolute top-3 left-3">
@@ -166,14 +166,14 @@ export const HotelDirectory: React.FC<HotelDirectoryProps> = ({
                     {/* Price Tier */}
                     {hotel.priceTier && (
                       <div className="absolute top-3 right-3">
-                        <span className="px-2.5 py-1 rounded text-[10px] font-bold uppercase tracking-wider bg-black/70 backdrop-blur-md text-[#1A1209]/90 border border-white/10">
+                        <span className="px-2.5 py-1 rounded text-[10px] font-bold uppercase tracking-wider bg-black/70 backdrop-blur-md text-white font-bold border border-white/20">
                           {hotel.priceTier}
                         </span>
                       </div>
                     )}
 
                     {/* Location strip */}
-                    <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between text-xs text-[#1A1209]/90">
+                    <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between text-xs text-white font-medium">
                       <div className="flex items-center gap-1.5 font-medium">
                         <MapPin className="w-3.5 h-3.5 text-gold shrink-0" />
                         <span className="truncate">{hotel.location}</span>
@@ -189,7 +189,7 @@ export const HotelDirectory: React.FC<HotelDirectoryProps> = ({
 
                     {/* Stat Badges */}
                     <div className="grid grid-cols-2 gap-2 text-xs">
-                      <div className="flex items-center gap-2 p-2.5 rounded-lg bg-white/[0.03] border border-white/10">
+                      <div className="flex items-center gap-2 p-2.5 rounded-lg bg-[#FAF7F2] border border-gold/15">
                         <BedDouble className="w-4 h-4 text-gold shrink-0" />
                         <div>
                           <span className="text-[10px] uppercase text-[#5C5147] block font-bold">
@@ -201,7 +201,7 @@ export const HotelDirectory: React.FC<HotelDirectoryProps> = ({
                         </div>
                       </div>
 
-                      <div className="flex items-center gap-2 p-2.5 rounded-lg bg-white/[0.03] border border-white/10">
+                      <div className="flex items-center gap-2 p-2.5 rounded-lg bg-[#FAF7F2] border border-gold/15">
                         <Users className="w-4 h-4 text-gold shrink-0" />
                         <div>
                           <span className="text-[10px] uppercase text-[#5C5147] block font-bold">
@@ -249,9 +249,9 @@ export const HotelDirectory: React.FC<HotelDirectoryProps> = ({
                     href={whatsappLink}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-full inline-flex items-center justify-center gap-2 px-3 py-2 rounded-[2px] border border-emerald-500/30 hover:border-emerald-400 bg-emerald-950/30 text-emerald-300 font-sans text-xs uppercase tracking-wider font-bold transition-all"
+                    className="w-full inline-flex items-center justify-center gap-2 px-3 py-2 rounded-[2px] border border-emerald-400 bg-emerald-50 hover:bg-emerald-100 text-emerald-900 font-sans text-xs uppercase tracking-wider font-bold transition-all shadow-sm"
                   >
-                    <MessageCircle className="w-3.5 h-3.5 text-emerald-400" />
+                    <MessageCircle className="w-3.5 h-3.5 text-emerald-600" />
                     <span>WhatsApp Venue Enquiry</span>
                   </a>
                 </div>

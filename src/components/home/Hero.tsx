@@ -82,7 +82,7 @@ export const Hero: React.FC = () => {
   return (
     <section
       ref={sectionRef}
-      className="relative w-full min-h-screen flex items-center justify-center overflow-hidden bg-[#1A100A]"
+      className="relative w-full min-h-screen flex items-center justify-center overflow-hidden bg-[#0E0A06]"
     >
       {/* ══════════════════════════════════════════════
           LAYER 0 — Luxury Video Background with Parallax
@@ -107,7 +107,7 @@ export const Hero: React.FC = () => {
 
         {/* ── Lighter cinematic scrims — video breathes more on ivory theme ── */}
         {/* Top navbar gradient — still needs to fade to transparent quickly */}
-        <div className="absolute inset-x-0 top-0 h-36 bg-gradient-to-b from-[#1A100A]/85 via-[#1A100A]/40 to-transparent" />
+        <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-black/45 via-black/20 to-transparent" />
 
         {/* Very light ambient veil — far less dark than before */}
         <div className="absolute inset-0 bg-[#06040d]/30" />

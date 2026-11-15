@@ -37,7 +37,7 @@ export const Button: React.FC<ButtonProps> = ({
     primary:
       "bg-gradient-to-r from-[#D4AF37] via-[#F3E5AB] to-[#D4AF37] text-[#1A1209] font-bold border border-gold/50 shadow-[0_4px_20px_rgba(212,175,55,0.35)] hover:shadow-[0_8px_30px_rgba(212,175,55,0.5)] hover:scale-[1.02] hover:-translate-y-0.5 active:translate-y-0",
     outline:
-      "shimmer-card bg-white/90 backdrop-blur-md text-[#1A1209] border border-gold/70 hover:bg-gold hover:text-white hover:border-gold hover:shadow-[0_4px_25px_rgba(212,175,55,0.3)] hover:-translate-y-0.5 active:translate-y-0",
+      "shimmer-card bg-white/90 backdrop-blur-md text-[#1A1209] border border-gold/70 hover:bg-gold hover:text-[#1A1209] hover:border-gold hover:shadow-[0_4px_25px_rgba(212,175,55,0.3)] hover:-translate-y-0.5 active:translate-y-0",
     text:
       "bg-transparent text-[#1A1209] hover:text-gold underline underline-offset-8 decoration-gold/60 p-0 border-0 overflow-visible",
   };

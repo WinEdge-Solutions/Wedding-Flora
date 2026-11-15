@@ -68,8 +68,8 @@ export default function DirectorPage() {
                   fill
                   className="object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#090614]/90 via-transparent to-transparent" />
-                <div className="absolute bottom-6 left-6 right-6 text-ivory">
+                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/35 to-transparent" />
+                <div className="absolute bottom-6 left-6 right-6 text-white">
                   <span className="text-xs uppercase tracking-widest text-gold font-bold block mb-1">
                     Leadership &amp; Vision
                   </span>
@@ -77,7 +77,7 @@ export default function DirectorPage() {
                     {/* TODO: replace with the director's full legal name */}
                     Creative Director &amp; Founder
                   </p>
-                  <p className="font-sans text-xs text-ivory/70 mt-1 uppercase tracking-wider">
+                  <p className="font-sans text-xs text-white/80 mt-1 uppercase tracking-wider">
                     Wedding Flora • Est. 2014
                   </p>
                 </div>

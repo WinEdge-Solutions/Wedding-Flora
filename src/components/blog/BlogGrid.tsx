@@ -84,7 +84,7 @@ export const BlogGrid: React.FC = () => {
                 className={`px-4 py-2 rounded-full text-xs font-bold tracking-wider uppercase transition-all flex items-center gap-2 ${
                   active
                     ? "bg-gold text-midnight font-extrabold shadow-[0_0_15px_rgba(212,175,55,0.4)]"
-                    : "bg-white/[0.04] text-[#5C5147] hover:text-[#1A1209] hover:bg-white/[0.08] border border-white/10"
+                    : "bg-[#FAF7F2] text-[#5C5147] hover:text-[#1A1209] hover:bg-gold/10 border border-gold/20"
                 }`}
               >
                 <span>{cat.label}</span>
@@ -103,7 +103,7 @@ export const BlogGrid: React.FC = () => {
 
       {/* ── Articles Grid ── */}
       {filteredPosts.length === 0 ? (
-        <div className="text-center py-16 bg-[#090614]/40 rounded-[3px] border border-white/10 p-8 space-y-4">
+        <div className="text-center py-16 bg-[#FAF7F2] rounded-[3px] border border-gold/25 p-8 space-y-4">
           <p className="text-[#5C5147] font-serif text-xl">
             No articles found matching &ldquo;{searchQuery}&rdquo;.
           </p>
@@ -181,7 +181,7 @@ export const BlogGrid: React.FC = () => {
                       {post.tags.slice(0, 3).map((tag, idx) => (
                         <span
                           key={idx}
-                          className="px-2 py-0.5 rounded text-[10px] font-medium bg-white/[0.04] text-[#5C5147] border border-white/5"
+                          className="px-2 py-0.5 rounded text-[10px] font-medium bg-[#FAF7F2] text-[#5C5147] border border-gold/15"
                         >
                           #{tag}
                         </span>
@@ -194,7 +194,7 @@ export const BlogGrid: React.FC = () => {
                 <div className="p-5 sm:p-6 pt-0 border-t border-white/5 mt-4">
                   <Link
                     href={`/blog/${post.slug}`}
-                    className="w-full inline-flex items-center justify-between py-2 px-3 rounded-[2px] bg-white/[0.04] hover:bg-gold hover:text-midnight text-[#1A1209] text-xs uppercase tracking-wider font-extrabold transition-all border border-white/10 hover:border-gold"
+                    className="w-full inline-flex items-center justify-between py-2.5 px-3 rounded-[2px] bg-[#FAF7F2] hover:bg-gold hover:text-black text-[#1A1209] text-xs uppercase tracking-wider font-bold transition-all border border-gold/30 hover:border-gold shadow-sm"
                   >
                     <span>Read Full Guide</span>
                     <ArrowRight className="w-3.5 h-3.5" />
