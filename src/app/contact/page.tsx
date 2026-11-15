@@ -27,7 +27,7 @@ export default function ContactPage() {
   return (
     <main className="min-h-screen text-ivory relative z-10">
       {/* ── Contact Hero ── */}
-      <section className="relative py-14 sm:py-20 overflow-hidden bg-white/[0.02] backdrop-blur-[2px] border-b border-gold/20">
+      <section className="relative py-14 sm:py-20 overflow-hidden bg-[#FAF7F2]/60 border-b border-gold/20">
         <Container className="relative z-10 text-center">
           <div className="max-w-2xl mx-auto space-y-3 sm:space-y-3.5">
             <div className="flex justify-center -mb-2">
@@ -81,7 +81,7 @@ export default function ContactPage() {
             {/* Direct Contact Cards Column */}
             <div className="lg:col-span-5 space-y-6">
               {/* WhatsApp Quick Trigger — Regal Brand Card */}
-              <div className="p-6 sm:p-7 rounded-[3px] bg-[#090614]/85 backdrop-blur-xl border border-[#D4AF37]/50 shadow-[0_12px_40px_rgba(0,0,0,0.5)] space-y-4">
+              <div className="p-6 sm:p-7 rounded-[3px] bg-white border border-gold/40 shadow-[0_8px_30px_rgba(26,18,9,0.06)] shadow-[0_12px_40px_rgba(0,0,0,0.5)] space-y-4">
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 rounded-full bg-[#25D366]/20 border border-[#25D366]/40 flex items-center justify-center text-[#25D366]">
                     <MessageCircle className="w-5 h-5 text-[#25D366]" />
@@ -110,7 +110,7 @@ export default function ContactPage() {
               </div>
 
               {/* Contact Information Card */}
-              <div className="p-6 sm:p-7 rounded-[3px] bg-[#090614]/70 backdrop-blur-xl border border-white/10 shadow-[0_15px_40px_rgba(0,0,0,0.4)] space-y-5">
+              <div className="p-6 sm:p-7 rounded-[3px] bg-white border border-gold/25 shadow-[0_8px_30px_rgba(26,18,9,0.06)] shadow-[0_15px_40px_rgba(0,0,0,0.4)] space-y-5">
                 <h4 className="font-serif text-2xl font-semibold text-ivory pb-2 border-b border-white/10">
                   Studios &amp; Direct Lines
                 </h4>
@@ -230,7 +230,7 @@ export default function ContactPage() {
               </div>
 
               {/* Peace of mind badge */}
-              <div className="p-5 rounded-[3px] bg-[#090614]/70 backdrop-blur-xl border border-white/10 flex items-center gap-3.5">
+              <div className="p-5 rounded-[3px] bg-white border border-gold/25 shadow-[0_8px_30px_rgba(26,18,9,0.06)] flex items-center gap-3.5">
                 <ShieldCheck className="w-7 h-7 text-gold shrink-0" />
                 <p className="text-xs text-ivory/80 font-medium leading-relaxed">
                   Strictly confidential consultations. We regularly sign NDAs for high-profile and celebrity family celebrations.

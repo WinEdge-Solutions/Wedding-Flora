@@ -18,7 +18,7 @@ export default function DestinationsPage() {
   return (
     <main className="min-h-screen text-ivory relative z-10">
       {/* ── Destinations Hero ── */}
-      <section className="relative py-16 sm:py-24 overflow-hidden bg-white/[0.02] backdrop-blur-[2px] border-b border-gold/20">
+      <section className="relative py-16 sm:py-24 overflow-hidden bg-[#FAF7F2]/60 border-b border-gold/20">
         <Container className="relative z-10 text-center">
           <div className="max-w-3xl mx-auto space-y-3.5 sm:space-y-4">
             <p className="font-sans text-[9px] sm:text-xs uppercase tracking-[0.16em] sm:tracking-[0.32em] text-[#D4AF37] font-bold flex items-center justify-center gap-1.5 sm:gap-2 px-2">
@@ -43,7 +43,7 @@ export default function DestinationsPage() {
       {/* ── Quick City Jump Bar ── */}
       <nav
         aria-label="Rajasthan Cities"
-        className="sticky top-[64px] z-30 bg-[#090614]/90 backdrop-blur-xl border-b border-gold/20 py-2.5 overflow-x-auto no-scrollbar shadow-lg"
+        className="sticky top-[64px] z-30 bg-[#FDFAF5]/95 backdrop-blur-xl border-b border-gold/20 shadow-sm py-2.5 overflow-x-auto no-scrollbar shadow-lg"
       >
         <Container>
           <div className="flex items-center justify-start lg:justify-center gap-2 min-w-max px-2">
@@ -54,7 +54,7 @@ export default function DestinationsPage() {
               <a
                 key={city.id}
                 href={`#${city.id}`}
-                className="px-3.5 py-1 rounded-[2px] text-xs font-semibold text-ivory/85 bg-white/[0.04] border border-white/10 hover:border-gold hover:text-gold hover:bg-gold/10 transition-all duration-200 whitespace-nowrap"
+                className="px-3.5 py-1 rounded-[2px] text-xs font-semibold text-[#1A1209] bg-[#FAF7F2] border border-gold/20 hover:border-gold hover:text-gold hover:bg-gold/10 transition-all duration-200 whitespace-nowrap"
               >
                 {city.name}
               </a>
@@ -164,7 +164,7 @@ export default function DestinationsPage() {
       </Section>
 
       {/* ── Destination Consultation CTA ── */}
-      <section className="bg-black/50 backdrop-blur-md text-ivory py-16 text-center relative overflow-hidden border-t border-gold/20">
+      <section className="bg-[#F7F3EC] text-[#1A1209] py-16 sm:py-20 text-center relative overflow-hidden border-t border-gold/25 text-center relative overflow-hidden border-t border-gold/20">
         <Container size="narrow" className="relative z-10 space-y-5">
           <p className="font-sans text-xs uppercase tracking-[0.3em] text-[#D4AF37] font-bold">
             Bespoke Destination Planning

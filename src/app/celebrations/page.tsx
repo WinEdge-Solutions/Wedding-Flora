@@ -19,7 +19,7 @@ export default function CelebrationsPage() {
   return (
     <main className="min-h-screen text-ivory relative z-10">
       {/* ── Celebrations Hero ── */}
-      <section className="relative py-14 sm:py-24 overflow-hidden bg-white/[0.02] backdrop-blur-[2px] border-b border-gold/20">
+      <section className="relative py-14 sm:py-24 overflow-hidden bg-[#FAF7F2]/60 border-b border-gold/20">
         <Container className="relative z-10 text-center">
           <div className="max-w-3xl mx-auto space-y-3.5 sm:space-y-4">
             <p className="font-sans text-[9px] sm:text-xs uppercase tracking-[0.16em] sm:tracking-[0.32em] text-[#D4AF37] font-bold flex items-center justify-center gap-1.5 sm:gap-2 px-2">
@@ -56,7 +56,7 @@ export default function CelebrationsPage() {
               <article
                 key={story.id}
                 id={story.slug}
-                className="rounded-[3px] bg-[#090614]/70 backdrop-blur-xl border border-white/10 p-5 sm:p-10 lg:p-12 shadow-[0_20px_60px_rgba(0,0,0,0.5)] space-y-8 sm:space-y-10"
+                className="rounded-[3px] bg-white border border-gold/25 shadow-[0_8px_30px_rgba(26,18,9,0.06)] p-5 sm:p-10 lg:p-12 shadow-[0_20px_60px_rgba(0,0,0,0.5)] space-y-8 sm:space-y-10"
               >
                 {/* Story Header */}
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
@@ -119,7 +119,7 @@ export default function CelebrationsPage() {
                 </div>
 
                 {/* Highlights Bar */}
-                <div className="p-6 rounded-[3px] bg-[#06040e]/80 border border-white/10">
+                <div className="p-6 rounded-[3px] bg-[#FAF7F2] border border-gold/20">
                   <h4 className="text-xs uppercase tracking-wider text-ivory font-bold mb-3 flex items-center gap-1.5">
                     <Sparkles className="w-4 h-4 text-gold" />
                     <span>Ceremony &amp; Scenography Highlights</span>
@@ -187,7 +187,7 @@ export default function CelebrationsPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 pt-4">
             {galleryData.slice(0, 3).map((item) => (
-              <div key={item.id} className="rounded-[3px] overflow-hidden bg-[#090614]/70 backdrop-blur-xl border border-white/10 shadow-[0_12px_40px_rgba(0,0,0,0.5)] group">
+              <div key={item.id} className="rounded-[3px] overflow-hidden bg-white border border-gold/25 shadow-[0_8px_30px_rgba(26,18,9,0.06)] shadow-[0_12px_40px_rgba(0,0,0,0.5)] group">
                 <div className="relative aspect-[9/16] max-h-[460px] w-full overflow-hidden bg-[#030308]">
                   {item.videoUrl ? (
                     <video
@@ -224,7 +224,7 @@ export default function CelebrationsPage() {
       </Section>
 
       {/* ── Bottom CTA ── */}
-      <section className="bg-black/50 backdrop-blur-md text-ivory py-16 text-center relative overflow-hidden grain-overlay border-t border-gold/20">
+      <section className="bg-[#F7F3EC] text-[#1A1209] py-16 sm:py-20 text-center relative overflow-hidden border-t border-gold/25 text-center relative overflow-hidden grain-overlay border-t border-gold/20">
         <Container size="narrow" className="relative z-10 space-y-5">
           <p className="font-sans text-xs uppercase tracking-[0.3em] text-[#D4AF37] font-bold">
             Create Your Own Story

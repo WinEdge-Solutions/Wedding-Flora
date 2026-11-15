@@ -201,7 +201,7 @@ export const InstagramShowcase: React.FC = () => {
           </div>
         ) : (
           /* Reels Player View */
-          <div className="p-6 sm:p-8 space-y-6 bg-ivory">
+          <div className="p-6 sm:p-8 space-y-6 bg-[#FDFAF5]">
             <div className="text-center max-w-xl mx-auto space-y-1">
               <span className="text-xs uppercase tracking-widest text-[#8C6D2D] font-bold">
                 Royal Wedding Film Archives
@@ -262,7 +262,7 @@ export const InstagramShowcase: React.FC = () => {
                     </div>
                   </div>
 
-                  <div className="p-4 bg-ivory space-y-2 flex-1 flex flex-col justify-between">
+                  <div className="p-4 bg-[#FDFAF5] space-y-2 flex-1 flex flex-col justify-between">
                     <p className="text-xs text-charcoal/90 font-medium line-clamp-3">
                       {reel.desc}
                     </p>

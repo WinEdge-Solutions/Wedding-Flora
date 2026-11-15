@@ -14,10 +14,10 @@ export const SacredCeremoniesSection: React.FC = () => {
           <span>Sacred Traditions &amp; Celebrations</span>
           <span>✦</span>
         </p>
-        <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-semibold text-ivory tracking-tight leading-tight">
+        <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-semibold text-[#1A1209] tracking-tight leading-tight">
           The Sacred Ceremonies We Curate
         </h2>
-        <p className="font-sans text-sm sm:text-base text-ivory/80 font-medium leading-relaxed">
+        <p className="font-sans text-sm sm:text-base text-[#5C5147] font-medium leading-relaxed">
           Each ritual in an Indian wedding carries centuries of spiritual blessings and emotional depth. We design and coordinate every ceremony with reverence, authenticity, and palatial elegance.
         </p>
       </div>
@@ -28,7 +28,7 @@ export const SacredCeremoniesSection: React.FC = () => {
           return (
             <div
               key={ritual.id}
-              className="group flex flex-col justify-between bg-[#090614]/80 backdrop-blur-xl border border-white/10 hover:border-gold/60 rounded-[3px] overflow-hidden transition-all duration-300 hover:shadow-[0_15px_35px_rgba(212,175,55,0.15)] hover:-translate-y-1"
+              className="group flex flex-col justify-between bg-white border border-gold/25 hover:border-gold/70 rounded-[3px] overflow-hidden shadow-[0_8px_30px_rgba(26,18,9,0.06)] transition-all duration-300 hover:shadow-[0_16px_45px_rgba(212,175,55,0.2)] hover:-translate-y-1"
             >
               <div>
                 {/* Visual Image */}
@@ -41,7 +41,7 @@ export const SacredCeremoniesSection: React.FC = () => {
                     className="object-cover transition-transform duration-700 group-hover:scale-105"
                     loading="lazy"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#090614] via-[#090614]/30 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
 
                   {/* Ritual Number Pill */}
                   <div className="absolute top-3 left-3">
@@ -58,7 +58,7 @@ export const SacredCeremoniesSection: React.FC = () => {
 
                 {/* Content */}
                 <div className="p-5 space-y-3.5">
-                  <h3 className="font-serif text-xl font-bold text-ivory group-hover:text-gold transition-colors leading-snug">
+                  <h3 className="font-serif text-xl font-bold text-[#1A1209] group-hover:text-gold transition-colors leading-snug">
                     {ritual.title}
                   </h3>
 
@@ -66,23 +66,23 @@ export const SacredCeremoniesSection: React.FC = () => {
                     &ldquo;{ritual.significance}&rdquo;
                   </p>
 
-                  <p className="text-xs text-ivory/70 line-clamp-3 leading-relaxed">
+                  <p className="text-xs text-[#5C5147] line-clamp-3 leading-relaxed">
                     {ritual.description}
                   </p>
 
                   {/* Decor Vibe & Duration */}
-                  <div className="space-y-2 pt-2 border-t border-white/5 text-[11px]">
-                    <div className="flex items-start gap-2 text-ivory/80">
+                  <div className="space-y-2 pt-2 border-t border-gold/15 text-[11px]">
+                    <div className="flex items-start gap-2 text-[#5C5147]">
                       <Palette className="w-3.5 h-3.5 text-gold shrink-0 mt-0.5" />
                       <span className="line-clamp-2">
-                        <strong className="text-ivory">Atmosphere:</strong> {ritual.decorVibe}
+                        <strong className="text-[#1A1209]">Atmosphere:</strong> {ritual.decorVibe}
                       </span>
                     </div>
 
-                    <div className="flex items-center gap-2 text-ivory/80">
+                    <div className="flex items-center gap-2 text-[#5C5147]">
                       <Clock className="w-3.5 h-3.5 text-gold shrink-0" />
                       <span>
-                        <strong className="text-ivory">Typical Timing:</strong> {ritual.duration}
+                        <strong className="text-[#1A1209]">Typical Timing:</strong> {ritual.duration}
                       </span>
                     </div>
                   </div>
@@ -90,7 +90,7 @@ export const SacredCeremoniesSection: React.FC = () => {
               </div>
 
               {/* Action Button */}
-              <div className="p-5 pt-0 border-t border-white/5 mt-4">
+              <div className="p-5 pt-0 border-t border-gold/15 mt-4">
                 <Link
                   href={`/contact?package=custom-bespoke&ritual=${ritual.id}`}
                   className="w-full inline-flex items-center justify-center gap-1.5 py-2 px-3 rounded-[2px] bg-white/[0.04] hover:bg-gold hover:text-midnight text-ivory text-xs uppercase tracking-wider font-bold transition-all border border-white/10 hover:border-gold"

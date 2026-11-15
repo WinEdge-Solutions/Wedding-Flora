@@ -38,17 +38,17 @@ export const BlogGrid: React.FC = () => {
   return (
     <div className="space-y-8 sm:space-y-12">
       {/* ── Search & Filter Controls ── */}
-      <div className="bg-[#090614]/70 backdrop-blur-xl border border-gold/20 rounded-[3px] p-6 sm:p-8 space-y-6">
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-white/10 pb-6">
+      <div className="bg-white border border-gold/25 shadow-[0_8px_30px_rgba(26,18,9,0.06)] rounded-[3px] p-6 sm:p-8 space-y-6">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-gold/15 pb-6">
           <div>
             <div className="flex items-center gap-2 text-gold text-xs font-bold uppercase tracking-[0.2em] mb-1">
               <Sparkles className="w-4 h-4 text-gold" />
               <span>Expert Planning Compendium</span>
             </div>
-            <h2 className="font-serif text-2xl sm:text-3xl font-bold text-ivory">
+            <h2 className="font-serif text-2xl sm:text-3xl font-bold text-[#1A1209]">
               Editorial Insights &amp; Destination Guides
             </h2>
-            <p className="text-sm text-ivory/70 mt-1">
+            <p className="text-sm text-[#5C5147] mt-1">
               Curated articles and cost blueprints authored by Wedding Flora&apos;s principal directors.
             </p>
           </div>
@@ -61,7 +61,7 @@ export const BlogGrid: React.FC = () => {
               placeholder="Search topics, costs, venues..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-10 pr-4 py-2.5 rounded-lg bg-white/[0.05] border border-white/15 text-ivory placeholder-white/40 text-sm focus:outline-none focus:border-gold transition-colors"
+              className="w-full pl-10 pr-4 py-2.5 rounded-lg bg-[#FAF7F2] border border-gold/25 text-[#1A1209] placeholder-[#5C5147]/50 text-sm focus:outline-none focus:border-gold transition-colors"
             />
           </div>
         </div>
@@ -84,7 +84,7 @@ export const BlogGrid: React.FC = () => {
                 className={`px-4 py-2 rounded-full text-xs font-bold tracking-wider uppercase transition-all flex items-center gap-2 ${
                   active
                     ? "bg-gold text-midnight font-extrabold shadow-[0_0_15px_rgba(212,175,55,0.4)]"
-                    : "bg-white/[0.04] text-ivory/80 hover:text-ivory hover:bg-white/[0.08] border border-white/10"
+                    : "bg-white/[0.04] text-[#5C5147] hover:text-[#1A1209] hover:bg-white/[0.08] border border-white/10"
                 }`}
               >
                 <span>{cat.label}</span>
@@ -104,7 +104,7 @@ export const BlogGrid: React.FC = () => {
       {/* ── Articles Grid ── */}
       {filteredPosts.length === 0 ? (
         <div className="text-center py-16 bg-[#090614]/40 rounded-[3px] border border-white/10 p-8 space-y-4">
-          <p className="text-ivory/60 font-serif text-xl">
+          <p className="text-[#5C5147] font-serif text-xl">
             No articles found matching &ldquo;{searchQuery}&rdquo;.
           </p>
           <button
@@ -127,7 +127,7 @@ export const BlogGrid: React.FC = () => {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: 15 }}
                 transition={{ duration: 0.3 }}
-                className="group flex flex-col justify-between bg-[#090614]/80 backdrop-blur-xl border border-white/10 hover:border-gold/60 rounded-[3px] overflow-hidden shadow-[0_12px_40px_rgba(0,0,0,0.4)] transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_15px_35px_rgba(212,175,55,0.15)]"
+                className="group flex flex-col justify-between bg-white border border-gold/25 hover:border-gold/70 rounded-[3px] overflow-hidden shadow-[0_8px_30px_rgba(26,18,9,0.06)] transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_16px_45px_rgba(212,175,55,0.2)]"
               >
                 <div>
                   {/* Cover Image Container */}
@@ -140,7 +140,7 @@ export const BlogGrid: React.FC = () => {
                       className="object-cover transition-transform duration-700 group-hover:scale-105"
                       loading="lazy"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#090614] via-[#090614]/20 to-transparent opacity-80" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-40" />
 
                     {/* Category Badge */}
                     <div className="absolute top-3 left-3">
@@ -150,7 +150,7 @@ export const BlogGrid: React.FC = () => {
                     </div>
 
                     {/* Reading Time */}
-                    <div className="absolute bottom-3 right-3 flex items-center gap-1.5 text-[11px] text-ivory/90 bg-black/70 backdrop-blur-md px-2.5 py-1 rounded border border-white/10">
+                    <div className="absolute bottom-3 right-3 flex items-center gap-1.5 text-[11px] text-white bg-black/60 backdrop-blur-md px-2.5 py-1 rounded border border-white/10">
                       <Clock size={12} className="text-gold" />
                       <span>{post.readTime}</span>
                     </div>
@@ -158,7 +158,7 @@ export const BlogGrid: React.FC = () => {
 
                   {/* Body Content */}
                   <div className="p-5 sm:p-6 space-y-3.5">
-                    <div className="text-[11px] text-ivory/50 flex items-center gap-2">
+                    <div className="text-[11px] text-[#5C5147] flex items-center gap-2">
                       <span className="text-gold font-bold uppercase tracking-wider">
                         {post.publishedAt}
                       </span>
@@ -166,13 +166,13 @@ export const BlogGrid: React.FC = () => {
                       <span>By {post.author.name}</span>
                     </div>
 
-                    <h3 className="font-serif text-xl sm:text-2xl font-bold text-ivory group-hover:text-gold transition-colors leading-snug">
+                    <h3 className="font-serif text-xl sm:text-2xl font-bold text-[#1A1209] group-hover:text-gold transition-colors leading-snug">
                       <Link href={`/blog/${post.slug}`} className="focus:outline-none">
                         {post.title}
                       </Link>
                     </h3>
 
-                    <p className="text-xs sm:text-sm text-ivory/70 line-clamp-3 leading-relaxed">
+                    <p className="text-xs sm:text-sm text-[#5C5147] line-clamp-3 leading-relaxed">
                       {post.excerpt}
                     </p>
 
@@ -181,7 +181,7 @@ export const BlogGrid: React.FC = () => {
                       {post.tags.slice(0, 3).map((tag, idx) => (
                         <span
                           key={idx}
-                          className="px-2 py-0.5 rounded text-[10px] font-medium bg-white/[0.04] text-ivory/60 border border-white/5"
+                          className="px-2 py-0.5 rounded text-[10px] font-medium bg-white/[0.04] text-[#5C5147] border border-white/5"
                         >
                           #{tag}
                         </span>
@@ -194,7 +194,7 @@ export const BlogGrid: React.FC = () => {
                 <div className="p-5 sm:p-6 pt-0 border-t border-white/5 mt-4">
                   <Link
                     href={`/blog/${post.slug}`}
-                    className="w-full inline-flex items-center justify-between py-2 px-3 rounded-[2px] bg-white/[0.04] hover:bg-gold hover:text-midnight text-ivory text-xs uppercase tracking-wider font-extrabold transition-all border border-white/10 hover:border-gold"
+                    className="w-full inline-flex items-center justify-between py-2 px-3 rounded-[2px] bg-white/[0.04] hover:bg-gold hover:text-midnight text-[#1A1209] text-xs uppercase tracking-wider font-extrabold transition-all border border-white/10 hover:border-gold"
                   >
                     <span>Read Full Guide</span>
                     <ArrowRight className="w-3.5 h-3.5" />

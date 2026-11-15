@@ -78,7 +78,7 @@ export const GalleryGrid: React.FC<GalleryGridProps> = ({ mode }) => {
     <div className="space-y-8 sm:space-y-12">
       {/* ── Mode Switcher Tabs (Only shown when not restricted by page prop) ── */}
       {!mode && (
-        <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 p-1.5 max-w-xl mx-auto rounded-full bg-white/[0.03] border border-gold/25 backdrop-blur-md">
+        <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 p-1.5 max-w-xl mx-auto rounded-full bg-white border border-gold/30 shadow-sm">
           <button
             type="button"
             onClick={() => {
@@ -88,7 +88,7 @@ export const GalleryGrid: React.FC<GalleryGridProps> = ({ mode }) => {
             className={`px-4 sm:px-5 py-2 rounded-full text-xs font-bold uppercase tracking-wider transition-all duration-300 ${
               currentMode === "all"
                 ? "bg-gold text-midnight shadow-[0_0_15px_rgba(212,175,55,0.4)]"
-                : "text-ivory/70 hover:text-ivory hover:bg-white/[0.04]"
+                : "text-[#5C5147] hover:text-[#1A1209] hover:bg-gold/10"
             }`}
           >
             All Archives ({galleryData.length})
@@ -103,7 +103,7 @@ export const GalleryGrid: React.FC<GalleryGridProps> = ({ mode }) => {
             className={`px-4 sm:px-5 py-2 rounded-full text-xs font-bold uppercase tracking-wider transition-all duration-300 flex items-center gap-1.5 ${
               currentMode === "photos"
                 ? "bg-gold text-midnight shadow-[0_0_15px_rgba(212,175,55,0.4)]"
-                : "text-ivory/70 hover:text-ivory hover:bg-white/[0.04]"
+                : "text-[#5C5147] hover:text-[#1A1209] hover:bg-gold/10"
             }`}
           >
             <Camera size={13} />
@@ -119,7 +119,7 @@ export const GalleryGrid: React.FC<GalleryGridProps> = ({ mode }) => {
             className={`px-4 sm:px-5 py-2 rounded-full text-xs font-bold uppercase tracking-wider transition-all duration-300 flex items-center gap-1.5 ${
               currentMode === "videos"
                 ? "bg-gold text-midnight shadow-[0_0_15px_rgba(212,175,55,0.4)]"
-                : "text-ivory/70 hover:text-ivory hover:bg-white/[0.04]"
+                : "text-[#5C5147] hover:text-[#1A1209] hover:bg-gold/10"
             }`}
           >
             <Video size={13} />
@@ -181,7 +181,7 @@ export const GalleryGrid: React.FC<GalleryGridProps> = ({ mode }) => {
                 exit={{ opacity: 0, scale: 0.95 }}
                 transition={{ duration: 0.3 }}
                 key={item.id}
-                className="group relative rounded-[3px] overflow-hidden bg-[#090614]/80 backdrop-blur-xl border border-white/10 hover:border-gold/60 shadow-[0_12px_40px_rgba(0,0,0,0.5)] transition-all duration-500 hover:-translate-y-1.5 cursor-pointer flex flex-col justify-between"
+                className="group relative rounded-[3px] overflow-hidden bg-white border border-gold/25 hover:border-gold/70 shadow-[0_8px_30px_rgba(26,18,9,0.06)] transition-all duration-500 hover:shadow-[0_16px_45px_rgba(212,175,55,0.2)] hover:-translate-y-1.5 cursor-pointer flex flex-col justify-between"
                 onClick={() => setActiveItem(item)}
               >
                 {/* Media Container */}
@@ -194,7 +194,7 @@ export const GalleryGrid: React.FC<GalleryGridProps> = ({ mode }) => {
                     className="object-cover object-center transition-transform duration-700 group-hover:scale-105"
                     loading="lazy"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#090614] via-[#090614]/25 to-transparent opacity-80 group-hover:opacity-60 transition-opacity" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-60 group-hover:opacity-60 transition-opacity" />
 
                   {/* Category Pill */}
                   <div className="absolute top-3 left-3">
@@ -205,7 +205,7 @@ export const GalleryGrid: React.FC<GalleryGridProps> = ({ mode }) => {
                   </div>
 
                   {/* Play Icon / View Icon */}
-                  <div className="absolute top-3 right-3 w-8 h-8 rounded-full bg-black/60 backdrop-blur-md border border-white/15 flex items-center justify-center text-ivory group-hover:text-gold group-hover:scale-110 transition-all">
+                  <div className="absolute top-3 right-3 w-8 h-8 rounded-full bg-black/60 backdrop-blur-md border border-white/15 flex items-center justify-center text-[#1A1209] group-hover:text-gold group-hover:scale-110 transition-all">
                     {isVideo ? <Play size={14} className="fill-current ml-0.5" /> : <Eye size={14} />}
                   </div>
 
@@ -220,7 +220,7 @@ export const GalleryGrid: React.FC<GalleryGridProps> = ({ mode }) => {
 
                 {/* Content info */}
                 <div className="p-5 space-y-2">
-                  <div className="flex items-center justify-between text-[11px] text-ivory/50">
+                  <div className="flex items-center justify-between text-[11px] text-[#5C5147]">
                     <span className="font-bold text-gold uppercase tracking-wider">
                       ✦ {isVideo ? "4K Cinematic Film" : "Royal Celebration"}
                     </span>
@@ -230,12 +230,12 @@ export const GalleryGrid: React.FC<GalleryGridProps> = ({ mode }) => {
                     </span>
                   </div>
 
-                  <h3 className="font-serif text-lg sm:text-xl font-bold text-ivory group-hover:text-gold transition-colors leading-snug">
+                  <h3 className="font-serif text-lg sm:text-xl font-bold text-[#1A1209] group-hover:text-gold transition-colors leading-snug">
                     {item.title}
                   </h3>
 
                   {item.caption && (
-                    <p className="text-xs text-ivory/70 line-clamp-2 leading-relaxed">
+                    <p className="text-xs text-[#5C5147] line-clamp-2 leading-relaxed">
                       {item.caption}
                     </p>
                   )}
@@ -243,7 +243,7 @@ export const GalleryGrid: React.FC<GalleryGridProps> = ({ mode }) => {
 
                 {/* View Details Prompt */}
                 <div className="px-5 pb-5 pt-0">
-                  <div className="w-full inline-flex items-center justify-between text-xs text-gold font-bold uppercase tracking-wider group-hover:text-white transition-colors pt-2 border-t border-white/5">
+                  <div className="w-full inline-flex items-center justify-between text-xs text-gold font-bold uppercase tracking-wider group-hover:text-white transition-colors pt-2 border-t border-gold/15">
                     <span>{isVideo ? "Watch Cinematic Reel" : "Expand High-Res Photo"}</span>
                     <ArrowRight size={13} className="transition-transform group-hover:translate-x-1" />
                   </div>

@@ -10,7 +10,7 @@ export const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-[#030308]/90 backdrop-blur-xl text-ivory border-t border-gold/25 pt-16 pb-12 mt-auto">
+    <footer className="bg-[#1A1209] text-[#FAF7F2] border-t border-gold/25 pt-16 pb-12 mt-auto">
       <Container>
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10 lg:gap-12 pb-12">
           {/* Brand & Monogram Column */}
@@ -25,7 +25,7 @@ export const Footer: React.FC = () => {
                 />
               </div>
               <div className="flex flex-col">
-                <span className="font-serif text-2xl sm:text-3xl font-semibold tracking-wide text-ivory block group-hover:text-gold-gradient transition-colors">
+                <span className="font-serif text-2xl sm:text-3xl font-semibold tracking-wide text-[#FAF7F2] block group-hover:text-gold-gradient transition-colors">
                   Wedding Flora
                 </span>
                 <span className="text-[10px] uppercase tracking-[0.25em] text-[#D4AF37] font-bold">
@@ -33,7 +33,7 @@ export const Footer: React.FC = () => {
                 </span>
               </div>
             </Link>
-            <p className="text-ivory/80 text-sm font-medium max-w-sm leading-relaxed">
+            <p className="text-[#FAF7F2]/75 text-sm font-medium max-w-sm leading-relaxed">
               Curating regal palace weddings, bespoke Sangeet productions, and sacred Mandap ceremonies across Udaipur, Jaipur, Jodhpur, and destination sanctuaries in India.
             </p>
             <div className="flex items-center space-x-4 pt-2">
@@ -41,7 +41,7 @@ export const Footer: React.FC = () => {
                 href={siteConfig.contact.instagram}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-9 h-9 rounded-[2px] border border-white/20 flex items-center justify-center text-ivory hover:text-gold hover:border-gold transition-colors duration-200"
+                className="w-9 h-9 rounded-[2px] border border-white/20 flex items-center justify-center text-[#FAF7F2] hover:text-gold hover:border-gold transition-colors duration-200"
                 aria-label="Instagram"
               >
                 <svg
@@ -55,7 +55,7 @@ export const Footer: React.FC = () => {
               </a>
               <a
                 href={`mailto:${siteConfig.contact.email}`}
-                className="w-9 h-9 rounded-[2px] border border-white/20 flex items-center justify-center text-ivory hover:text-gold hover:border-gold transition-colors duration-200"
+                className="w-9 h-9 rounded-[2px] border border-white/20 flex items-center justify-center text-[#FAF7F2] hover:text-gold hover:border-gold transition-colors duration-200"
                 aria-label="Email Us"
               >
                 <Mail size={16} />
@@ -65,10 +65,10 @@ export const Footer: React.FC = () => {
 
           {/* Quick Links Column */}
           <div className="md:col-span-3">
-            <h4 className="font-serif text-lg text-ivory mb-4 font-semibold tracking-wide">
+            <h4 className="font-serif text-lg text-[#FAF7F2] mb-4 font-semibold tracking-wide">
               Navigation
             </h4>
-            <ul className="space-y-2.5 text-sm font-medium text-ivory/75">
+            <ul className="space-y-2.5 text-sm font-medium text-[#FAF7F2]/70">
               {siteConfig.navItems.map((item) => (
                 <li key={item.label}>
                   <Link
@@ -84,10 +84,10 @@ export const Footer: React.FC = () => {
 
           {/* Contact Details Column */}
           <div className="md:col-span-4">
-            <h4 className="font-serif text-lg text-ivory mb-4 font-semibold tracking-wide">
+            <h4 className="font-serif text-lg text-[#FAF7F2] mb-4 font-semibold tracking-wide">
               Get in Touch
             </h4>
-            <div className="space-y-3 text-sm font-medium text-ivory/75">
+            <div className="space-y-3 text-sm font-medium text-[#FAF7F2]/70">
               <div className="flex items-start space-x-3">
                 <MapPin size={16} className="text-gold mt-1 shrink-0" />
                 <a
@@ -124,9 +124,9 @@ export const Footer: React.FC = () => {
 
         <Divider variant="gold" className="my-6 opacity-30" />
 
-        <div className="flex flex-col sm:flex-row items-center justify-between text-xs text-ivory/70 font-medium pt-2 gap-4">
+        <div className="flex flex-col sm:flex-row items-center justify-between text-xs text-[#FAF7F2]/60 font-medium pt-2 gap-4">
           <p>© {currentYear} Wedding Flora. All rights reserved.</p>
-          <p className="tracking-widest uppercase text-[10px] font-bold text-ivory/50">
+          <p className="tracking-widest uppercase text-[10px] font-bold text-[#FAF7F2]/40">
             Designed with timeless grace
           </p>
         </div>

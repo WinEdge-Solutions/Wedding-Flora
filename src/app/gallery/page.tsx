@@ -18,7 +18,7 @@ export default function GalleryPage() {
   return (
     <main className="min-h-screen text-ivory relative z-10">
       {/* ── Gallery Hero ── */}
-      <section className="relative py-16 sm:py-24 overflow-hidden bg-white/[0.02] backdrop-blur-[2px] border-b border-gold/20">
+      <section className="relative py-16 sm:py-24 overflow-hidden bg-[#FAF7F2]/60 border-b border-gold/20">
         <Container className="relative z-10 text-center">
           <div className="max-w-3xl mx-auto space-y-3.5 sm:space-y-4">
             <div className="flex justify-center -mb-2">
@@ -86,7 +86,7 @@ export default function GalleryPage() {
       </Section>
 
       {/* ── Consultation CTA ── */}
-      <section className="bg-black/60 backdrop-blur-md text-ivory py-16 sm:py-20 text-center relative overflow-hidden border-t border-gold/20">
+      <section className="bg-[#F7F3EC] text-[#1A1209] py-16 sm:py-20 text-center relative overflow-hidden border-t border-gold/25 sm:py-20 text-center relative overflow-hidden border-t border-gold/20">
         <Container size="narrow" className="relative z-10 space-y-5">
           <div className="flex items-center justify-center gap-1.5 text-gold text-xs font-bold uppercase tracking-[0.25em]">
             <Sparkles className="w-4 h-4 text-gold" />

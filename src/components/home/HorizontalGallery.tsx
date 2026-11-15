@@ -98,7 +98,7 @@ export function HorizontalGallery() {
   return (
     <section
       ref={sectionRef}
-      className="relative w-full overflow-hidden bg-black/40 backdrop-blur-sm border-y border-white/[0.05]"
+      className="relative w-full overflow-hidden bg-[#F7F3EC] border-y border-gold/20"
       aria-label="Royal Celebrations Gallery"
     >
       {/* Section header */}
@@ -111,7 +111,7 @@ export function HorizontalGallery() {
         <SplitTextReveal
           text="A Legacy of Grand Moments"
           as="h2"
-          className="font-display text-2xl sm:text-5xl lg:text-6xl text-ivory font-bold tracking-[0.03em]"
+          className="font-display text-2xl sm:text-5xl lg:text-6xl text-[#1A1209] font-bold tracking-[0.03em]"
           stagger={0.03}
         />
         {/* Mobile swipe helper hint */}
@@ -132,7 +132,7 @@ export function HorizontalGallery() {
         {panels.map((item, i) => (
           <div
             key={item.id}
-            className={`gallery-panel relative flex-shrink-0 overflow-hidden rounded-[3px] md:rounded-[3px] cursor-pointer transition-all duration-500 snap-center md:snap-align-none ${
+            className={`gallery-panel relative flex-shrink-0 overflow-hidden rounded-[3px] md:rounded-[3px] cursor-pointer transition-all duration-500 snap-center md:snap-align-none shadow-[0_8px_30px_rgba(26,18,9,0.08)] hover:shadow-[0_16px_45px_rgba(212,175,55,0.25)] ${
               i % 3 === 1
                 ? "w-[82vw] sm:w-[320px] md:w-[340px] h-[440px] md:h-[500px]"
                 : "w-[82vw] sm:w-[320px] md:w-[340px] h-[400px] md:h-[440px]"
@@ -146,18 +146,18 @@ export function HorizontalGallery() {
               className="object-cover transition-transform duration-700 ease-out hover:scale-105"
             />
 
-            {/* Gradient overlay */}
-            <div className="absolute inset-0 bg-gradient-to-t from-[#030308]/95 via-transparent to-transparent" />
+            {/* Gradient overlay for photo readability */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent" />
 
             {/* Panel label */}
             <div className="absolute bottom-0 left-0 right-0 p-5 sm:p-6">
               <p className="font-sans text-[10px] uppercase tracking-[0.25em] text-gold font-bold mb-1">
                 {item.category}
               </p>
-              <h3 className="font-serif text-lg sm:text-xl text-ivory font-semibold leading-snug">
+              <h3 className="font-serif text-lg sm:text-xl text-[#FAF7F2] font-semibold leading-snug">
                 {item.title}
               </h3>
-              <p className="font-sans text-xs text-ivory/70 mt-1">
+              <p className="font-sans text-xs text-[#FAF7F2]/80 mt-1">
                 {item.location} · {item.year}
               </p>
             </div>
@@ -183,7 +183,7 @@ export function HorizontalGallery() {
             className={`rounded-full transition-all duration-400 p-0 border-0 ${
               i === activeIdx
                 ? "w-6 h-1.5 bg-gold"
-                : "w-1.5 h-1.5 bg-ivory/30 hover:bg-ivory/60"
+                : "w-1.5 h-1.5 bg-[#1A1209]/20 hover:bg-[#1A1209]/40"
             }`}
           />
         ))}
