@@ -95,7 +95,7 @@ export default function DestinationsPage() {
                       </div>
 
                       {/* Best Season Overlay */}
-                      <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between text-xs text-ivory/90 font-medium">
+                      <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between text-xs text-white font-medium">
                         <span className="inline-flex items-center gap-1.5 bg-black/50 backdrop-blur-md px-3 py-1 rounded-full border border-white/10">
                           <Calendar size={12} className="text-gold" />
                           <span>Ideal: {city.bestSeason}</span>

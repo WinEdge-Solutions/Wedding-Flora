@@ -88,7 +88,7 @@ export default function RitualsPage() {
 
       {/* ── Section 1: The 7-Step Royal Planning Blueprint ── */}
       <section id="planning-process" className="scroll-mt-32">
-        <Section variant="charcoal">
+        <Section variant="ivory">
           <Container>
             <PlanningProcessSection />
           </Container>
@@ -97,7 +97,7 @@ export default function RitualsPage() {
 
       {/* ── Section 2: Sacred Indian Wedding Ceremonies ── */}
       <section id="sacred-rituals" className="scroll-mt-32">
-        <Section variant="ivory" className="border-t border-b border-white/10">
+        <Section variant="cream">
           <Container>
             <SacredCeremoniesSection />
           </Container>
@@ -106,7 +106,7 @@ export default function RitualsPage() {
 
       {/* ── Section 3: Rituals & Timelines FAQ ── */}
       <section id="faqs" className="scroll-mt-32">
-        <Section variant="charcoal">
+        <Section variant="ivory">
           <Container>
             <RitualsFaqSection />
           </Container>

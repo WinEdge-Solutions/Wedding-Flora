@@ -49,12 +49,12 @@ export default async function BlogPostPage({
   return (
     <main className="min-h-screen text-ivory relative z-10">
       {/* ── Breadcrumb Bar ── */}
-      <div className="bg-[#090614]/80 backdrop-blur-md border-b border-white/10 py-3">
+      <div className="bg-[#FAF7F2] border-b border-gold/20 py-3">
         <Container>
           <div className="flex items-center justify-between text-xs">
             <Link
               href="/blog"
-              className="inline-flex items-center gap-1.5 text-ivory/70 hover:text-gold transition-colors font-medium"
+              className="inline-flex items-center gap-1.5 text-[#1A1209] hover:text-gold font-bold transition-colors font-medium"
             >
               <ArrowLeft size={14} className="text-gold" />
               <span>Back to All Guides</span>
@@ -107,7 +107,7 @@ export default async function BlogPostPage({
       </section>
 
       {/* ── Featured Image & Article Body ── */}
-      <Section variant="charcoal">
+      <Section variant="ivory">
         <Container size="narrow" className="space-y-10 sm:space-y-12">
           {/* Main Hero Image */}
           <div className="relative aspect-[16/9] rounded-[3px] overflow-hidden border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.6)]">
@@ -127,7 +127,7 @@ export default async function BlogPostPage({
             {post.content.map((block, idx) => (
               <div key={idx} className="space-y-4">
                 {block.heading && (
-                  <h2 className="font-serif text-2xl sm:text-3xl font-bold text-ivory tracking-tight pt-4 border-t border-white/5">
+                  <h2 className="font-serif text-2xl sm:text-3xl font-bold text-ivory tracking-tight pt-4 border-t border-gold/15">
                     {block.heading}
                   </h2>
                 )}
@@ -156,7 +156,7 @@ export default async function BlogPostPage({
             {post.tags.map((tag, idx) => (
               <span
                 key={idx}
-                className="px-3 py-1 rounded text-xs font-medium bg-white/[0.04] text-ivory/80 border border-white/10"
+                className="px-3 py-1 rounded text-xs font-medium bg-[#FAF7F2] text-[#5C5147] border border-gold/20"
               >
                 #{tag}
               </span>
@@ -164,12 +164,12 @@ export default async function BlogPostPage({
           </div>
 
           {/* Consultation Box inside Article */}
-          <div className="p-6 sm:p-8 rounded-[3px] bg-[#06040e]/80 border border-gold/40 shadow-xl space-y-4 text-center">
+          <div className="p-6 sm:p-8 rounded-[3px] bg-[#FAF7F2] border border-gold/30 shadow-md space-y-4 text-center">
             <Sparkles className="w-6 h-6 text-gold mx-auto" />
-            <h3 className="font-serif text-xl sm:text-2xl font-bold text-ivory">
+            <h3 className="font-serif text-xl sm:text-2xl font-bold text-[#1A1209]">
               Planning a Destination Wedding with These Requirements?
             </h3>
-            <p className="text-xs sm:text-sm text-ivory/80 max-w-lg mx-auto font-medium">
+            <p className="text-xs sm:text-sm text-[#5C5147] max-w-lg mx-auto font-medium">
               Our principal directors in Jaipur and Delhi NCR can prepare a personalized feasibility proposal, palace date options, and accurate budget blueprint.
             </p>
             <div className="pt-2 flex flex-wrap items-center justify-center gap-3">
@@ -192,7 +192,7 @@ export default async function BlogPostPage({
           {/* Related Articles */}
           {relatedPosts.length > 0 && (
             <div className="pt-8 border-t border-gold/15 space-y-6">
-              <h3 className="font-serif text-2xl font-bold text-ivory">
+              <h3 className="font-serif text-2xl font-bold text-[#1A1209]">
                 Continue Reading
               </h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">

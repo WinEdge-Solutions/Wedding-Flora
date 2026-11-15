@@ -79,9 +79,9 @@ function NavLink({
           ? "w-full py-3 px-4 text-xs font-semibold tracking-[0.18em] rounded-[2px] flex items-center justify-between " +
             (isActive
               ? "text-gold bg-gold/[0.06] font-bold"
-              : "text-[#1A1209]/80 hover:text-[#1A1209] hover:bg-gold/[0.04]")
+              : "text-[#1A1209] hover:text-gold hover:bg-gold/[0.06] font-bold")
           : "inline-flex items-center justify-center h-7 leading-none tracking-[0.13em] lg:tracking-[0.15em] xl:tracking-[0.18em] text-[11px] xl:text-[11.5px] 2xl:text-xs " +
-            (isActive ? "text-gold font-bold" : "text-[#1A1209]/75 hover:text-[#1A1209] font-semibold")
+            (isActive ? "text-gold font-bold" : "text-[#1A1209] hover:text-[#D4AF37] font-bold")
       }`}
     >
       <span className="leading-none">{label}</span>
@@ -180,7 +180,7 @@ function NavItemDropdown({
         className={`relative uppercase tracking-[0.13em] lg:tracking-[0.15em] xl:tracking-[0.18em] text-[11px] xl:text-[11.5px] 2xl:text-xs transition-colors duration-200 inline-flex items-center justify-center gap-1 h-7 leading-none group/droptrig ${
           isParentActive
             ? "text-gold font-bold"
-            : "text-[#1A1209]/75 hover:text-[#1A1209] font-semibold"
+            : "text-[#1A1209] hover:text-[#D4AF37] font-bold"
         }`}
       >
         <span className="leading-none">{item.label}</span>
@@ -248,7 +248,7 @@ function NavItemDropdown({
                             className={`group/city px-2.5 py-2.5 rounded-[2px] transition-all duration-200 flex items-center justify-between text-left ${
                               isSubActive
                                 ? "bg-white/[0.08] text-gold font-bold border-l-2 border-gold"
-                                : "hover:bg-white/[0.05] text-ivory/80 hover:text-white hover:translate-x-0.5"
+                                : "hover:bg-gold/[0.06] text-[#1A1209] hover:text-[#D4AF37] hover:translate-x-0.5 font-medium"
                             }`}
                           >
                             <span className="font-serif text-[13.5px] tracking-wide group-hover/city:text-gold transition-colors">
@@ -267,7 +267,7 @@ function NavItemDropdown({
                       <Link
                         href={item.href}
                         onClick={() => setIsOpen(false)}
-                        className="text-[9.5px] uppercase tracking-[0.18em] text-[#D4AF37] hover:text-white font-bold transition-colors inline-flex items-center gap-1.5"
+                        className="text-[9.5px] uppercase tracking-[0.18em] text-[#D4AF37] hover:text-[#1A1209] font-bold transition-colors inline-flex items-center gap-1.5"
                       >
                         <span>Explore All Rajasthan Venues</span>
                         <span>→</span>
@@ -321,7 +321,7 @@ function NavItemDropdown({
                             className={`font-serif text-[14px] tracking-wide transition-colors ${
                               isSubActive
                                 ? "text-gold font-bold"
-                                : "text-[#1A1209] group-hover/sub:text-gold font-medium"
+                                : "text-[#1A1209] group-hover/sub:text-gold font-bold"
                             }`}
                           >
                             {subItem.label}
@@ -345,7 +345,7 @@ function NavItemDropdown({
                   <Link
                     href={item.href}
                     onClick={() => setIsOpen(false)}
-                    className="text-[9.5px] uppercase tracking-[0.18em] text-[#D4AF37] hover:text-white font-bold transition-colors inline-flex items-center justify-between w-full py-1"
+                    className="text-[9.5px] uppercase tracking-[0.18em] text-[#D4AF37] hover:text-[#1A1209] font-bold transition-colors inline-flex items-center justify-between w-full py-1"
                   >
                     <span>
                       {item.label === "Gallery" ? "Explore All Archives" : "Discover Our Story"}
@@ -607,10 +607,10 @@ export const Navbar: React.FC = () => {
                       <button
                         type="button"
                         onClick={() => setMobileDropdownOverride(isExpanded ? null : item.label)}
-                        className={`w-full py-3 px-4 text-xs font-semibold rounded-[2px] flex items-center justify-between uppercase tracking-[0.18em] transition-colors ${
+                        className={`w-full py-3 px-4 text-xs font-bold rounded-[2px] flex items-center justify-between uppercase tracking-[0.18em] transition-colors ${
                           pathname.startsWith(item.href)
                             ? "text-gold bg-gold/[0.06] font-bold"
-                            : "text-[#1A1209]/80 hover:text-[#1A1209] hover:bg-gold/[0.04]"
+                            : "text-[#1A1209] hover:text-gold hover:bg-gold/[0.06] font-bold"
                         }`}
                         aria-expanded={isExpanded}
                         aria-controls={`mobile-accordion-${item.label.replace(/\s+/g, "-")}`}
@@ -654,7 +654,7 @@ export const Navbar: React.FC = () => {
                                             className={`py-3 px-3 rounded-[2px] text-xs uppercase tracking-[0.14em] flex items-center justify-between transition-colors ${
                                               isSubActive
                                                 ? "text-gold bg-gold/[0.08] font-bold"
-                                                : "text-[#1A1209]/70 hover:text-[#1A1209] hover:bg-gold/[0.04] font-medium"
+                                                : "text-[#1A1209] hover:text-gold hover:bg-gold/[0.06] font-semibold"
                                             }`}
                                           >
                                             <span className="truncate">{subItem.label}</span>
@@ -681,7 +681,7 @@ export const Navbar: React.FC = () => {
                                           className={`py-3 px-6 rounded-[2px] text-xs uppercase tracking-[0.15em] flex items-center justify-between transition-colors ${
                                             isSubActive
                                               ? "text-gold bg-gold/[0.08] font-bold"
-                                              : "text-[#1A1209]/70 hover:text-[#1A1209] hover:bg-gold/[0.04] font-medium"
+                                              : "text-[#1A1209] hover:text-gold hover:bg-gold/[0.06] font-semibold"
                                           }`}
                                         >
                                           <div className="flex items-center gap-2">
@@ -701,7 +701,7 @@ export const Navbar: React.FC = () => {
                                       <Link
                                         href={item.href}
                                         onClick={closeMobileMenu}
-                                        className="py-2 px-6 text-[9.5px] uppercase tracking-widest text-[#D4AF37] hover:text-white font-bold flex items-center gap-1.5"
+                                        className="py-2 px-6 text-[9.5px] uppercase tracking-widest text-[#D4AF37] hover:text-[#1A1209] font-bold flex items-center gap-1.5"
                                       >
                                         <span>View All {item.label}</span>
                                         <span>→</span>

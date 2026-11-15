@@ -102,15 +102,15 @@ export default function CelebrationsPage() {
                         fill
                         className="object-cover transition-transform duration-700 group-hover:scale-105"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-[#090614]/80 via-transparent to-transparent" />
-                      <div className="absolute bottom-6 left-6 right-6 text-ivory">
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/35 to-transparent" />
+                      <div className="absolute bottom-6 left-6 right-6 text-white">
                         <span className="text-xs uppercase tracking-widest text-gold font-bold block mb-1">
                           Royal Destination
                         </span>
                         <p className="font-serif text-2xl font-bold leading-snug">
                           {story.couple}
                         </p>
-                        <p className="text-xs text-ivory/80 font-sans mt-0.5">
+                        <p className="text-xs text-white/80 font-sans mt-0.5">
                           {story.location}
                         </p>
                       </div>
@@ -149,8 +149,8 @@ export default function CelebrationsPage() {
                           sizes="(max-width: 640px) 100vw, 25vw"
                           className="object-cover transition-transform duration-500 group-hover:scale-105"
                         />
-                        <div className="absolute inset-0 bg-[#090614]/75 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-3">
-                          <p className="text-xs text-ivory font-medium leading-tight">
+                        <div className="absolute inset-0 bg-black/75 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-3">
+                          <p className="text-xs text-white font-medium leading-tight">
                             {photo.caption}
                           </p>
                         </div>
@@ -160,9 +160,9 @@ export default function CelebrationsPage() {
                 </div>
 
                 {/* Couple Quote */}
-                <div className="p-6 sm:p-8 rounded-[3px] bg-[#06040e]/60 border-l-4 border-gold border-y border-r border-white/10 relative">
+                <div className="p-6 sm:p-8 rounded-[3px] bg-[#FAF7F2] border-l-4 border-gold border-y border-r border-gold/25 shadow-sm relative">
                   <Quote className="w-8 h-8 text-gold/40 mb-2" />
-                  <blockquote className="font-serif text-lg sm:text-xl font-semibold text-ivory italic leading-relaxed">
+                  <blockquote className="font-serif text-lg sm:text-xl font-semibold text-[#1A1209] italic leading-relaxed">
                     &ldquo;{story.quote.text}&rdquo;
                   </blockquote>
                   <p className="text-xs font-sans uppercase tracking-wider text-gold font-bold mt-3">

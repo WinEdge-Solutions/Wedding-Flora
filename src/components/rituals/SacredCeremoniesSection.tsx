@@ -41,7 +41,7 @@ export const SacredCeremoniesSection: React.FC = () => {
                     className="object-cover transition-transform duration-700 group-hover:scale-105"
                     loading="lazy"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/25 to-transparent" />
 
                   {/* Ritual Number Pill */}
                   <div className="absolute top-3 left-3">
@@ -93,7 +93,7 @@ export const SacredCeremoniesSection: React.FC = () => {
               <div className="p-5 pt-0 border-t border-gold/15 mt-4">
                 <Link
                   href={`/contact?package=custom-bespoke&ritual=${ritual.id}`}
-                  className="w-full inline-flex items-center justify-center gap-1.5 py-2 px-3 rounded-[2px] bg-white/[0.04] hover:bg-gold hover:text-midnight text-ivory text-xs uppercase tracking-wider font-bold transition-all border border-white/10 hover:border-gold"
+                  className="w-full inline-flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-[2px] bg-[#FAF7F2] hover:bg-gold hover:text-black text-[#1A1209] text-xs uppercase tracking-wider font-bold transition-all border border-gold/30 hover:border-gold shadow-sm"
                 >
                   <span>Curate This Ceremony</span>
                   <ArrowRight className="w-3.5 h-3.5" />

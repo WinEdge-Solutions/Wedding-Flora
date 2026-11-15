@@ -12,7 +12,7 @@ export const TestimonialsSection: React.FC = () => {
   const inView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <Section variant="cream">
+    <Section variant="ivory">
       <Container size="narrow">
         <SectionHeading
           eyebrow="Royal Reflections"

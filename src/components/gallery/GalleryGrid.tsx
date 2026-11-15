@@ -147,7 +147,7 @@ export const GalleryGrid: React.FC<GalleryGridProps> = ({ mode }) => {
                 className={`px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-full text-[11px] sm:text-xs font-bold tracking-wider uppercase transition-all duration-300 flex items-center gap-2 ${
                   active
                     ? "bg-gold text-midnight font-extrabold shadow-[0_0_15px_rgba(212,175,55,0.4)]"
-                    : "bg-white/[0.04] text-ivory/80 hover:text-ivory hover:bg-white/[0.08] border border-white/10"
+                    : "bg-[#FAF7F2] text-[#5C5147] hover:text-[#1A1209] hover:bg-gold/10 border border-gold/25"
                 }`}
               >
                 <span>{cat.label}</span>
@@ -205,12 +205,12 @@ export const GalleryGrid: React.FC<GalleryGridProps> = ({ mode }) => {
                   </div>
 
                   {/* Play Icon / View Icon */}
-                  <div className="absolute top-3 right-3 w-8 h-8 rounded-full bg-black/60 backdrop-blur-md border border-white/15 flex items-center justify-center text-[#1A1209] group-hover:text-gold group-hover:scale-110 transition-all">
+                  <div className="absolute top-3 right-3 w-8 h-8 rounded-full bg-black/60 backdrop-blur-md border border-white/25 flex items-center justify-center text-white group-hover:text-gold group-hover:scale-110 transition-all">
                     {isVideo ? <Play size={14} className="fill-current ml-0.5" /> : <Eye size={14} />}
                   </div>
 
                   {/* Location strip */}
-                  <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between text-xs text-ivory/90">
+                  <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between text-xs text-white font-medium">
                     <div className="flex items-center gap-1.5 font-medium">
                       <MapPin className="w-3.5 h-3.5 text-gold shrink-0" />
                       <span className="truncate">{item.location}</span>
@@ -273,7 +273,7 @@ export const GalleryGrid: React.FC<GalleryGridProps> = ({ mode }) => {
               <button
                 type="button"
                 onClick={() => setActiveItem(null)}
-                className="absolute top-4 right-4 z-20 w-10 h-10 rounded-full bg-black/80 hover:bg-gold text-ivory hover:text-midnight border border-white/20 flex items-center justify-center transition-colors shadow-lg"
+                className="absolute top-4 right-4 z-20 w-10 h-10 rounded-full bg-black/80 hover:bg-gold text-white hover:text-gold border border-white/20 flex items-center justify-center transition-colors shadow-lg"
                 aria-label="Close modal"
               >
                 <X size={18} />
@@ -309,7 +309,7 @@ export const GalleryGrid: React.FC<GalleryGridProps> = ({ mode }) => {
                     <span className="text-[10px] uppercase tracking-[0.25em] text-[#D4AF37] font-bold block">
                       {activeItem.category} • {activeItem.year}
                     </span>
-                    <h3 className="font-serif text-2xl sm:text-3xl font-bold text-ivory">
+                    <h3 className="font-serif text-2xl sm:text-3xl font-bold text-[#FAF7F2]">
                       {activeItem.title}
                     </h3>
                   </div>
@@ -323,7 +323,7 @@ export const GalleryGrid: React.FC<GalleryGridProps> = ({ mode }) => {
                   </Link>
                 </div>
 
-                <div className="flex flex-wrap items-center gap-4 text-xs text-ivory/80">
+                <div className="flex flex-wrap items-center gap-4 text-xs text-[#FAF7F2]/80">
                   <div className="flex items-center gap-1.5">
                     <MapPin size={14} className="text-gold" />
                     <span>{activeItem.location}</span>
@@ -331,7 +331,7 @@ export const GalleryGrid: React.FC<GalleryGridProps> = ({ mode }) => {
                 </div>
 
                 {activeItem.caption && (
-                  <p className="text-sm text-ivory/80 leading-relaxed font-medium">
+                  <p className="text-sm text-[#FAF7F2]/90 leading-relaxed font-medium">
                     {activeItem.caption}
                   </p>
                 )}

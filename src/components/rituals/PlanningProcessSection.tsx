@@ -39,7 +39,7 @@ export const PlanningProcessSection: React.FC = () => {
                   isEven ? "lg:order-2" : "lg:order-1"
                 }`}
               >
-                <div className="relative aspect-[4/3] rounded-[3px] overflow-hidden border border-gold/25 shadow-[0_8px_30px_rgba(26,18,9,0.06)] group bg-white/5">
+                <div className="relative aspect-[4/3] rounded-[3px] overflow-hidden border border-gold/25 shadow-md group bg-black">
                   <Image
                     src={step.image}
                     alt={step.alt}
@@ -88,7 +88,7 @@ export const PlanningProcessSection: React.FC = () => {
                   {step.keyPoints.map((point, idx) => (
                     <div
                       key={idx}
-                      className="flex items-start gap-3 p-2.5 rounded-lg bg-white/[0.03] border border-white/5"
+                      className="flex items-start gap-3 p-2.5 rounded-lg bg-white border border-gold/15 shadow-sm"
                     >
                       <span className="mt-0.5 p-0.5 rounded-full bg-gold/20 text-[#D4AF37] shrink-0">
                         <Check className="w-3.5 h-3.5 text-[#D4AF37]" />

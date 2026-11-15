@@ -46,12 +46,12 @@ export default async function CityDestinationPage({
   return (
     <main className="min-h-screen text-ivory relative z-10">
       {/* ── Breadcrumb & Back Link ── */}
-      <div className="bg-[#090614]/80 backdrop-blur-md border-b border-white/10 py-3">
+      <div className="bg-[#FAF7F2] border-b border-gold/20 py-3">
         <Container>
           <div className="flex items-center justify-between text-xs">
             <Link
               href="/destinations"
-              className="inline-flex items-center gap-1.5 text-ivory/70 hover:text-gold transition-colors font-medium"
+              className="inline-flex items-center gap-1.5 text-[#1A1209] hover:text-gold font-bold transition-colors font-medium"
             >
               <ArrowLeft size={14} className="text-gold" />
               <span>All Rajasthan Destinations</span>
@@ -147,9 +147,9 @@ export default async function CityDestinationPage({
                 Our in-house production, hospitality, and decor teams coordinate every aspect of royal celebrations across {destination.name}. Whether you are envisioning a multi-day buyout of an ancient Maharaja’s palace or a contemporary luxury resort with sweeping courtyards, our direct relationships guarantee unmatched privilege and exclusivity.
               </p>
 
-              <div className="p-4 rounded-xl bg-[#090614]/70 border border-gold/30 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+              <div className="p-5 rounded-[3px] bg-[#FAF7F2] border border-gold/30 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                 <div>
-                  <span className="text-[10px] uppercase tracking-wider text-ivory/60 block font-semibold">
+                  <span className="text-[10px] uppercase tracking-wider text-[#5C5147] block font-semibold">
                     Have Preferred Dates for {destination.name}?
                   </span>
                   <span className="font-serif text-base font-bold text-gold">
@@ -166,7 +166,7 @@ export default async function CityDestinationPage({
       </Section>
 
       {/* ── Complete Hotels & Venues Directory ── */}
-      <Section variant="charcoal">
+      <Section variant="cream">
         <Container>
           <HotelDirectory
             cityName={destination.name}
