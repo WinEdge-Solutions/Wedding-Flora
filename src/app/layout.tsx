@@ -4,7 +4,6 @@ import "./globals.css";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { LenisProvider } from "@/components/providers/LenisProvider";
-import { MagneticCursor } from "@/components/ui/MagneticCursor";
 import { GlobalAurora } from "@/components/ui/GlobalAurora";
 import { FloatingWhatsApp } from "@/components/ui/FloatingWhatsApp";
 
@@ -58,8 +57,6 @@ export default function RootLayout({
         <LenisProvider>
           {/* Subtle warm-ivory aurora gradient — does not overshadow content */}
           <GlobalAurora />
-          {/* Custom luxury gold cursor — desktop only, skipped on touch */}
-          <MagneticCursor />
           <Navbar />
           <div className="flex-1 relative z-10">{children}</div>
           <FloatingWhatsApp />
