@@ -20,10 +20,10 @@ export const RitualsFaqSection: React.FC = () => {
           <HelpCircle className="w-4 h-4 text-gold" />
           <span>Ritual Insights &amp; Timelines</span>
         </div>
-        <h2 className="font-serif text-2xl sm:text-4xl font-bold text-ivory">
+        <h2 className="font-serif text-2xl sm:text-4xl font-bold text-[#1A1209]">
           Frequently Asked Questions
         </h2>
-        <p className="text-sm text-ivory/70">
+        <p className="text-sm text-[#5C5147]">
           Everything you need to know about traditional ceremony curation and multi-day destination timelines.
         </p>
       </div>
@@ -36,12 +36,12 @@ export const RitualsFaqSection: React.FC = () => {
           return (
             <div
               key={index}
-              className="rounded-xl border border-white/10 bg-[#090614]/70 backdrop-blur-xl overflow-hidden transition-colors"
+              className="rounded-xl border border-gold/25 bg-white shadow-sm overflow-hidden transition-colors"
             >
               <button
                 type="button"
                 onClick={() => toggle(index)}
-                className="w-full flex items-center justify-between p-4 sm:p-5 text-left text-sm sm:text-base font-serif font-semibold text-ivory hover:text-gold transition-colors gap-4"
+                className="w-full flex items-center justify-between p-4 sm:p-5 text-left text-sm sm:text-base font-serif font-semibold text-[#1A1209] hover:text-gold transition-colors gap-4"
                 aria-expanded={isOpen}
               >
                 <span>{faq.question}</span>
@@ -61,7 +61,7 @@ export const RitualsFaqSection: React.FC = () => {
                     transition={{ duration: 0.25 }}
                     className="overflow-hidden"
                   >
-                    <div className="p-4 sm:p-5 pt-0 text-xs sm:text-sm text-ivory/80 font-sans font-medium leading-relaxed border-t border-white/5">
+                    <div className="p-4 sm:p-5 pt-0 text-xs sm:text-sm text-[#5C5147] font-sans font-medium leading-relaxed border-t border-gold/15">
                       {faq.answer}
                     </div>
                   </motion.div>

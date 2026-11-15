@@ -64,7 +64,7 @@ export default function PackagesPage() {
   return (
     <main className="min-h-screen text-ivory relative z-10">
       {/* ── Packages Hero ── */}
-      <section className="relative py-14 sm:py-24 overflow-hidden bg-white/[0.02] backdrop-blur-[2px] border-b border-gold/20">
+      <section className="relative py-14 sm:py-24 overflow-hidden bg-[#FAF7F2]/60 border-b border-gold/20">
         <Container className="relative z-10 text-center">
           <div className="max-w-3xl mx-auto space-y-3.5 sm:space-y-4">
             <p className="font-sans text-[9px] sm:text-xs uppercase tracking-[0.16em] sm:tracking-[0.32em] text-[#D4AF37] font-bold flex items-center justify-center gap-1.5 sm:gap-2 px-2">
@@ -96,7 +96,7 @@ export default function PackagesPage() {
                 className={`relative rounded-[3px] p-5 sm:p-7 flex flex-col justify-between transition-all duration-300 ${
                   pkg.recommended
                     ? "bg-[#090614]/80 backdrop-blur-xl border-2 border-gold shadow-[0_20px_50px_rgba(212,175,55,0.25)] md:-translate-y-3"
-                    : "bg-[#090614]/60 backdrop-blur-xl border border-white/10 hover:border-gold/60 hover:shadow-2xl"
+                    : "bg-white border border-gold/25 shadow-[0_8px_30px_rgba(26,18,9,0.06)] hover:border-gold/60 hover:shadow-2xl"
                 }`}
               >
                 {pkg.recommended && (
@@ -117,7 +117,7 @@ export default function PackagesPage() {
                   </div>
 
                   {/* Pricing Badge with ₹ XXXX */}
-                  <div className="p-4 rounded-[3px] bg-white/[0.04] border border-white/10 shadow-sm">
+                  <div className="p-4 rounded-[3px] bg-[#FAF7F2] border border-gold/15 shadow-sm">
                     <span className="text-xs uppercase tracking-wider text-ivory/60 block font-semibold">
                       Package Investment
                     </span>
@@ -135,7 +135,7 @@ export default function PackagesPage() {
                     {pkg.description}
                   </p>
 
-                  <div className="pt-3 border-t border-white/10 space-y-2.5">
+                  <div className="pt-3 border-t border-gold/15 space-y-2.5">
                     <span className="text-xs uppercase tracking-wider text-ivory font-bold block">
                       Included In Curation:
                     </span>
@@ -150,7 +150,7 @@ export default function PackagesPage() {
                   </div>
                 </div>
 
-                <div className="pt-8 mt-6 border-t border-white/10">
+                <div className="pt-8 mt-6 border-t border-gold/15">
                   <Button
                     href={`/contact?package=${pkg.id}`}
                     variant={pkg.recommended ? "primary" : "outline"}
@@ -179,7 +179,7 @@ export default function PackagesPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pt-4">
             {bespokeAddons.map((addon, aIdx) => (
-              <div key={aIdx} className="p-6 rounded-[3px] bg-[#090614]/70 backdrop-blur-xl border border-white/10 hover:border-gold/50 shadow-md space-y-2.5 transition-all duration-300">
+              <div key={aIdx} className="p-6 rounded-[3px] bg-white border border-gold/25 shadow-[0_8px_30px_rgba(26,18,9,0.06)] hover:border-gold/50 shadow-md space-y-2.5 transition-all duration-300">
                 <div className="flex items-center gap-2 text-gold">
                   <Sparkles className="w-4 h-4" />
                   <span className="text-xs uppercase tracking-widest text-[#D4AF37] font-bold">Add-on 0{aIdx + 1}</span>
@@ -208,7 +208,7 @@ export default function PackagesPage() {
 
           <div className="space-y-6 pt-4">
             {faqs.map((faq, fIdx) => (
-              <div key={fIdx} className="p-6 rounded-[3px] bg-[#090614]/70 backdrop-blur-xl border border-white/10 hover:border-gold/40 space-y-2 transition-all duration-300">
+              <div key={fIdx} className="p-6 rounded-[3px] bg-white border border-gold/25 shadow-[0_8px_30px_rgba(26,18,9,0.06)] hover:border-gold/40 space-y-2 transition-all duration-300">
                 <h4 className="font-serif text-lg sm:text-xl font-semibold text-ivory flex items-start gap-2.5">
                   <HelpCircle className="w-5 h-5 text-gold shrink-0 mt-0.5" />
                   <span>{faq.q}</span>
@@ -223,7 +223,7 @@ export default function PackagesPage() {
       </Section>
 
       {/* ── Direct Contact CTA ── */}
-      <section className="bg-black/50 backdrop-blur-md text-ivory py-16 text-center relative overflow-hidden grain-overlay border-t border-gold/20">
+      <section className="bg-[#F7F3EC] text-[#1A1209] py-16 sm:py-20 text-center relative overflow-hidden border-t border-gold/25 text-center relative overflow-hidden grain-overlay border-t border-gold/20">
         <Container size="narrow" className="relative z-10 space-y-5">
           <p className="font-sans text-xs uppercase tracking-[0.3em] text-[#D4AF37] font-bold">
             Tailored Quotations

@@ -49,14 +49,14 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${cinzel.variable} ${cormorant.variable} ${jakarta.variable} bg-[#030308]`}
+      className={`${cinzel.variable} ${cormorant.variable} ${jakarta.variable} bg-[#FDFAF5]`}
     >
       <head>
         <link rel="preload" href="/videos/hero-bg.mp4" as="video" type="video/mp4" />
       </head>
-      <body className="bg-[#030308] text-[#FAF7F2] font-sans min-h-screen flex flex-col selection:bg-gold selection:text-black relative">
+      <body className="bg-[#FDFAF5] text-[#1A1209] font-sans min-h-screen flex flex-col selection:bg-gold selection:text-white relative">
         <LenisProvider>
-          {/* Google Stitch full-site responsive aurora gradient */}
+          {/* Subtle warm-ivory aurora gradient — does not overshadow content */}
           <GlobalAurora />
           {/* Custom luxury gold cursor — desktop only, skipped on touch */}
           <MagneticCursor />

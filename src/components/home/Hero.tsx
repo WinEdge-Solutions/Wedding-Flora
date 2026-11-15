@@ -82,7 +82,7 @@ export const Hero: React.FC = () => {
   return (
     <section
       ref={sectionRef}
-      className="relative w-full min-h-screen flex items-center justify-center overflow-hidden bg-[#030308]"
+      className="relative w-full min-h-screen flex items-center justify-center overflow-hidden bg-[#1A100A]"
     >
       {/* ══════════════════════════════════════════════
           LAYER 0 — Luxury Video Background with Parallax
@@ -99,31 +99,30 @@ export const Hero: React.FC = () => {
             muted
             playsInline
             preload="auto"
-            
-            className="absolute inset-0 w-full h-full object-cover object-center filter brightness-[0.82] contrast-[1.08] saturate-[1.12]"
+            className="absolute inset-0 w-full h-full object-cover object-center filter brightness-[0.90] contrast-[1.05] saturate-[1.08]"
           >
             <source src="/videos/hero-bg.mp4" type="video/mp4" />
           </video>
         </motion.div>
 
-        {/* ── Multi-Layer Cinematic Scrims ── */}
-        {/* Top navbar dark gradient veil */}
-        <div className="absolute inset-x-0 top-0 h-44 bg-gradient-to-b from-[#030308]/95 via-[#030308]/60 to-transparent" />
+        {/* ── Lighter cinematic scrims — video breathes more on ivory theme ── */}
+        {/* Top navbar gradient — still needs to fade to transparent quickly */}
+        <div className="absolute inset-x-0 top-0 h-36 bg-gradient-to-b from-[#1A100A]/85 via-[#1A100A]/40 to-transparent" />
 
-        {/* Deep ambient royal dark veil */}
-        <div className="absolute inset-0 bg-[#06040d]/45 backdrop-blur-[0.5px]" />
+        {/* Very light ambient veil — far less dark than before */}
+        <div className="absolute inset-0 bg-[#06040d]/30" />
 
-        {/* Radial vignette spotlight for text readability */}
+        {/* Radial vignette — just enough to lift the centred text */}
         <div
           className="absolute inset-0"
           style={{
             background:
-              "radial-gradient(ellipse at 50% 48%, rgba(212, 175, 55, 0.06) 0%, rgba(3, 3, 8, 0.55) 60%, rgba(3, 3, 8, 0.95) 100%)",
+              "radial-gradient(ellipse at 50% 48%, rgba(212,175,55,0.04) 0%, rgba(26,16,10,0.40) 60%, rgba(26,16,10,0.88) 100%)",
           }}
         />
 
-        {/* Bottom seamless transition fade to next section */}
-        <div className="absolute inset-x-0 bottom-0 h-52 bg-gradient-to-t from-[#030308] via-[#030308]/85 to-transparent" />
+        {/* Bottom fade — transitions into the light ivory body */}
+        <div className="absolute inset-x-0 bottom-0 h-56 bg-gradient-to-t from-[#FDFAF5] via-[#FDFAF5]/60 to-transparent" />
       </div>
 
       {/* ══════════════════════════════════════════════
@@ -175,7 +174,7 @@ export const Hero: React.FC = () => {
               animate="visible"
               custom={1}
             >
-              <p className="font-sans text-[9px] sm:text-xs uppercase tracking-[0.18em] sm:tracking-[0.32em] text-gold font-bold inline-flex items-center justify-center gap-2 px-4 py-1.5 rounded-full bg-black/55 backdrop-blur-md border border-gold/40 shadow-[0_4px_24px_rgba(0,0,0,0.7)]">
+              <p className="font-sans text-[9px] sm:text-xs uppercase tracking-[0.18em] sm:tracking-[0.32em] text-gold font-bold inline-flex items-center justify-center gap-2 px-4 py-1.5 rounded-full bg-black/40 backdrop-blur-md border border-gold/40 shadow-[0_4px_24px_rgba(0,0,0,0.5)]">
                 <span>✦</span>
                 <span>Royal Indian Wedding Planning &amp; Floral Artistry</span>
                 <span>✦</span>
@@ -194,42 +193,42 @@ export const Hero: React.FC = () => {
                 aria-label="Crafting Royal Weddings With Grandeur & Soul"
               >
                 <div className="flex flex-wrap items-center justify-center gap-x-2 sm:gap-x-3.5 lg:gap-x-4">
-                  <span className="inline-block overflow-hidden whitespace-nowrap font-display text-2xl sm:text-4xl md:text-5xl lg:text-[3.25rem] xl:text-[3.75rem] text-[#FAF7F2] font-bold tracking-[0.03em] drop-shadow-[0_4px_24px_rgba(0,0,0,0.95)]">
+                  <span className="inline-block overflow-hidden whitespace-nowrap font-display text-2xl sm:text-4xl md:text-5xl lg:text-[3.25rem] xl:text-[3.75rem] text-[#FAF7F2] font-bold tracking-[0.03em] drop-shadow-[0_4px_24px_rgba(0,0,0,0.9)]">
                     {splitChars("Crafting")}
                   </span>
                   <span className="inline-block overflow-hidden whitespace-nowrap font-display text-2xl sm:text-4xl md:text-5xl lg:text-[3.25rem] xl:text-[3.75rem] font-extrabold tracking-[0.03em] drop-shadow-[0_0_28px_rgba(212,175,55,0.6)]">
                     {splitChars("Royal", "gold-char-gradient")}
                   </span>
-                  <span className="inline-block overflow-hidden whitespace-nowrap font-display text-2xl sm:text-4xl md:text-5xl lg:text-[3.25rem] xl:text-[3.75rem] text-[#FAF7F2] font-bold tracking-[0.03em] drop-shadow-[0_4px_24px_rgba(0,0,0,0.95)]">
+                  <span className="inline-block overflow-hidden whitespace-nowrap font-display text-2xl sm:text-4xl md:text-5xl lg:text-[3.25rem] xl:text-[3.75rem] text-[#FAF7F2] font-bold tracking-[0.03em] drop-shadow-[0_4px_24px_rgba(0,0,0,0.9)]">
                     {splitChars("Weddings")}
                   </span>
                 </div>
 
                 <div className="mt-1 sm:mt-2.5 flex flex-wrap items-center justify-center gap-x-1.5 sm:gap-x-2.5">
-                  <span className="inline-block overflow-hidden whitespace-nowrap font-serif text-lg sm:text-3xl md:text-4xl lg:text-[2.65rem] text-[#F3E5AB]/95 font-light italic tracking-wide drop-shadow-[0_2px_16px_rgba(0,0,0,0.9)]">
+                  <span className="inline-block overflow-hidden whitespace-nowrap font-serif text-lg sm:text-3xl md:text-4xl lg:text-[2.65rem] text-[#F3E5AB]/95 font-light italic tracking-wide drop-shadow-[0_2px_16px_rgba(0,0,0,0.85)]">
                     {splitChars("With")}
                   </span>
-                  <span className="inline-block overflow-hidden whitespace-nowrap font-serif text-lg sm:text-3xl md:text-4xl lg:text-[2.65rem] text-[#F3E5AB]/95 font-light italic tracking-wide drop-shadow-[0_2px_16px_rgba(0,0,0,0.9)]">
+                  <span className="inline-block overflow-hidden whitespace-nowrap font-serif text-lg sm:text-3xl md:text-4xl lg:text-[2.65rem] text-[#F3E5AB]/95 font-light italic tracking-wide drop-shadow-[0_2px_16px_rgba(0,0,0,0.85)]">
                     {splitChars("Grandeur")}
                   </span>
-                  <span className="inline-block overflow-hidden whitespace-nowrap font-serif text-lg sm:text-3xl md:text-4xl lg:text-[2.65rem] text-[#F3E5AB]/95 font-light italic tracking-wide drop-shadow-[0_2px_16px_rgba(0,0,0,0.9)]">
+                  <span className="inline-block overflow-hidden whitespace-nowrap font-serif text-lg sm:text-3xl md:text-4xl lg:text-[2.65rem] text-[#F3E5AB]/95 font-light italic tracking-wide drop-shadow-[0_2px_16px_rgba(0,0,0,0.85)]">
                     {splitChars("&")}
                   </span>
-                  <span className="inline-block overflow-hidden whitespace-nowrap font-serif text-lg sm:text-3xl md:text-4xl lg:text-[2.65rem] text-[#F3E5AB]/95 font-light italic tracking-wide drop-shadow-[0_2px_16px_rgba(0,0,0,0.9)]">
+                  <span className="inline-block overflow-hidden whitespace-nowrap font-serif text-lg sm:text-3xl md:text-4xl lg:text-[2.65rem] text-[#F3E5AB]/95 font-light italic tracking-wide drop-shadow-[0_2px_16px_rgba(0,0,0,0.85)]">
                     {splitChars("Soul")}
                   </span>
                 </div>
               </h1>
             </motion.div>
 
-            {/* ── Ornamental divider (ivory on dark) ── */}
+            {/* ── Ornamental divider ── */}
             <motion.div variants={fadeUp} initial="hidden" animate="visible" custom={3}>
               <Divider variant="ornamental" className="my-1 sm:my-1.5 [&>*]:border-gold/50 [&>*]:text-gold/80" />
             </motion.div>
 
             {/* ── Subtitle ──────────────────────────── */}
             <motion.p
-              className="font-sans text-xs sm:text-sm lg:text-[15px] text-[#FAF7F2]/90 font-medium max-w-2xl mx-auto leading-relaxed px-3 sm:px-0 drop-shadow-[0_2px_12px_rgba(0,0,0,0.95)]"
+              className="font-sans text-xs sm:text-sm lg:text-[15px] text-[#FAF7F2]/90 font-medium max-w-2xl mx-auto leading-relaxed px-3 sm:px-0 drop-shadow-[0_2px_12px_rgba(0,0,0,0.9)]"
               variants={fadeUp}
               initial="hidden"
               animate="visible"
@@ -268,10 +267,10 @@ export const Hero: React.FC = () => {
                 href="/celebrations"
                 className="w-full sm:w-auto inline-flex items-center justify-center px-6 sm:px-8 py-2.5 sm:py-3.5
                   font-sans text-xs uppercase tracking-[0.18em] font-bold
-                  bg-black/45 backdrop-blur-xl text-ivory text-center
-                  border border-gold/40 rounded-[3px]
-                  hover:bg-gold/15 hover:border-gold hover:text-white
-                  hover:shadow-[0_0_28px_rgba(212,175,55,0.35)]
+                  bg-white/20 backdrop-blur-xl text-[#FAF7F2] text-center
+                  border border-white/40 rounded-[3px]
+                  hover:bg-white/30 hover:border-white/60 hover:text-white
+                  hover:shadow-[0_0_28px_rgba(255,255,255,0.2)]
                   hover:scale-[1.03] active:scale-[0.98]
                   transition-all duration-300 ease-out"
               >
@@ -292,7 +291,7 @@ export const Hero: React.FC = () => {
                 transition={{ repeat: Infinity, duration: 2.3, ease: "easeInOut" }}
                 className="flex flex-col items-center gap-1 opacity-60 hover:opacity-100 transition-opacity cursor-pointer"
               >
-                <span className="text-[9px] uppercase tracking-[0.3em] text-ivory font-bold font-sans">
+                <span className="text-[9px] uppercase tracking-[0.3em] text-[#FAF7F2] font-bold font-sans">
                   Scroll
                 </span>
                 <div className="w-px h-5 bg-gradient-to-b from-gold/80 to-transparent" />

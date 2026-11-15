@@ -150,7 +150,7 @@ export default async function BlogPostPage({
           </div>
 
           {/* Tags */}
-          <div className="pt-6 border-t border-white/10 flex flex-wrap items-center gap-2">
+          <div className="pt-6 border-t border-gold/15 flex flex-wrap items-center gap-2">
             <Tag size={14} className="text-gold" />
             <span className="text-xs font-bold text-ivory/70 mr-2">Tags:</span>
             {post.tags.map((tag, idx) => (
@@ -191,7 +191,7 @@ export default async function BlogPostPage({
 
           {/* Related Articles */}
           {relatedPosts.length > 0 && (
-            <div className="pt-8 border-t border-white/10 space-y-6">
+            <div className="pt-8 border-t border-gold/15 space-y-6">
               <h3 className="font-serif text-2xl font-bold text-ivory">
                 Continue Reading
               </h3>

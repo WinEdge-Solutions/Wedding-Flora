@@ -3,9 +3,9 @@
 import { useEffect, useRef } from "react";
 
 /**
- * FloralParticles — rising gold bokeh + star particles rendered on
- * a canvas. Colors tuned for the dark aurora hero background.
- * Uses requestAnimationFrame, fully self-contained.
+ * FloralParticles — rising gold bokeh + star particles.
+ * Tuned for the Hero section which keeps its dark video background.
+ * Colours remain warm gold / champagne — read well over the dark veil.
  */
 export function FloralParticles() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -20,7 +20,7 @@ export function FloralParticles() {
 
     let animId: number;
 
-    // Brighter gold / warm tones against dark background
+    // Warm gold tones — work on the semi-dark hero video background
     const colors = [
       "#D4B87A", "#B79A5B", "#E8C88A", "#F0D9A0",
       "#C4A96A", "#FFE4A8", "#E8D5D0",
@@ -34,19 +34,19 @@ export function FloralParticles() {
     const ro = new ResizeObserver(resize);
     ro.observe(canvas);
 
-    const COUNT = 55;
+    const COUNT = 45;
     const particles = Array.from({ length: COUNT }, () => ({
       x: Math.random() * (canvas.width || window.innerWidth),
       y: Math.random() * (canvas.height || window.innerHeight),
-      size: Math.random() * 4 + 1.2,
-      speedY: Math.random() * 0.65 + 0.2,
-      speedX: (Math.random() - 0.5) * 0.35,
-      opacity: Math.random() * 0.65 + 0.15,
+      size: Math.random() * 3.5 + 1,
+      speedY: Math.random() * 0.55 + 0.18,
+      speedX: (Math.random() - 0.5) * 0.3,
+      opacity: Math.random() * 0.55 + 0.12,
       opacityDir: Math.random() < 0.5 ? 1 : -1,
-      opacitySpeed: Math.random() * 0.006 + 0.002,
+      opacitySpeed: Math.random() * 0.005 + 0.002,
       color: colors[Math.floor(Math.random() * colors.length)],
       rotation: Math.random() * Math.PI * 2,
-      rotSpeed: (Math.random() - 0.5) * 0.04,
+      rotSpeed: (Math.random() - 0.5) * 0.035,
       isStar: Math.random() < 0.4,
     }));
 
@@ -58,11 +58,8 @@ export function FloralParticles() {
         const radius = i % 2 === 0 ? r : r * 0.35;
         const px = cx + Math.cos(angle) * radius;
         const py = cy + Math.sin(angle) * radius;
-        if (i === 0) {
-          ctx!.moveTo(px, py);
-        } else {
-          ctx!.lineTo(px, py);
-        }
+        if (i === 0) ctx!.moveTo(px, py);
+        else ctx!.lineTo(px, py);
       }
       ctx!.closePath();
     }
@@ -76,20 +73,20 @@ export function FloralParticles() {
         p.opacity += p.opacityDir * p.opacitySpeed;
         p.rotation += p.rotSpeed;
 
-        if (p.opacity > 0.85)  p.opacityDir = -1;
-        if (p.opacity < 0.08)  p.opacityDir =  1;
+        if (p.opacity > 0.75) p.opacityDir = -1;
+        if (p.opacity < 0.07) p.opacityDir =  1;
 
         if (p.y < -20) {
           p.y = canvas.height + 20;
           p.x = Math.random() * canvas.width;
         }
-        if (p.x < -20)              p.x = canvas.width + 20;
-        if (p.x > canvas.width + 20) p.x = -20;
+        if (p.x < -20)               p.x = canvas.width + 20;
+        if (p.x > canvas.width + 20)  p.x = -20;
 
         ctx.save();
         ctx.globalAlpha = p.opacity;
         ctx.fillStyle   = p.color;
-        ctx.shadowBlur  = 14;
+        ctx.shadowBlur  = 12;
         ctx.shadowColor = p.color;
 
         if (p.isStar) {

@@ -101,7 +101,7 @@ function ReelCard({
       onClick={handleCardClick}
     >
       {/* Reel container with portrait proportions */}
-      <div className="relative aspect-[4/5] sm:aspect-[9/16] w-full overflow-hidden bg-[#181513] rounded-[3px] mb-3.5 shadow-[0_8px_30px_rgba(43,43,43,0.08)] group-hover:shadow-[0_20px_45px_rgba(183,154,91,0.25)] transition-all duration-500">
+      <div className="relative aspect-[4/5] sm:aspect-[9/16] w-full overflow-hidden bg-[#1A1209] rounded-[3px] mb-3.5 shadow-[0_8px_30px_rgba(26,18,9,0.08)] group-hover:shadow-[0_20px_45px_rgba(212,175,55,0.25)] transition-all duration-500">
         {/* Native Video Element */}
         {item.videoUrl && (
           <video
@@ -122,11 +122,11 @@ function ReelCard({
         )}
 
         {/* Ambient dark gradient vignette for text legibility */}
-        <div className="absolute inset-0 bg-gradient-to-t from-charcoal/80 via-transparent to-charcoal/30 pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/30 pointer-events-none" />
 
         {/* Top Badges: Category + Audio toggle */}
         <div className="absolute top-3.5 inset-x-3.5 flex items-center justify-between z-10 pointer-events-auto">
-          <span className="inline-block bg-charcoal/85 backdrop-blur-md px-2.5 py-1 text-[10px] uppercase tracking-[0.25em] text-gold font-sans font-semibold rounded-[2px] border border-gold/40 shadow-sm">
+          <span className="inline-block bg-black/75 backdrop-blur-md px-2.5 py-1 text-[10px] uppercase tracking-[0.25em] text-gold font-sans font-semibold rounded-[2px] border border-gold/40 shadow-sm">
             {item.category}
           </span>
 
@@ -134,7 +134,7 @@ function ReelCard({
             <button
               onClick={handleToggleMute}
               title={isMuted ? "Unmute reel" : "Mute reel"}
-              className="p-1.5 rounded-full bg-charcoal/70 hover:bg-charcoal/90 text-ivory/90 hover:text-gold backdrop-blur-md transition-all duration-300 border border-gold/30 hover:border-gold focus:outline-none"
+              className="p-1.5 rounded-full bg-black/70 hover:bg-black/90 text-white hover:text-gold backdrop-blur-md transition-all duration-300 border border-gold/30 hover:border-gold focus:outline-none"
             >
               {isMuted ? <VolumeX className="w-3.5 h-3.5" /> : <Volume2 className="w-3.5 h-3.5 text-gold" />}
             </button>
@@ -143,7 +143,7 @@ function ReelCard({
 
         {/* Live golden progress line on playback */}
         {isPlaying && (
-          <div className="absolute bottom-0 inset-x-0 h-1 bg-charcoal/40 z-20 overflow-hidden pointer-events-none">
+          <div className="absolute bottom-0 inset-x-0 h-1 bg-black/40 z-20 overflow-hidden pointer-events-none">
             <div
               className="h-full bg-gradient-to-r from-gold via-champagne to-gold transition-all duration-100 ease-linear"
               style={{ width: `${progress}%` }}
@@ -163,10 +163,10 @@ function ReelCard({
         <p className="text-[11px] font-sans text-[#D4AF37] uppercase tracking-[0.2em] font-bold">
           {item.category}
         </p>
-        <h3 className="font-serif text-lg sm:text-xl md:text-2xl text-ivory font-semibold group-hover:text-gold transition-colors duration-300 leading-snug">
+        <h3 className="font-serif text-lg sm:text-xl md:text-2xl text-[#1A1209] font-semibold group-hover:text-gold transition-colors duration-300 leading-snug">
           {item.title}
         </h3>
-        <p className="text-xs font-sans text-ivory/80 font-medium tracking-wide">
+        <p className="text-xs font-sans text-[#5C5147] font-medium tracking-wide">
           {item.location} • {item.year}
         </p>
         {/* Animated underline */}
@@ -200,12 +200,13 @@ export const FeaturedWork: React.FC = () => {
 
   const handleTouchMove = (e: React.TouchEvent) => {
     if (!isDragging) return;
+
     const currentX = e.touches[0].clientX;
     const currentY = e.touches[0].clientY;
     const diffX = currentX - touchStartX.current;
     const diffY = currentY - touchStartY.current;
 
-    // Detect direction lock on first movement
+    // Detect gesture direction on first significant movement
     if (isHorizontalSwipe.current === null) {
       if (Math.abs(diffX) > 8 || Math.abs(diffY) > 8) {
         isHorizontalSwipe.current = Math.abs(diffX) > Math.abs(diffY);
@@ -213,7 +214,7 @@ export const FeaturedWork: React.FC = () => {
     }
 
     if (isHorizontalSwipe.current) {
-      // Rubber-band resistance on boundary edges
+      // Elastic resistance at carousel boundaries
       let resistedDiff = diffX;
       if (
         (activeIndex === 0 && diffX > 0) ||
@@ -259,7 +260,7 @@ export const FeaturedWork: React.FC = () => {
         />
 
         {/* ── Mobile Carousel Navigation Bar (md:hidden) ── */}
-        <div className="md:hidden flex items-center justify-between text-xs text-ivory mb-4 px-1">
+        <div className="md:hidden flex items-center justify-between text-xs text-[#1A1209] mb-4 px-1">
           <div className="flex items-center gap-2">
             <span className="text-[10px] uppercase tracking-[0.25em] text-[#D4AF37] font-bold">
               Reel {activeIndex + 1} of {featured.length}
@@ -272,9 +273,9 @@ export const FeaturedWork: React.FC = () => {
               onClick={() => setActiveIndex((prev) => Math.max(0, prev - 1))}
               disabled={activeIndex === 0}
               aria-label="Previous reel"
-              className="p-1.5 rounded-full border border-white/20 bg-[#090614]/80 text-ivory disabled:opacity-30 disabled:cursor-not-allowed hover:bg-gold/10 transition-colors"
+              className="p-1.5 rounded-full border border-gold/30 bg-white text-[#1A1209] disabled:opacity-30 disabled:cursor-not-allowed hover:bg-gold/10 transition-colors shadow-sm"
             >
-              <ChevronLeft className="w-4 h-4 text-ivory" />
+              <ChevronLeft className="w-4 h-4 text-[#1A1209]" />
             </button>
 
             {/* Dot indicators */}
@@ -285,7 +286,7 @@ export const FeaturedWork: React.FC = () => {
                   onClick={() => setActiveIndex(i)}
                   aria-label={`Go to reel ${i + 1}`}
                   className={`h-1.5 rounded-full transition-all duration-300 ${
-                    i === activeIndex ? "w-5 bg-gold" : "w-1.5 bg-white/20"
+                    i === activeIndex ? "w-5 bg-gold" : "w-1.5 bg-[#1A1209]/20"
                   }`}
                 />
               ))}
@@ -295,9 +296,9 @@ export const FeaturedWork: React.FC = () => {
               onClick={() => setActiveIndex((prev) => Math.min(featured.length - 1, prev + 1))}
               disabled={activeIndex === featured.length - 1}
               aria-label="Next reel"
-              className="p-1.5 rounded-full border border-white/20 bg-[#090614]/80 text-ivory disabled:opacity-30 disabled:cursor-not-allowed hover:bg-gold/10 transition-colors"
+              className="p-1.5 rounded-full border border-gold/30 bg-white text-[#1A1209] disabled:opacity-30 disabled:cursor-not-allowed hover:bg-gold/10 transition-colors shadow-sm"
             >
-              <ChevronRight className="w-4 h-4 text-ivory" />
+              <ChevronRight className="w-4 h-4 text-[#1A1209]" />
             </button>
           </div>
         </div>

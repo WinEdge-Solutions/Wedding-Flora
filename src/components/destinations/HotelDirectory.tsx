@@ -52,17 +52,17 @@ export const HotelDirectory: React.FC<HotelDirectoryProps> = ({
   return (
     <div className="space-y-8 sm:space-y-12">
       {/* ── Directory Header & Filters ── */}
-      <div className="bg-[#090614]/70 backdrop-blur-xl border border-gold/20 rounded-[3px] p-6 sm:p-8 space-y-6">
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-white/10 pb-6">
+      <div className="bg-white border border-gold/25 shadow-[0_8px_30px_rgba(26,18,9,0.06)] rounded-[3px] p-6 sm:p-8 space-y-6">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-gold/15 pb-6">
           <div>
             <div className="flex items-center gap-2 text-gold text-xs font-bold uppercase tracking-[0.2em] mb-1">
               <Sparkles className="w-4 h-4 text-gold" />
               <span>Verified Royal Portfolio</span>
             </div>
-            <h2 className="font-serif text-2xl sm:text-4xl font-bold text-ivory">
+            <h2 className="font-serif text-2xl sm:text-4xl font-bold text-[#1A1209]">
               {cityName} Wedding Venues &amp; Palaces
             </h2>
-            <p className="text-sm text-ivory/70 mt-1">
+            <p className="text-sm text-[#5C5147] mt-1">
               Showing {filteredHotels.length} of {hotels.length} luxury hotels and historic palaces available for exclusive wedding buyouts.
             </p>
           </div>
@@ -75,7 +75,7 @@ export const HotelDirectory: React.FC<HotelDirectoryProps> = ({
               placeholder={`Search in ${cityName}...`}
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-10 pr-4 py-2.5 rounded-lg bg-white/[0.05] border border-white/15 text-ivory placeholder-white/40 text-sm focus:outline-none focus:border-gold transition-colors"
+              className="w-full pl-10 pr-4 py-2.5 rounded-lg bg-[#FAF7F2] border border-gold/25 text-[#1A1209] placeholder-[#5C5147]/50 text-sm focus:outline-none focus:border-gold transition-colors"
             />
           </div>
         </div>
@@ -93,7 +93,7 @@ export const HotelDirectory: React.FC<HotelDirectoryProps> = ({
                   className={`px-4 py-2 rounded-full text-xs font-bold tracking-wider uppercase transition-all flex items-center gap-2 ${
                     active
                       ? "bg-gold text-midnight font-extrabold shadow-[0_0_15px_rgba(212,175,55,0.4)]"
-                      : "bg-white/[0.04] text-ivory/80 hover:text-ivory hover:bg-white/[0.08] border border-white/10"
+                      : "bg-white/[0.04] text-[#5C5147] hover:text-[#1A1209] hover:bg-white/[0.08] border border-white/10"
                   }`}
                 >
                   <span>{cat.label}</span>
@@ -113,7 +113,7 @@ export const HotelDirectory: React.FC<HotelDirectoryProps> = ({
       {/* ── Hotels Grid ── */}
       {filteredHotels.length === 0 ? (
         <div className="text-center py-16 bg-[#090614]/40 rounded-[3px] border border-white/10 p-8 space-y-4">
-          <p className="text-ivory/60 font-serif text-xl">
+          <p className="text-[#5C5147] font-serif text-xl">
             No hotels found matching &ldquo;{searchQuery}&rdquo;.
           </p>
           <button
@@ -141,7 +141,7 @@ export const HotelDirectory: React.FC<HotelDirectoryProps> = ({
             return (
               <div
                 key={hotel.slug}
-                className="group flex flex-col justify-between bg-[#090614]/80 backdrop-blur-xl border border-white/10 hover:border-gold/60 rounded-[3px] overflow-hidden transition-all duration-300 hover:shadow-[0_15px_35px_rgba(212,175,55,0.15)] hover:-translate-y-1"
+                className="group flex flex-col justify-between bg-white border border-gold/25 hover:border-gold/70 rounded-[3px] overflow-hidden shadow-[0_8px_30px_rgba(26,18,9,0.06)] transition-all duration-300 hover:shadow-[0_16px_45px_rgba(212,175,55,0.2)] hover:-translate-y-1"
               >
                 <div>
                   {/* Image Card Container */}
@@ -154,7 +154,7 @@ export const HotelDirectory: React.FC<HotelDirectoryProps> = ({
                       className="object-cover transition-transform duration-700 group-hover:scale-105"
                       loading="lazy"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#090614] via-[#090614]/20 to-transparent opacity-80" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-40" />
 
                     {/* Category Badge */}
                     <div className="absolute top-3 left-3">
@@ -166,14 +166,14 @@ export const HotelDirectory: React.FC<HotelDirectoryProps> = ({
                     {/* Price Tier */}
                     {hotel.priceTier && (
                       <div className="absolute top-3 right-3">
-                        <span className="px-2.5 py-1 rounded text-[10px] font-bold uppercase tracking-wider bg-black/70 backdrop-blur-md text-ivory/90 border border-white/10">
+                        <span className="px-2.5 py-1 rounded text-[10px] font-bold uppercase tracking-wider bg-black/70 backdrop-blur-md text-[#1A1209]/90 border border-white/10">
                           {hotel.priceTier}
                         </span>
                       </div>
                     )}
 
                     {/* Location strip */}
-                    <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between text-xs text-ivory/90">
+                    <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between text-xs text-[#1A1209]/90">
                       <div className="flex items-center gap-1.5 font-medium">
                         <MapPin className="w-3.5 h-3.5 text-gold shrink-0" />
                         <span className="truncate">{hotel.location}</span>
@@ -183,7 +183,7 @@ export const HotelDirectory: React.FC<HotelDirectoryProps> = ({
 
                   {/* Body Content */}
                   <div className="p-5 sm:p-6 space-y-4">
-                    <h3 className="font-serif text-xl sm:text-2xl font-bold text-ivory group-hover:text-gold transition-colors leading-snug">
+                    <h3 className="font-serif text-xl sm:text-2xl font-bold text-[#1A1209] group-hover:text-gold transition-colors leading-snug">
                       {hotel.name}
                     </h3>
 
@@ -192,10 +192,10 @@ export const HotelDirectory: React.FC<HotelDirectoryProps> = ({
                       <div className="flex items-center gap-2 p-2.5 rounded-lg bg-white/[0.03] border border-white/10">
                         <BedDouble className="w-4 h-4 text-gold shrink-0" />
                         <div>
-                          <span className="text-[10px] uppercase text-ivory/50 block font-bold">
+                          <span className="text-[10px] uppercase text-[#5C5147] block font-bold">
                             Rooms
                           </span>
-                          <span className="font-bold text-ivory">
+                          <span className="font-bold text-[#1A1209]">
                             {hotel.rooms > 0 ? `${hotel.rooms} Rooms` : "Bespoke Suites"}
                           </span>
                         </div>
@@ -204,10 +204,10 @@ export const HotelDirectory: React.FC<HotelDirectoryProps> = ({
                       <div className="flex items-center gap-2 p-2.5 rounded-lg bg-white/[0.03] border border-white/10">
                         <Users className="w-4 h-4 text-gold shrink-0" />
                         <div>
-                          <span className="text-[10px] uppercase text-ivory/50 block font-bold">
+                          <span className="text-[10px] uppercase text-[#5C5147] block font-bold">
                             Guest Capacity
                           </span>
-                          <span className="font-bold text-ivory">
+                          <span className="font-bold text-[#1A1209]">
                             {hotel.capacity > 0 ? `Up to ${hotel.capacity}` : "Exclusive Scale"}
                           </span>
                         </div>
@@ -215,7 +215,7 @@ export const HotelDirectory: React.FC<HotelDirectoryProps> = ({
                     </div>
 
                     {/* Short Description */}
-                    <p className="text-xs sm:text-sm text-ivory/70 line-clamp-3 leading-relaxed">
+                    <p className="text-xs sm:text-sm text-[#5C5147] line-clamp-3 leading-relaxed">
                       {hotel.shortInfo}
                     </p>
 

@@ -18,7 +18,7 @@ export default function DirectorPage() {
   return (
     <main className="min-h-screen text-ivory relative z-10">
       {/* ── Director Hero ── */}
-      <section className="relative py-14 sm:py-24 overflow-hidden bg-white/[0.02] backdrop-blur-[2px] border-b border-gold/20">
+      <section className="relative py-14 sm:py-24 overflow-hidden bg-[#FAF7F2]/60 border-b border-gold/20">
         <Container className="relative z-10 text-center">
           <div className="max-w-3xl mx-auto space-y-3.5 sm:space-y-4">
             <div className="flex justify-center -mb-2">
@@ -84,7 +84,7 @@ export default function DirectorPage() {
               </div>
 
               {/* Floating Monogram Seal */}
-              <div className="absolute -bottom-6 -right-6 hidden sm:flex items-center justify-center w-24 h-24 rounded-full bg-[#090614] border-2 border-gold shadow-2xl p-2">
+              <div className="absolute -bottom-6 -right-6 hidden sm:flex items-center justify-center w-24 h-24 rounded-full bg-white border-2 border-gold shadow-xl p-2">
                 <div className="relative w-full h-full">
                   <Image src="/images/logo-emblem.png" alt="Director Seal" fill className="object-contain" />
                 </div>
@@ -148,7 +148,7 @@ export default function DirectorPage() {
           />
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 pt-4">
-            <div className="p-6 rounded-[3px] bg-[#090614]/70 backdrop-blur-xl border border-white/10 hover:border-gold/50 shadow-[0_12px_40px_rgba(0,0,0,0.5)] transition-all duration-300 space-y-3">
+            <div className="p-6 rounded-[3px] bg-white border border-gold/25 shadow-[0_8px_30px_rgba(26,18,9,0.06)] hover:border-gold/50 shadow-[0_12px_40px_rgba(0,0,0,0.5)] transition-all duration-300 space-y-3">
               <div className="w-10 h-10 rounded-full bg-gold/15 flex items-center justify-center text-ivory">
                 <Crown className="w-5 h-5 text-gold" />
               </div>
@@ -158,7 +158,7 @@ export default function DirectorPage() {
               </p>
             </div>
 
-            <div className="p-6 rounded-[3px] bg-[#090614]/70 backdrop-blur-xl border border-white/10 hover:border-gold/50 shadow-[0_12px_40px_rgba(0,0,0,0.5)] transition-all duration-300 space-y-3">
+            <div className="p-6 rounded-[3px] bg-white border border-gold/25 shadow-[0_8px_30px_rgba(26,18,9,0.06)] hover:border-gold/50 shadow-[0_12px_40px_rgba(0,0,0,0.5)] transition-all duration-300 space-y-3">
               <div className="w-10 h-10 rounded-full bg-gold/15 flex items-center justify-center text-ivory">
                 <Sparkles className="w-5 h-5 text-gold" />
               </div>
@@ -168,7 +168,7 @@ export default function DirectorPage() {
               </p>
             </div>
 
-            <div className="p-6 rounded-[3px] bg-[#090614]/70 backdrop-blur-xl border border-white/10 hover:border-gold/50 shadow-[0_12px_40px_rgba(0,0,0,0.5)] transition-all duration-300 space-y-3">
+            <div className="p-6 rounded-[3px] bg-white border border-gold/25 shadow-[0_8px_30px_rgba(26,18,9,0.06)] hover:border-gold/50 shadow-[0_12px_40px_rgba(0,0,0,0.5)] transition-all duration-300 space-y-3">
               <div className="w-10 h-10 rounded-full bg-gold/15 flex items-center justify-center text-ivory">
                 <HeartHandshake className="w-5 h-5 text-gold" />
               </div>
@@ -178,7 +178,7 @@ export default function DirectorPage() {
               </p>
             </div>
 
-            <div className="p-6 rounded-[3px] bg-[#090614]/70 backdrop-blur-xl border border-white/10 hover:border-gold/50 shadow-[0_12px_40px_rgba(0,0,0,0.5)] transition-all duration-300 space-y-3">
+            <div className="p-6 rounded-[3px] bg-white border border-gold/25 shadow-[0_8px_30px_rgba(26,18,9,0.06)] hover:border-gold/50 shadow-[0_12px_40px_rgba(0,0,0,0.5)] transition-all duration-300 space-y-3">
               <div className="w-10 h-10 rounded-full bg-gold/15 flex items-center justify-center text-ivory">
                 <Compass className="w-5 h-5 text-gold" />
               </div>
@@ -192,7 +192,7 @@ export default function DirectorPage() {
       </Section>
 
       {/* ── Signature Sign-Off & Call to Action ── */}
-      <section className="bg-black/50 backdrop-blur-md text-ivory py-16 sm:py-20 text-center relative overflow-hidden grain-overlay border-t border-gold/20">
+      <section className="bg-[#F7F3EC] text-[#1A1209] py-16 sm:py-20 text-center relative overflow-hidden border-t border-gold/25 sm:py-20 text-center relative overflow-hidden grain-overlay border-t border-gold/20">
         <Container size="narrow" className="relative z-10 space-y-6">
           <p className="font-sans text-xs uppercase tracking-[0.3em] text-[#D4AF37] font-bold">
             Executive Consultation

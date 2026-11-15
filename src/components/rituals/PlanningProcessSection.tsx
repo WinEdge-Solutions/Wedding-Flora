@@ -13,10 +13,10 @@ export const PlanningProcessSection: React.FC = () => {
           <span>The 7 Rituals of Wedding Planning</span>
           <span>✦</span>
         </p>
-        <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-semibold text-ivory tracking-tight leading-tight">
+        <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-semibold text-[#1A1209] tracking-tight leading-tight">
           Our Proven 7-Step Regal Blueprint
         </h2>
-        <p className="font-sans text-sm sm:text-base text-ivory/80 font-medium leading-relaxed">
+        <p className="font-sans text-sm sm:text-base text-[#5C5147] font-medium leading-relaxed">
           From the initial heartfelt consultation to live on-ground showtime, we guide our esteemed families through a transparent, stress-free journey of aristocratic celebration.
         </p>
       </div>
@@ -39,7 +39,7 @@ export const PlanningProcessSection: React.FC = () => {
                   isEven ? "lg:order-2" : "lg:order-1"
                 }`}
               >
-                <div className="relative aspect-[4/3] rounded-[3px] overflow-hidden border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.5)] group bg-white/5">
+                <div className="relative aspect-[4/3] rounded-[3px] overflow-hidden border border-gold/25 shadow-[0_8px_30px_rgba(26,18,9,0.06)] group bg-white/5">
                   <Image
                     src={step.image}
                     alt={step.alt}
@@ -57,7 +57,7 @@ export const PlanningProcessSection: React.FC = () => {
 
                   {/* Tagline Badge */}
                   <div className="absolute bottom-4 left-4 right-4 text-left">
-                    <span className="text-[11px] uppercase tracking-wider text-white/90 font-bold bg-black/60 backdrop-blur-md px-3 py-1 rounded inline-block border border-white/10">
+                    <span className="text-[11px] uppercase tracking-wider text-white font-bold bg-black/60 backdrop-blur-md px-3 py-1 rounded inline-block border border-white/10">
                       {step.tagline}
                     </span>
                   </div>
@@ -74,12 +74,12 @@ export const PlanningProcessSection: React.FC = () => {
                   <span className="text-xs font-sans uppercase tracking-[0.25em] text-[#D4AF37] font-bold block">
                     {step.subtitle} • Stage {step.stepNumber}
                   </span>
-                  <h3 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-semibold text-ivory tracking-tight leading-snug">
+                  <h3 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-semibold text-[#1A1209] tracking-tight leading-snug">
                     {step.title}
                   </h3>
                 </div>
 
-                <p className="font-sans text-sm sm:text-base text-ivory/80 leading-relaxed font-medium">
+                <p className="font-sans text-sm sm:text-base text-[#5C5147] leading-relaxed font-medium">
                   {step.description}
                 </p>
 
@@ -93,7 +93,7 @@ export const PlanningProcessSection: React.FC = () => {
                       <span className="mt-0.5 p-0.5 rounded-full bg-gold/20 text-[#D4AF37] shrink-0">
                         <Check className="w-3.5 h-3.5 text-[#D4AF37]" />
                       </span>
-                      <span className="text-xs sm:text-sm text-ivory/85 font-medium leading-snug">
+                      <span className="text-xs sm:text-sm text-[#1A1209]/85 font-medium leading-snug">
                         {point}
                       </span>
                     </div>
@@ -104,7 +104,7 @@ export const PlanningProcessSection: React.FC = () => {
                 <div className="p-3.5 rounded-xl bg-gold/10 border border-gold/30 flex items-center gap-3 text-xs">
                   <FileText className="w-4 h-4 text-gold shrink-0" />
                   <div>
-                    <span className="text-[10px] uppercase tracking-wider text-ivory/60 block font-bold">
+                    <span className="text-[10px] uppercase tracking-wider text-[#1A1209]/60 block font-bold">
                       Key Milestone Deliverable:
                     </span>
                     <span className="font-bold text-gold">{step.deliverable}</span>

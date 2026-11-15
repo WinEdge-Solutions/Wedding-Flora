@@ -49,7 +49,7 @@ export default function ServicesPage() {
   return (
     <main className="min-h-screen text-ivory relative z-10">
       {/* ── Services Hero ── */}
-      <section className="relative py-14 sm:py-24 overflow-hidden bg-white/[0.02] backdrop-blur-[2px] border-b border-gold/20">
+      <section className="relative py-14 sm:py-24 overflow-hidden bg-[#FAF7F2]/60 border-b border-gold/20">
         <Container className="relative z-10 text-center">
           <div className="max-w-3xl mx-auto space-y-3.5 sm:space-y-4">
             <p className="font-sans text-[9px] sm:text-xs uppercase tracking-[0.16em] sm:tracking-[0.32em] text-[#D4AF37] font-bold flex items-center justify-center gap-1.5 sm:gap-2 px-2">
@@ -74,7 +74,7 @@ export default function ServicesPage() {
       {/* ── Services Quick Jump Bar ── */}
       <nav
         aria-label="Services Navigation"
-        className="sticky top-[64px] z-30 bg-[#090614]/90 backdrop-blur-xl border-b border-gold/20 py-2.5 overflow-x-auto no-scrollbar shadow-lg"
+        className="sticky top-[64px] z-30 bg-[#FDFAF5]/95 backdrop-blur-xl border-b border-gold/20 shadow-sm py-2.5 overflow-x-auto no-scrollbar shadow-lg"
       >
         <Container>
           <div className="flex items-center justify-start lg:justify-center gap-2 min-w-max px-2">
@@ -85,7 +85,7 @@ export default function ServicesPage() {
               <a
                 key={s.id}
                 href={`#${s.id}`}
-                className="px-3 py-1 rounded-[2px] text-xs font-semibold text-ivory/80 bg-white/[0.04] border border-white/10 hover:border-gold hover:text-gold hover:bg-gold/10 transition-all duration-200 whitespace-nowrap"
+                className="px-3 py-1 rounded-[2px] text-xs font-semibold text-[#1A1209] bg-[#FAF7F2] border border-gold/20 hover:border-gold hover:text-gold hover:bg-gold/10 transition-all duration-200 whitespace-nowrap"
               >
                 0{idx + 1}. {s.title}
               </a>
@@ -191,7 +191,7 @@ export default function ServicesPage() {
                 className={`relative rounded-[3px] p-6 sm:p-7 flex flex-col justify-between transition-all duration-300 ${
                   pkg.recommended
                     ? "bg-[#090614]/80 backdrop-blur-xl border-2 border-gold shadow-[0_20px_50px_rgba(212,175,55,0.2)] md:-translate-y-2"
-                    : "bg-[#090614]/60 backdrop-blur-xl border border-white/10 hover:border-gold/60 hover:shadow-xl"
+                    : "bg-white border border-gold/25 shadow-[0_8px_30px_rgba(26,18,9,0.06)] hover:border-gold/60 hover:shadow-xl"
                 }`}
               >
                 {pkg.recommended && (
@@ -212,7 +212,7 @@ export default function ServicesPage() {
                   </div>
 
                   {/* Price display with ₹ XXXX as requested */}
-                  <div className="py-2.5 px-3 rounded-[2px] bg-white/[0.04] border border-white/10">
+                  <div className="py-2.5 px-3 rounded-[2px] bg-[#FAF7F2] border border-gold/15">
                     <span className="text-xs uppercase tracking-wider text-ivory/60 block font-semibold">
                       Investment Guide
                     </span>
@@ -228,7 +228,7 @@ export default function ServicesPage() {
                     {pkg.description}
                   </p>
 
-                  <div className="pt-2 border-t border-white/10 space-y-2">
+                  <div className="pt-2 border-t border-gold/15 space-y-2">
                     <span className="text-[11px] uppercase tracking-wider text-ivory font-bold block">
                       What&apos;s Included:
                     </span>
@@ -243,7 +243,7 @@ export default function ServicesPage() {
                   </div>
                 </div>
 
-                <div className="pt-6 mt-6 border-t border-white/10">
+                <div className="pt-6 mt-6 border-t border-gold/15">
                   <Button
                     href={`/contact?package=${pkg.id}`}
                     variant={pkg.recommended ? "primary" : "outline"}
@@ -284,7 +284,7 @@ export default function ServicesPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-5 gap-6 pt-6">
             {processSteps.map((s, idx) => (
-              <div key={idx} className="relative p-6 rounded-[3px] bg-[#090614]/70 backdrop-blur-xl border border-white/10 flex flex-col justify-between hover:border-gold/50 transition-all duration-300">
+              <div key={idx} className="relative p-6 rounded-[3px] bg-white border border-gold/25 shadow-[0_8px_30px_rgba(26,18,9,0.06)] flex flex-col justify-between hover:border-gold/50 transition-all duration-300">
                 <div>
                   <span className="font-serif text-3xl font-bold text-gold/80 block mb-2">
                     {s.step}
@@ -303,7 +303,7 @@ export default function ServicesPage() {
       </Section>
 
       {/* ── Consultation CTA ── */}
-      <section className="bg-black/50 backdrop-blur-md text-ivory py-16 text-center relative overflow-hidden grain-overlay border-t border-gold/20">
+      <section className="bg-[#F7F3EC] text-[#1A1209] py-16 sm:py-20 text-center relative overflow-hidden border-t border-gold/25 text-center relative overflow-hidden grain-overlay border-t border-gold/20">
         <Container size="narrow" className="relative z-10 space-y-5">
           <p className="font-sans text-xs uppercase tracking-[0.3em] text-[#D4AF37] font-bold">
             Personalized Consultation

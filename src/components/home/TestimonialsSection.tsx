@@ -33,27 +33,22 @@ export const TestimonialsSection: React.FC = () => {
                   : ""
               }`}
             >
-              {/* Hover: glowing aurora behind quote */}
-              <div className="absolute inset-x-0 top-0 h-full rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
-                style={{ background: "radial-gradient(ellipse 70% 60% at 50% 40%, rgba(183,154,91,0.07) 0%, transparent 80%)" }}
-              />
-
               {/* Quotation mark */}
-              <span className="font-serif text-6xl text-gold-gradient select-none block leading-none">
+              <span className="font-serif text-6xl text-[#D4AF37] select-none block leading-none">
                 &ldquo;
               </span>
 
               {/* Quote */}
-              <blockquote className="font-serif text-xl sm:text-2xl lg:text-[1.85rem] font-normal text-ivory/95 leading-relaxed italic max-w-2xl mx-auto group-hover:text-white transition-colors duration-300 tracking-wide">
+              <blockquote className="font-serif text-xl sm:text-2xl lg:text-[1.85rem] font-normal text-[#1A1209] leading-relaxed italic max-w-2xl mx-auto tracking-wide">
                 {item.quote}
               </blockquote>
 
               {/* Attribution */}
               <div className="pt-2 space-y-1">
-                <p className="font-sans text-xs uppercase tracking-[0.25em] text-gold font-bold group-hover:text-white transition-colors duration-300">
+                <p className="font-sans text-xs uppercase tracking-[0.25em] text-[#D4AF37] font-bold">
                   {item.couple}
                 </p>
-                <p className="font-sans text-xs text-ivory/80 font-semibold tracking-wide">
+                <p className="font-sans text-xs text-[#5C5147] font-semibold tracking-wide">
                   {item.venue} • {item.date}
                 </p>
                 {/* Animated accent line */}

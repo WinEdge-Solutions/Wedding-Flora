@@ -78,10 +78,10 @@ function NavLink({
         isMobile
           ? "w-full py-3 px-4 text-xs font-semibold tracking-[0.18em] rounded-[2px] flex items-center justify-between " +
             (isActive
-              ? "text-gold bg-white/[0.06] font-bold"
-              : "text-ivory/80 hover:text-white hover:bg-white/[0.04]")
+              ? "text-gold bg-gold/[0.06] font-bold"
+              : "text-[#1A1209]/80 hover:text-[#1A1209] hover:bg-gold/[0.04]")
           : "inline-flex items-center justify-center h-7 leading-none tracking-[0.13em] lg:tracking-[0.15em] xl:tracking-[0.18em] text-[11px] xl:text-[11.5px] 2xl:text-xs " +
-            (isActive ? "text-gold font-bold" : "text-ivory/75 hover:text-ivory font-semibold")
+            (isActive ? "text-gold font-bold" : "text-[#1A1209]/75 hover:text-[#1A1209] font-semibold")
       }`}
     >
       <span className="leading-none">{label}</span>
@@ -180,7 +180,7 @@ function NavItemDropdown({
         className={`relative uppercase tracking-[0.13em] lg:tracking-[0.15em] xl:tracking-[0.18em] text-[11px] xl:text-[11.5px] 2xl:text-xs transition-colors duration-200 inline-flex items-center justify-center gap-1 h-7 leading-none group/droptrig ${
           isParentActive
             ? "text-gold font-bold"
-            : "text-ivory/75 hover:text-ivory font-semibold"
+            : "text-[#1A1209]/75 hover:text-[#1A1209] font-semibold"
         }`}
       >
         <span className="leading-none">{item.label}</span>
@@ -218,7 +218,7 @@ function NavItemDropdown({
           >
             {item.groups ? (
               /* Mega-Menu Grid for Destinations */
-              <div className="relative w-[400px] max-w-[calc(100vw-2rem)] p-3.5 rounded-[3px] bg-[#06040e]/98 backdrop-blur-2xl border border-gold/30 shadow-[0_20px_55px_rgba(0,0,0,0.85)] ring-1 ring-white/[0.08] flex flex-col overflow-hidden">
+              <div className="relative w-[400px] max-w-[calc(100vw-2rem)] p-3.5 rounded-[3px] bg-[#FDFAF5]/98 backdrop-blur-2xl border border-gold/35 shadow-[0_12px_40px_rgba(26,18,9,0.12)] ring-1 ring-gold/[0.08] flex flex-col overflow-hidden">
                 {/* Hairline gold shimmer rim */}
                 <div className="absolute top-0 left-0 right-0 h-[1.5px] bg-gradient-to-r from-transparent via-[#D4AF37] to-transparent pointer-events-none" />
 
@@ -229,7 +229,7 @@ function NavItemDropdown({
                       <span className="font-serif text-[11.5px] font-bold uppercase tracking-[0.24em] text-[#D4AF37]">
                         ✦ {group.title}
                       </span>
-                      <span className="text-[9px] uppercase tracking-wider text-ivory/50 font-sans font-semibold">
+                      <span className="text-[9px] uppercase tracking-wider text-[#5C5147]/60 font-sans font-semibold">
                         {group.items.length} Royal Venues
                       </span>
                     </div>
@@ -263,7 +263,7 @@ function NavItemDropdown({
                     </div>
 
                     {/* View All footer link */}
-                    <div className="pt-2.5 mt-2 border-t border-white/10 px-1 flex items-center justify-between">
+                    <div className="pt-2.5 mt-2 border-t border-[#D4AF37]/20 px-1 flex items-center justify-between">
                       <Link
                         href={item.href}
                         onClick={() => setIsOpen(false)}
@@ -278,7 +278,7 @@ function NavItemDropdown({
               </div>
             ) : (
               /* Refined Dropdown for About & Gallery */
-              <div className="relative w-72 max-w-[calc(100vw-2rem)] p-2.5 rounded-[3px] bg-[#06040e]/98 backdrop-blur-2xl border border-gold/30 shadow-[0_20px_55px_rgba(0,0,0,0.85)] ring-1 ring-white/[0.08] flex flex-col space-y-1 overflow-hidden">
+              <div className="relative w-72 max-w-[calc(100vw-2rem)] p-2.5 rounded-[3px] bg-[#FDFAF5]/98 backdrop-blur-2xl border border-gold/35 shadow-[0_12px_40px_rgba(26,18,9,0.12)] ring-1 ring-gold/[0.08] flex flex-col space-y-1 overflow-hidden">
                 {/* Hairline gold shimmer rim */}
                 <div className="absolute top-0 left-0 right-0 h-[1.5px] bg-gradient-to-r from-transparent via-[#D4AF37] to-transparent pointer-events-none" />
 
@@ -301,8 +301,8 @@ function NavItemDropdown({
                       onClick={() => setIsOpen(false)}
                       className={`group/sub flex items-start gap-2.5 px-3 py-2.5 rounded-[2px] transition-all duration-200 text-left ${
                         isSubActive
-                          ? "bg-white/[0.08] border-l-2 border-gold"
-                          : "hover:bg-white/[0.05] hover:border-l-2 hover:border-gold/60 border-l-2 border-transparent hover:translate-x-0.5"
+                          ? "bg-gold/[0.08] border-l-2 border-gold"
+                          : "hover:bg-gold/[0.04] hover:border-l-2 hover:border-gold/60 border-l-2 border-transparent hover:translate-x-0.5"
                       }`}
                     >
                       {subItem.icon === "camera" && (
@@ -321,7 +321,7 @@ function NavItemDropdown({
                             className={`font-serif text-[14px] tracking-wide transition-colors ${
                               isSubActive
                                 ? "text-gold font-bold"
-                                : "text-ivory group-hover/sub:text-gold font-medium"
+                                : "text-[#1A1209] group-hover/sub:text-gold font-medium"
                             }`}
                           >
                             {subItem.label}
@@ -331,7 +331,7 @@ function NavItemDropdown({
                           </span>
                         </div>
                         {subItem.description && (
-                          <span className="text-[10px] tracking-normal text-ivory/60 font-sans mt-0.5 line-clamp-1 block">
+                          <span className="text-[10px] tracking-normal text-[#5C5147]/70 font-sans mt-0.5 line-clamp-1 block">
                             {subItem.description}
                           </span>
                         )}
@@ -341,7 +341,7 @@ function NavItemDropdown({
                 })}
 
                 {/* Footer link */}
-                <div className="pt-2 mt-1 border-t border-white/10 px-2">
+                <div className="pt-2 mt-1 border-t border-[#D4AF37]/20 px-2">
                   <Link
                     href={item.href}
                     onClick={() => setIsOpen(false)}
@@ -399,11 +399,11 @@ export const Navbar: React.FC = () => {
     <header className="sticky top-0 z-50 w-full transition-all duration-300">
       {/* ── Top Micro-Header for Luxury Heritage Pedigree ── */}
       <div
-        className={`w-full transition-all duration-300 border-b border-gold/15 bg-black/50 backdrop-blur-md hidden md:block overflow-hidden ${
+        className={`w-full transition-all duration-300 border-b border-gold/20 bg-[#FDFAF5]/90 backdrop-blur-md hidden md:block overflow-hidden ${
           isScrolled ? "max-h-0 opacity-0 py-0 border-transparent" : "max-h-9 opacity-100 py-1.5"
         }`}
       >
-        <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 flex items-center justify-between text-[10px] tracking-[0.16em] uppercase text-ivory/70">
+        <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 flex items-center justify-between text-[10px] tracking-[0.16em] uppercase text-[#5C5147]">
           <div className="flex items-center gap-2">
             <span className="text-gold text-[9px]">✦</span>
             <span className="font-serif tracking-[0.18em] text-[#D4AF37] font-semibold">
@@ -414,27 +414,27 @@ export const Navbar: React.FC = () => {
           <div className="flex items-center gap-4 xl:gap-6 font-sans">
             <a
               href={`tel:${siteConfig.contact.phone.replace(/[^0-9+]/g, "")}`}
-              className="hover:text-gold transition-colors flex items-center gap-1.5"
+              className="hover:text-gold transition-colors flex items-center gap-1.5" style={{color: "#5C5147"}}
             >
               <Phone size={10} className="text-gold" />
               <span>{siteConfig.contact.phone}</span>
             </a>
-            <span className="text-white/20">|</span>
+            <span className="text-[#D4AF37]/30">|</span>
             <a
               href={siteConfig.contact.whatsapp}
               target="_blank"
               rel="noopener noreferrer"
-              className="hover:text-gold transition-colors flex items-center gap-1.5"
+              className="hover:text-gold transition-colors flex items-center gap-1.5" style={{color: "#5C5147"}}
             >
               <MessageCircle size={10} className="text-gold" />
               <span>WhatsApp Concierge</span>
             </a>
-            <span className="text-white/20">|</span>
+            <span className="text-[#D4AF37]/30">|</span>
             <a
               href={siteConfig.contact.mapsUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="hover:text-gold transition-colors flex items-center gap-1.5"
+              className="hover:text-gold transition-colors flex items-center gap-1.5" style={{color: "#5C5147"}}
             >
               <MapPin size={10} className="text-gold" />
               <span>Adarsh Nagar, Jaipur</span>
@@ -447,8 +447,8 @@ export const Navbar: React.FC = () => {
       <div
         className={`w-full transition-all duration-300 relative ${
           isScrolled
-            ? "bg-[#04030a]/94 backdrop-blur-2xl shadow-[0_12px_45px_rgba(0,0,0,0.7)] border-b border-[#D4AF37]/25"
-            : "bg-[#04030a]/78 backdrop-blur-xl border-b border-[#D4AF37]/15"
+            ? "bg-[#FDFAF5]/96 backdrop-blur-2xl shadow-[0_8px_32px_rgba(26,18,9,0.08)] border-b border-[#D4AF37]/30"
+            : "bg-[#FDFAF5]/90 backdrop-blur-xl border-b border-[#D4AF37]/20"
         }`}
       >
         {/* Hairline ambient shimmer lines */}
@@ -493,7 +493,7 @@ export const Navbar: React.FC = () => {
               />
             </div>
             <div className="flex flex-col text-left">
-              <span className="font-serif text-lg sm:text-[22px] font-semibold tracking-[0.04em] text-ivory group-hover:text-gold-gradient transition-colors duration-300 leading-none">
+              <span className="font-serif text-lg sm:text-[22px] font-semibold tracking-[0.04em] text-[#1A1209] group-hover:text-gold-gradient transition-colors duration-300 leading-none">
                 Wedding Flora
               </span>
               <span className="text-[7.5px] sm:text-[8.5px] uppercase tracking-[0.28em] text-[#D4AF37] font-semibold mt-1 transition-colors">
@@ -541,7 +541,7 @@ export const Navbar: React.FC = () => {
             <button
               type="button"
               onClick={() => setMobileMenuOpen((prev) => !prev)}
-              className="p-2 text-ivory hover:text-gold transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gold rounded-[2px]"
+              className="p-2 text-[#1A1209] hover:text-gold transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gold rounded-[2px]"
               aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
               aria-expanded={mobileMenuOpen}
               aria-controls="mobile-nav"
@@ -565,7 +565,7 @@ export const Navbar: React.FC = () => {
                     exit={{ rotate: -90, opacity: 0 }}
                     transition={{ duration: 0.2 }}
                   >
-                    <Menu size={22} />
+                    <Menu size={22} className="text-[#1A1209]" />
                   </motion.span>
                 )}
               </AnimatePresence>
@@ -584,7 +584,7 @@ export const Navbar: React.FC = () => {
             transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
             className="lg:hidden max-h-[calc(100dvh-64px)] overflow-y-auto overscroll-contain border-b border-gold/25"
             style={{
-              background: "rgba(5, 3, 10, 0.98)",
+              background: "rgba(253, 250, 245, 0.98)",
               backdropFilter: "blur(28px)",
               WebkitBackdropFilter: "blur(28px)",
             }}
@@ -609,8 +609,8 @@ export const Navbar: React.FC = () => {
                         onClick={() => setMobileDropdownOverride(isExpanded ? null : item.label)}
                         className={`w-full py-3 px-4 text-xs font-semibold rounded-[2px] flex items-center justify-between uppercase tracking-[0.18em] transition-colors ${
                           pathname.startsWith(item.href)
-                            ? "text-gold bg-white/[0.06] font-bold"
-                            : "text-ivory/80 hover:text-white hover:bg-white/[0.04]"
+                            ? "text-gold bg-gold/[0.06] font-bold"
+                            : "text-[#1A1209]/80 hover:text-[#1A1209] hover:bg-gold/[0.04]"
                         }`}
                         aria-expanded={isExpanded}
                         aria-controls={`mobile-accordion-${item.label.replace(/\s+/g, "-")}`}
@@ -653,8 +653,8 @@ export const Navbar: React.FC = () => {
                                             onClick={closeMobileMenu}
                                             className={`py-3 px-3 rounded-[2px] text-xs uppercase tracking-[0.14em] flex items-center justify-between transition-colors ${
                                               isSubActive
-                                                ? "text-gold bg-white/[0.08] font-bold"
-                                                : "text-ivory/70 hover:text-ivory hover:bg-white/[0.04] font-medium"
+                                                ? "text-gold bg-gold/[0.08] font-bold"
+                                                : "text-[#1A1209]/70 hover:text-[#1A1209] hover:bg-gold/[0.04] font-medium"
                                             }`}
                                           >
                                             <span className="truncate">{subItem.label}</span>
@@ -680,8 +680,8 @@ export const Navbar: React.FC = () => {
                                           onClick={closeMobileMenu}
                                           className={`py-3 px-6 rounded-[2px] text-xs uppercase tracking-[0.15em] flex items-center justify-between transition-colors ${
                                             isSubActive
-                                              ? "text-gold bg-white/[0.08] font-bold"
-                                              : "text-ivory/70 hover:text-ivory hover:bg-white/[0.04] font-medium"
+                                              ? "text-gold bg-gold/[0.08] font-bold"
+                                              : "text-[#1A1209]/70 hover:text-[#1A1209] hover:bg-gold/[0.04] font-medium"
                                           }`}
                                         >
                                           <div className="flex items-center gap-2">
@@ -729,10 +729,10 @@ export const Navbar: React.FC = () => {
               })}
 
               {/* Mobile Concierge Action Bar */}
-              <div className="pt-3 grid grid-cols-2 gap-2 border-t border-gold/15 mt-2">
+              <div className="pt-3 grid grid-cols-2 gap-2 border-t border-[#D4AF37]/20 mt-2">
                 <a
                   href={`tel:${siteConfig.contact.phone.replace(/[^0-9+]/g, "")}`}
-                  className="py-3 px-3 rounded-[2px] bg-white/[0.04] border border-gold/30 text-xs font-semibold text-ivory hover:text-gold flex items-center justify-center gap-1.5"
+                  className="py-3 px-3 rounded-[2px] bg-[#FAF7F0] border border-gold/30 text-xs font-semibold text-[#1A1209] hover:text-gold hover:border-gold flex items-center justify-center gap-1.5"
                 >
                   <Phone size={12} className="text-gold" />
                   <span>Call Us</span>
@@ -741,7 +741,7 @@ export const Navbar: React.FC = () => {
                   href={siteConfig.contact.whatsapp}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="py-3 px-3 rounded-[2px] bg-white/[0.04] border border-gold/30 text-xs font-semibold text-ivory hover:text-gold flex items-center justify-center gap-1.5"
+                  className="py-3 px-3 rounded-[2px] bg-[#FAF7F0] border border-gold/30 text-xs font-semibold text-[#1A1209] hover:text-gold hover:border-gold flex items-center justify-center gap-1.5"
                 >
                   <MessageCircle size={12} className="text-gold" />
                   <span>WhatsApp</span>

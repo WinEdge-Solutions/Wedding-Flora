@@ -64,7 +64,7 @@ export default async function CityDestinationPage({
       </div>
 
       {/* ── City Hero ── */}
-      <section className="relative py-14 sm:py-20 overflow-hidden bg-white/[0.02] backdrop-blur-[2px] border-b border-gold/20">
+      <section className="relative py-14 sm:py-20 overflow-hidden bg-[#FAF7F2]/60 border-b border-gold/20">
         <Container className="relative z-10 text-center">
           <div className="max-w-3xl mx-auto space-y-3.5 sm:space-y-4">
             <p className="font-sans text-[9px] sm:text-xs uppercase tracking-[0.16em] sm:tracking-[0.32em] text-[#D4AF37] font-bold flex items-center justify-center gap-1.5 sm:gap-2 px-2">
@@ -176,7 +176,7 @@ export default async function CityDestinationPage({
       </Section>
 
       {/* ── Consultation CTA ── */}
-      <section className="bg-black/50 backdrop-blur-md text-ivory py-16 text-center relative overflow-hidden border-t border-gold/20">
+      <section className="bg-[#F7F3EC] text-[#1A1209] py-16 sm:py-20 text-center relative overflow-hidden border-t border-gold/25 text-center relative overflow-hidden border-t border-gold/20">
         <Container size="narrow" className="relative z-10 space-y-4">
           <h3 className="font-serif text-2xl sm:text-4xl font-semibold text-ivory">
             Begin Planning Your {destination.name} Celebration
