@@ -403,14 +403,7 @@ export const Navbar: React.FC = () => {
           isScrolled ? "max-h-0 opacity-0 py-0 border-transparent" : "max-h-9 opacity-100 py-1.5"
         }`}
       >
-        <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 flex items-center justify-between text-[10px] tracking-[0.16em] uppercase text-[#5C5147]">
-          <div className="flex items-center gap-2">
-            <span className="text-gold text-[9px]">✦</span>
-            <span className="font-serif tracking-[0.18em] text-[#D4AF37] font-semibold">
-              The Royal Wedding Planner
-            </span>
-          </div>
-
+        <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 flex items-center justify-end text-[10px] tracking-[0.16em] uppercase text-[#5C5147]">
           <div className="flex items-center gap-4 xl:gap-6 font-sans">
             <a
               href={`tel:${siteConfig.contact.phone.replace(/[^0-9+]/g, "")}`}
