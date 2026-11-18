@@ -78,15 +78,15 @@ export default function DestinationsPage() {
                   }`}
                 >
                   {/* Image Column */}
-                  <div className={`lg:col-span-6 ${isEven ? "lg:order-2" : "lg:order-1"}`}>
-                    <div className="relative aspect-[4/3] rounded-[3px] overflow-hidden border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.5)] group">
+                  <div className={`lg:col-span-7 xl:col-span-8 ${isEven ? "lg:order-2" : "lg:order-1"}`}>
+                    <div className="relative aspect-[16/10] rounded-[3px] overflow-hidden border border-gold/30 shadow-[0_16px_45px_rgba(26,18,9,0.08)] bg-white p-1.5 sm:p-2 group">
                       <Image
                         src={city.imageUrl}
                         alt={`${city.name} Destination Wedding by Wedding Flora`}
                         fill
                         className="object-cover object-center transition-transform duration-700 group-hover:scale-105"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-[#090614]/85 via-transparent to-transparent" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent" />
                       
                       {/* Vibe Badge Overlay */}
                       <div className="absolute top-4 left-4 px-3 py-1 rounded-full bg-black/60 backdrop-blur-md border border-gold/40 text-[10px] uppercase tracking-wider text-gold font-bold flex items-center gap-1.5">
@@ -109,7 +109,7 @@ export default function DestinationsPage() {
                   </div>
 
                   {/* Text Column */}
-                  <div className={`lg:col-span-6 space-y-4 sm:space-y-5 ${isEven ? "lg:order-1" : "lg:order-2"}`}>
+                  <div className={`lg:col-span-5 xl:col-span-4 space-y-4 sm:space-y-5 ${isEven ? "lg:order-1" : "lg:order-2"}`}>
                     <span className="text-xs font-sans uppercase tracking-[0.25em] text-[#D4AF37] font-bold block">
                       Destination 0{index + 1} • Rajasthan
                     </span>

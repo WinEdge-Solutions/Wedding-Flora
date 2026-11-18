@@ -115,20 +115,20 @@ export default function ServicesPage() {
                   }`}
                 >
                   {/* Image Column */}
-                  <div className={`lg:col-span-6 ${isEven ? "lg:order-2" : "lg:order-1"}`}>
-                    <div className="relative aspect-[4/3] rounded-[3px] overflow-hidden border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.5)] group">
+                  <div className={`lg:col-span-7 xl:col-span-8 ${isEven ? "lg:order-2" : "lg:order-1"}`}>
+                    <div className="relative aspect-[16/10] rounded-[3px] overflow-hidden border border-gold/30 shadow-[0_16px_45px_rgba(26,18,9,0.08)] bg-white p-1.5 sm:p-2 group">
                       <Image
                         src={service.imageUrl}
                         alt={service.title}
                         fill
                         className="object-cover object-top transition-transform duration-700 group-hover:scale-105"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-[#090614]/80 via-transparent to-transparent" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
                     </div>
                   </div>
 
                   {/* Text Column */}
-                  <div className={`lg:col-span-6 space-y-5 ${isEven ? "lg:order-1" : "lg:order-2"}`}>
+                  <div className={`lg:col-span-5 xl:col-span-4 space-y-5 ${isEven ? "lg:order-1" : "lg:order-2"}`}>
                     <span className="text-xs font-sans uppercase tracking-[0.25em] text-[#D4AF37] font-bold">
                       Service 0{index + 1}
                     </span>

@@ -52,35 +52,63 @@ export default function AboutPage() {
       <Section variant="ivory">
         <Container>
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-            {/* Visual Column */}
-            <div className="lg:col-span-5 relative">
-              <div className="relative aspect-[4/5] rounded-[3px] overflow-hidden border border-gold/30 shadow-[0_20px_60px_rgba(0,0,0,0.6)]">
-                <Image
-                  src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=1200&q=80"
-                  alt="Royal Palace Wedding Architecture by Wedding Flora"
-                  fill
-                  className="object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/35 to-transparent" />
-                <div className="absolute bottom-6 left-6 right-6 text-white">
-                  <span className="text-xs uppercase tracking-widest text-gold font-bold block mb-1">
-                    Heritage Excellence
-                  </span>
-                  <p className="font-serif text-xl font-semibold leading-snug">
-                    Over a decade of orchestrating regal destination celebrations in Rajasthan &amp; India.
-                  </p>
+            {/* ── 65% VISUAL ATELIER COLUMN ── */}
+            <div className="lg:col-span-7 xl:col-span-8 relative">
+              <div className="grid grid-cols-12 gap-3 sm:gap-4 items-center">
+                {/* Primary Palace Scenography */}
+                <div className="col-span-12 sm:col-span-8 relative aspect-[4/5] rounded-[3px] overflow-hidden border border-gold/30 shadow-[0_20px_60px_rgba(0,0,0,0.15)] group bg-white p-1.5 sm:p-2">
+                  <div className="relative w-full h-full overflow-hidden rounded-[2px]">
+                    <Image
+                      src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=1200&q=80"
+                      alt="Royal Palace Wedding Architecture by Wedding Flora"
+                      fill
+                      className="object-cover transition-transform duration-700 group-hover:scale-105"
+                      priority
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/35 to-transparent" />
+                    <div className="absolute bottom-5 left-5 right-5 text-white">
+                      <span className="text-xs uppercase tracking-widest text-gold font-bold block mb-1">
+                        ✦ Heritage Excellence
+                      </span>
+                      <p className="font-serif text-lg sm:text-xl font-semibold leading-snug">
+                        Over a decade of orchestrating regal destination celebrations in Rajasthan.
+                      </p>
+                    </div>
+                  </div>
                 </div>
-              </div>
-              {/* Floating emblem stamp */}
-              <div className="absolute -bottom-6 -right-6 hidden sm:flex items-center justify-center w-24 h-24 rounded-full bg-white border-2 border-gold shadow-xl p-2">
-                <div className="relative w-full h-full">
-                  <Image src="/images/logo-emblem.png" alt="Stamp" fill className="object-contain" />
+
+                {/* Secondary Detail Floral Frame (65% visual depth) */}
+                <div className="hidden sm:block sm:col-span-4 space-y-3">
+                  <div className="relative aspect-[3/4] rounded-[3px] overflow-hidden border border-gold/30 shadow-md bg-white p-1.5 group">
+                    <div className="relative w-full h-full overflow-hidden rounded-[2px]">
+                      <Image
+                        src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=800&q=80"
+                        alt="Handcrafted Floral Mandap Detail"
+                        fill
+                        className="object-cover transition-transform duration-700 group-hover:scale-105"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
+                      <div className="absolute bottom-3 left-3 right-3 text-white">
+                        <span className="text-[10px] font-sans uppercase tracking-wider text-gold font-bold block">
+                          Floral Sculpture
+                        </span>
+                        <p className="text-xs font-serif text-white line-clamp-1">
+                          Vedic Scenography
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="p-3.5 rounded-[3px] bg-[#FAF7F2] border border-gold/25 text-center">
+                    <span className="text-xs uppercase tracking-widest text-[#D4AF37] font-bold block">Est. 2014</span>
+                    <span className="font-serif text-sm font-semibold text-[#1A1209]">Jaipur • Udaipur • Goa</span>
+                  </div>
                 </div>
               </div>
             </div>
 
-            {/* Story narrative */}
-            <div className="lg:col-span-7 space-y-6">
+            {/* ── 35% CONCISE EDITORIAL NARRATIVE ── */}
+            <div className="lg:col-span-5 xl:col-span-4 space-y-5">
               <span className="text-[11px] sm:text-xs font-sans uppercase tracking-[0.32em] text-[#D4AF37] font-bold flex items-center gap-2">
                 <span>✦</span>
                 <span>Our Genesis &amp; Devotion</span>
