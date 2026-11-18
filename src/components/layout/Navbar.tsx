@@ -489,9 +489,6 @@ export const Navbar: React.FC = () => {
               <span className="font-serif text-lg sm:text-[22px] font-semibold tracking-[0.04em] text-[#1A1209] group-hover:text-gold-gradient transition-colors duration-300 leading-none">
                 Wedding Flora
               </span>
-              <span className="text-[7.5px] sm:text-[8.5px] uppercase tracking-[0.28em] text-[#D4AF37] font-semibold mt-1 transition-colors">
-                The Wedding Planner
-              </span>
             </div>
           </Link>
 

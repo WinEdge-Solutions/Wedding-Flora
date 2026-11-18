@@ -169,7 +169,7 @@ export const sacredRitualsList: SacredRitual[] = [
       "A vibrant, music-filled afternoon celebration under colorful sunshades or palace courtyards. Skilled artists apply intricate botanical henna motifs while family members sing traditional folk suhaag songs amidst laughter, cocktails, and live bangle-making stalls.",
     decorVibe: "Bohemian silk draperies, lively Rajasthani cushions, fragrant floral jewelry, and flute melodies.",
     duration: "4 to 6 Hours (Afternoon into Evening)",
-    image: "/images/services/service-mehendi-carnival.webp",
+    image: "/images/services/service-social-gatherings.webp",
   },
   {
     id: "haldi",
@@ -180,7 +180,7 @@ export const sacredRitualsList: SacredRitual[] = [
       "A jubilant ceremony of affection and laughter. Families apply golden saffron-infused turmeric paste onto the bride and groom. At Wedding Flora, we culminate the ceremony with an ethereal Phoolon Ki Holi — a shower of thousands of fresh rose and marigold petals.",
     decorVibe: "Sunshine-yellow fabrics, terracotta urli vessels, brass bells, and cascades of fresh marigold blooms.",
     duration: "2 to 3 Hours (Morning)",
-    image: "/images/services/service-haldi-sanctuary.webp",
+    image: "/images/rituals/process-3.webp",
   },
   {
     id: "sangeet",
@@ -191,7 +191,7 @@ export const sacredRitualsList: SacredRitual[] = [
       "An electrifying night of high-production performances, concert sound engineering, and celebratory glamour. From professionally choreographed family dance face-offs to live celebrity performances, the Sangeet is an unforgettable sensory spectacle beneath illuminated palace facades.",
     decorVibe: "Midnight crystal chandeliers, LED tunnel entrances, mirror-dance floors, and bespoke cocktail lounges.",
     duration: "5 to 7 Hours (Evening into Late Night)",
-    image: "/images/services/service-sangeet-spectacular.webp",
+    image: "/images/service-sangeet-dance.jpg",
   },
   {
     id: "shahi-baraat",
@@ -202,7 +202,7 @@ export const sacredRitualsList: SacredRitual[] = [
       "A spectacle of princely pomp. The groom arrives in a vintage open-top convertible or atop a royally caparisoned horse, escorted by energetic brass bands, dhol players, and fireworks. At the palace gates, the bride's family welcomes them with traditional royal aarti and rose water sprays.",
     decorVibe: "Torches, royal saffron turbans, velvet chhatras (umbrellas), dhol drums, and rose petal cannons.",
     duration: "2 to 3 Hours (Sunset / Dusk)",
-    image: "/images/services/service-shahi-baraat.webp",
+    image: "/images/hero-royal-stage.jpg",
   },
   {
     id: "jaimala-pheras",
@@ -213,7 +213,7 @@ export const sacredRitualsList: SacredRitual[] = [
       "Under an architecturally magnificent mandap, the couple exchanges fragrant floral varmalas. Guided by learned Vedic scholars reciting timeless Sanskrit mantras, they take the sacred Saptapadi (seven circumambulations) around the holy fire, sealing their eternal bond of devotion.",
     decorVibe: "Floating mandap over palace waterbodies, fragrant tuberoses, carved sandstone pillars, and sacred ghee lamps.",
     duration: "2 to 3 Hours (Night Muhurat)",
-    image: "/images/services/service-sacred-vedic-mandap.webp",
+    image: "/images/service-varmala-mandap.jpg",
   },
   {
     id: "vidaai",
@@ -224,7 +224,7 @@ export const sacredRitualsList: SacredRitual[] = [
       "A deeply poignant moment where parents bestow their most sacred blessings. As the bride tosses handfuls of rice over her shoulder to wish prosperity upon her maternal home, she steps into an illuminated palanquin or flower-adorned vintage car amidst bittersweet tears and heartfelt love.",
     decorVibe: "Soft candlelit lanterns, gentle violin or sitar acoustics, white petal pathways, and floral palanquins.",
     duration: "1 Hour (Post-Pheras)",
-    image: "/images/services/service-curated-entertainment.webp",
+    image: "/images/services/service-experiential-events.webp",
   },
   {
     id: "reception",
@@ -235,7 +235,7 @@ export const sacredRitualsList: SacredRitual[] = [
       "A black-tie evening of sophisticated luxury, heartfelt speeches, champagne toasts, and Michelin-inspired royal dining. Guests greet the newlyweds against a backdrop of royal palace ramparts, while classical symphonies and smooth jazz set an atmosphere of refined joy.",
     decorVibe: "Cascading wisteria ceilings, bespoke mirror tables, monogrammed ice sculptures, and champagne towers.",
     duration: "4 to 5 Hours (Evening)",
-    image: "/images/services/service-grand-reception.webp",
+    image: "/images/service-crystal-reception.jpg",
   },
 ];
 

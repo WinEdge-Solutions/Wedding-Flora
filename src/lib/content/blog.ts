@@ -150,7 +150,7 @@ export const blogPosts: BlogPost[] = [
       role: "Head of Floral Scenography",
       avatar: "/images/logo-emblem.png",
     },
-    coverImage: "/images/services/service-sacred-vedic-mandap.webp",
+    coverImage: "/images/service-varmala-mandap.jpg",
     tags: ["Mandap Trends", "Floral Architecture", "Vedic Scenography", "Sacred Geometry"],
     content: [
       {
@@ -184,7 +184,7 @@ export const blogPosts: BlogPost[] = [
       role: "Technical Audio-Visual Lead",
       avatar: "/images/logo-emblem.png",
     },
-    coverImage: "/images/services/service-sangeet-spectacular.webp",
+    coverImage: "/images/service-sangeet-dance.jpg",
     tags: ["Sangeet Production", "Concert Staging", "Audio Visuals", "Live Artists"],
     content: [
       {
@@ -216,7 +216,7 @@ export const blogPosts: BlogPost[] = [
       role: "Vedic Traditions Advisor",
       avatar: "/images/logo-emblem.png",
     },
-    coverImage: "/images/services/service-shahi-baraat.webp",
+    coverImage: "/images/hero-royal-stage.jpg",
     tags: ["Vedic Rituals", "Saptapadi", "Kanyadaan", "Varmala Significance"],
     content: [
       {
