@@ -166,27 +166,12 @@ export const Hero: React.FC = () => {
               </div>
             </motion.div>
 
-            {/* ── Eyebrow label in frosted pill ─────────── */}
-            <motion.div
-              className="flex justify-center"
-              variants={fadeUp}
-              initial="hidden"
-              animate="visible"
-              custom={1}
-            >
-              <p className="font-sans text-[9px] sm:text-xs uppercase tracking-[0.18em] sm:tracking-[0.32em] text-gold font-bold inline-flex items-center justify-center gap-2 px-4 py-1.5 rounded-full bg-black/40 backdrop-blur-md border border-gold/40 shadow-[0_4px_24px_rgba(0,0,0,0.5)]">
-                <span>✦</span>
-                <span>Royal Indian Wedding Planning &amp; Floral Artistry</span>
-                <span>✦</span>
-              </p>
-            </motion.div>
-
             {/* ── H1 — split char GSAP animation ───── */}
             <motion.div
               variants={fadeUp}
               initial="hidden"
               animate="visible"
-              custom={2}
+              custom={1}
             >
               <h1
                 className="hero-title leading-[1.12] tracking-tight"
@@ -222,7 +207,7 @@ export const Hero: React.FC = () => {
             </motion.div>
 
             {/* ── Ornamental divider ── */}
-            <motion.div variants={fadeUp} initial="hidden" animate="visible" custom={3}>
+            <motion.div variants={fadeUp} initial="hidden" animate="visible" custom={2}>
               <Divider variant="ornamental" className="my-1 sm:my-1.5 [&>*]:border-gold/50 [&>*]:text-gold/80" />
             </motion.div>
 
@@ -232,7 +217,7 @@ export const Hero: React.FC = () => {
               variants={fadeUp}
               initial="hidden"
               animate="visible"
-              custom={4}
+              custom={3}
             >
               From starlit palace Sangeets in Udaipur to ethereal Mandap ceremonies
               across heritage fortresses, we curate unforgettable Indian wedding
@@ -245,7 +230,7 @@ export const Hero: React.FC = () => {
               variants={fadeUp}
               initial="hidden"
               animate="visible"
-              custom={5}
+              custom={4}
             >
               {/* Primary — gold fill */}
               <a
@@ -284,7 +269,7 @@ export const Hero: React.FC = () => {
               variants={fadeUp}
               initial="hidden"
               animate="visible"
-              custom={6}
+              custom={5}
             >
               <motion.div
                 animate={{ y: [0, 6, 0] }}
