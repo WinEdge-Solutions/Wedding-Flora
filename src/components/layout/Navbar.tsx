@@ -589,20 +589,39 @@ export const Navbar: React.FC = () => {
           {/* ── Central Royal Monogram & Crest ── */}
           <Link
             href="/"
-            className="flex items-center gap-2.5 sm:gap-3 group focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gold shrink-0 py-0.5"
+            className="relative flex items-center gap-2.5 sm:gap-3 group focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gold shrink-0 py-1"
             aria-label="Wedding Flora Home"
           >
-            <div className="relative w-9 h-9 sm:w-11 sm:h-11 lg:w-14 lg:h-14 xl:w-16 xl:h-16 shrink-0 transition-all duration-500 group-hover:scale-105 my-0.5 lg:-my-1">
-              {/* Ambient radial gold halo behind crest */}
-              <div className="absolute -inset-2 bg-gradient-to-r from-gold/30 via-gold/15 to-transparent rounded-full blur-md opacity-30 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
-              <Image
-                src="/images/logo-emblem.png"
-                alt="Wedding Flora Crest"
-                fill
-                className="object-contain relative z-10 drop-shadow-[0_2px_10px_rgba(212,175,55,0.3)] group-hover:drop-shadow-[0_4px_18px_rgba(212,175,55,0.6)]"
-                priority
-              />
+            <div className="relative w-9 h-9 sm:w-11 sm:h-11 lg:w-15 lg:h-15 xl:w-[68px] xl:h-[68px] shrink-0 transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-105 group-hover:-translate-y-0.5 my-0.5 lg:-my-1.5 flex items-center justify-center">
+              {/* 1. Deep ambient radial gold aura */}
+              <div className="absolute -inset-3 bg-gradient-to-r from-[#D4AF37]/35 via-[#F3E5AB]/20 to-transparent rounded-full blur-lg opacity-25 group-hover:opacity-90 group-hover:scale-125 transition-all duration-700 ease-out pointer-events-none" />
+
+              {/* 2. Soft golden pulsing core */}
+              <div className="absolute -inset-1 bg-gradient-to-b from-[#FAF7F2] via-[#D4AF37]/25 to-transparent rounded-full blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+
+              {/* 3. Concentric hairline celestial ring */}
+              <div className="absolute -inset-2 rounded-full border border-[#D4AF37]/40 opacity-0 scale-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500 ease-out pointer-events-none" />
+
+              {/* 4. Delicate rotating astrolabe dashed ring (subtle slow regal spin on desktop) */}
+              <div className="hidden lg:block absolute -inset-3 rounded-full border border-dashed border-[#D4AF37]/25 opacity-0 scale-75 group-hover:opacity-60 group-hover:scale-100 transition-all duration-700 ease-out animate-[spin_30s_linear_infinite] pointer-events-none" />
+
+              {/* 5. The Royal Crest Emblem with specular gold drop shadow */}
+              <div className="relative w-full h-full">
+                <Image
+                  src="/images/logo-emblem.png"
+                  alt="Wedding Flora Crest"
+                  fill
+                  className="object-contain relative z-10 transition-all duration-500 ease-out filter drop-shadow-[0_2px_8px_rgba(212,175,55,0.35)] group-hover:drop-shadow-[0_6px_22px_rgba(212,175,55,0.7)] group-hover:brightness-105"
+                  priority
+                />
+              </div>
+
+              {/* 6. Subtle diagonal light catch sheen beam across crest */}
+              <div className="absolute inset-0 rounded-full overflow-hidden pointer-events-none z-20">
+                <div className="absolute -inset-full bg-gradient-to-tr from-transparent via-white/35 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out" />
+              </div>
             </div>
+
             {/* Brand text: shown on mobile, removed on desktop so the enlarged central crest stands out */}
             <div className="flex flex-col text-left lg:hidden">
               <span className="font-serif text-lg sm:text-[22px] font-semibold tracking-[0.04em] text-[#1A1209] group-hover:text-gold-gradient transition-colors duration-300 leading-none">
