@@ -51,7 +51,52 @@ export const siteConfig = {
         },
       ],
     },
-    { label: "Services", href: "/services" },
+    {
+      label: "Services",
+      href: "/services",
+      children: [
+        {
+          label: "Full-Service Planning",
+          href: "/services/full-service",
+          description: "Turnkey palatial management & dedicated shadow team",
+        },
+        {
+          label: "Destinations & Venues",
+          href: "/services#destinations-venues",
+          description: "Curated palaces, fortresses & waterfront sanctuaries",
+        },
+        {
+          label: "Design & Décor",
+          href: "/services#design-decor",
+          description: "3D floral mandaps & architectural scenography",
+        },
+        {
+          label: "Curated Experiences",
+          href: "/services#experiences",
+          description: "Royal Baraats, Sufi soirees & heritage rituals",
+        },
+        {
+          label: "Artists & Entertainment",
+          href: "/services#artists-entertainment",
+          description: "Celebrity performers, symphony & folk troupes",
+        },
+        {
+          label: "Food & Beverage Catering",
+          href: "/services#food-beverage-catering",
+          description: "Royal palatial feasts, master halwais & mixology",
+        },
+        {
+          label: "Hospitality & Logistics",
+          href: "/services#hospitality-guest-management",
+          description: "White-glove 24/7 guest concierge & luxury fleets",
+        },
+        {
+          label: "Production & Technicals",
+          href: "/services#production-technicals",
+          description: "Concert acoustics, intelligent lighting & SFX",
+        },
+      ],
+    },
     {
       label: "Wedding Destinations",
       href: "/destinations",

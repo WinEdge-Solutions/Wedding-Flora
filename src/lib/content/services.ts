@@ -7,110 +7,209 @@ export interface ServiceItem {
   imageUrl: string;
 }
 
+export interface OperationalPillar {
+  title: string;
+  description: string;
+  iconName: string;
+}
+
+export const operationalPillars: OperationalPillar[] = [
+  {
+    title: "Contracts & Negotiations",
+    description: "Direct commercial procurement, preferred tariff negotiations, and legally vetted vendor contracts ensuring complete financial transparency.",
+    iconName: "FileCheck",
+  },
+  {
+    title: "Master Timeline & Schedules",
+    description: "Minute-by-minute critical path run-sheets harmonising Vedic muhurats, artist soundchecks, guest transfers, and ritual ceremonies.",
+    iconName: "Clock",
+  },
+  {
+    title: "Arrival & Departure Manifests",
+    description: "Real-time flight tracking, dedicated airport concierge desks, and precision manifest synchronization across all transport hubs.",
+    iconName: "Plane",
+  },
+  {
+    title: "Room & Fleet Allocation",
+    description: "Strategic palace inventory distribution, family VIP suite assignments, and private luxury chauffeur fleet routing.",
+    iconName: "Key",
+  },
+  {
+    title: "Dedicated Wedding Shadow Team",
+    description: "A private bridal and family shadow brigade synchronizing every micro-detail, safa tying, and immediate need throughout the celebration.",
+    iconName: "Crown",
+  },
+];
+
 export const servicesData: ServiceItem[] = [
   {
-    id: "destination-wedding-planning",
-    title: "Destination Wedding Planning",
-    tagline: "Bespoke Royal Celebrations Tailored to Your Sacred Love Story",
+    id: "turnkey-planning",
+    title: "Full-Service Turnkey Planning",
+    tagline: "Single Point of Contact for End-to-End Palatial Orchestration",
     description:
-      "Your wedding day should be nothing short of extraordinary. We specialise in planning destination weddings that are as unique as your love story. From selecting scenic palace locations to coordinating with local vendors, we manage every detail so you can focus on enjoying your special day. Our goal is to create a wedding experience that you and your guests will cherish forever.",
+      "While you focus on making each moment count and soaking it all in, let us do all the work for you. Wedding Flora operates on a turnkey basis for its clients, taking full responsibility as your single point-of-contact for the celebration, from destination and venue selection to planning the honeymoon. We take care of all details of organization, negotiations, meetings, and troubleshooting so you can truly be a guest at your own event.",
     features: [
-      "Curated heritage palace & fort procurement across Udaipur, Jaipur, Jodhpur & Goa",
-      "End-to-end wedding blueprint, timeline design & transparent financial forecasting",
-      "Local vendor ecosystem orchestration, contract negotiation & compliance",
-      "Personalized multi-day celebration itineraries for families and guests",
-      "Dedicated bridal and groom shadow management on-site throughout rituals",
+      "Dedicated Wedding Shadow synchronizing every micro-detail with an entire team",
+      "Comprehensive vendor contracts, preferred palace buyout rates & transparent budgets",
+      "Master timeline management from first consult to final post-wedding wrap-up",
+      "Seamless multi-day orchestration ensuring zero stress for bride, groom & families",
+      "360-degree crisis prevention, on-ground medical & power redundancy protocols",
     ],
-    imageUrl: "/images/services/service-destination-wedding-planning.webp",
+    imageUrl: "/images/hero-royal-stage.jpg",
   },
   {
-    id: "destination-management",
-    title: "Destination Management",
-    tagline: "Flawless On-Ground Logistics, Clearances & Multi-City Execution",
+    id: "destinations-venues",
+    title: "Destinations & Venues",
+    tagline: "Curated Royal Palaces, Fortresses & Iconic Waterfronts",
     description:
-      "We take the stress out of organizing events in unfamiliar locations. From selecting the perfect venue to managing logistics, we ensure your event is executed flawlessly, regardless of where in the world it takes place. Our expert team handles everything, including local permits, vendor coordination, and cultural nuances, allowing you to enjoy the experience without any worries.",
+      "Selecting the perfect stage is the foundation of an unforgettable celebration. We conduct extensive research, organize private site inspections, and negotiate preferred buyouts across Rajasthan's most coveted heritage palaces, beachfront sanctuaries in Goa, and bespoke global destinations.",
     features: [
-      "End-to-end luxury airport & railway fleet transfers with private chauffeurs",
-      "Local municipal permits, sound clearances, police liaison & fire safety",
-      "Regional cultural alignment & traditional ritual harmonization",
-      "Complete multi-tier contingency planning with uninterrupted power back-up",
-      "Comprehensive multi-city vendor and logistics orchestration",
+      "Curated palace & fort procurement across Udaipur, Jaipur, Jodhpur & Goa",
+      "Comprehensive technical recces, acoustic audits & spatial flow evaluations",
+      "Heritage conservation clearances, government permissions & sound curfew liaison",
+      "Guaranteed room blocks, exclusive buyout contracts & favorable payment terms",
     ],
-    imageUrl: "/images/services/service-destination-management.webp",
+    imageUrl: "/images/destinations/hotels/rambagh-palace.webp",
   },
   {
-    id: "space-management",
-    title: "Space Management & Scenography",
-    tagline: "Transforming Palatial Canvas Into Living Works of Architectural Art",
+    id: "design-decor",
+    title: "Design & Décor",
+    tagline: "Architectural 3D Floral Scenography & Royal Mandap Installations",
     description:
-      "Your venue is more than just a location; it's the canvas for your event. We specialise in transforming spaces to align perfectly with your event's theme and purpose. Whether it's an empty courtyard or a luxurious ballroom, we optimize the layout, design, and flow to create an environment that is both functional and aesthetically beautiful.",
+      "Transforming palatial grounds into living works of art. Our architects and floral artists create bespoke thematic environments — from sacred Vedic mandaps adorned with thousands of cascading exotic blossoms to concert-grade starlit galas.",
     features: [
-      "3D spatial floorplans, architectural mandap schematics & guest movement zoning",
-      "Opulent botanical mandap domes handcrafted with cascading fragrant florals",
-      "Intelligent architectural illumination, crystal chandeliers & fairy-light canopies",
-      "Royal banquet tablescaping, luxury brassware & bespoke stationery styling",
-      "Acoustic zoning, customized dance floors & plush VIP lounge clusters",
+      "Photorealistic 3D spatial mandap visualisations, elevations & guest zoning",
+      "Opulent botanical domes handcrafted with fresh seasonal and imported florals",
+      "Intelligent architectural lighting, crystal chandeliers & fairy-light canopies",
+      "Bespoke royal tablescaping, custom linen weaves, brassware & personalized stationery",
     ],
     imageUrl: "/images/services/service-space-management.webp",
   },
   {
-    id: "experiential-events",
-    title: "Experiential Events & Entertainment",
-    tagline: "Immersive Sensory Celebrations & Concert-Grade Production",
+    id: "experiences",
+    title: "Curated Experiences",
+    tagline: "Bespoke Cultural Immersions & Regal Heritage Rituals",
     description:
-      "We go beyond traditional event planning to create fully immersive experiences that resonate with your audience. From interactive artistic installations to unique entertainment, every element is crafted to leave a lasting impression on your guests. We design celebrations that engage all senses with unforgettable energy and artistry.",
+      "A royal Indian wedding is a multi-sensory tapestry. We design bespoke experiences that immerse your guests in authentic Rajasthani grandeur — regal elephant Baraats, vintage motorcades, Sufi evenings by candlelit palace pools, and sacred twilight pheras.",
     features: [
-      "Curated headline performers: Sufi maestros, Bollywood playback & top DJs",
-      "Concert-grade line array acoustics & high-definition panoramic LED walls",
-      "Low-lying dry ice cloud fog, celebratory cold-pyro & SFX staging",
-      "Celebrity choreographers for family Sangeet performances & custom track mixes",
-      "Interactive cultural counters, royal Rajasthani folk troupes & live percussionists",
+      "Regal Baraat processions with royal brass bands, caparisoned elephants & vintage cars",
+      "Enchanting poolside Sufi soirees, candlelit baoris & traditional Rajasthani folk troupes",
+      "Sacred Vedic havan coordination with revered pandits & personalized ritual guides",
+      "Curated guest immersion: royal perfume bars, safa styling & artisan bangle craftsmen",
     ],
-    imageUrl: "/images/services/service-experiential-events.webp",
+    imageUrl: "/images/service-crystal-reception.jpg",
   },
   {
-    id: "hotel-bookings",
-    title: "Hotel Bookings & Luxury Hospitality",
-    tagline: "Atithi Devo Bhava: Exceptional Comfort & Personalized Concierge",
+    id: "artists-entertainment",
+    title: "Artists & Entertainment",
+    tagline: "Celebrity Performers, Sufi Maestros & Symphony Orchestras",
     description:
-      "Finding the perfect accommodation for your event is crucial. We offer a comprehensive hotel booking service that ensures you and your guests enjoy the highest standards of comfort and convenience. Whether you need a boutique heritage palace in Rajasthan or a sprawling beachfront resort, we secure the best options to suit your needs and budget.",
+      "Elevate your celebration into an awe-inspiring spectacle. We curate, contract, and manage headline artists — from renowned Bollywood playback singers and Sufi legends to international symphony ensembles and elite club DJs.",
     features: [
-      "Guaranteed group room blocks & exclusive preferential tariffs",
-      "Dedicated personalized check-in hospitality desks with traditional welcomes",
-      "Bespoke welcome hampers, personalized itineraries & custom keycards",
-      "24/7 guest concierge desk for wardrobe steaming, beauty & local transit",
-      "Luxury bridal and family VIP hospitality suites with round-the-clock service",
+      "Direct contracting of celebrity singers, Sufi maestros, stand-up hosts & emcees",
+      "Celebrity choreographers for family Sangeets, custom musical tracks & video edits",
+      "Concert-grade line-array acoustics, panoramic LED walls & intelligent beam lighting",
+      "Comprehensive artist hospitality, technical riders, security & green-room management",
+    ],
+    imageUrl: "/images/service-sangeet-dance.jpg",
+  },
+  {
+    id: "food-beverage-catering",
+    title: "Food & Beverage Catering",
+    tagline: "Royal Palatial Feasts, Master Chefs & Bespoke Mixology",
+    description:
+      "Culinary artistry fit for royalty. We collaborate with master chefs, royal halwais, and world-class culinary brands to design custom menus that honor regional heritage while delivering contemporary international dining experiences.",
+    features: [
+      "Curated multi-course royal Rajputana banquets, regional Indian feasts & global cuisines",
+      "Private tasting sessions, menu curation & synchronized white-glove service standards",
+      "Bespoke molecular mixology bars, signature bridal cocktails & sommelier wine pairing",
+      "Interactive live culinary theatres, artisanal dessert salons & midnight chaat streets",
+    ],
+    imageUrl: "/images/destinations/hotels/fairmont-jaipur.webp",
+  },
+  {
+    id: "invitation-suites-collateral",
+    title: "Invitation Suites & Collateral",
+    tagline: "Gilded Royal Calligraphy, Bespoke Crests & Digital Portals",
+    description:
+      "The first whisper of your grand celebration. We craft bespoke invitation suites featuring hand-painted royal motifs, gilded calligraphy, artisanal wax seals, and modern luxury digital RSVP concierge platforms.",
+    features: [
+      "Custom royal family monogram, bespoke crest design & thematic visual identity",
+      "Letterpress, gold foil & silk-screen printed boxed wedding invitation suites",
+      "Private interactive digital wedding portals with RSVP tracking & itinerary access",
+      "On-site branded collateral: luggage tags, room keycard sleeves, daily newsletters & menus",
+    ],
+    imageUrl: "/images/hero-bg.jpg",
+  },
+  {
+    id: "hospitality-guest-management",
+    title: "Hospitality & Guest Management",
+    tagline: "White-Glove Palatial Concierge & 24/7 Guest Care",
+    description:
+      "Atithi Devo Bhava — treating every guest as royalty. Our dedicated hospitality team manages round-the-clock desks, personalized airport welcomes, room drops, wardrobe care, and instant assistance for all attendees.",
+    features: [
+      "Dedicated 24/7 airport and hotel hospitality desks with traditional flower garlanding",
+      "Express check-in assistance, room key distribution & luggage delivery direct to rooms",
+      "On-site guest concierge for saree draping, safa tying, ironing & local errands",
+      "VIP bridal and family shadow team ensuring seamless comfort across every ritual",
     ],
     imageUrl: "/images/services/service-hotel-bookings.webp",
   },
   {
-    id: "social-gatherings",
-    title: "Social Gatherings & Milestone Events",
-    tagline: "Reflective Milestone Celebrations From Intimate Dinners to Royal Galas",
+    id: "transportation-logistics",
+    title: "Transportation & Logistics",
+    tagline: "Luxury Chauffeur Fleets, Airport Transfers & Precision Manifests",
     description:
-      "Celebrating life's milestones should be as unique as the individuals marking them. We specialise in curating personalised social gatherings, from intimate dinner parties to lavish galas. Our approach is to understand your vision and translate it into an event that is reflective of your personality and taste, ensuring that your guests feel the warmth and joy of the occasion.",
+      "Seamless mobility across cities and destinations. We deploy fleets of luxury sedans, private coaches, and vintage royal convertibles, synchronized via real-time flight tracking and digital manifests.",
     features: [
-      "Themed Mehendi, Haldi, poolside sundowners & starlit cocktail soirees",
-      "Royal anniversary galas, milestone birthdays & bespoke engagement ceremonies",
-      "Curated gourmet multi-cuisine dining with interactive live culinary stations",
-      "Bespoke mixology bars, signature bridal mocktails & sommelier curation",
-      "Artisanal return gifts, personalized packaging & handcrafted favors",
+      "Real-time flight tracking & dedicated airport dispatch managers across all terminals",
+      "Chauffeured luxury fleets (Mercedes, BMW, Audi) & air-conditioned executive coaches",
+      "Vintage Rolls-Royce and open-top royal convertibles for Baraat & couple entries",
+      "Dedicated luggage transfer trucks with barcode tagging ensuring zero lost baggage",
+    ],
+    imageUrl: "/images/services/service-destination-management.webp",
+  },
+  {
+    id: "gifting-hampers",
+    title: "Gifting & Hampers",
+    tagline: "Artisanal Palatial Welcome Baskets & Curated Favors",
+    description:
+      "Express your gratitude with unforgettable keepsakes. We design bespoke welcome hampers, room drops, and farewell gifts that showcase India's finest artisanal heritage and luxury culinary delicacies.",
+    features: [
+      "Bespoke arrival hampers with artisanal sweets, local savories, hangover kits & maps",
+      "Handcrafted regional keepsakes: silver-plated artifacts, organic attars & blue pottery",
+      "Personalized room drops aligned with daily celebration themes & ritual requirements",
+      "Custom luxury packaging, embroidered gift bags & hand-calligraphed thank-you cards",
     ],
     imageUrl: "/images/services/service-social-gatherings.webp",
   },
   {
-    id: "luxury-offsites",
-    title: "Luxury Offsites & Bespoke Retreats",
-    tagline: "Exclusive Retreats Blending Heritage Splendor, Relaxation & Inspiration",
+    id: "production-technicals",
+    title: "Production & Technicals",
+    tagline: "Concert-Grade Sound, Intelligent Illumination & SFX",
     description:
-      "Take your intimate family circle or executive team beyond the boardroom and into a world of luxury and inspiration. We organise exclusive offsite experiences that blend celebration with rejuvenation. From remote heritage sanctuaries in the hills to beachfront retreats, we handle all aspects of planning, ensuring your gathering is productive, rejuvenating, and truly memorable.",
+      "Flawless technical execution behind the glamour. From heavy-duty structural rigging and climate-controlled palace marquees to intelligent moving heads and synchronized cold pyrotechnics.",
     features: [
-      "Private buyouts of boutique heritage havelis, luxury desert camps & fortresses",
-      "Curated wellness itineraries: Ayurvedic spas, morning yoga & royal high teas",
-      "Private charter flights, helicopter transfers & vintage car motorcades",
-      "Starlit desert dining beneath the dunes with authentic royal hospitality",
-      "Curated heritage safaris, cultural walking tours & private polo matches",
+      "Heavy-duty German aluminium hangars, climate-controlled marquees & rainproof staging",
+      "Concert-calibrated audio engineering with line-array systems & sound containment",
+      "High-definition curved LED video backdrops, kinetic lighting & 3D projection mapping",
+      "Synchronized cold-pyrotechnics, low-lying dry ice clouds, sparkulars & confetti cannons",
+    ],
+    imageUrl: "/images/destinations/hotels/le-meridien-jaipur-resort-spa.webp",
+  },
+  {
+    id: "post-wedding-plans",
+    title: "Post-Wedding Plans & Honeymoons",
+    tagline: "Seamless Wrap-Up, Asset Packing & Bespoke Honeymoon Itineraries",
+    description:
+      "Our commitment extends beyond the final farewell. We handle post-event vendor reconciliations, systematic packing of bridal trousseaus and wedding gifts, and curate unforgettable royal honeymoon retreats.",
+    features: [
+      "Systematic packing, cataloging & secured dispatch of bridal outfits, jewelry & gifts",
+      "Transparent vendor account reconciliation, deposit recovery & final billing audit",
+      "Curated luxury honeymoon itineraries: private island buyouts, palace suites & safaris",
+      "Archival-grade wedding album curations & cinematic film master file delivery",
     ],
     imageUrl: "/images/services/service-luxury-offsites.webp",
   },
 ];
+
