@@ -370,7 +370,8 @@ export const Navbar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(getInitialScrolled);
   const pathname = usePathname();
 
-  const derivedDropdown = deriveOpenDropdown(pathname, siteConfig.navItems);
+  const navItems = siteConfig.navItems.filter((item) => item.href !== "/contact");
+  const derivedDropdown = deriveOpenDropdown(pathname, navItems);
   const [mobileDropdownOverride, setMobileDropdownOverride] = useState<
     string | null | undefined
   >(undefined);
@@ -397,8 +398,8 @@ export const Navbar: React.FC = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const leftItems = siteConfig.navItems.slice(0, 4);
-  const rightItems = siteConfig.navItems.slice(4, 9);
+  const leftItems = navItems.slice(0, 4);
+  const rightItems = navItems.slice(4);
 
   return (
     <header className="sticky top-0 z-50 w-full transition-all duration-300">
@@ -583,7 +584,7 @@ export const Navbar: React.FC = () => {
               className="flex flex-col space-y-1 text-left px-4 pt-3 pb-6"
             >
               {/* Mobile Navigation List */}
-              {siteConfig.navItems.map((item) => {
+              {navItems.map((item) => {
                 const hasChildren = Boolean(item.children && item.children.length > 0);
                 const hasGroups = Boolean(item.groups && item.groups.length > 0);
 
