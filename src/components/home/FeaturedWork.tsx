@@ -101,7 +101,7 @@ function ReelCard({
       onClick={handleCardClick}
     >
       {/* Reel container with portrait proportions */}
-      <div className="relative aspect-[4/5] sm:aspect-[9/16] w-full overflow-hidden bg-[#1A1209] rounded-[3px] mb-3.5 shadow-[0_8px_30px_rgba(26,18,9,0.08)] group-hover:shadow-[0_20px_45px_rgba(212,175,55,0.25)] transition-all duration-500">
+      <div className="relative aspect-[4/5] sm:aspect-[9/16] w-full overflow-hidden bg-[#1A1209] rounded-[2px] mb-3.5 shadow-[0_8px_30px_rgba(26,18,9,0.06)] group-hover:shadow-[0_16px_40px_rgba(212,175,55,0.2)] transition-all duration-300">
         {/* Native Video Element */}
         {item.videoUrl && (
           <video
@@ -115,8 +115,8 @@ function ReelCard({
             onTimeUpdate={handleTimeUpdate}
             onPlay={() => setIsPlaying(true)}
             onPause={() => setIsPlaying(false)}
-            className={`w-full h-full object-cover transition-transform duration-700 ease-out ${
-              isPlaying ? "scale-100" : "scale-[1.03] group-hover:scale-100"
+            className={`w-full h-full object-cover transition-transform duration-500 ease-out ${
+              isPlaying ? "scale-100" : "scale-[1.02] group-hover:scale-100"
             }`}
           />
         )}
@@ -126,7 +126,7 @@ function ReelCard({
 
         {/* Top Badges: Category + Audio toggle */}
         <div className="absolute top-3.5 inset-x-3.5 flex items-center justify-between z-10 pointer-events-auto">
-          <span className="inline-block bg-black/75 backdrop-blur-md px-2.5 py-1 text-[10px] uppercase tracking-[0.25em] text-gold font-sans font-semibold rounded-[2px] border border-gold/40 shadow-sm">
+          <span className="inline-block bg-black/75 backdrop-blur-md px-2.5 py-1 text-[10px] uppercase tracking-[0.25em] text-gold font-sans font-semibold rounded-[2px] border border-gold/30 shadow-sm">
             {item.category}
           </span>
 
@@ -152,25 +152,22 @@ function ReelCard({
         )}
 
         {/* Subtle gold border reveal on hover */}
-        <div className="absolute inset-0 border border-gold/0 group-hover:border-gold/50 transition-all duration-500 rounded-[3px] pointer-events-none" />
-
-        {/* Shimmer sweep */}
-        <div className="shimmer-card absolute inset-0 pointer-events-none" />
+        <div className="absolute inset-0 border border-gold/0 group-hover:border-gold/40 transition-all duration-300 rounded-[2px] pointer-events-none" />
       </div>
 
       {/* Caption & Location metadata */}
       <div className="space-y-1 px-1">
-        <p className="text-[11px] font-sans text-[#D4AF37] uppercase tracking-[0.2em] font-bold">
+        <p className="text-[11px] font-sans text-[#D4AF37] uppercase tracking-[0.2em] font-semibold">
           {item.category}
         </p>
         <h3 className="font-serif text-lg sm:text-xl md:text-2xl text-[#1A1209] font-semibold group-hover:text-gold transition-colors duration-300 leading-snug">
           {item.title}
         </h3>
-        <p className="text-xs font-sans text-[#5C5147] font-medium tracking-wide">
+        <p className="text-xs font-sans text-[#5C5147] font-normal tracking-wide">
           {item.location} • {item.year}
         </p>
         {/* Animated underline */}
-        <div className="h-px w-0 group-hover:w-16 bg-gradient-to-r from-gold to-gold/30 transition-all duration-500 mt-2" />
+        <div className="h-px w-0 group-hover:w-16 bg-gradient-to-r from-gold to-gold/30 transition-all duration-300 mt-2" />
       </div>
     </motion.div>
   );

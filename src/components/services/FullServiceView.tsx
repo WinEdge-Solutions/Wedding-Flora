@@ -160,10 +160,10 @@ export function FullServiceView() {
       <section className="relative py-12 sm:py-20 lg:py-24 overflow-hidden bg-gradient-to-b from-[#FAF7F2] via-[#FDFAF5] to-[#FAF7F2] border-b border-gold/20">
         <Container className="relative z-10 text-center">
           <div className="max-w-4xl mx-auto space-y-4 sm:space-y-5">
-            <p className="font-sans text-[10px] sm:text-xs uppercase tracking-[0.22em] sm:tracking-[0.32em] text-[#D4AF37] font-bold flex items-center justify-center gap-2">
-              <span>✦</span>
+            <p className="font-sans text-[11px] uppercase tracking-[0.3em] text-[#D4AF37] font-semibold flex items-center justify-center gap-2">
+              <span className="opacity-60">—</span>
               <span>Turnkey Palatial Wedding Management</span>
-              <span>✦</span>
+              <span className="opacity-60">—</span>
             </p>
 
             <h1 className="font-serif text-3xl sm:text-5xl lg:text-6xl xl:text-7xl font-semibold text-[#1A1209] tracking-[0.02em] leading-[1.12]">
@@ -176,7 +176,7 @@ export function FullServiceView() {
               &ldquo;While you focus on making each moment count and soaking it all in, let us do all the work for you.&rdquo;
             </p>
 
-            <p className="font-sans text-xs sm:text-base text-[#5C5147] font-medium leading-relaxed max-w-3xl mx-auto">
+            <p className="font-sans text-xs sm:text-base text-[#5C5147] font-normal leading-[1.75] max-w-3xl mx-auto">
               Wedding Flora operates on a <strong>turnkey basis</strong> for our couples and families, taking full responsibility as your single point-of-contact for the celebration — from destination and palace selection to planning the honeymoon. We manage every detail of organization, negotiations, meetings, and on-ground troubleshooting so you can truly <strong>be a guest at your own event</strong>.
             </p>
 

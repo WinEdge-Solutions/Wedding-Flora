@@ -41,7 +41,7 @@ export const Footer: React.FC = () => {
                 href={siteConfig.contact.instagram}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-9 h-9 rounded-[2px] border border-white/20 flex items-center justify-center text-[#FAF7F2] hover:text-gold hover:border-gold transition-colors duration-200"
+                className="w-10 h-10 rounded-[2px] border border-white/20 flex items-center justify-center text-[#FAF7F2] hover:text-gold hover:border-gold transition-colors duration-200"
                 aria-label="Instagram"
               >
                 <svg
@@ -55,7 +55,7 @@ export const Footer: React.FC = () => {
               </a>
               <a
                 href={`mailto:${siteConfig.contact.email}`}
-                className="w-9 h-9 rounded-[2px] border border-white/20 flex items-center justify-center text-[#FAF7F2] hover:text-gold hover:border-gold transition-colors duration-200"
+                className="w-10 h-10 rounded-[2px] border border-white/20 flex items-center justify-center text-[#FAF7F2] hover:text-gold hover:border-gold transition-colors duration-200"
                 aria-label="Email Us"
               >
                 <Mail size={16} />

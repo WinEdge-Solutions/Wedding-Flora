@@ -34,20 +34,20 @@ export function FloralParticles() {
     const ro = new ResizeObserver(resize);
     ro.observe(canvas);
 
-    const COUNT = 45;
+    const COUNT = 28;
     const particles = Array.from({ length: COUNT }, () => ({
       x: Math.random() * (canvas.width || window.innerWidth),
       y: Math.random() * (canvas.height || window.innerHeight),
-      size: Math.random() * 3.5 + 1,
-      speedY: Math.random() * 0.55 + 0.18,
-      speedX: (Math.random() - 0.5) * 0.3,
-      opacity: Math.random() * 0.55 + 0.12,
+      size: Math.random() * 2.8 + 0.8,
+      speedY: Math.random() * 0.45 + 0.14,
+      speedX: (Math.random() - 0.5) * 0.25,
+      opacity: Math.random() * 0.35 + 0.08,
       opacityDir: Math.random() < 0.5 ? 1 : -1,
-      opacitySpeed: Math.random() * 0.005 + 0.002,
+      opacitySpeed: Math.random() * 0.004 + 0.002,
       color: colors[Math.floor(Math.random() * colors.length)],
       rotation: Math.random() * Math.PI * 2,
-      rotSpeed: (Math.random() - 0.5) * 0.035,
-      isStar: Math.random() < 0.4,
+      rotSpeed: (Math.random() - 0.5) * 0.025,
+      isStar: Math.random() < 0.3,
     }));
 
     function drawStar(cx: number, cy: number, r: number, rot: number) {

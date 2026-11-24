@@ -42,19 +42,19 @@ export default function ContactPage() {
               </div>
             </div>
 
-            <p className="font-sans text-[9px] sm:text-xs uppercase tracking-[0.16em] sm:tracking-[0.32em] text-[#D4AF37] font-bold flex items-center justify-center gap-1.5 sm:gap-2 px-2">
-              <span>✦</span>
+            <p className="font-sans text-[11px] uppercase tracking-[0.3em] text-[#D4AF37] font-semibold flex items-center justify-center gap-2 px-2">
+              <span className="opacity-60">—</span>
               <span>Private Consultations &amp; Bespoke Proposals</span>
-              <span>✦</span>
+              <span className="opacity-60">—</span>
             </p>
 
-            <h1 className="font-display text-2xl sm:text-5xl lg:text-6xl font-bold text-ivory tracking-[0.03em] leading-[1.18]">
+            <h1 className="font-display text-2xl sm:text-5xl lg:text-6xl font-semibold text-[#1A1209] tracking-[0.03em] leading-[1.18]">
               Begin Planning Your Royal Celebration
             </h1>
 
             <Divider variant="ornamental" className="my-2 sm:my-2.5" />
 
-            <p className="font-sans text-sm sm:text-base text-ivory/80 font-medium leading-relaxed max-w-xl mx-auto">
+            <p className="font-sans text-sm sm:text-base text-[#5C5147] font-normal leading-[1.75] max-w-xl mx-auto">
               We look forward to honoring your family&apos;s heritage. Share your envisioned dates and destinations below, or connect with our directors directly.
             </p>
           </div>
