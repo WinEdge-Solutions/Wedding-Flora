@@ -383,7 +383,7 @@ function NavItemDropdown({
               /* Refined Dropdown for Services, About & Gallery */
               <div
                 className={`relative ${
-                  item.label === "Services" ? "w-80 sm:w-[380px]" : "w-72"
+                  item.label === "Services" ? "w-72 sm:w-80" : "w-72"
                 } max-w-[calc(100vw-2rem)] p-2.5 rounded-[3px] bg-[#FDFAF5]/98 backdrop-blur-2xl border border-gold/35 shadow-[0_12px_40px_rgba(26,18,9,0.12)] ring-1 ring-gold/[0.08] flex flex-col space-y-1 overflow-hidden`}
               >
                 {/* Hairline gold shimmer rim */}
@@ -406,26 +406,26 @@ function NavItemDropdown({
                       key={subItem.href}
                       href={subItem.href}
                       onClick={() => setIsOpen(false)}
-                      className={`group/sub flex items-start gap-2.5 px-3 py-2.5 rounded-[2px] transition-all duration-200 text-left ${
+                      className={`group/sub flex items-center gap-2.5 px-3 py-2 rounded-[2px] transition-all duration-200 text-left ${
                         isSubActive
                           ? "bg-gold/[0.08] border-l-2 border-gold"
                           : "hover:bg-gold/[0.04] hover:border-l-2 hover:border-gold/60 border-l-2 border-transparent hover:translate-x-0.5"
                       }`}
                     >
                       {subItem.icon === "camera" && (
-                        <div className="w-6 h-6 rounded-[2px] bg-gold/10 border border-gold/30 flex items-center justify-center shrink-0 text-gold group-hover/sub:bg-gold group-hover/sub:text-midnight transition-colors mt-0.5">
+                        <div className="w-6 h-6 rounded-[2px] bg-gold/10 border border-gold/30 flex items-center justify-center shrink-0 text-gold group-hover/sub:bg-gold group-hover/sub:text-midnight transition-colors">
                           <Camera size={12} />
                         </div>
                       )}
                       {subItem.icon === "video" && (
-                        <div className="w-6 h-6 rounded-[2px] bg-gold/10 border border-gold/30 flex items-center justify-center shrink-0 text-gold group-hover/sub:bg-gold group-hover/sub:text-midnight transition-colors mt-0.5">
+                        <div className="w-6 h-6 rounded-[2px] bg-gold/10 border border-gold/30 flex items-center justify-center shrink-0 text-gold group-hover/sub:bg-gold group-hover/sub:text-midnight transition-colors">
                           <Video size={12} />
                         </div>
                       )}
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center justify-between">
                           <span
-                            className={`font-serif text-[14px] tracking-wide transition-colors ${
+                            className={`font-serif text-[13.5px] tracking-wide transition-colors ${
                               isSubActive
                                 ? "text-gold font-bold"
                                 : "text-[#1A1209] group-hover/sub:text-gold font-bold"
@@ -437,7 +437,7 @@ function NavItemDropdown({
                             ✦
                           </span>
                         </div>
-                        {subItem.description && (
+                        {subItem.description && item.label !== "Services" && (
                           <span className="text-[11px] leading-[1.4] tracking-normal text-[#5C5147]/80 font-sans mt-0.5 line-clamp-2 block">
                             {subItem.description}
                           </span>
