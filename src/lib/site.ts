@@ -56,44 +56,40 @@ export const siteConfig = {
       href: "/services",
       children: [
         {
-          label: "Full-Service Planning",
-          href: "/services/full-service",
-          description: "Turnkey palatial management & dedicated shadow team",
+          label: "Wedding Decor & Design",
+          href: "/services#wedding-decor-design",
+          description:
+            "Beautifully styled wedding spaces that reflect your vision, personality and the atmosphere you want to create.",
         },
         {
-          label: "Destinations & Venues",
-          href: "/services#destinations-venues",
-          description: "Curated palaces, fortresses & waterfront sanctuaries",
+          label: "Pre-Wedding Celebrations",
+          href: "/services#pre-wedding-celebrations",
+          description:
+            "From haldi and mehendi to sangeet and cocktail nights, we make every celebration special in its own way.",
         },
         {
-          label: "Design & Décor",
-          href: "/services#design-decor",
-          description: "3D floral mandaps & architectural scenography",
+          label: "Wedding & Reception Styling",
+          href: "/services#wedding-reception-styling",
+          description:
+            "Thoughtfully designed settings, beautiful stages and carefully curated details for your most special moments.",
         },
         {
-          label: "Curated Experiences",
-          href: "/services#experiences",
-          description: "Royal Baraats, Sufi soirees & heritage rituals",
+          label: "Event Styling",
+          href: "/services#event-styling",
+          description:
+            "Creating beautiful experiences for celebrations, social gatherings and special occasions.",
         },
         {
-          label: "Artists & Entertainment",
-          href: "/services#artists-entertainment",
-          description: "Celebrity performers, symphony & folk troupes",
+          label: "Venue & Floral Styling",
+          href: "/services#venue-floral-styling",
+          description:
+            "Bringing spaces to life with thoughtful floral arrangements, elegant installations and beautiful details.",
         },
         {
-          label: "Food & Beverage Catering",
-          href: "/services#food-beverage-catering",
-          description: "Royal palatial feasts, master halwais & mixology",
-        },
-        {
-          label: "Hospitality & Logistics",
-          href: "/services#hospitality-guest-management",
-          description: "White-glove 24/7 guest concierge & luxury fleets",
-        },
-        {
-          label: "Production & Technicals",
-          href: "/services#production-technicals",
-          description: "Concert acoustics, intelligent lighting & SFX",
+          label: "Personalised Details",
+          href: "/services#personalised-details",
+          description:
+            "From welcome experiences to little finishing touches, we take care of the details that make your celebration feel personal.",
         },
       ],
     },

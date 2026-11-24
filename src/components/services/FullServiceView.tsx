@@ -96,7 +96,7 @@ const processSteps = [
 ];
 
 export function FullServiceView() {
-  const [activeServiceId, setActiveServiceId] = useState<string>("turnkey-planning");
+  const [activeServiceId, setActiveServiceId] = useState<string>("wedding-decor-design");
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const observerRef = useRef<IntersectionObserver | null>(null);

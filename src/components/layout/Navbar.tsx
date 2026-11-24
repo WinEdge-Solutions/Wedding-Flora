@@ -379,15 +379,19 @@ function NavItemDropdown({
                 ))}
               </div>
             ) : (
-              /* Refined Dropdown for About & Gallery */
-              <div className="relative w-72 max-w-[calc(100vw-2rem)] p-2.5 rounded-[3px] bg-[#FDFAF5]/98 backdrop-blur-2xl border border-gold/35 shadow-[0_12px_40px_rgba(26,18,9,0.12)] ring-1 ring-gold/[0.08] flex flex-col space-y-1 overflow-hidden">
+              /* Refined Dropdown for Services, About & Gallery */
+              <div
+                className={`relative ${
+                  item.label === "Services" ? "w-80 sm:w-[380px]" : "w-72"
+                } max-w-[calc(100vw-2rem)] p-2.5 rounded-[3px] bg-[#FDFAF5]/98 backdrop-blur-2xl border border-gold/35 shadow-[0_12px_40px_rgba(26,18,9,0.12)] ring-1 ring-gold/[0.08] flex flex-col space-y-1 overflow-hidden`}
+              >
                 {/* Hairline gold shimmer rim */}
                 <div className="absolute top-0 left-0 right-0 h-[1.5px] bg-gradient-to-r from-transparent via-[#D4AF37] to-transparent pointer-events-none" />
 
                 {/* Micro Header */}
                 <div className="px-2 pt-1 pb-1.5 border-b border-gold/15 flex items-center justify-between">
                   <span className="font-serif text-[10px] font-bold uppercase tracking-[0.24em] text-[#D4AF37]">
-                    ✦ {item.label === "Gallery" ? "Visual Archives" : "The Heritage"}
+                    ✦ {item.label === "Gallery" ? "Visual Archives" : item.label === "Services" ? "Our Services" : "The Heritage"}
                   </span>
                 </div>
 
@@ -433,7 +437,7 @@ function NavItemDropdown({
                           </span>
                         </div>
                         {subItem.description && (
-                          <span className="text-[10px] tracking-normal text-[#5C5147]/70 font-sans mt-0.5 line-clamp-1 block">
+                          <span className="text-[11px] leading-[1.4] tracking-normal text-[#5C5147]/80 font-sans mt-0.5 line-clamp-2 block">
                             {subItem.description}
                           </span>
                         )}
@@ -450,7 +454,11 @@ function NavItemDropdown({
                     className="text-[9.5px] uppercase tracking-[0.18em] text-[#D4AF37] hover:text-[#1A1209] font-bold transition-colors inline-flex items-center justify-between w-full py-1"
                   >
                     <span>
-                      {item.label === "Gallery" ? "Explore All Archives" : "Discover Our Story"}
+                      {item.label === "Gallery"
+                        ? "Explore All Archives"
+                        : item.label === "Services"
+                        ? "Explore All Services"
+                        : "Discover Our Story"}
                     </span>
                     <span>→</span>
                   </Link>

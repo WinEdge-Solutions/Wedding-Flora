@@ -43,19 +43,94 @@ export const operationalPillars: OperationalPillar[] = [
 
 export const servicesData: ServiceItem[] = [
   {
-    id: "turnkey-planning",
-    title: "Full-Service Turnkey Planning",
-    tagline: "Single Point of Contact for End-to-End Palatial Orchestration",
+    id: "wedding-decor-design",
+    title: "Wedding Decor & Design",
+    tagline: "Beautifully styled wedding spaces reflecting your personality & vision",
     description:
-      "While you focus on making each moment count and soaking it all in, let us do all the work for you. Wedding Flora operates on a turnkey basis for its clients, taking full responsibility as your single point-of-contact for the celebration, from destination and venue selection to planning the honeymoon. We take care of all details of organization, negotiations, meetings, and troubleshooting so you can truly be a guest at your own event.",
+      "Beautifully styled wedding spaces that reflect your vision, personality and the atmosphere you want to create.",
     features: [
-      "Dedicated Wedding Shadow synchronizing every micro-detail with an entire team",
-      "Comprehensive vendor contracts, preferred palace buyout rates & transparent budgets",
-      "Master timeline management from first consult to final post-wedding wrap-up",
-      "Seamless multi-day orchestration ensuring zero stress for bride, groom & families",
-      "360-degree crisis prevention, on-ground medical & power redundancy protocols",
+      "Photorealistic 3D spatial mandap visualisations, elevations & guest zoning",
+      "Opulent botanical domes handcrafted with fresh seasonal and imported florals",
+      "Intelligent architectural lighting, crystal chandeliers & fairy-light canopies",
+      "Bespoke royal tablescaping, custom linen weaves, brassware & personalized stationery",
+      "End-to-end theme curation tailored to your unique love story and traditions",
     ],
     imageUrl: "/images/hero-royal-stage.jpg",
+  },
+  {
+    id: "pre-wedding-celebrations",
+    title: "Pre-Wedding Celebrations",
+    tagline: "Haldi, Mehendi, Sangeet & Cocktail Nights Curated with Soul",
+    description:
+      "From haldi and mehendi to sangeet and cocktail nights, we make every celebration special in its own way.",
+    features: [
+      "Vibrant yellow marigold and sunflower canopies for intimate Haldi rituals",
+      "Boho-chic and royal Rajasthani Mehendi styling with artisan bangle craftsmen",
+      "High-energy concert staging, panoramic LED walls & SFX for Sangeet & Cocktail galas",
+      "Custom cocktail lounges, interactive live food streets & curated acoustic music",
+      "Seamless multi-day thematic transitions ensuring each function has its own distinct magic",
+    ],
+    imageUrl: "/images/service-sangeet-dance.jpg",
+  },
+  {
+    id: "wedding-reception-styling",
+    title: "Wedding & Reception Styling",
+    tagline: "Thoughtfully Designed Settings & Stages for Sacred Moments",
+    description:
+      "Thoughtfully designed settings, beautiful stages and carefully curated details for your most special moments.",
+    features: [
+      "Sacred Vedic mandaps with traditional bell canopies & floral chandeliers",
+      "Grand imperial reception stages with cascading floral arches & ambient warmth",
+      "Synchronized VIP bridal entries with cold pyrotechnics and rose petal showers",
+      "White-glove banquet tablescaping with fine bone china & gilded brass accents",
+      "Acoustic harmony and lighting schematics designed for intimate romance and regal splendor",
+    ],
+    imageUrl: "/images/service-crystal-reception.jpg",
+  },
+  {
+    id: "event-styling",
+    title: "Event Styling",
+    tagline: "Creating Beautiful Experiences for Gatherings & Celebrations",
+    description:
+      "Creating beautiful experiences for celebrations, social gatherings and special occasions.",
+    features: [
+      "Thematic concept development for anniversaries, milestones & royal galas",
+      "Curated lounges, vintage bar backdrops & bespoke mood lighting",
+      "Customized photo installations & experiential interactive zones",
+      "End-to-end spatial choreography ensuring effortless guest flow and luxury comfort",
+      "Dedicated styling concierge coordinating furniture, drapery, and accent lighting",
+    ],
+    imageUrl: "/images/services/service-experiential-events.webp",
+  },
+  {
+    id: "venue-floral-styling",
+    title: "Venue & Floral Styling",
+    tagline: "Transforming Spaces with Thoughtful Florals & Installations",
+    description:
+      "Bringing spaces to life with thoughtful floral arrangements, elegant installations and beautiful details.",
+    features: [
+      "Exquisite floral canopies, floating flower pools & dramatic entryway gates",
+      "Sustainably sourced exotic orchids, Dutch roses, tuberose & marigolds",
+      "Custom floral sculptures, heritage jharokha draping & cascading garlands",
+      "On-site floristry team ensuring all blooms remain fresh and pristine throughout the day",
+      "Botanical scent curation matching the mood of each palace courtyard and hall",
+    ],
+    imageUrl: "/images/service-varmala-mandap.jpg",
+  },
+  {
+    id: "personalised-details",
+    title: "Personalised Details",
+    tagline: "Welcome Experiences & Finishing Touches that Make It Personal",
+    description:
+      "From welcome experiences to little finishing touches, we take care of the details that make your celebration feel personal.",
+    features: [
+      "Hand-calligraphed welcome notes, custom wax-sealed wedding itineraries & gift tags",
+      "Curated artisanal arrival hampers with regional Rajasthan delicacies & comforts",
+      "Personalized scent bars, monogrammed safas & bespoke bridal party keepsakes",
+      "Thoughtful guest hospitality touches ensuring every loved one feels treasured",
+      "Custom bridal shadow coordination for immediate wardrobe and comfort needs",
+    ],
+    imageUrl: "/images/services/service-social-gatherings.webp",
   },
   {
     id: "destinations-venues",
