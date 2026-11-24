@@ -15,9 +15,48 @@ import {
   Phone,
   MapPin,
   MessageCircle,
+  Home,
+  Crown,
+  Sparkles,
+  Landmark,
+  Workflow,
+  Heart,
+  BookOpen,
 } from "lucide-react";
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
+
+/** Route-to-Icon renderer for regal dynamic icon navigation */
+function NavIcon({
+  href,
+  size = 15,
+  className = "",
+}: {
+  href: string;
+  size?: number;
+  className?: string;
+}) {
+  switch (href) {
+    case "/":
+      return <Home size={size} className={className} />;
+    case "/about":
+      return <Crown size={size} className={className} />;
+    case "/services":
+      return <Sparkles size={size} className={className} />;
+    case "/destinations":
+      return <Landmark size={size} className={className} />;
+    case "/working-process":
+      return <Workflow size={size} className={className} />;
+    case "/gallery":
+      return <Camera size={size} className={className} />;
+    case "/celebrations":
+      return <Heart size={size} className={className} />;
+    case "/blog":
+      return <BookOpen size={size} className={className} />;
+    default:
+      return <Sparkles size={size} className={className} />;
+  }
+}
 
 /** Safely compute initial scroll state to avoid a layout flash on load. */
 function getInitialScrolled(): boolean {
@@ -71,29 +110,59 @@ function NavLink({
   onClick?: () => void;
   isMobile?: boolean;
 }) {
+  if (isMobile) {
+    return (
+      <Link
+        href={href}
+        onClick={onClick}
+        className={`w-full py-3 px-4 text-xs font-semibold tracking-[0.18em] rounded-[2px] flex items-center justify-between uppercase transition-colors ${
+          isActive
+            ? "text-gold bg-gold/[0.06] font-bold"
+            : "text-[#1A1209] hover:text-gold hover:bg-gold/[0.06]"
+        }`}
+      >
+        <div className="flex items-center gap-2.5">
+          <NavIcon href={href} size={14} className="text-gold shrink-0" />
+          <span>{label}</span>
+        </div>
+      </Link>
+    );
+  }
+
   return (
     <Link
       href={href}
       onClick={onClick}
-      className={`relative uppercase transition-colors duration-200 group/nav ${
-        isMobile
-          ? "w-full py-3 px-4 text-xs font-semibold tracking-[0.18em] rounded-[2px] flex items-center justify-between " +
-            (isActive
-              ? "text-gold bg-gold/[0.06] font-bold"
-              : "text-[#1A1209] hover:text-gold hover:bg-gold/[0.06] font-bold")
-          : "inline-flex items-center justify-center h-7 leading-none tracking-[0.13em] lg:tracking-[0.15em] xl:tracking-[0.18em] text-[11px] xl:text-[11.5px] 2xl:text-xs " +
-            (isActive ? "text-gold font-semibold" : "text-[#1A1209] hover:text-[#D4AF37] font-semibold")
+      aria-label={label}
+      title={label}
+      className={`group/nav relative inline-flex items-center h-8 px-2.5 rounded-[3px] transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] ${
+        isActive
+          ? "bg-gold/[0.08] text-gold border border-gold/40 shadow-[0_2px_10px_rgba(212,175,55,0.12)]"
+          : "text-[#1A1209] hover:text-gold hover:bg-white hover:border hover:border-gold/30 hover:shadow-[0_2px_12px_rgba(212,175,55,0.12)] border border-transparent"
       }`}
     >
-      <span className="leading-none">{label}</span>
-      {/* Center-expanding gold gradient underline — desktop only */}
-      {!isMobile && (
-        <span
-          className={`absolute -bottom-0.5 left-1/2 -translate-x-1/2 h-[0.5px] bg-gradient-to-r from-transparent via-[#D4AF37] to-transparent transition-all duration-300 pointer-events-none ${
-            isActive ? "w-full opacity-100" : "w-0 opacity-0 group-hover/nav:w-full group-hover/nav:opacity-100"
+      {/* Icon always visible */}
+      <span className="shrink-0 flex items-center justify-center transition-transform duration-300 group-hover/nav:scale-105">
+        <NavIcon
+          href={href}
+          size={15}
+          className={`transition-colors duration-200 ${
+            isActive ? "text-gold" : "text-[#5C5147] group-hover/nav:text-gold"
           }`}
         />
-      )}
+      </span>
+
+      {/* Label smoothly expands on hover pushing neighboring icons */}
+      <span className="overflow-hidden whitespace-nowrap text-[11px] xl:text-[11.5px] uppercase tracking-[0.14em] font-semibold transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] max-w-0 opacity-0 group-hover/nav:max-w-[160px] group-hover/nav:opacity-100 group-hover/nav:ml-2 focus-visible:max-w-[160px] focus-visible:opacity-100 focus-visible:ml-2">
+        {label}
+      </span>
+
+      {/* Center-expanding gold gradient underline */}
+      <span
+        className={`absolute -bottom-0.5 left-1/2 -translate-x-1/2 h-[0.5px] bg-gradient-to-r from-transparent via-[#D4AF37] to-transparent transition-all duration-300 pointer-events-none ${
+          isActive ? "w-full opacity-100" : "w-0 opacity-0 group-hover/nav:w-full group-hover/nav:opacity-100"
+        }`}
+      />
     </Link>
   );
 }
@@ -167,7 +236,7 @@ function NavItemDropdown({
   return (
     <div
       ref={containerRef}
-      className="relative inline-flex items-center h-7"
+      className="relative inline-flex items-center"
       onMouseEnter={open}
       onMouseLeave={scheduleClose}
       onBlur={handleBlur}
@@ -176,28 +245,60 @@ function NavItemDropdown({
         href={item.href}
         aria-haspopup="true"
         aria-expanded={isOpen}
+        aria-label={item.label}
+        title={item.label}
         onFocus={open}
         onKeyDown={handleKeyDown}
-        className={`relative uppercase tracking-[0.13em] lg:tracking-[0.15em] xl:tracking-[0.18em] text-[11px] xl:text-[11.5px] 2xl:text-xs transition-colors duration-200 inline-flex items-center justify-center gap-1 h-7 leading-none group/droptrig ${
+        className={`group/nav relative inline-flex items-center h-8 px-2.5 rounded-[3px] transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] ${
           isParentActive
-            ? "text-gold font-semibold"
-            : "text-[#1A1209] hover:text-[#D4AF37] font-semibold"
+            ? "bg-gold/[0.08] text-gold border border-gold/40 shadow-[0_2px_10px_rgba(212,175,55,0.12)]"
+            : isOpen
+            ? "bg-white text-gold border border-gold/30 shadow-[0_2px_12px_rgba(212,175,55,0.12)]"
+            : "text-[#1A1209] hover:text-gold hover:bg-white hover:border hover:border-gold/30 hover:shadow-[0_2px_12px_rgba(212,175,55,0.12)] border border-transparent"
         }`}
       >
-        <span className="leading-none">{item.label}</span>
-        <motion.span
-          animate={{ rotate: isOpen ? 180 : 0 }}
-          transition={{ duration: 0.2 }}
-          className="inline-flex items-center justify-center w-2.5 h-2.5"
+        {/* Icon always visible */}
+        <span className="shrink-0 flex items-center justify-center transition-transform duration-300 group-hover/nav:scale-105">
+          <NavIcon
+            href={item.href}
+            size={15}
+            className={`transition-colors duration-200 ${
+              isParentActive || isOpen ? "text-gold" : "text-[#5C5147] group-hover/nav:text-gold"
+            }`}
+          />
+        </span>
+
+        {/* Label expands on hover pushing neighboring icons */}
+        <span
+          className={`overflow-hidden whitespace-nowrap text-[11px] xl:text-[11.5px] uppercase tracking-[0.14em] font-semibold transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] ${
+            isOpen
+              ? "max-w-[180px] opacity-100 ml-2"
+              : "max-w-0 opacity-0 group-hover/nav:max-w-[180px] group-hover/nav:opacity-100 group-hover/nav:ml-2 focus-visible:max-w-[180px] focus-visible:opacity-100 focus-visible:ml-2"
+          }`}
         >
-          <ChevronDown size={10} className="text-gold/80" />
-        </motion.span>
+          {item.label}
+        </span>
+
+        {/* Chevron animated reveal */}
+        <span
+          className={`overflow-hidden transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] flex items-center justify-center ${
+            isOpen
+              ? "max-w-[18px] opacity-100 ml-1"
+              : "max-w-0 opacity-0 group-hover/nav:max-w-[18px] group-hover/nav:opacity-100 group-hover/nav:ml-1"
+          }`}
+        >
+          <ChevronDown
+            size={10}
+            className={`text-gold/80 transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`}
+          />
+        </span>
+
         {/* Center-expanding gold gradient underline */}
         <span
           className={`absolute -bottom-0.5 left-1/2 -translate-x-1/2 h-[0.5px] bg-gradient-to-r from-transparent via-[#D4AF37] to-transparent transition-all duration-300 pointer-events-none ${
             isParentActive || isOpen
               ? "w-full opacity-100"
-              : "w-0 opacity-0 group-hover/droptrig:w-full group-hover/droptrig:opacity-100"
+              : "w-0 opacity-0 group-hover/nav:w-full group-hover/nav:opacity-100"
           }`}
         />
       </Link>
@@ -459,7 +560,7 @@ export const Navbar: React.FC = () => {
         <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 flex items-center justify-between py-2 sm:py-2.5">
           {/* ── Left Nav ── */}
           <nav
-            className="hidden lg:flex items-center space-x-3 lg:space-x-4 xl:space-x-5"
+            className="hidden lg:flex items-center gap-1.5 xl:gap-2"
             aria-label="Primary Left Navigation"
           >
             {leftItems.map((item) =>
@@ -501,7 +602,7 @@ export const Navbar: React.FC = () => {
           </Link>
 
           {/* ── Right Nav + Elegant CTA ── */}
-          <div className="hidden lg:flex items-center space-x-3 lg:space-x-4 xl:space-x-4">
+          <div className="hidden lg:flex items-center gap-1.5 xl:gap-2">
             {rightItems.map((item) =>
               item.children || item.groups ? (
                 <NavItemDropdown key={item.label} item={item} pathname={pathname} />
@@ -518,7 +619,7 @@ export const Navbar: React.FC = () => {
             {/* Bespoke Luxury CTA Badge */}
             <Link
               href="/contact"
-              className="relative group inline-flex items-center justify-center px-4 xl:px-5 py-1.5 text-[10px] xl:text-[10.5px] font-sans font-semibold uppercase tracking-[0.2em] rounded-[2px] transition-all duration-300 overflow-hidden bg-[#1A1209] text-[#FAF7F2] border border-[#1A1209] hover:border-gold/60 shadow-[0_2px_10px_rgba(26,18,9,0.1)] hover:shadow-[0_4px_18px_rgba(212,175,55,0.2)] hover:-translate-y-0.5 active:translate-y-0"
+              className="relative group inline-flex items-center justify-center px-4 xl:px-5 py-1.5 text-[10px] xl:text-[10.5px] font-sans font-semibold uppercase tracking-[0.2em] rounded-[2px] transition-all duration-300 overflow-hidden bg-[#1A1209] text-[#FAF7F2] border border-[#1A1209] hover:border-gold/60 shadow-[0_2px_10px_rgba(26,18,9,0.1)] hover:shadow-[0_4px_18px_rgba(212,175,55,0.2)] hover:-translate-y-0.5 active:translate-y-0 ml-1.5"
             >
               <span className="relative z-10">Enquire</span>
             </Link>
@@ -595,15 +696,18 @@ export const Navbar: React.FC = () => {
                       <button
                         type="button"
                         onClick={() => setMobileDropdownOverride(isExpanded ? null : item.label)}
-                        className={`w-full py-3 px-4 text-xs font-bold rounded-[2px] flex items-center justify-between uppercase tracking-[0.18em] transition-colors ${
+                        className={`w-full py-3 px-4 text-xs font-semibold rounded-[2px] flex items-center justify-between uppercase tracking-[0.18em] transition-colors ${
                           pathname.startsWith(item.href)
                             ? "text-gold bg-gold/[0.06] font-bold"
-                            : "text-[#1A1209] hover:text-gold hover:bg-gold/[0.06] font-bold"
+                            : "text-[#1A1209] hover:text-gold hover:bg-gold/[0.06]"
                         }`}
                         aria-expanded={isExpanded}
                         aria-controls={`mobile-accordion-${item.label.replace(/\s+/g, "-")}`}
                       >
-                        <span className="leading-none">{item.label}</span>
+                        <div className="flex items-center gap-2.5">
+                          <NavIcon href={item.href} size={14} className="text-gold shrink-0" />
+                          <span className="leading-none">{item.label}</span>
+                        </div>
                         <ChevronDown
                           size={13}
                           className={`text-gold transition-transform duration-300 shrink-0 ${
