@@ -56,40 +56,52 @@ export const siteConfig = {
       href: "/services",
       children: [
         {
-          label: "Wedding Decor & Design",
-          href: "/services#wedding-decor-design",
+          label: "Planning and reccee process",
+          href: "/services#planning-reccee-process",
           description:
-            "Beautifully styled wedding spaces that reflect your vision, personality and the atmosphere you want to create.",
+            "Comprehensive destination recces, technical audits, budget modeling, and turnkey orchestration.",
         },
         {
-          label: "Pre-Wedding Celebrations",
-          href: "/services#pre-wedding-celebrations",
+          label: "Destination and venue",
+          href: "/services#destination-venue",
           description:
-            "From haldi and mehendi to sangeet and cocktail nights, we make every celebration special in its own way.",
+            "Procuring iconic palatial estates, private forts, and luxury waterfront sanctuaries.",
         },
         {
-          label: "Wedding & Reception Styling",
-          href: "/services#wedding-reception-styling",
-          description:
-            "Thoughtfully designed settings, beautiful stages and carefully curated details for your most special moments.",
-        },
-        {
-          label: "Event Styling",
+          label: "Event styling",
           href: "/services#event-styling",
           description:
-            "Creating beautiful experiences for celebrations, social gatherings and special occasions.",
+            "Architectural 3D floral scenography, bespoke mandaps, and immersive thematic decor.",
         },
         {
-          label: "Venue & Floral Styling",
-          href: "/services#venue-floral-styling",
+          label: "Hospitality and logistics",
+          href: "/services#hospitality-logistics",
           description:
-            "Bringing spaces to life with thoughtful floral arrangements, elegant installations and beautiful details.",
+            "White-glove 24/7 guest concierge, luxury chauffeur fleets, and airport transfers.",
         },
         {
-          label: "Personalised Details",
-          href: "/services#personalised-details",
+          label: "Artist & entertainment",
+          href: "/services#artist-entertainment",
           description:
-            "From welcome experiences to little finishing touches, we take care of the details that make your celebration feel personal.",
+            "Celebrity performers, Sufi maestros, symphony orchestras, and folk troupes.",
+        },
+        {
+          label: "Production and technical",
+          href: "/services#production-technical",
+          description:
+            "Concert-grade acoustics, intelligent architectural lighting, and synchronized SFX.",
+        },
+        {
+          label: "Gifting and hampers",
+          href: "/services#gifting-hampers",
+          description:
+            "Artisanal welcome baskets, bespoke room drops, and curated luxury keepsakes.",
+        },
+        {
+          label: "Photography and BTS",
+          href: "/services#photography-bts",
+          description:
+            "Cinematic 4K films, fine-art editorial photography, and same-day social BTS reels.",
         },
       ],
     },

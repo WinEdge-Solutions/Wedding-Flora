@@ -10,15 +10,17 @@ import { Button } from "@/components/ui/Button";
 import { servicesData } from "@/lib/content/services";
 import { ArrowRight, Check, Sparkles, ChevronLeft, ChevronRight } from "lucide-react";
 
-const romanNumerals = ["I", "II", "III", "IV", "V", "VI", "VII"];
+const romanNumerals = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII"];
 
 const mobileShortTitles = [
-  "Decor & Design",
-  "Pre-Wedding",
-  "Reception",
+  "Planning & Reccee",
+  "Destination & Venue",
   "Event Styling",
-  "Floral Styling",
-  "Personal Details",
+  "Hospitality & Logistics",
+  "Artist & Entertainment",
+  "Production & Technical",
+  "Gifting & Hampers",
+  "Photography & BTS",
 ];
 
 export const ServicesOverview: React.FC = () => {
@@ -31,20 +33,21 @@ export const ServicesOverview: React.FC = () => {
   const scrollMobileTo = (idx: number) => {
     setMobileIdx(idx);
     if (!mobileTrackRef.current) return;
-    const card = mobileTrackRef.current.children[idx] as HTMLElement;
+    const track = mobileTrackRef.current;
+    const card = track.children[idx] as HTMLElement;
     if (card) {
-      card.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
+      const targetScroll = card.offsetLeft - (track.offsetWidth - card.offsetWidth) / 2;
+      track.scrollTo({ left: targetScroll, behavior: "smooth" });
     }
   };
 
   const handleMobileScroll = (e: React.UIEvent<HTMLDivElement>) => {
     const target = e.currentTarget;
     const scrollLeft = target.scrollLeft;
-    const cardWidth = target.firstElementChild
-      ? (target.firstElementChild as HTMLElement).offsetWidth + 14
-      : 300;
+    const card = target.firstElementChild as HTMLElement;
+    const cardWidth = card ? card.offsetWidth + 14 : 320;
     const newIdx = Math.round(scrollLeft / cardWidth);
-    if (newIdx !== mobileIdx && newIdx >= 0 && newIdx < 6) {
+    if (newIdx !== mobileIdx && newIdx >= 0 && newIdx < servicesData.length) {
       setMobileIdx(newIdx);
     }
   };
@@ -74,7 +77,7 @@ export const ServicesOverview: React.FC = () => {
             <div className="lg:col-span-5 xl:col-span-4 flex flex-col justify-between space-y-6">
               {/* Service Navigation List */}
               <div className="space-y-1 border-l-2 border-gold/25 pl-4">
-                {servicesData.slice(0, 6).map((service, idx) => {
+                {servicesData.map((service, idx) => {
                   const isActive = idx === activeIdx;
                   return (
                     <button
@@ -210,8 +213,8 @@ export const ServicesOverview: React.FC = () => {
               </AnimatePresence>
 
               {/* Multi-Service Thumbnail Selector Strip (Adds interactive visual richness) */}
-              <div className="grid grid-cols-6 gap-2 pt-1">
-                {servicesData.slice(0, 6).map((service, idx) => {
+              <div className="grid grid-cols-4 sm:grid-cols-8 gap-1.5 pt-1">
+                {servicesData.map((service, idx) => {
                   const isActive = idx === activeIdx;
                   return (
                     <button
@@ -228,7 +231,7 @@ export const ServicesOverview: React.FC = () => {
                         src={service.imageUrl}
                         alt={service.title}
                         fill
-                        sizes="120px"
+                        sizes="100px"
                         className="object-cover"
                       />
                       <div className="absolute inset-0 bg-black/30" />
@@ -246,7 +249,7 @@ export const ServicesOverview: React.FC = () => {
           <div className="lg:hidden space-y-3.5">
             {/* Quick Pill Selector Tabs (Horizontal Scrollable Bar) */}
             <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar -mx-4 px-4 pb-0.5">
-              {servicesData.slice(0, 6).map((service, idx) => {
+              {servicesData.map((service, idx) => {
                 const isActive = idx === mobileIdx;
                 return (
                   <button
@@ -265,10 +268,10 @@ export const ServicesOverview: React.FC = () => {
               })}
             </div>
 
-            {/* Stepper Navigation Bar: Service 01 / 06 + Prev/Next Controls */}
+            {/* Stepper Navigation Bar: Service 01 / 08 + Prev/Next Controls */}
             <div className="flex items-center justify-between px-1 text-xs">
               <span className="text-[10px] uppercase tracking-[0.25em] text-[#D4AF37] font-bold">
-                Service 0{mobileIdx + 1} of 06
+                Service 0{mobileIdx + 1} of 0{servicesData.length}
               </span>
 
               <div className="flex items-center gap-1.5">
@@ -284,7 +287,7 @@ export const ServicesOverview: React.FC = () => {
 
                 {/* Dot indicators */}
                 <div className="flex items-center gap-1 px-1">
-                  {servicesData.slice(0, 6).map((_, i) => (
+                  {servicesData.map((_, i) => (
                     <button
                       key={i}
                       type="button"
@@ -299,8 +302,8 @@ export const ServicesOverview: React.FC = () => {
 
                 <button
                   type="button"
-                  onClick={() => scrollMobileTo(Math.min(5, mobileIdx + 1))}
-                  disabled={mobileIdx === 5}
+                  onClick={() => scrollMobileTo(Math.min(servicesData.length - 1, mobileIdx + 1))}
+                  disabled={mobileIdx === servicesData.length - 1}
                   aria-label="Next service"
                   className="w-7 h-7 rounded-full bg-white border border-gold/25 disabled:opacity-30 disabled:cursor-not-allowed hover:border-gold text-[#1A1209] flex items-center justify-center shadow-sm transition-all"
                 >
@@ -315,7 +318,7 @@ export const ServicesOverview: React.FC = () => {
               onScroll={handleMobileScroll}
               className="flex items-stretch gap-3.5 overflow-x-auto snap-x snap-mandatory no-scrollbar -mx-4 px-4 pb-2 pt-0.5 touch-pan-x"
             >
-              {servicesData.slice(0, 6).map((service, idx) => (
+              {servicesData.map((service, idx) => (
                 <div
                   key={service.id}
                   className="w-[85vw] sm:w-[340px] shrink-0 snap-center bg-white border border-gold/20 rounded-[3px] overflow-hidden shadow-sm flex flex-col justify-between transition-shadow hover:shadow-md"
