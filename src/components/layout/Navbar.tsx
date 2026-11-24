@@ -18,6 +18,7 @@ import {
   Home,
   Crown,
   Sparkles,
+  Flower2,
   Landmark,
   Workflow,
   Heart,
@@ -42,7 +43,7 @@ function NavIcon({
     case "/about":
       return <Crown size={size} className={className} />;
     case "/services":
-      return <Sparkles size={size} className={className} />;
+      return <Flower2 size={size} className={className} />;
     case "/destinations":
       return <Landmark size={size} className={className} />;
     case "/working-process":
