@@ -136,11 +136,11 @@ export const Hero: React.FC = () => {
       ══════════════════════════════════════════════ */}
       <motion.div
         ref={textContentRef}
-        className="relative z-[10] w-full pt-20 pb-8 sm:pt-24 sm:pb-12 lg:pt-24 lg:pb-12"
+        className="relative z-[10] w-full pt-16 pb-6 sm:pt-24 sm:pb-12 lg:pt-24 lg:pb-12"
         style={{ y: textY, opacity: heroOpacity }}
       >
         <Container className="text-center">
-          <div className="max-w-5xl mx-auto space-y-3.5 sm:space-y-4 lg:space-y-4">
+          <div className="max-w-5xl mx-auto space-y-3 sm:space-y-4 lg:space-y-4">
 
             {/* ── Crest monogram ────────────────────── */}
             <motion.div

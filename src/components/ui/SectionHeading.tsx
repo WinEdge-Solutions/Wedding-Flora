@@ -23,9 +23,9 @@ export const SectionHeading: React.FC<SectionHeadingProps> = ({
   const alignClass = align === "center" ? "text-center mx-auto" : "text-left";
 
   return (
-    <div className={`max-w-2xl mb-8 sm:mb-12 lg:mb-16 ${alignClass} ${className}`}>
+    <div className={`max-w-2xl mb-6 sm:mb-10 lg:mb-16 ${alignClass} ${className}`}>
       {eyebrow && (
-        <p className={`font-sans text-[11px] uppercase tracking-[0.3em] text-[#D4AF37] font-semibold mb-2.5 sm:mb-3 flex items-center gap-2 ${align === "center" ? "justify-center" : "justify-start"}`}>
+        <p className={`font-sans text-[10px] sm:text-[11px] uppercase tracking-[0.25em] sm:tracking-[0.3em] text-[#D4AF37] font-semibold mb-2 sm:mb-3 flex items-center gap-2 ${align === "center" ? "justify-center" : "justify-start"}`}>
           <span className="opacity-60">—</span>
           <span>{eyebrow}</span>
           <span className="opacity-60">—</span>
@@ -38,7 +38,7 @@ export const SectionHeading: React.FC<SectionHeadingProps> = ({
 
       {withDivider && (
         <div className={align === "left" ? "flex justify-start" : "flex justify-center"}>
-          <Divider variant="ornamental" className="my-3 sm:my-5" />
+          <Divider variant="ornamental" className="my-2.5 sm:my-4" />
         </div>
       )}
 

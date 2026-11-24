@@ -84,7 +84,7 @@ export const TestimonialsSection: React.FC = () => {
                   </span>
 
                   {/* Narrative Quote */}
-                  <blockquote className="font-serif text-lg sm:text-xl lg:text-[1.35rem] font-normal text-[#1A1209] leading-relaxed italic">
+                  <blockquote className="font-serif text-base sm:text-xl lg:text-[1.35rem] font-normal text-[#1A1209] leading-relaxed italic">
                     {current.quote}
                   </blockquote>
 
@@ -178,8 +178,8 @@ export const TestimonialsSection: React.FC = () => {
                     </div>
                   </div>
 
-                  {/* Secondary Companion Photo (adds editorial layered depth) */}
-                  <div className="col-span-12 sm:col-span-4 relative aspect-[16/11] sm:aspect-[3/4] rounded-[2px] overflow-hidden shadow-[0_8px_30px_rgba(26,18,9,0.06)] group">
+                  {/* Secondary Companion Photo (adds editorial layered depth on tablet/desktop) */}
+                  <div className="hidden sm:block col-span-12 sm:col-span-4 relative aspect-[16/11] sm:aspect-[3/4] rounded-[2px] overflow-hidden shadow-[0_8px_30px_rgba(26,18,9,0.06)] group">
                     <div className="relative w-full h-full overflow-hidden">
                       <Image
                         src={current.secondaryImageUrl}

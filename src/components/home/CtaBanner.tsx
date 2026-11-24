@@ -14,7 +14,7 @@ export const CtaBanner: React.FC = () => {
   return (
     <Section variant="ivory" className="text-center overflow-hidden">
       <Container size="narrow" className="relative z-10">
-        <div className="bg-[#F7F3EC] border border-gold/20 rounded-[2px] p-10 sm:p-16 lg:p-20 shadow-[0_12px_45px_rgba(26,18,9,0.05)] relative overflow-hidden">
+        <div className="bg-[#F7F3EC] border border-gold/20 rounded-[2px] p-6 sm:p-14 lg:p-20 shadow-[0_12px_45px_rgba(26,18,9,0.05)] relative overflow-hidden">
           {/* Subtle gold decorative frame accents */}
           <div className="absolute top-3 left-3 w-3 h-3 border-t border-l border-gold/40 pointer-events-none" />
           <div className="absolute top-3 right-3 w-3 h-3 border-t border-r border-gold/40 pointer-events-none" />
@@ -26,7 +26,7 @@ export const CtaBanner: React.FC = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-            className="space-y-6"
+            className="space-y-4 sm:space-y-6"
           >
             <p className="font-sans text-[11px] uppercase tracking-[0.3em] text-[#D4AF37] font-semibold flex items-center justify-center gap-2 px-2 text-center">
               <span className="opacity-60">—</span>

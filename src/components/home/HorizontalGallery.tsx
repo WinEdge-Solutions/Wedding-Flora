@@ -102,8 +102,8 @@ export function HorizontalGallery() {
       aria-label="Royal Celebrations Gallery"
     >
       {/* Section header */}
-      <div className="relative z-10 pt-16 sm:pt-24 pb-6 sm:pb-8 text-center px-4">
-        <p className="font-sans text-[11px] uppercase tracking-[0.3em] text-[#D4AF37] font-semibold mb-2.5 sm:mb-3 flex items-center justify-center gap-2">
+      <div className="relative z-10 pt-10 sm:pt-16 pb-4 sm:pb-6 text-center px-4">
+        <p className="font-sans text-[10px] sm:text-[11px] uppercase tracking-[0.25em] sm:tracking-[0.3em] text-[#D4AF37] font-semibold mb-2 sm:mb-3 flex items-center justify-center gap-2">
           <span className="opacity-60">—</span>
           <span>Royal Celebrations</span>
           <span className="opacity-60">—</span>
@@ -115,7 +115,7 @@ export function HorizontalGallery() {
           stagger={0.03}
         />
         {/* Mobile swipe helper hint */}
-        <p className="md:hidden font-sans text-[11px] text-[#D4AF37] font-semibold uppercase tracking-[0.2em] mt-3">
+        <p className="md:hidden font-sans text-[10px] text-[#D4AF37] font-semibold uppercase tracking-[0.2em] mt-2">
           Swipe sideways to view all celebrations →
         </p>
       </div>
@@ -124,7 +124,7 @@ export function HorizontalGallery() {
       <div
         ref={trackRef}
         onScroll={handleMobileScroll}
-        className="flex items-center gap-4 md:gap-6 px-4 md:px-16 pb-16 md:pb-24 overflow-x-auto md:overflow-x-visible snap-x snap-mandatory md:snap-none no-scrollbar will-change-transform"
+        className="flex items-center gap-4 md:gap-6 px-4 md:px-16 pb-10 md:pb-24 overflow-x-auto md:overflow-x-visible snap-x snap-mandatory md:snap-none no-scrollbar will-change-transform"
         style={{
           width: undefined, // Let CSS govern mobile; on desktop GSAP calculates scrollWidth
         }}
@@ -134,8 +134,8 @@ export function HorizontalGallery() {
             key={item.id}
             className={`gallery-panel relative flex-shrink-0 overflow-hidden rounded-[3px] md:rounded-[3px] cursor-pointer transition-all duration-500 snap-center md:snap-align-none shadow-[0_8px_30px_rgba(26,18,9,0.08)] hover:shadow-[0_16px_45px_rgba(212,175,55,0.25)] ${
               i % 3 === 1
-                ? "w-[82vw] sm:w-[320px] md:w-[340px] h-[440px] md:h-[500px]"
-                : "w-[82vw] sm:w-[320px] md:w-[340px] h-[400px] md:h-[440px]"
+                ? "w-[78vw] sm:w-[320px] md:w-[340px] h-[340px] sm:h-[420px] md:h-[500px]"
+                : "w-[78vw] sm:w-[320px] md:w-[340px] h-[310px] sm:h-[380px] md:h-[440px]"
             }`}
           >
             <Image

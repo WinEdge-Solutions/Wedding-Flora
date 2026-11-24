@@ -20,7 +20,7 @@ export const Section: React.FC<SectionProps> = ({
 
   return (
     <section
-      className={`w-full relative py-16 sm:py-20 md:py-28 lg:py-32 ${variantClasses[variant]} ${className}`}
+      className={`w-full relative py-12 sm:py-20 md:py-28 lg:py-32 ${variantClasses[variant]} ${className}`}
       {...props}
     >
       {children}
