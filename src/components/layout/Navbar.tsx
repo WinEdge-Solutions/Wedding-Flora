@@ -18,7 +18,7 @@ import {
   Home,
   Crown,
   Sparkles,
-  ConciergeBell,
+  Briefcase,
   Landmark,
   Workflow,
   Heart,
@@ -43,7 +43,7 @@ function NavIcon({
     case "/about":
       return <Crown size={size} className={className} />;
     case "/services":
-      return <ConciergeBell size={size} className={className} />;
+      return <Briefcase size={size} className={className} />;
     case "/destinations":
       return <Landmark size={size} className={className} />;
     case "/working-process":
