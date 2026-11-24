@@ -6,14 +6,13 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { galleryData } from "@/lib/content/gallery";
 import { SplitTextReveal } from "@/components/ui/SplitTextReveal";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 gsap.registerPlugin(ScrollTrigger);
 
 /**
- * HorizontalGallery — a GSAP-pinned horizontal scroll section.
- * While the user scrolls vertically the gallery track glides
- * horizontally through all gallery panels. Each panel fades +
- * scales up on enter.
+ * HorizontalGallery — a GSAP-pinned horizontal scroll section on desktop,
+ * and a smooth, touch-native horizontal carousel on mobile/tablet.
  */
 export function HorizontalGallery() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -26,14 +25,14 @@ export function HorizontalGallery() {
     const track = trackRef.current;
     if (!section || !track) return;
 
-    // Check if desktop
-    const checkDesktop = () => window.innerWidth >= 768;
-    if (!checkDesktop()) return;
+    // Use GSAP matchMedia so animations ONLY bind on desktop (min-width: 1024px)
+    // and automatically clean up completely on smaller screens
+    const mm = gsap.matchMedia();
 
-    const ctx = gsap.context(() => {
+    mm.add("(min-width: 1024px)", () => {
       const totalWidth = track.scrollWidth - window.innerWidth;
 
-      // Main horizontal pin + scrub
+      // Main horizontal pin + scrub on desktop
       const trigger = gsap.to(track, {
         x: -totalWidth,
         ease: "none",
@@ -51,11 +50,11 @@ export function HorizontalGallery() {
         },
       });
 
-      // Individual panel reveal animations
+      // Individual panel reveal animations (desktop only)
       track.querySelectorAll<HTMLElement>(".gallery-panel").forEach((panel) => {
         gsap.from(panel, {
           opacity: 0,
-          scale: 0.9,
+          scale: 0.95,
           duration: 0.6,
           ease: "power2.out",
           scrollTrigger: {
@@ -66,19 +65,18 @@ export function HorizontalGallery() {
           },
         });
       });
-    }, section);
+    });
 
-    return () => ctx.revert();
+    return () => mm.revert();
   }, [panels.length]);
 
-  // Touch scroll handler for mobile
+  // Touch scroll handler for mobile/tablet
   const handleMobileScroll = (e: React.UIEvent<HTMLDivElement>) => {
-    if (typeof window !== "undefined" && window.innerWidth >= 768) return;
+    if (typeof window !== "undefined" && window.innerWidth >= 1024) return;
     const target = e.currentTarget;
     const scrollLeft = target.scrollLeft;
-    const cardWidth = target.firstElementChild
-      ? (target.firstElementChild as HTMLElement).offsetWidth + 16
-      : 300;
+    const card = target.firstElementChild as HTMLElement;
+    const cardWidth = card ? card.offsetWidth + 16 : 320;
     const newIdx = Math.round(scrollLeft / cardWidth);
     if (newIdx !== activeIdx && newIdx >= 0 && newIdx < panels.length) {
       setActiveIdx(newIdx);
@@ -87,11 +85,12 @@ export function HorizontalGallery() {
 
   const scrollToPanel = (idx: number) => {
     setActiveIdx(idx);
-    if (trackRef.current && window.innerWidth < 768) {
-      const card = trackRef.current.children[idx] as HTMLElement;
-      if (card) {
-        card.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
-      }
+    if (!trackRef.current) return;
+    const track = trackRef.current;
+    const card = track.children[idx] as HTMLElement;
+    if (card) {
+      const targetScroll = card.offsetLeft - (track.offsetWidth - card.offsetWidth) / 2;
+      track.scrollTo({ left: targetScroll, behavior: "smooth" });
     }
   };
 
@@ -115,7 +114,7 @@ export function HorizontalGallery() {
           stagger={0.03}
         />
         {/* Mobile swipe helper hint */}
-        <p className="md:hidden font-sans text-[10px] text-[#D4AF37] font-semibold uppercase tracking-[0.2em] mt-2">
+        <p className="lg:hidden font-sans text-[10px] text-[#D4AF37] font-semibold uppercase tracking-[0.2em] mt-2">
           Swipe sideways to view all celebrations →
         </p>
       </div>
@@ -124,25 +123,22 @@ export function HorizontalGallery() {
       <div
         ref={trackRef}
         onScroll={handleMobileScroll}
-        className="flex items-center gap-4 md:gap-6 px-4 md:px-16 pb-10 md:pb-24 overflow-x-auto md:overflow-x-visible snap-x snap-mandatory md:snap-none no-scrollbar will-change-transform"
-        style={{
-          width: undefined, // Let CSS govern mobile; on desktop GSAP calculates scrollWidth
-        }}
+        className="flex items-center gap-4 lg:gap-6 px-4 sm:px-8 lg:px-16 pb-12 lg:pb-24 overflow-x-auto lg:overflow-x-visible snap-x snap-mandatory lg:snap-none no-scrollbar touch-pan-x"
       >
         {panels.map((item, i) => (
           <div
             key={item.id}
-            className={`gallery-panel relative flex-shrink-0 overflow-hidden rounded-[3px] md:rounded-[3px] cursor-pointer transition-all duration-500 snap-center md:snap-align-none shadow-[0_8px_30px_rgba(26,18,9,0.08)] hover:shadow-[0_16px_45px_rgba(212,175,55,0.25)] ${
+            className={`gallery-panel relative flex-shrink-0 overflow-hidden rounded-[3px] cursor-pointer transition-all duration-300 snap-center lg:snap-align-none shadow-[0_8px_30px_rgba(26,18,9,0.08)] hover:shadow-[0_16px_45px_rgba(212,175,55,0.25)] ${
               i % 3 === 1
-                ? "w-[78vw] sm:w-[320px] md:w-[340px] h-[340px] sm:h-[420px] md:h-[500px]"
-                : "w-[78vw] sm:w-[320px] md:w-[340px] h-[310px] sm:h-[380px] md:h-[440px]"
+                ? "w-[84vw] sm:w-[320px] lg:w-[340px] h-[360px] sm:h-[420px] lg:h-[500px]"
+                : "w-[84vw] sm:w-[320px] lg:w-[340px] h-[330px] sm:h-[380px] lg:h-[440px]"
             }`}
           >
             <Image
               src={item.imageUrl}
               alt={item.title}
               fill
-              sizes="(max-width: 768px) 85vw, 340px"
+              sizes="(max-width: 1024px) 85vw, 340px"
               className="object-cover transition-transform duration-700 ease-out hover:scale-105"
             />
 
@@ -163,7 +159,7 @@ export function HorizontalGallery() {
             </div>
 
             {/* Gold border on hover */}
-            <div className="absolute inset-0 border border-gold/0 hover:border-gold/50 transition-all duration-500 rounded-[3px] md:rounded-[3px]" />
+            <div className="absolute inset-0 border border-gold/0 hover:border-gold/50 transition-all duration-500 rounded-[3px]" />
 
             {/* Active dot indicator */}
             {activeIdx === i && (
@@ -173,20 +169,45 @@ export function HorizontalGallery() {
         ))}
       </div>
 
-      {/* Progress bar at bottom */}
-      <div className="absolute bottom-5 sm:bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-2 z-20">
-        {panels.map((_, i) => (
-          <button
-            key={i}
-            onClick={() => scrollToPanel(i)}
-            aria-label={`Jump to panel ${i + 1}`}
-            className={`rounded-full transition-all duration-400 p-0 border-0 ${
-              i === activeIdx
-                ? "w-6 h-1.5 bg-gold"
-                : "w-1.5 h-1.5 bg-[#1A1209]/20 hover:bg-[#1A1209]/40"
-            }`}
-          />
-        ))}
+      {/* Progress bar + touch controls at bottom */}
+      <div className="absolute bottom-4 sm:bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-3 z-20">
+        {/* Mobile touch prev */}
+        <button
+          type="button"
+          onClick={() => scrollToPanel(Math.max(0, activeIdx - 1))}
+          disabled={activeIdx === 0}
+          aria-label="Previous gallery image"
+          className="lg:hidden w-7 h-7 rounded-full bg-white border border-gold/30 disabled:opacity-30 disabled:cursor-not-allowed hover:border-gold text-[#1A1209] flex items-center justify-center shadow-sm transition-all"
+        >
+          <ChevronLeft size={14} />
+        </button>
+
+        {/* Progress dots */}
+        <div className="flex items-center gap-1.5">
+          {panels.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => scrollToPanel(i)}
+              aria-label={`Jump to panel ${i + 1}`}
+              className={`rounded-full transition-all duration-300 p-0 border-0 ${
+                i === activeIdx
+                  ? "w-6 h-1.5 bg-gold"
+                  : "w-1.5 h-1.5 bg-[#1A1209]/20 hover:bg-[#1A1209]/40"
+              }`}
+            />
+          ))}
+        </div>
+
+        {/* Mobile touch next */}
+        <button
+          type="button"
+          onClick={() => scrollToPanel(Math.min(panels.length - 1, activeIdx + 1))}
+          disabled={activeIdx === panels.length - 1}
+          aria-label="Next gallery image"
+          className="lg:hidden w-7 h-7 rounded-full bg-white border border-gold/30 disabled:opacity-30 disabled:cursor-not-allowed hover:border-gold text-[#1A1209] flex items-center justify-center shadow-sm transition-all"
+        >
+          <ChevronRight size={14} />
+        </button>
       </div>
     </section>
   );

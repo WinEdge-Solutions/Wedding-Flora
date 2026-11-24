@@ -591,18 +591,19 @@ export const Navbar: React.FC = () => {
             className="flex items-center gap-2.5 sm:gap-3 group focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gold shrink-0 py-0.5"
             aria-label="Wedding Flora Home"
           >
-            <div className="relative w-8 h-8 sm:w-10 sm:h-10 shrink-0 transition-transform duration-500 group-hover:scale-105">
+            <div className="relative w-9 h-9 sm:w-11 sm:h-11 lg:w-14 lg:h-14 xl:w-16 xl:h-16 shrink-0 transition-all duration-500 group-hover:scale-105 my-0.5 lg:-my-1">
               {/* Ambient radial gold halo behind crest */}
-              <div className="absolute -inset-1 bg-gradient-to-r from-gold/20 via-gold/10 to-transparent rounded-full blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+              <div className="absolute -inset-2 bg-gradient-to-r from-gold/30 via-gold/15 to-transparent rounded-full blur-md opacity-30 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
               <Image
                 src="/images/logo-emblem.png"
                 alt="Wedding Flora Crest"
                 fill
-                className="object-contain relative z-10"
+                className="object-contain relative z-10 drop-shadow-[0_2px_10px_rgba(212,175,55,0.3)] group-hover:drop-shadow-[0_4px_18px_rgba(212,175,55,0.6)]"
                 priority
               />
             </div>
-            <div className="flex flex-col text-left">
+            {/* Brand text: shown on mobile, removed on desktop so the enlarged central crest stands out */}
+            <div className="flex flex-col text-left lg:hidden">
               <span className="font-serif text-lg sm:text-[22px] font-semibold tracking-[0.04em] text-[#1A1209] group-hover:text-gold-gradient transition-colors duration-300 leading-none">
                 Wedding Flora
               </span>
