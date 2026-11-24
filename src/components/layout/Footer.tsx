@@ -10,7 +10,7 @@ export const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-[#1A1209] text-[#FAF7F2] border-t border-gold/25 pt-16 pb-12 mt-auto">
+    <footer className="bg-[#1A1209] text-[#FAF7F2] border-t border-gold/20 pt-20 sm:pt-24 pb-14 mt-auto">
       <Container>
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10 lg:gap-12 pb-12">
           {/* Brand & Monogram Column */}
@@ -65,7 +65,7 @@ export const Footer: React.FC = () => {
 
           {/* Quick Links Column */}
           <div className="md:col-span-3">
-            <h4 className="font-serif text-lg text-[#FAF7F2] mb-4 font-semibold tracking-wide">
+            <h4 className="text-[11px] uppercase tracking-[0.25em] text-gold font-semibold mb-4">
               Navigation
             </h4>
             <ul className="space-y-2.5 text-sm font-medium text-[#FAF7F2]/70">
@@ -84,7 +84,7 @@ export const Footer: React.FC = () => {
 
           {/* Contact Details Column */}
           <div className="md:col-span-4">
-            <h4 className="font-serif text-lg text-[#FAF7F2] mb-4 font-semibold tracking-wide">
+            <h4 className="text-[11px] uppercase tracking-[0.25em] text-gold font-semibold mb-4">
               Get in Touch
             </h4>
             <div className="space-y-3 text-sm font-medium text-[#FAF7F2]/70">
@@ -122,12 +122,12 @@ export const Footer: React.FC = () => {
           </div>
         </div>
 
-        <Divider variant="gold" className="my-6 opacity-30" />
+        <Divider variant="gold" className="my-6 opacity-20" />
 
-        <div className="flex flex-col sm:flex-row items-center justify-between text-xs text-[#FAF7F2]/60 font-medium pt-2 gap-4">
+        <div className="flex flex-col sm:flex-row items-center justify-between text-xs text-[#FAF7F2]/50 font-normal pt-2 gap-4">
           <p>© {currentYear} Wedding Flora. All rights reserved.</p>
-          <p className="tracking-widest uppercase text-[10px] font-bold text-[#FAF7F2]/40">
-            Designed with timeless grace
+          <p className="tracking-widest uppercase text-[10px] text-[#FAF7F2]/40">
+            Jaipur · Udaipur · Jodhpur
           </p>
         </div>
       </Container>

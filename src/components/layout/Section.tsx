@@ -14,13 +14,13 @@ export const Section: React.FC<SectionProps> = ({
 }) => {
   const variantClasses = {
     ivory: "bg-[#FDFAF5] text-[#1A1209]",
-    cream: "bg-[#F7F3EC] text-[#1A1209] border-y border-[#D4AF37]/15",
+    cream: "bg-[#F7F3EC] text-[#1A1209] border-y border-[#D4AF37]/10",
     charcoal: "bg-[#1A1209] text-[#FAF7F2] border-y border-gold/20",
   };
 
   return (
     <section
-      className={`w-full relative py-12 sm:py-16 md:py-24 lg:py-28 ${variantClasses[variant]} ${className}`}
+      className={`w-full relative py-16 sm:py-20 md:py-28 lg:py-32 ${variantClasses[variant]} ${className}`}
       {...props}
     >
       {children}

@@ -102,16 +102,16 @@ export function HorizontalGallery() {
       aria-label="Royal Celebrations Gallery"
     >
       {/* Section header */}
-      <div className="relative z-10 pt-14 sm:pt-20 pb-6 sm:pb-8 text-center px-4">
-        <p className="font-sans text-[10px] sm:text-[11px] uppercase tracking-[0.2em] sm:tracking-[0.35em] text-[#D4AF37] font-bold mb-2.5 sm:mb-3 flex items-center justify-center gap-2">
-          <span>✦</span>
+      <div className="relative z-10 pt-16 sm:pt-24 pb-6 sm:pb-8 text-center px-4">
+        <p className="font-sans text-[11px] uppercase tracking-[0.3em] text-[#D4AF37] font-semibold mb-2.5 sm:mb-3 flex items-center justify-center gap-2">
+          <span className="opacity-60">—</span>
           <span>Royal Celebrations</span>
-          <span>✦</span>
+          <span className="opacity-60">—</span>
         </p>
         <SplitTextReveal
           text="A Legacy of Grand Moments"
           as="h2"
-          className="font-display text-2xl sm:text-5xl lg:text-6xl text-[#1A1209] font-bold tracking-[0.03em]"
+          className="font-display text-2xl sm:text-5xl lg:text-6xl text-[#1A1209] font-semibold tracking-[0.03em]"
           stagger={0.03}
         />
         {/* Mobile swipe helper hint */}

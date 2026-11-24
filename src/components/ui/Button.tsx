@@ -35,9 +35,9 @@ export const Button: React.FC<ButtonProps> = ({
 
   const variantClasses = {
     primary:
-      "bg-gradient-to-r from-[#D4AF37] via-[#F3E5AB] to-[#D4AF37] text-[#1A1209] font-bold border border-gold/50 shadow-[0_4px_20px_rgba(212,175,55,0.35)] hover:shadow-[0_8px_30px_rgba(212,175,55,0.5)] hover:scale-[1.02] hover:-translate-y-0.5 active:translate-y-0",
+      "bg-[#1A1209] text-[#FAF7F2] font-semibold border border-[#1A1209] hover:border-gold/60 shadow-[0_2px_12px_rgba(26,18,9,0.12)] hover:shadow-[0_6px_24px_rgba(212,175,55,0.2)] hover:-translate-y-0.5 active:translate-y-0",
     outline:
-      "shimmer-card bg-white/90 backdrop-blur-md text-[#1A1209] border border-gold/70 hover:bg-gold hover:text-[#1A1209] hover:border-gold hover:shadow-[0_4px_25px_rgba(212,175,55,0.3)] hover:-translate-y-0.5 active:translate-y-0",
+      "bg-transparent text-[#1A1209] border border-[#1A1209]/25 hover:bg-[#1A1209] hover:text-[#FAF7F2] hover:border-[#1A1209] hover:-translate-y-0.5 active:translate-y-0",
     text:
       "bg-transparent text-[#1A1209] hover:text-gold underline underline-offset-8 decoration-gold/60 p-0 border-0 overflow-visible",
   };

@@ -15,7 +15,6 @@ import {
   Phone,
   MapPin,
   MessageCircle,
-  Sparkles,
 } from "lucide-react";
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
@@ -83,14 +82,14 @@ function NavLink({
               ? "text-gold bg-gold/[0.06] font-bold"
               : "text-[#1A1209] hover:text-gold hover:bg-gold/[0.06] font-bold")
           : "inline-flex items-center justify-center h-7 leading-none tracking-[0.13em] lg:tracking-[0.15em] xl:tracking-[0.18em] text-[11px] xl:text-[11.5px] 2xl:text-xs " +
-            (isActive ? "text-gold font-bold" : "text-[#1A1209] hover:text-[#D4AF37] font-bold")
+            (isActive ? "text-gold font-semibold" : "text-[#1A1209] hover:text-[#D4AF37] font-semibold")
       }`}
     >
       <span className="leading-none">{label}</span>
       {/* Center-expanding gold gradient underline — desktop only */}
       {!isMobile && (
         <span
-          className={`absolute -bottom-0.5 left-1/2 -translate-x-1/2 h-[1px] bg-gradient-to-r from-transparent via-[#D4AF37] to-transparent transition-all duration-300 pointer-events-none ${
+          className={`absolute -bottom-0.5 left-1/2 -translate-x-1/2 h-[0.5px] bg-gradient-to-r from-transparent via-[#D4AF37] to-transparent transition-all duration-300 pointer-events-none ${
             isActive ? "w-full opacity-100" : "w-0 opacity-0 group-hover/nav:w-full group-hover/nav:opacity-100"
           }`}
         />
@@ -181,8 +180,8 @@ function NavItemDropdown({
         onKeyDown={handleKeyDown}
         className={`relative uppercase tracking-[0.13em] lg:tracking-[0.15em] xl:tracking-[0.18em] text-[11px] xl:text-[11.5px] 2xl:text-xs transition-colors duration-200 inline-flex items-center justify-center gap-1 h-7 leading-none group/droptrig ${
           isParentActive
-            ? "text-gold font-bold"
-            : "text-[#1A1209] hover:text-[#D4AF37] font-bold"
+            ? "text-gold font-semibold"
+            : "text-[#1A1209] hover:text-[#D4AF37] font-semibold"
         }`}
       >
         <span className="leading-none">{item.label}</span>
@@ -195,7 +194,7 @@ function NavItemDropdown({
         </motion.span>
         {/* Center-expanding gold gradient underline */}
         <span
-          className={`absolute -bottom-0.5 left-1/2 -translate-x-1/2 h-[1px] bg-gradient-to-r from-transparent via-[#D4AF37] to-transparent transition-all duration-300 pointer-events-none ${
+          className={`absolute -bottom-0.5 left-1/2 -translate-x-1/2 h-[0.5px] bg-gradient-to-r from-transparent via-[#D4AF37] to-transparent transition-all duration-300 pointer-events-none ${
             isParentActive || isOpen
               ? "w-full opacity-100"
               : "w-0 opacity-0 group-hover/droptrig:w-full group-hover/droptrig:opacity-100"
@@ -518,19 +517,9 @@ export const Navbar: React.FC = () => {
             {/* Bespoke Luxury CTA Badge */}
             <Link
               href="/contact"
-              className="relative group inline-flex items-center justify-center px-4 xl:px-4.5 py-1.5 text-[10px] xl:text-[10.5px] font-sans font-bold uppercase tracking-[0.2em] rounded-[2px] transition-all duration-300 overflow-hidden shadow-[0_0_15px_rgba(212,175,55,0.2)] hover:shadow-[0_0_25px_rgba(212,175,55,0.45)] hover:-translate-y-0.5 active:translate-y-0 border border-gold/60"
-              style={{
-                background: "linear-gradient(135deg, #FAF7F2 0%, #D4AF37 55%, #AB9178 100%)",
-                color: "#08040a",
-              }}
+              className="relative group inline-flex items-center justify-center px-4 xl:px-5 py-1.5 text-[10px] xl:text-[10.5px] font-sans font-semibold uppercase tracking-[0.2em] rounded-[2px] transition-all duration-300 overflow-hidden bg-[#1A1209] text-[#FAF7F2] border border-[#1A1209] hover:border-gold/60 shadow-[0_2px_10px_rgba(26,18,9,0.1)] hover:shadow-[0_4px_18px_rgba(212,175,55,0.2)] hover:-translate-y-0.5 active:translate-y-0"
             >
-              <span className="relative z-10 flex items-center gap-1.5">
-                <span>Enquire</span>
-                <span className="text-[9px] text-[#08040a] transition-transform duration-300 group-hover:translate-x-0.5">
-                  ✦
-                </span>
-              </span>
-              <span className="absolute inset-0 bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <span className="relative z-10">Enquire</span>
             </Link>
           </div>
 
@@ -751,13 +740,8 @@ export const Navbar: React.FC = () => {
                 <Link
                   href="/contact"
                   onClick={closeMobileMenu}
-                  className="w-full py-3 px-4 rounded-[2px] text-xs font-sans font-bold uppercase tracking-[0.2em] flex items-center justify-center gap-2 border border-gold/60 shadow-[0_0_20px_rgba(212,175,55,0.3)]"
-                  style={{
-                    background: "linear-gradient(135deg, #FAF7F2 0%, #D4AF37 55%, #AB9178 100%)",
-                    color: "#08040a",
-                  }}
+                  className="w-full py-3 px-4 rounded-[2px] text-xs font-sans font-semibold uppercase tracking-[0.2em] flex items-center justify-center gap-2 bg-[#1A1209] text-[#FAF7F2] border border-[#1A1209] hover:border-gold/60 shadow-[0_2px_10px_rgba(26,18,9,0.1)] transition-all duration-300"
                 >
-                  <Sparkles size={14} />
                   <span>Book Private Consultation</span>
                 </Link>
               </div>

@@ -23,15 +23,15 @@ export const ServicesOverview: React.FC = () => {
         <div className="space-y-8 sm:space-y-12">
           {/* Header */}
           <div className="text-center max-w-3xl mx-auto space-y-2.5">
-            <p className="font-sans text-[10px] sm:text-xs uppercase tracking-[0.25em] text-[#D4AF37] font-bold flex items-center justify-center gap-2">
-              <span>✦</span>
+            <p className="font-sans text-[11px] uppercase tracking-[0.3em] text-[#D4AF37] font-semibold flex items-center justify-center gap-2">
+              <span className="opacity-60">—</span>
               <span>Royal Wedding Services &amp; Artistry</span>
-              <span>✦</span>
+              <span className="opacity-60">—</span>
             </p>
-            <h2 className="font-display text-2xl sm:text-4xl lg:text-5xl text-[#1A1209] font-bold tracking-[0.03em]">
+            <h2 className="font-display text-2xl sm:text-4xl lg:text-5xl text-[#1A1209] font-semibold tracking-[0.03em]">
               Grandeur in Every Celebration
             </h2>
-            <p className="font-sans text-xs sm:text-base text-[#5C5147] font-medium leading-relaxed max-w-xl mx-auto">
+            <p className="font-sans text-xs sm:text-base text-[#5C5147] font-normal leading-relaxed max-w-xl mx-auto">
               From historic palace procurement to bespoke floral mandap scenography, we orchestrate unforgettable royal heirlooms.
             </p>
           </div>
@@ -84,16 +84,16 @@ export const ServicesOverview: React.FC = () => {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -12 }}
                   transition={{ duration: 0.25 }}
-                  className="p-5 rounded-[3px] bg-white border border-gold/25 shadow-sm space-y-4"
+                  className="p-5 rounded-[2px] bg-white border border-gold/15 shadow-sm space-y-4"
                 >
                   <div>
-                    <span className="text-[10px] font-sans uppercase tracking-[0.2em] text-[#D4AF37] font-bold block mb-1">
+                    <span className="text-[10px] font-sans uppercase tracking-[0.2em] text-[#D4AF37] font-semibold block mb-1">
                       {romanNumerals[activeIdx]} • Signature Atelier
                     </span>
-                    <h3 className="font-serif text-xl font-bold text-[#1A1209] leading-snug">
+                    <h3 className="font-serif text-xl font-semibold text-[#1A1209] leading-snug">
                       {activeService.title}
                     </h3>
-                    <p className="text-xs font-sans text-gold/90 font-semibold mt-1">
+                    <p className="text-xs font-sans text-gold/90 font-medium mt-1">
                       {activeService.tagline}
                     </p>
                   </div>
@@ -101,7 +101,7 @@ export const ServicesOverview: React.FC = () => {
                   {/* Top 2 Inclusions */}
                   <div className="space-y-1.5 pt-2 border-t border-gold/15">
                     {activeService.features.slice(0, 2).map((feat, fIdx) => (
-                      <div key={fIdx} className="flex items-start gap-2 text-xs text-[#5C5147] font-medium leading-relaxed">
+                      <div key={fIdx} className="flex items-start gap-2 text-xs text-[#5C5147] font-normal leading-relaxed">
                         <Check className="w-3.5 h-3.5 text-gold shrink-0 mt-0.5" />
                         <span className="line-clamp-2">{feat}</span>
                       </div>
@@ -111,7 +111,7 @@ export const ServicesOverview: React.FC = () => {
                   <div className="pt-2 flex items-center justify-between border-t border-gold/15">
                     <Link
                       href={`/services#${activeService.id}`}
-                      className="inline-flex items-center gap-1.5 text-xs font-sans font-bold uppercase tracking-wider text-[#1A1209] hover:text-gold transition-colors group/link"
+                      className="inline-flex items-center gap-1.5 text-xs font-sans font-semibold uppercase tracking-wider text-[#1A1209] hover:text-gold transition-colors group/link"
                     >
                       <span>Explore Inclusions</span>
                       <ArrowRight size={13} className="text-gold transition-transform group-hover/link:translate-x-1" />
@@ -119,7 +119,7 @@ export const ServicesOverview: React.FC = () => {
 
                     <Link
                       href={`/contact?service=${activeService.id}`}
-                      className="px-3.5 py-1.5 rounded-[2px] bg-gold hover:bg-[#b8972e] text-white text-[11px] font-sans font-bold uppercase tracking-wider shadow-sm transition-all"
+                      className="px-3.5 py-1.5 rounded-[2px] bg-[#1A1209] hover:bg-gold hover:text-[#1A1209] text-white text-[11px] font-sans font-semibold uppercase tracking-wider shadow-sm transition-all"
                     >
                       Book Atelier
                     </Link>
@@ -134,27 +134,27 @@ export const ServicesOverview: React.FC = () => {
               <AnimatePresence mode="wait">
                 <motion.div
                   key={activeService.id}
-                  initial={{ opacity: 0, scale: 0.98 }}
+                  initial={{ opacity: 0, scale: 0.99 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.98 }}
-                  transition={{ duration: 0.4, ease: "easeOut" }}
-                  className="relative aspect-[16/10] xl:aspect-[16/9] w-full rounded-[3px] overflow-hidden bg-white p-2 border border-gold/30 shadow-[0_16px_50px_rgba(26,18,9,0.09)] group"
+                  exit={{ opacity: 0, scale: 0.99 }}
+                  transition={{ duration: 0.35, ease: "easeOut" }}
+                  className="relative aspect-[16/10] xl:aspect-[16/9] w-full rounded-[2px] overflow-hidden shadow-[0_12px_40px_rgba(26,18,9,0.08)] group"
                 >
-                  <div className="relative w-full h-full overflow-hidden rounded-[2px]">
+                  <div className="relative w-full h-full overflow-hidden">
                     <Image
                       src={activeService.imageUrl}
                       alt={`${activeService.title} by Wedding Flora`}
                       fill
                       sizes="(max-width: 1200px) 60vw, 800px"
-                      className="object-cover object-top transition-transform duration-700 ease-out group-hover:scale-105"
+                      className="object-cover object-top transition-transform duration-700 ease-out group-hover:scale-[1.02]"
                       priority
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
 
                     {/* Top Overlay Badge */}
                     <div className="absolute top-3.5 left-3.5">
-                      <span className="px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-black/75 backdrop-blur-md text-gold border border-gold/30 flex items-center gap-1.5">
-                        <Sparkles size={11} />
+                      <span className="px-3 py-1 rounded-[2px] text-[10px] font-semibold uppercase tracking-wider bg-white/95 backdrop-blur-md text-[#1A1209] border border-gold/20 flex items-center gap-1.5 shadow-sm">
+                        <Sparkles size={11} className="text-gold" />
                         <span>Curated Royal Production</span>
                       </span>
                     </div>
@@ -162,10 +162,10 @@ export const ServicesOverview: React.FC = () => {
                     {/* Bottom Caption Strip */}
                     <div className="absolute bottom-3.5 left-3.5 right-3.5 flex items-end justify-between">
                       <div>
-                        <span className="text-[10px] font-sans uppercase tracking-widest text-gold font-bold block">
+                        <span className="text-[10px] font-sans uppercase tracking-widest text-[#D4AF37] font-semibold block">
                           Rajasthan Royal Venue
                         </span>
-                        <h4 className="font-serif text-lg sm:text-xl font-bold text-white tracking-wide">
+                        <h4 className="font-serif text-lg sm:text-xl font-semibold text-white tracking-wide">
                           {activeService.title}
                         </h4>
                       </div>
@@ -215,7 +215,7 @@ export const ServicesOverview: React.FC = () => {
             {servicesData.slice(0, 6).map((service, idx) => (
               <div
                 key={service.id}
-                className="bg-white border border-gold/25 rounded-[3px] overflow-hidden shadow-sm flex flex-col justify-between"
+                className="bg-white border border-gold/15 rounded-[2px] overflow-hidden shadow-sm flex flex-col justify-between"
               >
                 {/* 65% Dominant Visual */}
                 <div className="relative aspect-[16/10] w-full overflow-hidden">
@@ -228,12 +228,12 @@ export const ServicesOverview: React.FC = () => {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent" />
                   <div className="absolute top-2.5 left-2.5">
-                    <span className="px-2.5 py-0.5 rounded-full text-[9px] font-bold uppercase tracking-wider bg-black/75 text-gold border border-gold/30">
+                    <span className="px-2 py-0.5 rounded-[2px] text-[9px] font-semibold uppercase tracking-wider bg-black/70 text-gold border border-gold/20">
                       Service 0{idx + 1}
                     </span>
                   </div>
                   <div className="absolute bottom-2.5 left-2.5 right-2.5">
-                    <h3 className="font-serif text-lg font-bold text-white leading-tight">
+                    <h3 className="font-serif text-lg font-semibold text-white leading-tight">
                       {service.title}
                     </h3>
                   </div>
@@ -241,20 +241,20 @@ export const ServicesOverview: React.FC = () => {
 
                 {/* 35% Concise Content */}
                 <div className="p-4 space-y-3">
-                  <p className="text-xs text-[#5C5147] font-medium line-clamp-2 leading-relaxed">
+                  <p className="text-xs text-[#5C5147] font-normal line-clamp-2 leading-relaxed">
                     {service.tagline}
                   </p>
                   <div className="pt-2 border-t border-gold/15 flex items-center justify-between">
                     <Link
                       href={`/services#${service.id}`}
-                      className="text-xs uppercase tracking-wider font-bold text-[#1A1209] hover:text-gold inline-flex items-center gap-1"
+                      className="text-xs uppercase tracking-wider font-semibold text-[#1A1209] hover:text-gold inline-flex items-center gap-1"
                     >
                       <span>Explore</span>
                       <ArrowRight size={12} className="text-gold" />
                     </Link>
                     <Link
                       href={`/contact?service=${service.id}`}
-                      className="px-3 py-1 rounded-[2px] bg-gold text-white text-[10px] font-bold uppercase tracking-wider"
+                      className="px-3 py-1 rounded-[2px] bg-[#1A1209] hover:bg-gold text-white text-[10px] font-semibold uppercase tracking-wider"
                     >
                       Enquire
                     </Link>
@@ -267,7 +267,7 @@ export const ServicesOverview: React.FC = () => {
           {/* Bottom Action Button */}
           <div className="text-center pt-4">
             <Button href="/services" variant="primary" size="md">
-              View All 7 Services &amp; Packages
+              View All Services
             </Button>
           </div>
         </div>

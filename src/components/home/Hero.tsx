@@ -56,7 +56,6 @@ export const Hero: React.FC = () => {
       gsap.from(chars, {
         y: "115%",
         opacity: 0,
-        rotationZ: 4,
         duration: 1.2,
         ease: "power4.out",
         stagger: 0.028,
@@ -213,7 +212,7 @@ export const Hero: React.FC = () => {
 
             {/* ── Subtitle ──────────────────────────── */}
             <motion.p
-              className="font-sans text-xs sm:text-sm lg:text-[15px] text-[#FAF7F2]/90 font-medium max-w-2xl mx-auto leading-relaxed px-3 sm:px-0 drop-shadow-[0_2px_12px_rgba(0,0,0,0.9)]"
+              className="font-sans text-xs sm:text-sm lg:text-[15px] text-[#FAF7F2]/85 font-normal max-w-2xl mx-auto leading-[1.75] px-3 sm:px-0 drop-shadow-[0_2px_12px_rgba(0,0,0,0.9)]"
               variants={fadeUp}
               initial="hidden"
               animate="visible"
@@ -232,31 +231,31 @@ export const Hero: React.FC = () => {
               animate="visible"
               custom={4}
             >
-              {/* Primary — gold fill */}
+              {/* Primary — refined charcoal button with gold highlight */}
               <a
                 href="/contact"
                 className="w-full sm:w-auto inline-flex items-center justify-center px-6 sm:px-8 py-2.5 sm:py-3.5
-                  font-sans text-xs uppercase tracking-[0.18em] font-bold
-                  bg-gradient-to-r from-[#D4AF37] via-[#F3E5AB] to-[#D4AF37]
-                  text-[#090614] rounded-[3px] text-center
-                  shadow-[0_0_0_1px_rgba(212,175,55,0.5),0_10px_35px_rgba(212,175,55,0.4)]
-                  hover:shadow-[0_0_0_1px_rgba(212,175,55,0.9),0_12px_50px_rgba(212,175,55,0.65)]
-                  hover:scale-[1.03] active:scale-[0.98]
+                  font-sans text-xs uppercase tracking-[0.18em] font-semibold
+                  bg-[#FAF7F2] text-[#1A1209] rounded-[2px] text-center
+                  border border-[#FAF7F2]/90
+                  shadow-[0_4px_20px_rgba(0,0,0,0.18)]
+                  hover:shadow-[0_8px_30px_rgba(212,175,55,0.3)]
+                  hover:border-gold/60
+                  hover:-translate-y-0.5 active:translate-y-0
                   transition-all duration-300 ease-out"
               >
                 Plan Your Royal Wedding
               </a>
 
-              {/* Secondary — frosted glass */}
+              {/* Secondary — ethereal ghost outline */}
               <a
                 href="/celebrations"
                 className="w-full sm:w-auto inline-flex items-center justify-center px-6 sm:px-8 py-2.5 sm:py-3.5
-                  font-sans text-xs uppercase tracking-[0.18em] font-bold
-                  bg-white/20 backdrop-blur-xl text-[#FAF7F2] text-center
-                  border border-white/40 rounded-[3px]
-                  hover:bg-white/30 hover:border-white/60 hover:text-white
-                  hover:shadow-[0_0_28px_rgba(255,255,255,0.2)]
-                  hover:scale-[1.03] active:scale-[0.98]
+                  font-sans text-xs uppercase tracking-[0.18em] font-semibold
+                  bg-transparent text-[#FAF7F2] text-center
+                  border border-[#FAF7F2]/40 rounded-[2px]
+                  hover:bg-[#FAF7F2]/10 hover:border-[#FAF7F2]/75
+                  hover:-translate-y-0.5 active:translate-y-0
                   transition-all duration-300 ease-out"
               >
                 Explore Celebrations
@@ -274,12 +273,9 @@ export const Hero: React.FC = () => {
               <motion.div
                 animate={{ y: [0, 6, 0] }}
                 transition={{ repeat: Infinity, duration: 2.3, ease: "easeInOut" }}
-                className="flex flex-col items-center gap-1 opacity-60 hover:opacity-100 transition-opacity cursor-pointer"
+                className="flex flex-col items-center gap-1 opacity-50 hover:opacity-80 transition-opacity cursor-pointer"
               >
-                <span className="text-[9px] uppercase tracking-[0.3em] text-[#FAF7F2] font-bold font-sans">
-                  Scroll
-                </span>
-                <div className="w-px h-5 bg-gradient-to-b from-gold/80 to-transparent" />
+                <div className="w-px h-7 bg-gradient-to-b from-[#FAF7F2]/60 to-transparent" />
               </motion.div>
             </motion.div>
 

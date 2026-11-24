@@ -95,7 +95,7 @@ export function GlobalAurora() {
           height: "80vw",
           maxHeight: "1000px",
           background:
-            "radial-gradient(circle, rgba(212,175,55,0.11) 0%, rgba(243,229,171,0.07) 45%, transparent 70%)",
+            "radial-gradient(circle, rgba(212,175,55,0.07) 0%, rgba(243,229,171,0.04) 45%, transparent 70%)",
           filter: "blur(70px)",
           mixBlendMode: "multiply",
         }}
@@ -109,7 +109,7 @@ export function GlobalAurora() {
           height: "65vw",
           maxHeight: "850px",
           background:
-            "radial-gradient(circle, rgba(241,220,225,0.13) 0%, rgba(212,175,55,0.06) 50%, transparent 70%)",
+            "radial-gradient(circle, rgba(241,220,225,0.08) 0%, rgba(212,175,55,0.04) 50%, transparent 70%)",
           filter: "blur(80px)",
           mixBlendMode: "multiply",
         }}
@@ -123,7 +123,7 @@ export function GlobalAurora() {
           height: "60vw",
           maxHeight: "780px",
           background:
-            "radial-gradient(circle, rgba(247,243,236,0.18) 0%, rgba(212,175,55,0.05) 55%, transparent 70%)",
+            "radial-gradient(circle, rgba(247,243,236,0.12) 0%, rgba(212,175,55,0.03) 55%, transparent 70%)",
           filter: "blur(90px)",
           mixBlendMode: "multiply",
         }}

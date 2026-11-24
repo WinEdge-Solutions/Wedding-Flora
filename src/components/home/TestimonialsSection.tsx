@@ -27,21 +27,21 @@ export const TestimonialsSection: React.FC = () => {
       <Container>
         <div className="space-y-8 sm:space-y-12">
           {/* Micro Section Eyebrow */}
-          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-gold/20 pb-5">
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-gold/15 pb-5">
             <div>
-              <p className="font-sans text-[10px] sm:text-xs uppercase tracking-[0.25em] text-[#D4AF37] font-bold flex items-center gap-2">
-                <span>✦</span>
+              <p className="font-sans text-[11px] uppercase tracking-[0.3em] text-[#D4AF37] font-semibold flex items-center gap-2">
+                <span className="opacity-60">—</span>
                 <span>Love Stories &amp; Royal Reflections</span>
-                <span>✦</span>
+                <span className="opacity-60">—</span>
               </p>
-              <h2 className="font-display text-2xl sm:text-4xl lg:text-[2.6rem] font-bold text-[#1A1209] tracking-[0.03em] mt-1.5">
+              <h2 className="font-display text-2xl sm:text-4xl lg:text-[2.6rem] font-semibold text-[#1A1209] tracking-[0.03em] mt-1.5">
                 Vows Celebrated in Royal Splendor
               </h2>
             </div>
 
             {/* Stepper Navigation Controls */}
             <div className="flex items-center gap-3 shrink-0">
-              <span className="text-xs uppercase tracking-widest text-[#D4AF37] font-bold font-sans">
+              <span className="text-xs uppercase tracking-widest text-[#D4AF37] font-semibold font-sans">
                 Story 0{activeIndex + 1} / 0{testimonialsData.length}
               </span>
               <div className="flex items-center gap-1.5">
@@ -49,7 +49,7 @@ export const TestimonialsSection: React.FC = () => {
                   type="button"
                   onClick={handlePrev}
                   aria-label="Previous royal wedding story"
-                  className="w-9 h-9 rounded-full bg-white border border-gold/30 hover:border-gold hover:bg-gold/10 text-[#1A1209] flex items-center justify-center transition-all shadow-sm"
+                  className="w-9 h-9 rounded-full bg-white border border-gold/25 hover:border-gold hover:bg-gold/10 text-[#1A1209] flex items-center justify-center transition-all shadow-sm"
                 >
                   <ChevronLeft size={16} />
                 </button>
@@ -57,7 +57,7 @@ export const TestimonialsSection: React.FC = () => {
                   type="button"
                   onClick={handleNext}
                   aria-label="Next royal wedding story"
-                  className="w-9 h-9 rounded-full bg-white border border-gold/30 hover:border-gold hover:bg-gold/10 text-[#1A1209] flex items-center justify-center transition-all shadow-sm"
+                  className="w-9 h-9 rounded-full bg-white border border-gold/25 hover:border-gold hover:bg-gold/10 text-[#1A1209] flex items-center justify-center transition-all shadow-sm"
                 >
                   <ChevronRight size={16} />
                 </button>
@@ -146,29 +146,29 @@ export const TestimonialsSection: React.FC = () => {
                   className="relative grid grid-cols-12 gap-3 sm:gap-4 items-center"
                 >
                   {/* Primary Grand Showcase Photo (occupies dominant visual space) */}
-                  <div className="col-span-12 sm:col-span-8 relative aspect-[16/11] sm:aspect-[4/3] rounded-[3px] overflow-hidden bg-white p-1.5 sm:p-2 border border-gold/30 shadow-[0_12px_45px_rgba(26,18,9,0.08)] group">
-                    <div className="relative w-full h-full overflow-hidden rounded-[2px]">
+                  <div className="col-span-12 sm:col-span-8 relative aspect-[16/11] sm:aspect-[4/3] rounded-[2px] overflow-hidden shadow-[0_12px_45px_rgba(26,18,9,0.08)] group">
+                    <div className="relative w-full h-full overflow-hidden">
                       <Image
                         src={current.imageUrl}
                         alt={`${current.couple} Wedding at ${current.venue}`}
                         fill
                         sizes="(max-width: 768px) 100vw, 60vw"
-                        className="object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"
+                        className="object-cover object-center transition-transform duration-700 ease-out group-hover:scale-[1.02]"
                         priority
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
 
                       {/* Top Location Badge */}
                       <div className="absolute top-3 left-3">
-                        <span className="px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-black/75 backdrop-blur-md text-gold border border-gold/30 flex items-center gap-1.5">
-                          <Sparkles size={11} />
+                        <span className="px-3 py-1 rounded-[2px] text-[10px] font-semibold uppercase tracking-wider bg-white/95 backdrop-blur-md text-[#1A1209] border border-gold/20 flex items-center gap-1.5 shadow-sm">
+                          <Sparkles size={11} className="text-gold" />
                           <span>{current.location}</span>
                         </span>
                       </div>
 
                       {/* Bottom Ceremony Title Overlay */}
                       <div className="absolute bottom-3 left-3 right-3 text-left">
-                        <p className="text-xs sm:text-sm font-serif font-bold text-white tracking-wide">
+                        <p className="text-xs sm:text-sm font-serif font-semibold text-white tracking-wide">
                           {current.tagline}
                         </p>
                         <p className="text-[11px] font-sans text-white/80 mt-0.5">
@@ -179,18 +179,18 @@ export const TestimonialsSection: React.FC = () => {
                   </div>
 
                   {/* Secondary Companion Photo (adds editorial layered depth) */}
-                  <div className="col-span-12 sm:col-span-4 relative aspect-[16/11] sm:aspect-[3/4] rounded-[3px] overflow-hidden bg-white p-1.5 sm:p-2 border border-gold/30 shadow-[0_8px_30px_rgba(26,18,9,0.06)] group">
-                    <div className="relative w-full h-full overflow-hidden rounded-[2px]">
+                  <div className="col-span-12 sm:col-span-4 relative aspect-[16/11] sm:aspect-[3/4] rounded-[2px] overflow-hidden shadow-[0_8px_30px_rgba(26,18,9,0.06)] group">
+                    <div className="relative w-full h-full overflow-hidden">
                       <Image
                         src={current.secondaryImageUrl}
                         alt={`${current.couple} Celebration Moments`}
                         fill
                         sizes="(max-width: 768px) 100vw, 25vw"
-                        className="object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"
+                        className="object-cover object-center transition-transform duration-700 ease-out group-hover:scale-[1.02]"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent" />
                       <div className="absolute bottom-3 left-3 right-3 text-left">
-                        <span className="text-[10px] font-sans uppercase tracking-widest text-gold font-bold block">
+                        <span className="text-[10px] font-sans uppercase tracking-widest text-[#D4AF37] font-semibold block">
                           Atelier Archive
                         </span>
                         <p className="text-xs font-serif text-white font-medium line-clamp-1">
