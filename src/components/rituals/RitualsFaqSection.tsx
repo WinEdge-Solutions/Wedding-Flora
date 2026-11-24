@@ -16,15 +16,15 @@ export const RitualsFaqSection: React.FC = () => {
     <div className="max-w-3xl mx-auto space-y-8">
       {/* ── Header ── */}
       <div className="text-center space-y-2.5">
-        <div className="flex items-center justify-center gap-2 text-gold text-xs font-bold uppercase tracking-[0.2em]">
+        <div className="flex items-center justify-center gap-2 text-gold text-[11px] font-semibold uppercase tracking-[0.25em]">
           <HelpCircle className="w-4 h-4 text-gold" />
-          <span>Ritual Insights &amp; Timelines</span>
+          <span>Working Process &amp; Timelines</span>
         </div>
-        <h2 className="font-serif text-2xl sm:text-4xl font-bold text-[#1A1209]">
+        <h2 className="font-serif text-2xl sm:text-4xl font-semibold text-[#1A1209]">
           Frequently Asked Questions
         </h2>
-        <p className="text-sm text-[#5C5147]">
-          Everything you need to know about traditional ceremony curation and multi-day destination timelines.
+        <p className="text-sm text-[#5C5147] font-normal leading-[1.75]">
+          Everything you need to know about our working process, traditional ceremony curation, and multi-day destination timelines.
         </p>
       </div>
 

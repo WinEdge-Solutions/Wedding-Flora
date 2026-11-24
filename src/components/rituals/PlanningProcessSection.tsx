@@ -8,16 +8,16 @@ export const PlanningProcessSection: React.FC = () => {
     <div className="space-y-16 sm:space-y-24">
       {/* ── Section Header ── */}
       <div className="text-center max-w-3xl mx-auto space-y-3">
-        <p className="font-sans text-xs uppercase tracking-[0.25em] text-[#D4AF37] font-bold flex items-center justify-center gap-2">
-          <span>✦</span>
-          <span>The 7 Rituals of Wedding Planning</span>
-          <span>✦</span>
+        <p className="font-sans text-[11px] uppercase tracking-[0.3em] text-[#D4AF37] font-semibold flex items-center justify-center gap-2">
+          <span className="opacity-60">—</span>
+          <span>The 7-Step Working Process</span>
+          <span className="opacity-60">—</span>
         </p>
         <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-semibold text-[#1A1209] tracking-tight leading-tight">
-          Our Proven 7-Step Regal Blueprint
+          Our Proven 7-Step Working Process
         </h2>
-        <p className="font-sans text-sm sm:text-base text-[#5C5147] font-medium leading-relaxed">
-          From the initial heartfelt consultation to live on-ground showtime, we guide our esteemed families through a transparent, stress-free journey of aristocratic celebration.
+        <p className="font-sans text-sm sm:text-base text-[#5C5147] font-normal leading-[1.75]">
+          From the initial heartfelt consultation to live on-ground showtime, our structured working process guides families through a transparent, stress-free journey of aristocratic celebration.
         </p>
       </div>
 
@@ -50,14 +50,14 @@ export const PlanningProcessSection: React.FC = () => {
                   <div className="absolute inset-0 bg-gradient-to-t from-[#090614]/85 via-transparent to-transparent" />
 
                   {/* Step Number Tag */}
-                  <div className="absolute top-4 left-4 px-3.5 py-1.5 rounded-full bg-black/75 backdrop-blur-md border border-gold/40 text-xs uppercase tracking-widest text-gold font-extrabold flex items-center gap-2">
+                  <div className="absolute top-4 left-4 px-3.5 py-1.5 rounded-[2px] bg-black/75 backdrop-blur-md border border-gold/30 text-xs uppercase tracking-widest text-gold font-bold flex items-center gap-2">
                     <Sparkles className="w-3.5 h-3.5 text-gold" />
                     <span>Step {step.stepNumber}</span>
                   </div>
 
                   {/* Tagline Badge */}
                   <div className="absolute bottom-4 left-4 right-4 text-left">
-                    <span className="text-[11px] uppercase tracking-wider text-white font-bold bg-black/60 backdrop-blur-md px-3 py-1 rounded inline-block border border-white/10">
+                    <span className="text-[11px] uppercase tracking-wider text-white font-semibold bg-black/60 backdrop-blur-md px-3 py-1 rounded-[2px] inline-block border border-white/10">
                       {step.tagline}
                     </span>
                   </div>
@@ -88,12 +88,12 @@ export const PlanningProcessSection: React.FC = () => {
                   {step.keyPoints.map((point, idx) => (
                     <div
                       key={idx}
-                      className="flex items-start gap-3 p-2.5 rounded-lg bg-white border border-gold/15 shadow-sm"
+                      className="flex items-start gap-3 p-2.5 rounded-[2px] bg-white border border-gold/15 shadow-sm"
                     >
-                      <span className="mt-0.5 p-0.5 rounded-full bg-gold/20 text-[#D4AF37] shrink-0">
+                      <span className="mt-0.5 p-0.5 rounded-[2px] bg-gold/20 text-[#D4AF37] shrink-0">
                         <Check className="w-3.5 h-3.5 text-[#D4AF37]" />
                       </span>
-                      <span className="text-xs sm:text-sm text-[#1A1209]/85 font-medium leading-snug">
+                      <span className="text-xs sm:text-sm text-[#1A1209]/85 font-normal leading-snug">
                         {point}
                       </span>
                     </div>
@@ -101,13 +101,13 @@ export const PlanningProcessSection: React.FC = () => {
                 </div>
 
                 {/* Milestone Deliverable Pill */}
-                <div className="p-3.5 rounded-xl bg-gold/10 border border-gold/30 flex items-center gap-3 text-xs">
+                <div className="p-3.5 rounded-[2px] bg-gold/10 border border-gold/25 flex items-center gap-3 text-xs">
                   <FileText className="w-4 h-4 text-gold shrink-0" />
                   <div>
-                    <span className="text-[10px] uppercase tracking-wider text-[#1A1209]/60 block font-bold">
+                    <span className="text-[10px] uppercase tracking-wider text-[#1A1209]/60 block font-semibold">
                       Key Milestone Deliverable:
                     </span>
-                    <span className="font-bold text-gold">{step.deliverable}</span>
+                    <span className="font-semibold text-gold">{step.deliverable}</span>
                   </div>
                 </div>
               </div>

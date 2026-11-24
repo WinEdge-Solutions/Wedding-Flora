@@ -9,16 +9,16 @@ export const SacredCeremoniesSection: React.FC = () => {
     <div className="space-y-12 sm:space-y-16">
       {/* ── Section Header ── */}
       <div className="text-center max-w-3xl mx-auto space-y-3">
-        <p className="font-sans text-xs uppercase tracking-[0.25em] text-[#D4AF37] font-bold flex items-center justify-center gap-2">
-          <span>✦</span>
+        <p className="font-sans text-[11px] uppercase tracking-[0.3em] text-[#D4AF37] font-semibold flex items-center justify-center gap-2">
+          <span className="opacity-60">—</span>
           <span>Sacred Traditions &amp; Celebrations</span>
-          <span>✦</span>
+          <span className="opacity-60">—</span>
         </p>
         <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-semibold text-[#1A1209] tracking-tight leading-tight">
-          The Sacred Ceremonies We Curate
+          Sacred Ceremonies We Curate
         </h2>
-        <p className="font-sans text-sm sm:text-base text-[#5C5147] font-medium leading-relaxed">
-          Each ritual in an Indian wedding carries centuries of spiritual blessings and emotional depth. We design and coordinate every ceremony with reverence, authenticity, and palatial elegance.
+        <p className="font-sans text-sm sm:text-base text-[#5C5147] font-normal leading-[1.75]">
+          Each ceremony in an Indian wedding carries centuries of spiritual blessings and emotional depth. We design and coordinate every ceremony with reverence, authenticity, and palatial elegance.
         </p>
       </div>
 
@@ -45,7 +45,7 @@ export const SacredCeremoniesSection: React.FC = () => {
 
                   {/* Ritual Number Pill */}
                   <div className="absolute top-3 left-3">
-                    <span className="px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-midnight/90 backdrop-blur-md text-gold border border-gold/30">
+                    <span className="px-2.5 py-1 rounded-[2px] text-[10px] font-semibold uppercase tracking-wider bg-black/80 backdrop-blur-md text-gold border border-gold/30">
                       Ceremony 0{idx + 1}
                     </span>
                   </div>

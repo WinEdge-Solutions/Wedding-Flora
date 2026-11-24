@@ -116,7 +116,7 @@ export const siteConfig = {
         },
       ],
     },
-    { label: "Rituals", href: "/rituals" },
+    { label: "Working Process", href: "/working-process" },
     {
       label: "Gallery",
       href: "/gallery",
