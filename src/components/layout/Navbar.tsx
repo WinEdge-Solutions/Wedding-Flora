@@ -22,7 +22,9 @@ import {
 
 /** Safely compute initial scroll state to avoid a layout flash on load. */
 function getInitialScrolled(): boolean {
-  if (typeof window !== "undefined") return window.scrollY > 24;
+  if (typeof window !== "undefined") {
+    return (window.scrollY || document.documentElement.scrollTop || 0) > 15;
+  }
   return false;
 }
 
@@ -387,7 +389,11 @@ export const Navbar: React.FC = () => {
   const closeMobileMenu = useCallback(() => setMobileMenuOpen(false), []);
 
   useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 24);
+    const handleScroll = () => {
+      const scrollPos = window.scrollY || document.documentElement.scrollTop || 0;
+      setIsScrolled(scrollPos > 15);
+    };
+    handleScroll();
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -399,8 +405,10 @@ export const Navbar: React.FC = () => {
     <header className="sticky top-0 z-50 w-full transition-all duration-300">
       {/* ── Top Micro-Header for Luxury Heritage Pedigree ── */}
       <div
-        className={`w-full transition-all duration-300 border-b border-gold/20 bg-[#FDFAF5]/90 backdrop-blur-md hidden md:block overflow-hidden ${
-          isScrolled ? "max-h-0 opacity-0 py-0 border-transparent" : "max-h-9 opacity-100 py-1.5"
+        className={`w-full transition-all duration-300 bg-[#FDFAF5]/90 backdrop-blur-md hidden md:block overflow-hidden ${
+          isScrolled
+            ? "max-h-0 opacity-0 py-0 border-b-0 border-transparent pointer-events-none"
+            : "max-h-10 opacity-100 py-1.5 border-b border-gold/20"
         }`}
       >
         <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 flex items-center justify-end text-[10px] tracking-[0.16em] uppercase text-[#5C5147]">
