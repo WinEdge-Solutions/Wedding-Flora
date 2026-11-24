@@ -58,8 +58,8 @@ export const CtaBanner: React.FC = () => {
               <Button href="/contact" variant="primary" size="lg" className="w-full sm:w-auto">
                 Begin Planning
               </Button>
-              <Button href="/packages" variant="outline" size="lg" className="w-full sm:w-auto">
-                View Royal Packages &amp; Services
+              <Button href="/services" variant="outline" size="lg" className="w-full sm:w-auto">
+                Explore Royal Services
               </Button>
             </motion.div>
           </motion.div>

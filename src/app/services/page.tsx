@@ -262,10 +262,10 @@ export default function ServicesPage() {
               Need a completely bespoke multi-city or palace celebration package?
             </p>
             <Link
-              href="/packages"
+              href="/contact"
               className="inline-flex items-center gap-1.5 text-xs uppercase tracking-widest text-gold font-bold hover:text-white transition-colors"
             >
-              <span>Explore Detailed Packages Page &amp; FAQs</span>
+              <span>Connect With Our Master Planning Team</span>
               <ArrowRight className="w-3.5 h-3.5" />
             </Link>
           </div>

@@ -92,7 +92,6 @@ export const siteConfig = {
     },
     { label: "Celebrations", href: "/celebrations" },
     { label: "Blog", href: "/blog" },
-    { label: "Packages", href: "/packages" },
     { label: "Contact", href: "/contact" },
   ] as NavItem[],
 };

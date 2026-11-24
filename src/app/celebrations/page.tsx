@@ -242,8 +242,8 @@ export default function CelebrationsPage() {
             <Button href="/contact" variant="primary" size="lg">
               Plan Your Celebration
             </Button>
-            <Button href="/packages" variant="outline" size="lg" className="border-gold text-ivory hover:bg-gold/20">
-              View Packages &amp; Services
+            <Button href="/services" variant="outline" size="lg" className="border-gold text-ivory hover:bg-gold/20">
+              Explore Our Services
             </Button>
           </div>
         </Container>

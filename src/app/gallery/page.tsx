@@ -107,10 +107,10 @@ export default function GalleryPage() {
               <ArrowRight className="w-4 h-4 ml-1" />
             </Button>
             <Link
-              href="/packages"
+              href="/services"
               className="inline-flex items-center gap-2 text-xs uppercase tracking-wider font-bold text-ivory hover:text-gold transition-colors py-3 px-6"
             >
-              <span>Explore Curated Packages</span>
+              <span>Explore Royal Services</span>
               <ArrowRight className="w-4 h-4 text-gold" />
             </Link>
           </div>
