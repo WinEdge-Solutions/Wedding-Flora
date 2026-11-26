@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import { Cinzel, Cormorant_Garamond, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import { getPublishedCmsData } from "@/lib/cms/server";
-import { CmsProvider, buildThemeCssVars } from "@/components/cms/CmsProvider";
+import { buildThemeCssVars } from "@/lib/cms/theme";
+import { CmsProvider } from "@/components/cms/CmsProvider";
 import { SiteChromeShell } from "@/components/layout/SiteChromeShell";
 
 const cinzel = Cinzel({
