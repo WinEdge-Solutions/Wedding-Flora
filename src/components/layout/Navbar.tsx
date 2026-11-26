@@ -16,49 +16,9 @@ import {
   Phone,
   MapPin,
   MessageCircle,
-  Home,
-  Crown,
-  Sparkles,
-  Briefcase,
-  Landmark,
-  Workflow,
-  Heart,
-  BookOpen,
 } from "lucide-react";
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
-
-/** Route-to-Icon renderer for regal dynamic icon navigation */
-function NavIcon({
-  href,
-  size = 15,
-  className = "",
-}: {
-  href: string;
-  size?: number;
-  className?: string;
-}) {
-  switch (href) {
-    case "/":
-      return <Home size={size} className={className} />;
-    case "/about":
-      return <Crown size={size} className={className} />;
-    case "/services":
-      return <Briefcase size={size} className={className} />;
-    case "/destinations":
-      return <Landmark size={size} className={className} />;
-    case "/working-process":
-      return <Workflow size={size} className={className} />;
-    case "/gallery":
-      return <Camera size={size} className={className} />;
-    case "/celebrations":
-      return <Heart size={size} className={className} />;
-    case "/blog":
-      return <BookOpen size={size} className={className} />;
-    default:
-      return <Sparkles size={size} className={className} />;
-  }
-}
 
 /** Safely compute initial scroll state to avoid a layout flash on load. */
 function getInitialScrolled(): boolean {
@@ -112,59 +72,29 @@ function NavLink({
   onClick?: () => void;
   isMobile?: boolean;
 }) {
-  if (isMobile) {
-    return (
-      <Link
-        href={href}
-        onClick={onClick}
-        className={`w-full py-3 px-4 text-xs font-semibold tracking-[0.18em] rounded-[2px] flex items-center justify-between uppercase transition-colors ${
-          isActive
-            ? "text-gold bg-gold/[0.06] font-bold"
-            : "text-[#1A1209] hover:text-gold hover:bg-gold/[0.06]"
-        }`}
-      >
-        <div className="flex items-center gap-2.5">
-          <NavIcon href={href} size={14} className="text-gold shrink-0" />
-          <span>{label}</span>
-        </div>
-      </Link>
-    );
-  }
-
   return (
     <Link
       href={href}
       onClick={onClick}
-      aria-label={label}
-      title={label}
-      className={`group/nav relative inline-flex items-center h-8 px-2.5 rounded-[3px] transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] ${
-        isActive
-          ? "bg-gold/[0.08] text-gold border border-gold/40 shadow-[0_2px_10px_rgba(212,175,55,0.12)]"
-          : "text-[#1A1209] hover:text-gold hover:bg-white hover:border hover:border-gold/30 hover:shadow-[0_2px_12px_rgba(212,175,55,0.12)] border border-transparent"
+      className={`relative uppercase transition-colors duration-200 group/nav whitespace-nowrap ${
+        isMobile
+          ? "w-full py-3 px-4 text-xs font-semibold tracking-[0.18em] rounded-[2px] flex items-center justify-between " +
+            (isActive
+              ? "text-gold bg-gold/[0.06] font-bold"
+              : "text-[#1A1209] hover:text-gold hover:bg-gold/[0.06] font-bold")
+          : "inline-flex items-center justify-center h-7 leading-none tracking-[0.08em] xl:tracking-[0.12em] 2xl:tracking-[0.15em] text-[10.5px] xl:text-[11px] 2xl:text-xs " +
+            (isActive ? "text-gold font-semibold" : "text-[#1A1209] hover:text-[#D4AF37] font-semibold")
       }`}
     >
-      {/* Icon always visible */}
-      <span className="shrink-0 flex items-center justify-center transition-transform duration-300 group-hover/nav:scale-105">
-        <NavIcon
-          href={href}
-          size={15}
-          className={`transition-colors duration-200 ${
-            isActive ? "text-gold" : "text-[#5C5147] group-hover/nav:text-gold"
+      <span className="leading-none">{label}</span>
+      {/* Center-expanding gold gradient underline — desktop only */}
+      {!isMobile && (
+        <span
+          className={`absolute -bottom-0.5 left-1/2 -translate-x-1/2 h-[0.5px] bg-gradient-to-r from-transparent via-[#D4AF37] to-transparent transition-all duration-300 pointer-events-none ${
+            isActive ? "w-full opacity-100" : "w-0 opacity-0 group-hover/nav:w-full group-hover/nav:opacity-100"
           }`}
         />
-      </span>
-
-      {/* Label smoothly expands on hover pushing neighboring icons */}
-      <span className="overflow-hidden whitespace-nowrap text-[11px] xl:text-[11.5px] uppercase tracking-[0.14em] font-semibold transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] max-w-0 opacity-0 group-hover/nav:max-w-[160px] group-hover/nav:opacity-100 group-hover/nav:ml-2 focus-visible:max-w-[160px] focus-visible:opacity-100 focus-visible:ml-2">
-        {label}
-      </span>
-
-      {/* Center-expanding gold gradient underline */}
-      <span
-        className={`absolute -bottom-0.5 left-1/2 -translate-x-1/2 h-[0.5px] bg-gradient-to-r from-transparent via-[#D4AF37] to-transparent transition-all duration-300 pointer-events-none ${
-          isActive ? "w-full opacity-100" : "w-0 opacity-0 group-hover/nav:w-full group-hover/nav:opacity-100"
-        }`}
-      />
+      )}
     </Link>
   );
 }
@@ -238,7 +168,7 @@ function NavItemDropdown({
   return (
     <div
       ref={containerRef}
-      className="relative inline-flex items-center"
+      className="relative inline-flex items-center h-7"
       onMouseEnter={open}
       onMouseLeave={scheduleClose}
       onBlur={handleBlur}
@@ -247,60 +177,28 @@ function NavItemDropdown({
         href={item.href}
         aria-haspopup="true"
         aria-expanded={isOpen}
-        aria-label={item.label}
-        title={item.label}
         onFocus={open}
         onKeyDown={handleKeyDown}
-        className={`group/nav relative inline-flex items-center h-8 px-2.5 rounded-[3px] transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] ${
+        className={`relative uppercase tracking-[0.08em] xl:tracking-[0.12em] 2xl:tracking-[0.15em] text-[10.5px] xl:text-[11px] 2xl:text-xs transition-colors duration-200 inline-flex items-center justify-center gap-1 h-7 leading-none group/droptrig whitespace-nowrap ${
           isParentActive
-            ? "bg-gold/[0.08] text-gold border border-gold/40 shadow-[0_2px_10px_rgba(212,175,55,0.12)]"
-            : isOpen
-            ? "bg-white text-gold border border-gold/30 shadow-[0_2px_12px_rgba(212,175,55,0.12)]"
-            : "text-[#1A1209] hover:text-gold hover:bg-white hover:border hover:border-gold/30 hover:shadow-[0_2px_12px_rgba(212,175,55,0.12)] border border-transparent"
+            ? "text-gold font-semibold"
+            : "text-[#1A1209] hover:text-[#D4AF37] font-semibold"
         }`}
       >
-        {/* Icon always visible */}
-        <span className="shrink-0 flex items-center justify-center transition-transform duration-300 group-hover/nav:scale-105">
-          <NavIcon
-            href={item.href}
-            size={15}
-            className={`transition-colors duration-200 ${
-              isParentActive || isOpen ? "text-gold" : "text-[#5C5147] group-hover/nav:text-gold"
-            }`}
-          />
-        </span>
-
-        {/* Label expands on hover pushing neighboring icons */}
-        <span
-          className={`overflow-hidden whitespace-nowrap text-[11px] xl:text-[11.5px] uppercase tracking-[0.14em] font-semibold transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] ${
-            isOpen
-              ? "max-w-[180px] opacity-100 ml-2"
-              : "max-w-0 opacity-0 group-hover/nav:max-w-[180px] group-hover/nav:opacity-100 group-hover/nav:ml-2 focus-visible:max-w-[180px] focus-visible:opacity-100 focus-visible:ml-2"
-          }`}
+        <span className="leading-none">{item.label}</span>
+        <motion.span
+          animate={{ rotate: isOpen ? 180 : 0 }}
+          transition={{ duration: 0.2 }}
+          className="inline-flex items-center justify-center w-2.5 h-2.5 shrink-0"
         >
-          {item.label}
-        </span>
-
-        {/* Chevron animated reveal */}
-        <span
-          className={`overflow-hidden transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] flex items-center justify-center ${
-            isOpen
-              ? "max-w-[18px] opacity-100 ml-1"
-              : "max-w-0 opacity-0 group-hover/nav:max-w-[18px] group-hover/nav:opacity-100 group-hover/nav:ml-1"
-          }`}
-        >
-          <ChevronDown
-            size={10}
-            className={`text-gold/80 transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`}
-          />
-        </span>
-
+          <ChevronDown size={10} className="text-gold/80" />
+        </motion.span>
         {/* Center-expanding gold gradient underline */}
         <span
           className={`absolute -bottom-0.5 left-1/2 -translate-x-1/2 h-[0.5px] bg-gradient-to-r from-transparent via-[#D4AF37] to-transparent transition-all duration-300 pointer-events-none ${
             isParentActive || isOpen
               ? "w-full opacity-100"
-              : "w-0 opacity-0 group-hover/nav:w-full group-hover/nav:opacity-100"
+              : "w-0 opacity-0 group-hover/droptrig:w-full group-hover/droptrig:opacity-100"
           }`}
         />
       </Link>
@@ -510,10 +408,6 @@ export const Navbar: React.FC = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const midpoint = Math.ceil(navItems.length / 2);
-  const leftItems = navItems.slice(0, midpoint);
-  const rightItems = navItems.slice(midpoint);
-
   return (
     <header className="sticky top-0 z-50 w-full transition-all duration-300">
       {/* ── Top Micro-Header for Luxury Heritage Pedigree ── */}
@@ -569,33 +463,14 @@ export const Navbar: React.FC = () => {
         <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[#D4AF37]/35 to-transparent pointer-events-none" />
         <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[#D4AF37]/25 to-transparent pointer-events-none" />
 
-        <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 flex items-center justify-between py-2 sm:py-2.5">
-          {/* ── Left Nav ── */}
-          <nav
-            className="hidden lg:flex items-center gap-1.5 xl:gap-2"
-            aria-label="Primary Left Navigation"
-          >
-            {leftItems.map((item) =>
-              item.children || item.groups ? (
-                <NavItemDropdown key={item.label} item={item} pathname={pathname} />
-              ) : (
-                <NavLink
-                  key={item.href}
-                  href={item.href}
-                  label={item.label}
-                  isActive={pathname === item.href}
-                />
-              )
-            )}
-          </nav>
-
-          {/* ── Central Royal Monogram & Crest ── */}
+        <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 flex items-center justify-between gap-4 py-2 sm:py-2.5">
+          {/* ── Leftmost Royal Monogram & Crest ── */}
           <Link
             href="/"
             className="relative flex items-center gap-2.5 sm:gap-3 group focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gold shrink-0 py-1"
             aria-label="Wedding Flora Home"
           >
-            <div className="relative w-9 h-9 sm:w-11 sm:h-11 lg:w-15 lg:h-15 xl:w-[68px] xl:h-[68px] shrink-0 transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-105 group-hover:-translate-y-0.5 my-0.5 lg:-my-1.5 flex items-center justify-center">
+            <div className="relative w-9 h-9 sm:w-11 sm:h-11 lg:w-13 lg:h-13 xl:w-15 xl:h-15 shrink-0 transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-105 group-hover:-translate-y-0.5 my-0.5 lg:-my-1 flex items-center justify-center">
               {/* 1. Deep ambient radial gold aura */}
               <div className="absolute -inset-3 bg-gradient-to-r from-[#D4AF37]/35 via-[#F3E5AB]/20 to-transparent rounded-full blur-lg opacity-25 group-hover:opacity-90 group-hover:scale-125 transition-all duration-700 ease-out pointer-events-none" />
 
@@ -637,9 +512,12 @@ export const Navbar: React.FC = () => {
             </div>
           </Link>
 
-          {/* ── Right Nav + Elegant CTA ── */}
-          <div className="hidden lg:flex items-center gap-1.5 xl:gap-2">
-            {rightItems.map((item) =>
+          {/* ── Primary Navigation Sections ── */}
+          <nav
+            className="hidden lg:flex items-center justify-center gap-3 xl:gap-5 2xl:gap-6 flex-1 min-w-0"
+            aria-label="Primary Navigation"
+          >
+            {navItems.map((item) =>
               item.children || item.groups ? (
                 <NavItemDropdown key={item.label} item={item} pathname={pathname} />
               ) : (
@@ -651,52 +529,54 @@ export const Navbar: React.FC = () => {
                 />
               )
             )}
+          </nav>
 
-            {/* Bespoke Luxury CTA Badge */}
+          {/* ── Right Actions: Enquire CTA (Desktop) & Hamburger (Mobile) ── */}
+          <div className="flex items-center shrink-0">
             {cms.site.navbar.showEnquireCta && (
               <Link
                 href={cms.site.navbar.enquireHref || "/contact"}
-                className="relative group inline-flex items-center justify-center px-4 xl:px-5 py-1.5 text-[10px] xl:text-[10.5px] font-sans font-semibold uppercase tracking-[0.2em] rounded-[2px] transition-all duration-300 overflow-hidden bg-[#1A1209] text-[#FAF7F2] border border-[#1A1209] hover:border-gold/60 shadow-[0_2px_10px_rgba(26,18,9,0.1)] hover:shadow-[0_4px_18px_rgba(212,175,55,0.2)] hover:-translate-y-0.5 active:translate-y-0 ml-1.5"
+                className="hidden lg:inline-flex relative group items-center justify-center px-4 xl:px-5 py-1.5 text-[10px] xl:text-[10.5px] font-sans font-semibold uppercase tracking-[0.2em] rounded-[2px] transition-all duration-300 overflow-hidden bg-[#1A1209] text-[#FAF7F2] border border-[#1A1209] hover:border-gold/60 shadow-[0_2px_10px_rgba(26,18,9,0.1)] hover:shadow-[0_4px_18px_rgba(212,175,55,0.2)] hover:-translate-y-0.5 active:translate-y-0 whitespace-nowrap"
               >
                 <span className="relative z-10">{cms.site.navbar.enquireLabel || "Enquire"}</span>
               </Link>
             )}
-          </div>
 
-          {/* ── Mobile Hamburger Toggle ── */}
-          <div className="flex lg:hidden items-center">
-            <button
-              type="button"
-              onClick={() => setMobileMenuOpen((prev) => !prev)}
-              className="p-2 text-[#1A1209] hover:text-gold transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gold rounded-[2px]"
-              aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
-              aria-expanded={mobileMenuOpen}
-              aria-controls="mobile-nav"
-            >
-              <AnimatePresence mode="wait" initial={false}>
-                {mobileMenuOpen ? (
-                  <motion.span
-                    key="x"
-                    initial={{ rotate: -90, opacity: 0 }}
-                    animate={{ rotate: 0, opacity: 1 }}
-                    exit={{ rotate: 90, opacity: 0 }}
-                    transition={{ duration: 0.2 }}
-                  >
-                    <X size={22} className="text-gold" />
-                  </motion.span>
-                ) : (
-                  <motion.span
-                    key="menu"
-                    initial={{ rotate: 90, opacity: 0 }}
-                    animate={{ rotate: 0, opacity: 1 }}
-                    exit={{ rotate: -90, opacity: 0 }}
-                    transition={{ duration: 0.2 }}
-                  >
-                    <Menu size={22} className="text-[#1A1209]" />
-                  </motion.span>
-                )}
-              </AnimatePresence>
-            </button>
+            {/* ── Mobile Hamburger Toggle ── */}
+            <div className="flex lg:hidden items-center">
+              <button
+                type="button"
+                onClick={() => setMobileMenuOpen((prev) => !prev)}
+                className="p-2 text-[#1A1209] hover:text-gold transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gold rounded-[2px]"
+                aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
+                aria-expanded={mobileMenuOpen}
+                aria-controls="mobile-nav"
+              >
+                <AnimatePresence mode="wait" initial={false}>
+                  {mobileMenuOpen ? (
+                    <motion.span
+                      key="x"
+                      initial={{ rotate: -90, opacity: 0 }}
+                      animate={{ rotate: 0, opacity: 1 }}
+                      exit={{ rotate: 90, opacity: 0 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      <X size={22} className="text-gold" />
+                    </motion.span>
+                  ) : (
+                    <motion.span
+                      key="menu"
+                      initial={{ rotate: 90, opacity: 0 }}
+                      animate={{ rotate: 0, opacity: 1 }}
+                      exit={{ rotate: -90, opacity: 0 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      <Menu size={22} className="text-[#1A1209]" />
+                    </motion.span>
+                  )}
+                </AnimatePresence>
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -742,10 +622,7 @@ export const Navbar: React.FC = () => {
                         aria-expanded={isExpanded}
                         aria-controls={`mobile-accordion-${item.label.replace(/\s+/g, "-")}`}
                       >
-                        <div className="flex items-center gap-2.5">
-                          <NavIcon href={item.href} size={14} className="text-gold shrink-0" />
-                          <span className="leading-none">{item.label}</span>
-                        </div>
+                        <span className="leading-none">{item.label}</span>
                         <ChevronDown
                           size={13}
                           className={`text-gold transition-transform duration-300 shrink-0 ${
