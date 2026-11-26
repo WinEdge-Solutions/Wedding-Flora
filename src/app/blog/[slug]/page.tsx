@@ -6,12 +6,12 @@ import { Container } from "@/components/layout/Container";
 import { Section } from "@/components/layout/Section";
 import { Divider } from "@/components/ui/Divider";
 import { Button } from "@/components/ui/Button";
-import { blogPosts } from "@/lib/content/blog";
+import { blogPosts as defaultBlogPosts } from "@/lib/content/blog";
+import { getPublishedCmsData } from "@/lib/cms/server";
 import { Clock, ArrowLeft, Sparkles, Tag } from "lucide-react";
-import { siteConfig } from "@/lib/site";
 
 export function generateStaticParams() {
-  return blogPosts.map((post) => ({
+  return defaultBlogPosts.map((post) => ({
     slug: post.slug,
   }));
 }
@@ -22,7 +22,8 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const post = blogPosts.find((p) => p.slug === slug);
+  const cms = await getPublishedCmsData();
+  const post = cms.collections.blogPosts.find((p) => p.slug === slug);
   if (!post) return { title: "Article Not Found | Wedding Flora" };
 
   return {
@@ -37,6 +38,8 @@ export default async function BlogPostPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
+  const cms = await getPublishedCmsData();
+  const blogPosts = cms.collections.blogPosts;
   const post = blogPosts.find((p) => p.slug === slug);
 
   if (!post) {
@@ -177,8 +180,8 @@ export default async function BlogPostPage({
                 Request Custom Proposal
               </Button>
               <a
-                href={`${siteConfig.contact.whatsapp}?text=${encodeURIComponent(
-                  `Hello Wedding Flora! I read your guide "${post.title}" and would like to consult on planning our celebration.`
+                href={`${cms.site.contact.whatsapp}?text=${encodeURIComponent(
+                  `Hello ${cms.site.name}! I read your guide "${post.title}" and would like to consult on planning our celebration.`
                 )}`}
                 target="_blank"
                 rel="noopener noreferrer"

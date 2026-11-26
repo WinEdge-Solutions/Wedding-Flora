@@ -1,23 +1,33 @@
+"use client";
+
 import React from "react";
 import Image from "next/image";
-import { planningProcessSteps } from "@/lib/content/rituals";
+import { useCms } from "@/components/cms/CmsProvider";
+import type { PageSectionConfig } from "@/lib/cms/types";
 import { Check, Sparkles, FileText } from "lucide-react";
 
-export const PlanningProcessSection: React.FC = () => {
+export const PlanningProcessSection: React.FC<{ section?: PageSectionConfig }> = ({
+  section,
+}) => {
+  const cms = useCms();
+  const planningProcessSteps = cms.collections.processSteps;
+  const c = section?.content;
+
   return (
     <div className="space-y-16 sm:space-y-24">
       {/* ── Section Header ── */}
       <div className="text-center max-w-3xl mx-auto space-y-3">
         <p className="font-sans text-[11px] uppercase tracking-[0.3em] text-[#D4AF37] font-semibold flex items-center justify-center gap-2">
           <span className="opacity-60">—</span>
-          <span>The 7-Step Working Process</span>
+          <span>{c?.eyebrow || "The 7-Step Working Process"}</span>
           <span className="opacity-60">—</span>
         </p>
         <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-semibold text-[#1A1209] tracking-tight leading-tight">
-          Our Proven 7-Step Working Process
+          {c?.title || "Our Proven 7-Step Working Process"}
         </h2>
         <p className="font-sans text-sm sm:text-base text-[#5C5147] font-normal leading-[1.75]">
-          From the initial heartfelt consultation to live on-ground showtime, our structured working process guides families through a transparent, stress-free journey of aristocratic celebration.
+          {c?.subtitle ||
+            "From the initial heartfelt consultation to live on-ground showtime, our structured working process guides families through a transparent, stress-free journey of aristocratic celebration."}
         </p>
       </div>
 

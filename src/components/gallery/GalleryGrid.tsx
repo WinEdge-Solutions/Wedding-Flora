@@ -4,15 +4,19 @@ import React, { useState, useMemo } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import { galleryData, GalleryItem } from "@/lib/content/gallery";
+import type { GalleryItem } from "@/lib/content/gallery";
+import { useCms } from "@/components/cms/CmsProvider";
 import { Sparkles, MapPin, Play, X, ArrowRight, Eye, Calendar, Camera, Video } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 interface GalleryGridProps {
   mode?: "all" | "photos" | "videos";
+  columns?: 2 | 3 | 4;
 }
 
-export const GalleryGrid: React.FC<GalleryGridProps> = ({ mode }) => {
+export const GalleryGrid: React.FC<GalleryGridProps> = ({ mode, columns = 3 }) => {
+  const cms = useCms();
+  const galleryItems = cms.collections.gallery;
   const searchParams = useSearchParams();
   const typeParam = searchParams.get("type"); // "photos" | "videos" | null
 
@@ -28,19 +32,19 @@ export const GalleryGrid: React.FC<GalleryGridProps> = ({ mode }) => {
     (typeParam === "photos" ? "photos" : typeParam === "videos" ? "videos" : "all");
 
   // Counts
-  const photoCount = useMemo(() => galleryData.filter((i) => !i.videoUrl).length, []);
-  const videoCount = useMemo(() => galleryData.filter((i) => Boolean(i.videoUrl)).length, []);
+  const photoCount = useMemo(() => galleryItems.filter((i) => !i.videoUrl).length, [galleryItems]);
+  const videoCount = useMemo(() => galleryItems.filter((i) => Boolean(i.videoUrl)).length, [galleryItems]);
 
   // Filter items by media mode
   const modeFilteredItems = useMemo(() => {
     if (currentMode === "photos") {
-      return galleryData.filter((item) => !item.videoUrl);
+      return galleryItems.filter((item) => !item.videoUrl);
     }
     if (currentMode === "videos") {
-      return galleryData.filter((item) => Boolean(item.videoUrl));
+      return galleryItems.filter((item) => Boolean(item.videoUrl));
     }
-    return galleryData;
-  }, [currentMode]);
+    return galleryItems;
+  }, [currentMode, galleryItems]);
 
   // Dynamic category options based on mode
   const categories = useMemo(() => {
@@ -91,7 +95,7 @@ export const GalleryGrid: React.FC<GalleryGridProps> = ({ mode }) => {
                 : "text-[#5C5147] hover:text-[#1A1209] hover:bg-gold/10"
             }`}
           >
-            All Archives ({galleryData.length})
+            All Archives ({galleryItems.length})
           </button>
 
           <button
@@ -167,7 +171,13 @@ export const GalleryGrid: React.FC<GalleryGridProps> = ({ mode }) => {
       {/* ── Gallery Grid ── */}
       <motion.div
         layout
-        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8"
+        className={`grid grid-cols-1 sm:grid-cols-2 ${
+          columns === 4
+            ? "lg:grid-cols-4"
+            : columns === 2
+              ? "lg:grid-cols-2"
+              : "lg:grid-cols-3"
+        } gap-6 sm:gap-8`}
       >
         <AnimatePresence>
           {finalItems.map((item) => {

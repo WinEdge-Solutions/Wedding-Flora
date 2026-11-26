@@ -7,7 +7,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Container } from "@/components/layout/Container";
 import { Section } from "@/components/layout/Section";
 import { Button } from "@/components/ui/Button";
-import { servicesData } from "@/lib/content/services";
+import { useCms } from "@/components/cms/CmsProvider";
+import type { PageSectionConfig } from "@/lib/cms/types";
 import { ArrowRight, Check, Sparkles, ChevronLeft, ChevronRight } from "lucide-react";
 
 const romanNumerals = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII"];
@@ -23,12 +24,33 @@ const mobileShortTitles = [
   "Photography & BTS",
 ];
 
-export const ServicesOverview: React.FC = () => {
+export const ServicesOverview: React.FC<{ section?: PageSectionConfig }> = ({
+  section,
+}) => {
+  const cms = useCms();
+  const servicesList = cms.collections.services.slice(0, section?.itemLimit ?? 8);
+  const c = section?.content;
+  const isGridMode =
+    section?.layout === "grid-2" ||
+    section?.layout === "grid-3" ||
+    section?.layout === "grid-4";
+  const isReversedSplit = section?.layout === "split-right";
+  const cols =
+    section?.columns ??
+    (section?.layout === "grid-4" ? 4 : section?.layout === "grid-2" ? 2 : 3);
+  const gridColsClass =
+    cols === 4
+      ? "lg:grid-cols-4"
+      : cols === 2
+        ? "lg:grid-cols-2"
+        : "lg:grid-cols-3";
+
   const [activeIdx, setActiveIdx] = useState(0);
   const [mobileIdx, setMobileIdx] = useState(0);
   const mobileTrackRef = useRef<HTMLDivElement>(null);
 
-  const activeService = servicesData[activeIdx] || servicesData[0];
+  const safeActiveIdx = activeIdx < servicesList.length ? activeIdx : 0;
+  const activeService = servicesList[safeActiveIdx] || servicesList[0];
 
   const scrollMobileTo = (idx: number) => {
     setMobileIdx(idx);
@@ -47,57 +69,113 @@ export const ServicesOverview: React.FC = () => {
     const card = target.firstElementChild as HTMLElement;
     const cardWidth = card ? card.offsetWidth + 14 : 320;
     const newIdx = Math.round(scrollLeft / cardWidth);
-    if (newIdx !== mobileIdx && newIdx >= 0 && newIdx < servicesData.length) {
+    if (newIdx !== mobileIdx && newIdx >= 0 && newIdx < servicesList.length) {
       setMobileIdx(newIdx);
     }
   };
 
+  if (!activeService) return null;
+
   return (
-    <Section variant="cream" className="overflow-hidden">
+    <Section variant={section?.bgVariant ?? "cream"} className="overflow-hidden">
       <Container>
         <div className="space-y-6 sm:space-y-10 lg:space-y-12">
           {/* Header */}
           <div className="text-center max-w-3xl mx-auto space-y-2">
             <p className="font-sans text-[10px] sm:text-[11px] uppercase tracking-[0.25em] sm:tracking-[0.3em] text-[#D4AF37] font-semibold flex items-center justify-center gap-2">
               <span className="opacity-60">—</span>
-              <span>Royal Wedding Services &amp; Artistry</span>
+              <span>{c?.eyebrow || "Royal Wedding Services & Artistry"}</span>
               <span className="opacity-60">—</span>
             </p>
             <h2 className="font-display text-2xl sm:text-4xl lg:text-5xl text-[#1A1209] font-semibold tracking-[0.03em]">
-              Grandeur in Every Celebration
+              {c?.title || "Grandeur in Every Celebration"}
             </h2>
             <p className="font-sans text-xs sm:text-base text-[#5C5147] font-normal leading-relaxed max-w-xl mx-auto">
-              From historic palace procurement to bespoke floral mandap scenography, we orchestrate unforgettable royal heirlooms.
+              {c?.subtitle ||
+                "From historic palace procurement to bespoke floral mandap scenography, we orchestrate unforgettable royal heirlooms."}
             </p>
           </div>
 
-          {/* 35% Content : 65% Visual Atelier Layout (Desktop) */}
-          <div className="hidden lg:grid lg:grid-cols-12 gap-8 xl:gap-12 items-center">
-            {/* ── 35% CONTENT COLUMN (Left) ── */}
-            <div className="lg:col-span-5 xl:col-span-4 flex flex-col justify-between space-y-6">
-              {/* Service Navigation List */}
-              <div className="space-y-1 border-l-2 border-gold/25 pl-4">
-                {servicesData.map((service, idx) => {
-                  const isActive = idx === activeIdx;
-                  return (
-                    <button
-                      key={service.id}
-                      type="button"
-                      onClick={() => setActiveIdx(idx)}
-                      onMouseEnter={() => setActiveIdx(idx)}
-                      className={`w-full text-left py-2 px-3 rounded-[2px] transition-all duration-300 flex items-center justify-between group ${
-                        isActive
-                          ? "bg-white text-gold font-bold shadow-sm translate-x-1"
-                          : "text-[#1A1209]/80 hover:text-[#1A1209] hover:bg-white/60 font-semibold"
-                      }`}
+          {isGridMode ? (
+            <div className={`hidden lg:grid ${gridColsClass} gap-6`}>
+              {servicesList.map((service, idx) => (
+                <div
+                  key={service.id}
+                  className="bg-white border border-gold/20 rounded-[3px] overflow-hidden shadow-sm hover:shadow-md transition-all flex flex-col justify-between"
+                >
+                  <div>
+                    <div className="relative aspect-[16/10] w-full overflow-hidden">
+                      <Image
+                        src={service.imageUrl}
+                        alt={service.title}
+                        fill
+                        sizes="400px"
+                        className="object-cover"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent" />
+                      <span className="absolute bottom-3 left-3 text-[10px] uppercase tracking-widest text-gold font-bold">
+                        {romanNumerals[idx] || `0${idx + 1}`}
+                      </span>
+                    </div>
+                    <div className="p-5 space-y-2">
+                      <h3 className="font-serif text-xl font-semibold text-[#1A1209]">
+                        {service.title}
+                      </h3>
+                      <p className="text-xs text-[#5C5147] leading-relaxed line-clamp-3">
+                        {service.description}
+                      </p>
+                    </div>
+                  </div>
+                  <div className="px-5 pb-5 pt-2 flex items-center justify-between border-t border-gold/10">
+                    <Link
+                      href={`/services#${service.id}`}
+                      className="text-xs uppercase tracking-wider font-semibold text-[#1A1209] hover:text-gold inline-flex items-center gap-1"
                     >
-                      <div className="flex items-center gap-2.5 min-w-0">
-                        <span className="font-serif text-xs text-[#D4AF37] font-bold shrink-0">
-                          {romanNumerals[idx]}.
-                        </span>
-                        <span className="text-xs font-sans uppercase tracking-wider truncate">
-                          {service.title}
-                        </span>
+                      <span>Explore</span>
+                      <ArrowRight size={12} className="text-gold" />
+                    </Link>
+                    <Link
+                      href={`/contact?service=${service.id}`}
+                      className="px-3 py-1 rounded-[2px] bg-[#1A1209] text-white text-[10px] uppercase tracking-wider font-semibold hover:bg-gold hover:text-[#1A1209]"
+                    >
+                      Enquire
+                    </Link>
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : (
+            /* 35% Content : 65% Visual Atelier Layout (Desktop) */
+            <div className="hidden lg:grid lg:grid-cols-12 gap-8 xl:gap-12 items-center">
+              {/* ── 35% CONTENT COLUMN ── */}
+              <div
+                className={`lg:col-span-5 xl:col-span-4 flex flex-col justify-between space-y-6 ${
+                  isReversedSplit ? "lg:order-2" : "lg:order-1"
+                }`}
+              >
+                {/* Service Navigation List */}
+                <div className="space-y-1 border-l-2 border-gold/25 pl-4">
+                  {servicesList.map((service, idx) => {
+                    const isActive = idx === safeActiveIdx;
+                    return (
+                      <button
+                        key={service.id}
+                        type="button"
+                        onClick={() => setActiveIdx(idx)}
+                        onMouseEnter={() => setActiveIdx(idx)}
+                        className={`w-full text-left py-2 px-3 rounded-[2px] transition-all duration-300 flex items-center justify-between group ${
+                          isActive
+                            ? "bg-white text-gold font-bold shadow-sm translate-x-1"
+                            : "text-[#1A1209]/80 hover:text-[#1A1209] hover:bg-white/60 font-semibold"
+                        }`}
+                      >
+                        <div className="flex items-center gap-2.5 min-w-0">
+                          <span className="font-serif text-xs text-[#D4AF37] font-bold shrink-0">
+                            {romanNumerals[idx] || idx + 1}.
+                          </span>
+                          <span className="text-xs font-sans uppercase tracking-wider truncate">
+                            {service.title}
+                          </span>
                       </div>
                       <span
                         className={`text-[9px] text-gold transition-opacity duration-200 ${
@@ -123,7 +201,7 @@ export const ServicesOverview: React.FC = () => {
                 >
                   <div>
                     <span className="text-[10px] font-sans uppercase tracking-[0.2em] text-[#D4AF37] font-semibold block mb-1">
-                      {romanNumerals[activeIdx]} • Signature Atelier
+                      {romanNumerals[safeActiveIdx] || safeActiveIdx + 1} • Signature Atelier
                     </span>
                     <h3 className="font-serif text-xl font-semibold text-[#1A1209] leading-snug">
                       {activeService.title}
@@ -163,8 +241,12 @@ export const ServicesOverview: React.FC = () => {
               </AnimatePresence>
             </div>
 
-            {/* ── 65% VISUAL ATELIER COLUMN (Right) ── */}
-            <div className="lg:col-span-7 xl:col-span-8 space-y-3">
+            {/* ── 65% VISUAL ATELIER COLUMN ── */}
+            <div
+              className={`lg:col-span-7 xl:col-span-8 space-y-3 ${
+                isReversedSplit ? "lg:order-1" : "lg:order-2"
+              }`}
+            >
               {/* Grand Showcase Photo (occupies dominant 65% visual real estate) */}
               <AnimatePresence mode="wait">
                 <motion.div
@@ -214,8 +296,8 @@ export const ServicesOverview: React.FC = () => {
 
               {/* Multi-Service Thumbnail Selector Strip (Adds interactive visual richness) */}
               <div className="grid grid-cols-4 sm:grid-cols-8 gap-1.5 pt-1">
-                {servicesData.map((service, idx) => {
-                  const isActive = idx === activeIdx;
+                {servicesList.map((service, idx) => {
+                  const isActive = idx === safeActiveIdx;
                   return (
                     <button
                       key={service.id}
@@ -236,7 +318,7 @@ export const ServicesOverview: React.FC = () => {
                       />
                       <div className="absolute inset-0 bg-black/30" />
                       <span className="absolute bottom-1 left-1 right-1 text-[9px] font-sans font-bold uppercase tracking-wider text-white truncate text-center drop-shadow">
-                        {romanNumerals[idx]}
+                        {romanNumerals[idx] || idx + 1}
                       </span>
                     </button>
                   );
@@ -244,12 +326,13 @@ export const ServicesOverview: React.FC = () => {
               </div>
             </div>
           </div>
+          )}
 
           {/* ── Mobile Compact Interactive Atelier Carousel (lg:hidden) ── */}
           <div className="lg:hidden space-y-3.5">
             {/* Quick Pill Selector Tabs (Horizontal Scrollable Bar) */}
             <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar -mx-4 px-4 pb-0.5">
-              {servicesData.map((service, idx) => {
+              {servicesList.map((service, idx) => {
                 const isActive = idx === mobileIdx;
                 return (
                   <button
@@ -271,7 +354,7 @@ export const ServicesOverview: React.FC = () => {
             {/* Stepper Navigation Bar: Service 01 / 08 + Prev/Next Controls */}
             <div className="flex items-center justify-between px-1 text-xs">
               <span className="text-[10px] uppercase tracking-[0.25em] text-[#D4AF37] font-bold">
-                Service 0{mobileIdx + 1} of 0{servicesData.length}
+                Service 0{mobileIdx + 1} of 0{servicesList.length}
               </span>
 
               <div className="flex items-center gap-1.5">
@@ -287,7 +370,7 @@ export const ServicesOverview: React.FC = () => {
 
                 {/* Dot indicators */}
                 <div className="flex items-center gap-1 px-1">
-                  {servicesData.map((_, i) => (
+                  {servicesList.map((_, i) => (
                     <button
                       key={i}
                       type="button"
@@ -302,8 +385,8 @@ export const ServicesOverview: React.FC = () => {
 
                 <button
                   type="button"
-                  onClick={() => scrollMobileTo(Math.min(servicesData.length - 1, mobileIdx + 1))}
-                  disabled={mobileIdx === servicesData.length - 1}
+                  onClick={() => scrollMobileTo(Math.min(servicesList.length - 1, mobileIdx + 1))}
+                  disabled={mobileIdx === servicesList.length - 1}
                   aria-label="Next service"
                   className="w-7 h-7 rounded-full bg-white border border-gold/25 disabled:opacity-30 disabled:cursor-not-allowed hover:border-gold text-[#1A1209] flex items-center justify-center shadow-sm transition-all"
                 >
@@ -318,7 +401,7 @@ export const ServicesOverview: React.FC = () => {
               onScroll={handleMobileScroll}
               className="flex items-stretch gap-3.5 overflow-x-auto snap-x snap-mandatory no-scrollbar -mx-4 px-4 pb-2 pt-0.5 touch-pan-x"
             >
-              {servicesData.map((service, idx) => (
+              {servicesList.map((service, idx) => (
                 <div
                   key={service.id}
                   className="w-[85vw] sm:w-[340px] shrink-0 snap-center bg-white border border-gold/20 rounded-[3px] overflow-hidden shadow-sm flex flex-col justify-between transition-shadow hover:shadow-md"
@@ -395,8 +478,8 @@ export const ServicesOverview: React.FC = () => {
 
           {/* Bottom Action Button */}
           <div className="text-center pt-2 sm:pt-4">
-            <Button href="/services" variant="primary" size="md">
-              View All Services
+            <Button href={c?.primaryCtaHref || "/services"} variant="primary" size="md">
+              {c?.primaryCtaLabel || "View All Services"}
             </Button>
           </div>
         </div>

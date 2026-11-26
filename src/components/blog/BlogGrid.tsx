@@ -3,11 +3,13 @@
 import React, { useState, useMemo } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { blogPosts } from "@/lib/content/blog";
+import { useCms } from "@/components/cms/CmsProvider";
 import { Search, Clock, ArrowRight, Sparkles } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
-export const BlogGrid: React.FC = () => {
+export const BlogGrid: React.FC<{ columns?: 2 | 3 }> = ({ columns = 3 }) => {
+  const cms = useCms();
+  const posts = cms.collections.blogPosts;
   const [selectedCategory, setSelectedCategory] = useState<string>("ALL");
   const [searchQuery, setSearchQuery] = useState<string>("");
 
@@ -21,7 +23,7 @@ export const BlogGrid: React.FC = () => {
   ];
 
   const filteredPosts = useMemo(() => {
-    return blogPosts.filter((post) => {
+    return posts.filter((post) => {
       const matchesCategory =
         selectedCategory === "ALL" || post.category === selectedCategory;
       const matchesSearch =
@@ -33,7 +35,7 @@ export const BlogGrid: React.FC = () => {
         );
       return matchesCategory && matchesSearch;
     });
-  }, [selectedCategory, searchQuery]);
+  }, [posts, selectedCategory, searchQuery]);
 
   return (
     <div className="space-y-8 sm:space-y-12">
@@ -72,8 +74,8 @@ export const BlogGrid: React.FC = () => {
             const active = selectedCategory === cat.id;
             const count =
               cat.id === "ALL"
-                ? blogPosts.length
-                : blogPosts.filter((p) => p.category === cat.id).length;
+                ? posts.length
+                : posts.filter((p) => p.category === cat.id).length;
 
             if (cat.id !== "ALL" && count === 0) return null;
 
@@ -118,7 +120,11 @@ export const BlogGrid: React.FC = () => {
           </button>
         </div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+        <div
+          className={`grid grid-cols-1 md:grid-cols-2 ${
+            columns === 2 ? "lg:grid-cols-2" : "lg:grid-cols-3"
+          } gap-6 sm:gap-8`}
+        >
           <AnimatePresence>
             {filteredPosts.map((post) => (
               <motion.article

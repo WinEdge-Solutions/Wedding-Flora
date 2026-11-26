@@ -4,20 +4,30 @@ import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { galleryData } from "@/lib/content/gallery";
 import { SplitTextReveal } from "@/components/ui/SplitTextReveal";
+import { Container } from "@/components/layout/Container";
+import { Section } from "@/components/layout/Section";
+import { useCms } from "@/components/cms/CmsProvider";
+import type { PageSectionConfig } from "@/lib/cms/types";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 gsap.registerPlugin(ScrollTrigger);
 
 /**
  * HorizontalGallery —
- * • Desktop (lg:min-width: 1024px): Pinned GSAP horizontal glide with staggered luxury cards.
- * • Mobile & Tablet (lg:hidden): Dedicated 100% pure CSS/touch carousel with snap-center,
- *   touch swipe, and pagination controls. Completely decoupled from GSAP to prevent any
- *   transform or clipping issues.
+ * • Desktop (lg:min-width: 1024px): Pinned GSAP horizontal glide (or configurable grid layout).
+ * • Mobile & Tablet (lg:hidden): Dedicated pure CSS/touch carousel with snap-center.
  */
-export function HorizontalGallery() {
+export function HorizontalGallery({ section }: { section?: PageSectionConfig }) {
+  const cms = useCms();
+  const c = section?.content;
+  const limit = section?.itemLimit ?? 6;
+  const panels = cms.collections.gallery.slice(0, limit);
+  const isGridMode =
+    section?.layout === "grid-2" ||
+    section?.layout === "grid-3" ||
+    section?.layout === "grid-4";
+
   const desktopSectionRef = useRef<HTMLElement>(null);
   const desktopTrackRef = useRef<HTMLDivElement>(null);
   const mobileTrackRef = useRef<HTMLDivElement>(null);
@@ -25,31 +35,31 @@ export function HorizontalGallery() {
   const [desktopActiveIdx, setDesktopActiveIdx] = useState(0);
   const [mobileActiveIdx, setMobileActiveIdx] = useState(0);
 
-  const panels = galleryData.slice(0, 6);
-
   /* ── Desktop GSAP Pin & Scrub ────────────────────── */
   useEffect(() => {
-    const section = desktopSectionRef.current;
+    if (isGridMode) return;
+    const sectionEl = desktopSectionRef.current;
     const track = desktopTrackRef.current;
-    if (!section || !track) return;
+    if (!sectionEl || !track) return;
 
     const mm = gsap.matchMedia();
 
     mm.add("(min-width: 1024px)", () => {
-      const totalWidth = track.scrollWidth - window.innerWidth;
+      const totalWidth = Math.max(0, track.scrollWidth - window.innerWidth);
+      if (totalWidth <= 0) return;
 
       gsap.to(track, {
         x: -totalWidth,
         ease: "none",
         scrollTrigger: {
-          trigger: section,
+          trigger: sectionEl,
           pin: true,
           scrub: 1,
           start: "top top",
           end: () => `+=${totalWidth}`,
           invalidateOnRefresh: true,
           onUpdate: (self) => {
-            const idx = Math.round(self.progress * (panels.length - 1));
+            const idx = Math.round(self.progress * Math.max(1, panels.length - 1));
             setDesktopActiveIdx(idx);
           },
         },
@@ -57,7 +67,7 @@ export function HorizontalGallery() {
     });
 
     return () => mm.revert();
-  }, [panels.length]);
+  }, [panels.length, isGridMode]);
 
   /* ── Mobile Touch Scroll Handlers ───────────────── */
   const handleMobileScroll = (e: React.UIEvent<HTMLDivElement>) => {
@@ -82,33 +92,99 @@ export function HorizontalGallery() {
     }
   };
 
+  const eyebrow = c?.eyebrow || "Royal Celebrations";
+  const title = c?.title || "A Legacy of Grand Moments";
+  const mobileHint = c?.subtitle || "Swipe sideways to view all celebrations →";
+
+  if (isGridMode) {
+    const cols =
+      section?.columns ??
+      (section?.layout === "grid-4" ? 4 : section?.layout === "grid-2" ? 2 : 3);
+    const gridClass =
+      cols === 4
+        ? "grid-cols-1 sm:grid-cols-2 lg:grid-cols-4"
+        : cols === 2
+          ? "grid-cols-1 sm:grid-cols-2"
+          : "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3";
+
+    return (
+      <Section variant={section?.bgVariant ?? "cream"}>
+        <Container>
+          <div className="text-center pb-8 space-y-2">
+            <p className="font-sans text-[11px] uppercase tracking-[0.3em] text-[#D4AF37] font-semibold flex items-center justify-center gap-2">
+              <span className="opacity-60">—</span>
+              <span>{eyebrow}</span>
+              <span className="opacity-60">—</span>
+            </p>
+            <h2 className="font-display text-2xl sm:text-5xl text-[#1A1209] font-semibold tracking-[0.03em]">
+              {title}
+            </h2>
+          </div>
+          <div className={`grid ${gridClass} gap-6`}>
+            {panels.map((item) => (
+              <div
+                key={item.id}
+                className="relative aspect-[4/5] overflow-hidden rounded-[3px] shadow-[0_8px_30px_rgba(26,18,9,0.08)] group"
+              >
+                <Image
+                  src={item.imageUrl}
+                  alt={item.title}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 400px"
+                  className="object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent" />
+                <div className="absolute bottom-0 left-0 right-0 p-5">
+                  <p className="font-sans text-[10px] uppercase tracking-[0.25em] text-gold font-bold mb-1">
+                    {item.category}
+                  </p>
+                  <h3 className="font-serif text-lg text-[#FAF7F2] font-semibold leading-snug">
+                    {item.title}
+                  </h3>
+                  <p className="font-sans text-xs text-[#FAF7F2]/80 mt-1">
+                    {item.location} · {item.year}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </Container>
+      </Section>
+    );
+  }
+
   return (
     <>
       {/* ══════════════════════════════════════════════════════════════
           1. DESKTOP VIEWPORT (lg:block min-width: 1024px)
-          Pinned GSAP horizontal scroll with staggered luxury cards
          ══════════════════════════════════════════════════════════════ */}
       <section
         ref={desktopSectionRef}
-        className="hidden lg:block relative w-full overflow-hidden bg-[#F7F3EC] border-y border-gold/20"
+        className="hidden lg:block relative w-full overflow-hidden border-y border-gold/20"
+        style={{
+          backgroundColor:
+            section?.bgVariant === "ivory"
+              ? "var(--wf-paper, #FDFAF5)"
+              : section?.bgVariant === "charcoal"
+                ? "var(--wf-ink, #1A1209)"
+                : "var(--wf-cream, #F7F3EC)",
+        }}
         aria-label="Royal Celebrations Gallery"
       >
-        {/* Section Header */}
         <div className="relative z-10 pt-16 pb-6 text-center px-4">
           <p className="font-sans text-[11px] uppercase tracking-[0.3em] text-[#D4AF37] font-semibold mb-3 flex items-center justify-center gap-2">
             <span className="opacity-60">—</span>
-            <span>Royal Celebrations</span>
+            <span>{eyebrow}</span>
             <span className="opacity-60">—</span>
           </p>
           <SplitTextReveal
-            text="A Legacy of Grand Moments"
+            text={title}
             as="h2"
             className="font-display text-5xl xl:text-6xl text-[#1A1209] font-semibold tracking-[0.03em]"
             stagger={0.03}
           />
         </div>
 
-        {/* Pinned horizontal glide track */}
         <div
           ref={desktopTrackRef}
           className="flex items-center gap-6 px-16 pb-24 overflow-x-visible will-change-transform"
@@ -129,11 +205,7 @@ export function HorizontalGallery() {
                 sizes="360px"
                 className="object-cover transition-transform duration-700 ease-out hover:scale-105"
               />
-
-              {/* Gradient overlay for readability */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent" />
-
-              {/* Panel label */}
               <div className="absolute bottom-0 left-0 right-0 p-6">
                 <p className="font-sans text-[10px] uppercase tracking-[0.25em] text-gold font-bold mb-1">
                   {item.category}
@@ -145,11 +217,7 @@ export function HorizontalGallery() {
                   {item.location} · {item.year}
                 </p>
               </div>
-
-              {/* Gold border on hover */}
               <div className="absolute inset-0 border border-gold/0 hover:border-gold/50 transition-all duration-500 rounded-[3px]" />
-
-              {/* Active dot indicator */}
               {desktopActiveIdx === i && (
                 <div className="absolute top-4 right-4 w-2 h-2 rounded-full bg-gold animate-pulse" />
               )}
@@ -157,7 +225,6 @@ export function HorizontalGallery() {
           ))}
         </div>
 
-        {/* Desktop Progress bar at bottom */}
         <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-2 z-20">
           {panels.map((_, i) => (
             <div
@@ -174,34 +241,34 @@ export function HorizontalGallery() {
 
       {/* ══════════════════════════════════════════════════════════════
           2. MOBILE & TABLET VIEWPORT (lg:hidden)
-          Dedicated pure CSS touch-scroll carousel:
-          - Completely decoupled from GSAP (no transform/translate bugs)
-          - Silky smooth touch snapping
-          - Touch pagination & arrow navigation
          ══════════════════════════════════════════════════════════════ */}
       <section
-        className="block lg:hidden relative w-full overflow-hidden bg-[#F7F3EC] border-y border-gold/20 py-10"
+        className="block lg:hidden relative w-full overflow-hidden border-y border-gold/20 py-10"
+        style={{
+          backgroundColor:
+            section?.bgVariant === "ivory"
+              ? "var(--wf-paper, #FDFAF5)"
+              : "var(--wf-cream, #F7F3EC)",
+        }}
         aria-label="Royal Celebrations Gallery Mobile"
       >
-        {/* Mobile Header */}
         <div className="relative z-10 pb-4 text-center px-4">
           <p className="font-sans text-[10px] uppercase tracking-[0.25em] text-[#D4AF37] font-semibold mb-2 flex items-center justify-center gap-2">
             <span className="opacity-60">—</span>
-            <span>Royal Celebrations</span>
+            <span>{eyebrow}</span>
             <span className="opacity-60">—</span>
           </p>
           <SplitTextReveal
-            text="A Legacy of Grand Moments"
+            text={title}
             as="h2"
             className="font-display text-2xl sm:text-3xl text-[#1A1209] font-semibold tracking-[0.03em]"
             stagger={0.03}
           />
           <p className="font-sans text-[10px] text-[#D4AF37] font-semibold uppercase tracking-[0.2em] mt-2">
-            Swipe sideways to view all celebrations →
+            {mobileHint}
           </p>
         </div>
 
-        {/* Mobile Swipeable Track */}
         <div
           ref={mobileTrackRef}
           onScroll={handleMobileScroll}
@@ -220,11 +287,7 @@ export function HorizontalGallery() {
                 sizes="(max-width: 768px) 85vw, 320px"
                 className="object-cover"
               />
-
-              {/* Gradient overlay for photo readability */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent" />
-
-              {/* Panel label */}
               <div className="absolute bottom-0 left-0 right-0 p-5">
                 <p className="font-sans text-[10px] uppercase tracking-[0.25em] text-gold font-bold mb-1">
                   {item.category}
@@ -236,11 +299,7 @@ export function HorizontalGallery() {
                   {item.location} · {item.year}
                 </p>
               </div>
-
-              {/* Hairline gold border */}
               <div className="absolute inset-0 border border-gold/20 rounded-[3px] pointer-events-none" />
-
-              {/* Active dot indicator */}
               {mobileActiveIdx === i && (
                 <div className="absolute top-3.5 right-3.5 w-2 h-2 rounded-full bg-gold animate-pulse" />
               )}
@@ -248,9 +307,7 @@ export function HorizontalGallery() {
           ))}
         </div>
 
-        {/* Mobile Touch Navigation (Prev / Dots / Next) */}
         <div className="flex items-center justify-center gap-3 pt-2">
-          {/* Prev Button */}
           <button
             type="button"
             onClick={() => scrollMobileTo(Math.max(0, mobileActiveIdx - 1))}
@@ -261,7 +318,6 @@ export function HorizontalGallery() {
             <ChevronLeft size={14} />
           </button>
 
-          {/* Dots Indicator */}
           <div className="flex items-center gap-1.5">
             {panels.map((_, i) => (
               <button
@@ -278,7 +334,6 @@ export function HorizontalGallery() {
             ))}
           </div>
 
-          {/* Next Button */}
           <button
             type="button"
             onClick={() => scrollMobileTo(Math.min(panels.length - 1, mobileActiveIdx + 1))}

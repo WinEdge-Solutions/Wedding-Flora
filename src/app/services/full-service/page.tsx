@@ -1,5 +1,5 @@
 import React from "react";
-import { FullServiceView } from "@/components/services/FullServiceView";
+import { DynamicSubpageView } from "@/components/cms/DynamicSubpageView";
 
 export const metadata = {
   title: "Full-Service Wedding Planners | Wedding Flora",
@@ -8,10 +8,5 @@ export const metadata = {
 };
 
 export default function FullServicePage() {
-  return (
-    <main className="min-h-screen text-[#1A1209] relative z-10">
-      <FullServiceView />
-    </main>
-  );
+  return <DynamicSubpageView pageKey="services" />;
 }
-

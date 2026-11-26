@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { InstagramIcon } from "@/components/ui/InstagramIcon";
+import { useCms } from "@/components/cms/CmsProvider";
 import {
   RotateCw,
   Lock,
@@ -16,13 +17,14 @@ import {
 } from "lucide-react";
 
 export const InstagramShowcase: React.FC = () => {
+  const cms = useCms();
   const [iframeKey, setIframeKey] = useState(1);
   const [isReloading, setIsReloading] = useState(false);
   const [copied, setCopied] = useState(false);
   const [viewMode, setViewMode] = useState<"realtime" | "reels">("reels");
 
-  const profileUrl = "https://www.instagram.com/weddingflora_theweddingplanner/";
-  const embedUrl = "https://www.instagram.com/weddingflora_theweddingplanner/embed";
+  const profileUrl = cms.site.contact.instagram || "https://www.instagram.com/weddingflora_theweddingplanner/";
+  const embedUrl = `${profileUrl.replace(/\/$/, "")}/embed`;
 
   const handleReload = () => {
     setIsReloading(true);

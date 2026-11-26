@@ -8,6 +8,8 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Container } from "@/components/layout/Container";
 import { Divider } from "@/components/ui/Divider";
 import { FloralParticles } from "@/components/ui/FloralParticles";
+import { useCms } from "@/components/cms/CmsProvider";
+import type { PageSectionConfig } from "@/lib/cms/types";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -25,10 +27,29 @@ const fadeUp = {
   }),
 };
 
-export const Hero: React.FC = () => {
+export const Hero: React.FC<{ section?: PageSectionConfig }> = ({ section }) => {
+  const cms = useCms();
+  const c = section?.content;
   const sectionRef = useRef<HTMLElement>(null);
   const textContentRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
+
+  const heroTitleLine1 = c?.title || "Crafting Royal Weddings";
+  const heroHighlight = c?.titleHighlight || "Royal";
+  const heroLine2 = c?.subtitle || "With Grandeur & Soul";
+  const heroDesc =
+    c?.paragraphs?.[0] ||
+    "From starlit palace Sangeets in Udaipur to ethereal Mandap ceremonies across heritage fortresses, we curate unforgettable Indian wedding heirlooms tailored to your family's heritage.";
+  const videoUrl = c?.videoUrl || "/videos/hero-bg.mp4";
+  const fallbackImage = c?.imageUrl;
+  const primaryLabel = c?.primaryCtaLabel || "Plan Your Royal Wedding";
+  const primaryHref = c?.primaryCtaHref || "/contact";
+  const secondaryLabel = c?.secondaryCtaLabel || "Explore Celebrations";
+  const secondaryHref = c?.secondaryCtaHref || "/celebrations";
+  const showCrest = c?.showCrest !== false;
+  const showDivider = c?.showDivider !== false;
+  const isLeftAligned = section?.layout === "left-aligned";
+  const overlayOpacity = (c?.overlayOpacity ?? 30) / 100;
 
   useEffect(() => {
     const video = videoRef.current;
@@ -88,20 +109,32 @@ export const Hero: React.FC = () => {
       ══════════════════════════════════════════════ */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
         <motion.div
-          style={{ y: videoY, scale: videoScale }}
+          style={cms.theme.effects.enableParallax ? { y: videoY, scale: videoScale } : undefined}
           className="relative w-full h-full will-change-transform"
         >
-          <video
-            ref={videoRef}
-            autoPlay
-            loop
-            muted
-            playsInline
-            preload="auto"
-            className="absolute inset-0 w-full h-full object-cover object-center filter brightness-[0.90] contrast-[1.05] saturate-[1.08]"
-          >
-            <source src="/videos/hero-bg.mp4" type="video/mp4" />
-          </video>
+          {videoUrl ? (
+            <video
+              key={videoUrl}
+              ref={videoRef}
+              autoPlay
+              loop
+              muted
+              playsInline
+              poster={fallbackImage}
+              preload="auto"
+              className="absolute inset-0 w-full h-full object-cover object-center filter brightness-[0.90] contrast-[1.05] saturate-[1.08]"
+            >
+              <source src={videoUrl} type="video/mp4" />
+            </video>
+          ) : fallbackImage ? (
+            <Image
+              src={fallbackImage}
+              alt={heroTitleLine1}
+              fill
+              className="object-cover object-center"
+              priority
+            />
+          ) : null}
         </motion.div>
 
         {/* ── Lighter cinematic scrims — video breathes more on ivory theme ── */}
@@ -109,7 +142,10 @@ export const Hero: React.FC = () => {
         <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-black/45 via-black/20 to-transparent" />
 
         {/* Very light ambient veil — far less dark than before */}
-        <div className="absolute inset-0 bg-[#06040d]/30" />
+        <div
+          className="absolute inset-0"
+          style={{ backgroundColor: `rgba(6, 4, 13, ${overlayOpacity})` }}
+        />
 
         {/* Radial vignette — just enough to lift the centred text */}
         <div
@@ -127,9 +163,11 @@ export const Hero: React.FC = () => {
       {/* ══════════════════════════════════════════════
           LAYER 1 — Floating gold bokeh particles
       ══════════════════════════════════════════════ */}
-      <div className="absolute inset-0 z-[2] pointer-events-none">
-        <FloralParticles />
-      </div>
+      {cms.theme.effects.enableParticles && (
+        <div className="absolute inset-0 z-[2] pointer-events-none">
+          <FloralParticles />
+        </div>
+      )}
 
       {/* ══════════════════════════════════════════════
           LAYER 2 — Text content (fades + lifts on scroll)
@@ -137,33 +175,35 @@ export const Hero: React.FC = () => {
       <motion.div
         ref={textContentRef}
         className="relative z-[10] w-full pt-16 pb-6 sm:pt-24 sm:pb-12 lg:pt-24 lg:pb-12"
-        style={{ y: textY, opacity: heroOpacity }}
+        style={cms.theme.effects.enableParallax ? { y: textY, opacity: heroOpacity } : undefined}
       >
-        <Container className="text-center">
-          <div className="max-w-5xl mx-auto space-y-3 sm:space-y-4 lg:space-y-4">
+        <Container className={isLeftAligned ? "text-left" : "text-center"}>
+          <div className={`max-w-5xl space-y-3 sm:space-y-4 lg:space-y-4 ${isLeftAligned ? "" : "mx-auto"}`}>
 
             {/* ── Crest monogram ────────────────────── */}
-            <motion.div
-              className="flex justify-center"
-              variants={fadeUp}
-              initial="hidden"
-              animate="visible"
-              custom={0}
-            >
-              <div
-                className="relative w-12 h-12 sm:w-16 sm:h-16 transition-all duration-500
-                  hover:scale-110 drop-shadow-[0_0_24px_rgba(212,175,55,0.65)]"
+            {showCrest && (
+              <motion.div
+                className={`flex ${isLeftAligned ? "justify-start" : "justify-center"}`}
+                variants={fadeUp}
+                initial="hidden"
+                animate="visible"
+                custom={0}
               >
-                <Image
-                  src="/images/logo-emblem.png"
-                  alt="Wedding Flora Crest"
-                  fill
-                  sizes="(max-width: 640px) 48px, 64px"
-                  className="object-contain"
-                  priority
-                />
-              </div>
-            </motion.div>
+                <div
+                  className="relative w-12 h-12 sm:w-16 sm:h-16 transition-all duration-500
+                    hover:scale-110 drop-shadow-[0_0_24px_rgba(212,175,55,0.65)]"
+                >
+                  <Image
+                    src={cms.site.logoEmblemUrl || "/images/logo-emblem.png"}
+                    alt={`${cms.site.name} Crest`}
+                    fill
+                    sizes="(max-width: 640px) 48px, 64px"
+                    className="object-contain"
+                    priority
+                  />
+                </div>
+              </motion.div>
+            )}
 
             {/* ── H1 — split char GSAP animation ───── */}
             <motion.div
@@ -174,58 +214,68 @@ export const Hero: React.FC = () => {
             >
               <h1
                 className="hero-title leading-[1.12] tracking-tight"
-                aria-label="Crafting Royal Weddings With Grandeur & Soul"
+                aria-label={`${heroTitleLine1} ${heroLine2}`}
               >
-                <div className="flex flex-wrap items-center justify-center gap-x-2 sm:gap-x-3.5 lg:gap-x-4">
-                  <span className="inline-block overflow-hidden whitespace-nowrap font-display text-2xl sm:text-4xl md:text-5xl lg:text-[3.25rem] xl:text-[3.75rem] text-[#FAF7F2] font-bold tracking-[0.03em] drop-shadow-[0_4px_24px_rgba(0,0,0,0.9)]">
-                    {splitChars("Crafting")}
-                  </span>
-                  <span className="inline-block overflow-hidden whitespace-nowrap font-display text-2xl sm:text-4xl md:text-5xl lg:text-[3.25rem] xl:text-[3.75rem] font-extrabold tracking-[0.03em] drop-shadow-[0_0_28px_rgba(212,175,55,0.6)]">
-                    {splitChars("Royal", "gold-char-gradient")}
-                  </span>
-                  <span className="inline-block overflow-hidden whitespace-nowrap font-display text-2xl sm:text-4xl md:text-5xl lg:text-[3.25rem] xl:text-[3.75rem] text-[#FAF7F2] font-bold tracking-[0.03em] drop-shadow-[0_4px_24px_rgba(0,0,0,0.9)]">
-                    {splitChars("Weddings")}
-                  </span>
+                <div className={`flex flex-wrap items-center gap-x-2 sm:gap-x-3.5 lg:gap-x-4 ${isLeftAligned ? "justify-start" : "justify-center"}`}>
+                  {heroTitleLine1.split(/\s+/).filter(Boolean).map((word, wIdx) => {
+                    const isHighlighted =
+                      heroHighlight &&
+                      word.toLowerCase() === heroHighlight.toLowerCase();
+                    return (
+                      <span
+                        key={`${word}-${wIdx}`}
+                        className={`inline-block overflow-hidden whitespace-nowrap font-display text-2xl sm:text-4xl md:text-5xl lg:text-[3.25rem] xl:text-[3.75rem] tracking-[0.03em] ${
+                          isHighlighted
+                            ? "font-extrabold drop-shadow-[0_0_28px_rgba(212,175,55,0.6)]"
+                            : "text-[#FAF7F2] font-bold drop-shadow-[0_4px_24px_rgba(0,0,0,0.9)]"
+                        }`}
+                      >
+                        {splitChars(word, isHighlighted ? "gold-char-gradient" : "")}
+                      </span>
+                    );
+                  })}
                 </div>
 
-                <div className="mt-1 sm:mt-2.5 flex flex-wrap items-center justify-center gap-x-1.5 sm:gap-x-2.5">
-                  <span className="inline-block overflow-hidden whitespace-nowrap font-serif text-lg sm:text-3xl md:text-4xl lg:text-[2.65rem] text-[#F3E5AB]/95 font-light italic tracking-wide drop-shadow-[0_2px_16px_rgba(0,0,0,0.85)]">
-                    {splitChars("With")}
-                  </span>
-                  <span className="inline-block overflow-hidden whitespace-nowrap font-serif text-lg sm:text-3xl md:text-4xl lg:text-[2.65rem] text-[#F3E5AB]/95 font-light italic tracking-wide drop-shadow-[0_2px_16px_rgba(0,0,0,0.85)]">
-                    {splitChars("Grandeur")}
-                  </span>
-                  <span className="inline-block overflow-hidden whitespace-nowrap font-serif text-lg sm:text-3xl md:text-4xl lg:text-[2.65rem] text-[#F3E5AB]/95 font-light italic tracking-wide drop-shadow-[0_2px_16px_rgba(0,0,0,0.85)]">
-                    {splitChars("&")}
-                  </span>
-                  <span className="inline-block overflow-hidden whitespace-nowrap font-serif text-lg sm:text-3xl md:text-4xl lg:text-[2.65rem] text-[#F3E5AB]/95 font-light italic tracking-wide drop-shadow-[0_2px_16px_rgba(0,0,0,0.85)]">
-                    {splitChars("Soul")}
-                  </span>
-                </div>
+                {heroLine2 && (
+                  <div className={`mt-1 sm:mt-2.5 flex flex-wrap items-center gap-x-1.5 sm:gap-x-2.5 ${isLeftAligned ? "justify-start" : "justify-center"}`}>
+                    {heroLine2.split(/\s+/).filter(Boolean).map((word, wIdx) => (
+                      <span
+                        key={`${word}-${wIdx}`}
+                        className="inline-block overflow-hidden whitespace-nowrap font-serif text-lg sm:text-3xl md:text-4xl lg:text-[2.65rem] text-[#F3E5AB]/95 font-light italic tracking-wide drop-shadow-[0_2px_16px_rgba(0,0,0,0.85)]"
+                      >
+                        {splitChars(word)}
+                      </span>
+                    ))}
+                  </div>
+                )}
               </h1>
             </motion.div>
 
             {/* ── Ornamental divider ── */}
-            <motion.div variants={fadeUp} initial="hidden" animate="visible" custom={2}>
-              <Divider variant="ornamental" className="my-1 sm:my-1.5 [&>*]:border-gold/50 [&>*]:text-gold/80" />
-            </motion.div>
+            {showDivider && (
+              <motion.div variants={fadeUp} initial="hidden" animate="visible" custom={2}>
+                <Divider variant="ornamental" className="my-1 sm:my-1.5 [&>*]:border-gold/50 [&>*]:text-gold/80" />
+              </motion.div>
+            )}
 
             {/* ── Subtitle ──────────────────────────── */}
             <motion.p
-              className="font-sans text-xs sm:text-sm lg:text-[15px] text-[#FAF7F2]/85 font-normal max-w-2xl mx-auto leading-[1.75] px-3 sm:px-0 drop-shadow-[0_2px_12px_rgba(0,0,0,0.9)]"
+              className={`font-sans text-xs sm:text-sm lg:text-[15px] text-[#FAF7F2]/85 font-normal max-w-2xl leading-[1.75] px-3 sm:px-0 drop-shadow-[0_2px_12px_rgba(0,0,0,0.9)] ${
+                isLeftAligned ? "" : "mx-auto"
+              }`}
               variants={fadeUp}
               initial="hidden"
               animate="visible"
               custom={3}
             >
-              From starlit palace Sangeets in Udaipur to ethereal Mandap ceremonies
-              across heritage fortresses, we curate unforgettable Indian wedding
-              heirlooms tailored to your family&apos;s heritage.
+              {heroDesc}
             </motion.p>
 
             {/* ── CTA Buttons ───────────────────────── */}
             <motion.div
-              className="pt-2 sm:pt-3.5 flex flex-col sm:flex-row items-center justify-center gap-2.5 sm:gap-4 w-full max-w-xs sm:max-w-none mx-auto"
+              className={`pt-2 sm:pt-3.5 flex flex-col sm:flex-row items-center gap-2.5 sm:gap-4 w-full max-w-xs sm:max-w-none ${
+                isLeftAligned ? "justify-start" : "justify-center mx-auto"
+              }`}
               variants={fadeUp}
               initial="hidden"
               animate="visible"
@@ -233,7 +283,7 @@ export const Hero: React.FC = () => {
             >
               {/* Primary — refined charcoal button with gold highlight */}
               <a
-                href="/contact"
+                href={primaryHref}
                 className="w-full sm:w-auto inline-flex items-center justify-center px-6 sm:px-8 py-2.5 sm:py-3.5
                   font-sans text-xs uppercase tracking-[0.18em] font-semibold
                   bg-[#FAF7F2] text-[#1A1209] rounded-[2px] text-center
@@ -244,12 +294,12 @@ export const Hero: React.FC = () => {
                   hover:-translate-y-0.5 active:translate-y-0
                   transition-all duration-300 ease-out"
               >
-                Plan Your Royal Wedding
+                {primaryLabel}
               </a>
 
               {/* Secondary — ethereal ghost outline */}
               <a
-                href="/celebrations"
+                href={secondaryHref}
                 className="w-full sm:w-auto inline-flex items-center justify-center px-6 sm:px-8 py-2.5 sm:py-3.5
                   font-sans text-xs uppercase tracking-[0.18em] font-semibold
                   bg-transparent text-[#FAF7F2] text-center
@@ -258,7 +308,7 @@ export const Hero: React.FC = () => {
                   hover:-translate-y-0.5 active:translate-y-0
                   transition-all duration-300 ease-out"
               >
-                Explore Celebrations
+                {secondaryLabel}
               </a>
             </motion.div>
 

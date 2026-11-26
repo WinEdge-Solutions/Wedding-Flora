@@ -5,7 +5,8 @@ import Link from "next/link";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { usePathname } from "next/navigation";
-import { siteConfig, NavItem } from "@/lib/site";
+import type { NavItem } from "@/lib/site";
+import { useCms } from "@/components/cms/CmsProvider";
 import {
   Menu,
   X,
@@ -479,8 +480,9 @@ export const Navbar: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(getInitialScrolled);
   const pathname = usePathname();
+  const cms = useCms();
 
-  const navItems = siteConfig.navItems.filter((item) => item.href !== "/contact");
+  const navItems = cms.site.navbar.items.filter((item) => item.visible !== false);
   const derivedDropdown = deriveOpenDropdown(pathname, navItems);
   const [mobileDropdownOverride, setMobileDropdownOverride] = useState<
     string | null | undefined
@@ -508,8 +510,9 @@ export const Navbar: React.FC = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const leftItems = navItems.slice(0, 4);
-  const rightItems = navItems.slice(4);
+  const midpoint = Math.ceil(navItems.length / 2);
+  const leftItems = navItems.slice(0, midpoint);
+  const rightItems = navItems.slice(midpoint);
 
   return (
     <header className="sticky top-0 z-50 w-full transition-all duration-300">
@@ -524,15 +527,15 @@ export const Navbar: React.FC = () => {
         <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 flex items-center justify-end text-[10px] tracking-[0.16em] uppercase text-[#5C5147]">
           <div className="flex items-center gap-4 xl:gap-6 font-sans">
             <a
-              href={`tel:${siteConfig.contact.phone.replace(/[^0-9+]/g, "")}`}
+              href={`tel:${cms.site.contact.phone.replace(/[^0-9+]/g, "")}`}
               className="hover:text-gold transition-colors flex items-center gap-1.5" style={{color: "#5C5147"}}
             >
               <Phone size={10} className="text-gold" />
-              <span>{siteConfig.contact.phone}</span>
+              <span>{cms.site.contact.phone}</span>
             </a>
             <span className="text-[#D4AF37]/30">|</span>
             <a
-              href={siteConfig.contact.whatsapp}
+              href={cms.site.contact.whatsapp}
               target="_blank"
               rel="noopener noreferrer"
               className="hover:text-gold transition-colors flex items-center gap-1.5" style={{color: "#5C5147"}}
@@ -542,7 +545,7 @@ export const Navbar: React.FC = () => {
             </a>
             <span className="text-[#D4AF37]/30">|</span>
             <a
-              href={siteConfig.contact.mapsUrl}
+              href={cms.site.contact.mapsUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="hover:text-gold transition-colors flex items-center gap-1.5" style={{color: "#5C5147"}}
@@ -608,8 +611,8 @@ export const Navbar: React.FC = () => {
               {/* 5. The Royal Crest Emblem with specular gold drop shadow */}
               <div className="relative w-full h-full">
                 <Image
-                  src="/images/logo-emblem.png"
-                  alt="Wedding Flora Crest"
+                  src={cms.site.logoEmblemUrl || "/images/logo-emblem.png"}
+                  alt={`${cms.site.name} Crest`}
                   fill
                   className="object-contain relative z-10 transition-all duration-500 ease-out filter drop-shadow-[0_2px_8px_rgba(212,175,55,0.35)] group-hover:drop-shadow-[0_6px_22px_rgba(212,175,55,0.7)] group-hover:brightness-105"
                   priority
@@ -622,10 +625,14 @@ export const Navbar: React.FC = () => {
               </div>
             </div>
 
-            {/* Brand text: shown on mobile, removed on desktop so the enlarged central crest stands out */}
-            <div className="flex flex-col text-left lg:hidden">
+            {/* Brand text: visibility configurable in Admin Studio */}
+            <div
+              className={`flex-col text-left ${
+                cms.site.navbar.showBrandTextMobile ? "flex" : "hidden"
+              } ${cms.site.navbar.showBrandTextDesktop ? "lg:flex" : "lg:hidden"}`}
+            >
               <span className="font-serif text-lg sm:text-[22px] font-semibold tracking-[0.04em] text-[#1A1209] group-hover:text-gold-gradient transition-colors duration-300 leading-none">
-                Wedding Flora
+                {cms.site.name}
               </span>
             </div>
           </Link>
@@ -646,12 +653,14 @@ export const Navbar: React.FC = () => {
             )}
 
             {/* Bespoke Luxury CTA Badge */}
-            <Link
-              href="/contact"
-              className="relative group inline-flex items-center justify-center px-4 xl:px-5 py-1.5 text-[10px] xl:text-[10.5px] font-sans font-semibold uppercase tracking-[0.2em] rounded-[2px] transition-all duration-300 overflow-hidden bg-[#1A1209] text-[#FAF7F2] border border-[#1A1209] hover:border-gold/60 shadow-[0_2px_10px_rgba(26,18,9,0.1)] hover:shadow-[0_4px_18px_rgba(212,175,55,0.2)] hover:-translate-y-0.5 active:translate-y-0 ml-1.5"
-            >
-              <span className="relative z-10">Enquire</span>
-            </Link>
+            {cms.site.navbar.showEnquireCta && (
+              <Link
+                href={cms.site.navbar.enquireHref || "/contact"}
+                className="relative group inline-flex items-center justify-center px-4 xl:px-5 py-1.5 text-[10px] xl:text-[10.5px] font-sans font-semibold uppercase tracking-[0.2em] rounded-[2px] transition-all duration-300 overflow-hidden bg-[#1A1209] text-[#FAF7F2] border border-[#1A1209] hover:border-gold/60 shadow-[0_2px_10px_rgba(26,18,9,0.1)] hover:shadow-[0_4px_18px_rgba(212,175,55,0.2)] hover:-translate-y-0.5 active:translate-y-0 ml-1.5"
+              >
+                <span className="relative z-10">{cms.site.navbar.enquireLabel || "Enquire"}</span>
+              </Link>
+            )}
           </div>
 
           {/* ── Mobile Hamburger Toggle ── */}
@@ -852,14 +861,14 @@ export const Navbar: React.FC = () => {
               {/* Mobile Concierge Action Bar */}
               <div className="pt-3 grid grid-cols-2 gap-2 border-t border-[#D4AF37]/20 mt-2">
                 <a
-                  href={`tel:${siteConfig.contact.phone.replace(/[^0-9+]/g, "")}`}
+                  href={`tel:${cms.site.contact.phone.replace(/[^0-9+]/g, "")}`}
                   className="py-3 px-3 rounded-[2px] bg-[#FAF7F0] border border-gold/30 text-xs font-semibold text-[#1A1209] hover:text-gold hover:border-gold flex items-center justify-center gap-1.5"
                 >
                   <Phone size={12} className="text-gold" />
                   <span>Call Us</span>
                 </a>
                 <a
-                  href={siteConfig.contact.whatsapp}
+                  href={cms.site.contact.whatsapp}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="py-3 px-3 rounded-[2px] bg-[#FAF7F0] border border-gold/30 text-xs font-semibold text-[#1A1209] hover:text-gold hover:border-gold flex items-center justify-center gap-1.5"

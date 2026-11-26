@@ -7,8 +7,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Container } from "@/components/layout/Container";
 import { Button } from "@/components/ui/Button";
 import { Divider } from "@/components/ui/Divider";
-import { servicesData, operationalPillars } from "@/lib/content/services";
-import { siteConfig } from "@/lib/site";
+import { useCms } from "@/components/cms/CmsProvider";
+import type { PageSectionConfig } from "@/lib/cms/types";
 import {
   Check,
   Sparkles,
@@ -34,7 +34,7 @@ const pillarIcons: Record<string, React.ReactNode> = {
   Crown: <Crown className="w-5 h-5 text-gold" />,
 };
 
-const editorialSlides = [
+const defaultEditorialSlides = [
   {
     image: "/images/service-varmala-mandap.jpg",
     title: "Vedic Mandap Under Starlit Aravali Skies",
@@ -95,20 +95,31 @@ const processSteps = [
   },
 ];
 
-export function FullServiceView() {
-  const [activeServiceId, setActiveServiceId] = useState<string>("planning-reccee-process");
+export function FullServiceView({ section }: { section?: PageSectionConfig }) {
+  const cms = useCms();
+  const servicesData = cms.collections.services;
+  const operationalPillars = cms.collections.operationalPillars;
+  const editorialSlides =
+    cms.collections.editorialSlides.length > 0
+      ? cms.collections.editorialSlides
+      : defaultEditorialSlides;
+  const c = section?.content;
+
+  const [activeServiceId, setActiveServiceId] = useState<string>(
+    servicesData[0]?.id || "planning-reccee-process"
+  );
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const observerRef = useRef<IntersectionObserver | null>(null);
 
   // Auto-slide gallery every 5 seconds unless paused
   useEffect(() => {
-    if (isPaused) return;
+    if (isPaused || editorialSlides.length === 0) return;
     const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % editorialSlides.length);
     }, 5000);
     return () => clearInterval(timer);
-  }, [isPaused]);
+  }, [isPaused, editorialSlides.length]);
 
   // Scroll spy to highlight active service in sidebar
   useEffect(() => {
@@ -138,7 +149,7 @@ export function FullServiceView() {
         observerRef.current.disconnect();
       }
     };
-  }, []);
+  }, [servicesData]);
 
   const scrollToService = (id: string) => {
     setActiveServiceId(id);
@@ -162,22 +173,23 @@ export function FullServiceView() {
           <div className="max-w-4xl mx-auto space-y-4 sm:space-y-5">
             <p className="font-sans text-[11px] uppercase tracking-[0.3em] text-[#D4AF37] font-semibold flex items-center justify-center gap-2">
               <span className="opacity-60">—</span>
-              <span>Turnkey Palatial Wedding Management</span>
+              <span>{c?.eyebrow || "Turnkey Palatial Wedding Management"}</span>
               <span className="opacity-60">—</span>
             </p>
 
             <h1 className="font-serif text-3xl sm:text-5xl lg:text-6xl xl:text-7xl font-semibold text-[#1A1209] tracking-[0.02em] leading-[1.12]">
-              Full-Service Wedding Planners
+              {c?.title || "Full-Service Wedding Planners"}
             </h1>
 
             <Divider variant="ornamental" className="my-3 sm:my-4" />
 
             <p className="font-serif italic text-base sm:text-xl lg:text-2xl text-gold/90 max-w-2xl mx-auto leading-relaxed">
-              &ldquo;While you focus on making each moment count and soaking it all in, let us do all the work for you.&rdquo;
+              &ldquo;{c?.quoteText || "While you focus on making each moment count and soaking it all in, let us do all the work for you."}&rdquo;
             </p>
 
             <p className="font-sans text-xs sm:text-base text-[#5C5147] font-normal leading-[1.75] max-w-3xl mx-auto">
-              Wedding Flora operates on a <strong>turnkey basis</strong> for our couples and families, taking full responsibility as your single point-of-contact for the celebration — from destination and palace selection to planning the honeymoon. We manage every detail of organization, negotiations, meetings, and on-ground troubleshooting so you can truly <strong>be a guest at your own event</strong>.
+              {c?.subtitle ||
+                "Wedding Flora operates on a turnkey basis for our couples and families, taking full responsibility as your single point-of-contact for the celebration — from destination and palace selection to planning the honeymoon. We manage every detail of organization, negotiations, meetings, and on-ground troubleshooting so you can truly be a guest at your own event."}
             </p>
 
             {/* Quick Trust Badges */}
@@ -284,7 +296,7 @@ export function FullServiceView() {
                     </p>
                     <div className="pt-1 space-y-1.5">
                       <a
-                        href={siteConfig.contact.whatsapp}
+                        href={cms.site.contact.whatsapp}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="w-full py-1.5 px-2.5 rounded-[2px] bg-[#25D366]/10 text-[#128C7E] border border-[#25D366]/30 hover:bg-[#25D366]/20 transition-colors flex items-center justify-center gap-1.5 text-[11px] font-bold uppercase tracking-wider"
@@ -293,11 +305,11 @@ export function FullServiceView() {
                         <span>WhatsApp Concierge</span>
                       </a>
                       <a
-                        href={`tel:${siteConfig.contact.phone.replace(/[^0-9+]/g, "")}`}
+                        href={`tel:${cms.site.contact.phone.replace(/[^0-9+]/g, "")}`}
                         className="w-full py-1.5 px-2.5 rounded-[2px] bg-white text-[#1A1209] border border-gold/30 hover:border-gold hover:text-gold transition-colors flex items-center justify-center gap-1.5 text-[11px] font-semibold"
                       >
                         <PhoneCall className="w-3.5 h-3.5 text-gold" />
-                        <span>{siteConfig.contact.phone}</span>
+                        <span>{cms.site.contact.phone}</span>
                       </a>
                     </div>
                   </div>
@@ -610,7 +622,7 @@ export function FullServiceView() {
                     <ArrowRight className="w-4 h-4 ml-1.5" />
                   </Button>
                   <a
-                    href={siteConfig.contact.whatsapp}
+                    href={cms.site.contact.whatsapp}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-2 text-xs uppercase tracking-wider font-bold text-white hover:text-gold transition-colors py-3 px-6 rounded-[2px] border border-white/20 hover:border-gold bg-white/5 backdrop-blur-sm"

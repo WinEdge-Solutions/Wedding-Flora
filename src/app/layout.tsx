@@ -1,11 +1,9 @@
 import type { Metadata } from "next";
 import { Cinzel, Cormorant_Garamond, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
-import { Navbar } from "@/components/layout/Navbar";
-import { Footer } from "@/components/layout/Footer";
-import { LenisProvider } from "@/components/providers/LenisProvider";
-import { GlobalAurora } from "@/components/ui/GlobalAurora";
-import { FloatingWhatsApp } from "@/components/ui/FloatingWhatsApp";
+import { getPublishedCmsData } from "@/lib/cms/server";
+import { CmsProvider, buildThemeCssVars } from "@/components/cms/CmsProvider";
+import { SiteChromeShell } from "@/components/layout/SiteChromeShell";
 
 const cinzel = Cinzel({
   subsets: ["latin"],
@@ -29,39 +27,49 @@ const jakarta = Plus_Jakarta_Sans({
   display: "swap",
 });
 
-export const metadata: Metadata = {
-  title: "Wedding Flora | Luxury Indian Wedding Planning & Royal Floral Artistry",
-  description:
-    "Premier luxury wedding planning, royal palace celebrations, opulent floral mandaps, and bespoke Sangeet productions across Udaipur, Jaipur, Jodhpur, and Goa.",
-  icons: {
-    icon: "/images/logo-emblem.png",
-    shortcut: "/images/logo-emblem.png",
-    apple: "/images/logo-emblem.png",
-  },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const cms = await getPublishedCmsData();
+  const homePage = cms.pages.home;
 
-export default function RootLayout({
+  return {
+    title: homePage.seoTitle || `${cms.site.name} | ${cms.site.tagline}`,
+    description: homePage.seoDescription || cms.site.description,
+    icons: {
+      icon: cms.site.logoEmblemUrl || "/images/logo-emblem.png",
+      shortcut: cms.site.logoEmblemUrl || "/images/logo-emblem.png",
+      apple: cms.site.logoEmblemUrl || "/images/logo-emblem.png",
+    },
+  };
+}
+
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const cmsData = await getPublishedCmsData();
+  const cssVars = buildThemeCssVars(cmsData.theme) as React.CSSProperties;
+
   return (
     <html
       lang="en"
+      style={cssVars}
       className={`${cinzel.variable} ${cormorant.variable} ${jakarta.variable} bg-[#FDFAF5]`}
     >
       <head>
         <link rel="preload" href="/videos/hero-bg.mp4" as="video" type="video/mp4" />
       </head>
-      <body className="bg-[#FDFAF5] text-[#1A1209] font-sans min-h-screen flex flex-col selection:bg-gold selection:text-white relative">
-        <LenisProvider>
-          {/* Subtle warm-ivory aurora gradient — does not overshadow content */}
-          <GlobalAurora />
-          <Navbar />
-          <div className="flex-1 relative z-10">{children}</div>
-          <FloatingWhatsApp />
-          <Footer />
-        </LenisProvider>
+      <body
+        className="font-sans min-h-screen flex flex-col selection:bg-gold selection:text-white relative"
+        style={{
+          backgroundColor: "var(--wf-paper, #FDFAF5)",
+          color: "var(--wf-ink, #1A1209)",
+          fontSize: "var(--wf-body-size, 16px)",
+        }}
+      >
+        <CmsProvider initialData={cmsData}>
+          <SiteChromeShell>{children}</SiteChromeShell>
+        </CmsProvider>
       </body>
     </html>
   );

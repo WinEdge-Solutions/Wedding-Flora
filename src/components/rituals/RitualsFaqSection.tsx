@@ -1,11 +1,17 @@
 "use client";
 
 import React, { useState } from "react";
-import { ritualsFaqs } from "@/lib/content/rituals";
+import { useCms } from "@/components/cms/CmsProvider";
+import type { PageSectionConfig } from "@/lib/cms/types";
 import { ChevronDown, HelpCircle } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
-export const RitualsFaqSection: React.FC = () => {
+export const RitualsFaqSection: React.FC<{ section?: PageSectionConfig }> = ({
+  section,
+}) => {
+  const cms = useCms();
+  const ritualsFaqs = cms.collections.ritualFaqs;
+  const c = section?.content;
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   const toggle = (index: number) => {
@@ -18,13 +24,14 @@ export const RitualsFaqSection: React.FC = () => {
       <div className="text-center space-y-2.5">
         <div className="flex items-center justify-center gap-2 text-gold text-[11px] font-semibold uppercase tracking-[0.25em]">
           <HelpCircle className="w-4 h-4 text-gold" />
-          <span>Working Process &amp; Timelines</span>
+          <span>{c?.eyebrow || "Working Process & Timelines"}</span>
         </div>
         <h2 className="font-serif text-2xl sm:text-4xl font-semibold text-[#1A1209]">
-          Frequently Asked Questions
+          {c?.title || "Frequently Asked Questions"}
         </h2>
         <p className="text-sm text-[#5C5147] font-normal leading-[1.75]">
-          Everything you need to know about our working process, traditional ceremony curation, and multi-day destination timelines.
+          {c?.subtitle ||
+            "Everything you need to know about our working process, traditional ceremony curation, and multi-day destination timelines."}
         </p>
       </div>
 

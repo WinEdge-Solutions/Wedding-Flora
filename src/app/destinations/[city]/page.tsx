@@ -7,11 +7,12 @@ import { Section } from "@/components/layout/Section";
 import { Divider } from "@/components/ui/Divider";
 import { Button } from "@/components/ui/Button";
 import { HotelDirectory } from "@/components/destinations/HotelDirectory";
-import { rajasthanDestinations } from "@/lib/content/destinations";
+import { rajasthanDestinations as defaultDestinations } from "@/lib/content/destinations";
+import { getPublishedCmsData } from "@/lib/cms/server";
 import { Sparkles, ArrowLeft, Calendar, Building2, Crown } from "lucide-react";
 
 export function generateStaticParams() {
-  return rajasthanDestinations.map((city) => ({
+  return defaultDestinations.map((city) => ({
     city: city.id,
   }));
 }
@@ -22,7 +23,8 @@ export async function generateMetadata({
   params: Promise<{ city: string }>;
 }) {
   const { city } = await params;
-  const destination = rajasthanDestinations.find((d) => d.id === city);
+  const cms = await getPublishedCmsData();
+  const destination = cms.collections.destinations.find((d) => d.id === city);
   if (!destination) return { title: "Destination | Wedding Flora" };
 
   return {
@@ -37,7 +39,8 @@ export default async function CityDestinationPage({
   params: Promise<{ city: string }>;
 }) {
   const { city } = await params;
-  const destination = rajasthanDestinations.find((d) => d.id === city);
+  const cms = await getPublishedCmsData();
+  const destination = cms.collections.destinations.find((d) => d.id === city);
 
   if (!destination) {
     notFound();

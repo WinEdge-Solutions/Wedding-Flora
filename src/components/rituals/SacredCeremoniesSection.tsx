@@ -1,29 +1,47 @@
+"use client";
+
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { sacredRitualsList } from "@/lib/content/rituals";
+import { useCms } from "@/components/cms/CmsProvider";
+import type { PageSectionConfig } from "@/lib/cms/types";
 import { Clock, Palette, ArrowRight } from "lucide-react";
 
-export const SacredCeremoniesSection: React.FC = () => {
+export const SacredCeremoniesSection: React.FC<{ section?: PageSectionConfig }> = ({
+  section,
+}) => {
+  const cms = useCms();
+  const sacredRitualsList = cms.collections.sacredRituals;
+  const c = section?.content;
+  const cols =
+    section?.columns ?? (section?.layout === "grid-2" ? 2 : section?.layout === "grid-3" ? 3 : 4);
+  const gridColsClass =
+    cols === 2
+      ? "grid-cols-1 md:grid-cols-2"
+      : cols === 3
+        ? "grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
+        : "grid-cols-1 md:grid-cols-2 lg:grid-cols-4";
+
   return (
     <div className="space-y-12 sm:space-y-16">
       {/* ── Section Header ── */}
       <div className="text-center max-w-3xl mx-auto space-y-3">
         <p className="font-sans text-[11px] uppercase tracking-[0.3em] text-[#D4AF37] font-semibold flex items-center justify-center gap-2">
           <span className="opacity-60">—</span>
-          <span>Sacred Traditions &amp; Celebrations</span>
+          <span>{c?.eyebrow || "Sacred Traditions & Celebrations"}</span>
           <span className="opacity-60">—</span>
         </p>
         <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-semibold text-[#1A1209] tracking-tight leading-tight">
-          Sacred Ceremonies We Curate
+          {c?.title || "Sacred Ceremonies We Curate"}
         </h2>
         <p className="font-sans text-sm sm:text-base text-[#5C5147] font-normal leading-[1.75]">
-          Each ceremony in an Indian wedding carries centuries of spiritual blessings and emotional depth. We design and coordinate every ceremony with reverence, authenticity, and palatial elegance.
+          {c?.subtitle ||
+            "Each ceremony in an Indian wedding carries centuries of spiritual blessings and emotional depth. We design and coordinate every ceremony with reverence, authenticity, and palatial elegance."}
         </p>
       </div>
 
       {/* ── Ceremonies Grid ── */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
+      <div className={`grid ${gridColsClass} gap-6 sm:gap-8`}>
         {sacredRitualsList.map((ritual, idx) => {
           return (
             <div

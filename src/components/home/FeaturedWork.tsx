@@ -7,7 +7,9 @@ import { Container } from "@/components/layout/Container";
 import { Section } from "@/components/layout/Section";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Button } from "@/components/ui/Button";
-import { galleryData, GalleryItem } from "@/lib/content/gallery";
+import type { GalleryItem } from "@/lib/content/gallery";
+import { useCms } from "@/components/cms/CmsProvider";
+import type { PageSectionConfig } from "@/lib/cms/types";
 
 /* ── Luxury Indian Wedding Reel Card ──────────────────────── */
 function ReelCard({
@@ -173,8 +175,18 @@ function ReelCard({
   );
 }
 
-export const FeaturedWork: React.FC = () => {
-  const featured = galleryData.slice(0, 3);
+export const FeaturedWork: React.FC<{ section?: PageSectionConfig }> = ({ section }) => {
+  const cms = useCms();
+  const limit = section?.itemLimit ?? 3;
+  const featured = cms.collections.gallery.slice(0, limit);
+  const c = section?.content;
+  const cols = section?.columns ?? (section?.layout === "grid-2" ? 2 : section?.layout === "grid-4" ? 4 : 3);
+  const desktopGridClass =
+    cols === 4
+      ? "md:grid-cols-4"
+      : cols === 2
+        ? "md:grid-cols-2"
+        : "md:grid-cols-3";
   const containerRef = useRef<HTMLDivElement>(null);
   const inView = useInView(containerRef, { once: true, margin: "-80px" });
 
@@ -247,13 +259,16 @@ export const FeaturedWork: React.FC = () => {
   };
 
   return (
-    <Section variant="ivory">
+    <Section variant={section?.bgVariant ?? "ivory"}>
       <Container>
         <div ref={containerRef}>
         <SectionHeading
-          eyebrow="Royal Celebrations"
-          title="Recent Wedding Celebrations"
-          subtitle="Glimpses into bespoke Sangeet productions, grand palace Mandaps, and royal celebrations across India. Hover on desktop or swipe on mobile to experience each moment."
+          eyebrow={c?.eyebrow || "Royal Celebrations"}
+          title={c?.title || "Recent Wedding Celebrations"}
+          subtitle={
+            c?.subtitle ||
+            "Glimpses into bespoke Sangeet productions, grand palace Mandaps, and royal celebrations across India. Hover on desktop or swipe on mobile to experience each moment."
+          }
         />
 
         {/* ── Mobile Carousel Navigation Bar (md:hidden) ── */}
@@ -339,8 +354,8 @@ export const FeaturedWork: React.FC = () => {
           </div>
         </div>
 
-        {/* ── Desktop 3-Column Grid (hidden md:grid) ── */}
-        <div className="hidden md:grid md:grid-cols-3 md:gap-8 lg:gap-10">
+        {/* ── Desktop Multi-Column Grid (hidden md:grid) ── */}
+        <div className={`hidden md:grid ${desktopGridClass} md:gap-8 lg:gap-10`}>
           {featured.map((item, index) => (
             <ReelCard
               key={item.id}
@@ -359,8 +374,8 @@ export const FeaturedWork: React.FC = () => {
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ delay: 0.55, duration: 0.6 }}
         >
-          <Button href="/celebrations" variant="primary" size="md">
-            View All Royal Celebrations
+          <Button href={c?.primaryCtaHref || "/celebrations"} variant="primary" size="md">
+            {c?.primaryCtaLabel || "View All Royal Celebrations"}
           </Button>
         </motion.div>
         </div>
